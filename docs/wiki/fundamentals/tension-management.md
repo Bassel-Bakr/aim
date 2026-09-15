@@ -79,7 +79,7 @@ which is easier. It also sidesteps the harder skill of balancing fingertip tensi
 
 <figure class="aim-figure">
 <img src="../../assets/images/tension/grip-zones.webp" alt="A grey mannequin hand in a claw grip on a glossy dark grey mouse, its forearm in a black sleeve. Labels mark the fingertips for micro-corrections, the wrist for narrow smooth motion, and the forearm and shoulder for wide fast motion." width="1600" height="1000" loading="lazy">
-<figcaption>Where each kind of motion draws its tension from. <span class="aim-figure-credit">Mouse model: <a href="https://sketchfab.com/3d-models/razer-viper-mini-85e1735704c645e5aaead0278a1038fe">Razer Viper Mini</a> by <a href="https://sketchfab.com/kimberly.h">kimberly.h</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Recoloured, logo removed.</span></figcaption>
+<figcaption>Where each kind of motion draws its tension from. <span class="aim-figure-credit">Mouse model: <a href="https://skfb.ly/oqIQA">Razer Viper Mini</a> by <a href="https://sketchfab.com/kimberly.h">kimberly.h</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Recoloured, logo removed. Forearm model: <a href="https://skfb.ly/o9Vty">FPS Arm Rig</a> by <a href="https://sketchfab.com/milesdiduck">Miles0707</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Posed, recoloured, cut at the wrist.</span></figcaption>
 </figure>
 
 ## How the hand holds
@@ -105,7 +105,7 @@ suits a lighter two-finger pinch.[^REF-73]
 
 <figure class="aim-figure">
 <img src="../../assets/images/tension/grip-forces.webp" alt="The same hand seen from in front of the mouse. Blue arrows push in from both sides at the thumb and ring finger for the side squeeze. An orange arrow pushes down at the index finger for the downward press." width="1600" height="1000" loading="lazy">
-<figcaption>Side squeeze and downward press. Players combine them in different proportions. <span class="aim-figure-credit">Mouse model: <a href="https://sketchfab.com/3d-models/razer-viper-mini-85e1735704c645e5aaead0278a1038fe">Razer Viper Mini</a> by <a href="https://sketchfab.com/kimberly.h">kimberly.h</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Recoloured, logo removed.</span></figcaption>
+<figcaption>Side squeeze and downward press. Players combine them in different proportions. <span class="aim-figure-credit">Mouse model: <a href="https://skfb.ly/oqIQA">Razer Viper Mini</a> by <a href="https://sketchfab.com/kimberly.h">kimberly.h</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Recoloured, logo removed. Forearm model: <a href="https://skfb.ly/o9Vty">FPS Arm Rig</a> by <a href="https://sketchfab.com/milesdiduck">Miles0707</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Posed, recoloured, cut at the wrist.</span></figcaption>
 </figure>
 
 ## How to feel it

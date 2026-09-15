@@ -6,9 +6,10 @@
 build.py runs this for the page; call it directly only to try a new view.
 
 The mouse is "Razer Viper Mini" by kimberly.h, CC BY 4.0, from Sketchfab; see the note above MODEL.
-The hand and forearm are metaballs, so joints blend into one smooth surface, converted to a mesh. The
-hand is one flat grey, and the forearm wears a compression sleeve. Every finger is posed by flexion
-angles only, so no joint can bend backwards. A sidecar JSON gives label anchor points in image space.
+The hand is metaballs, so joints blend into one smooth surface, converted to a mesh. The forearm is
+"FPS Arm Rig" by Miles0707, CC BY 4.0, from Sketchfab; see the note above FOREARM_MODEL. The hand is
+one flat grey, and the forearm wears a compression sleeve. Every finger is posed by flexion angles
+only, so no joint can bend backwards. A sidecar JSON gives label anchor points in image space.
 """
 import json
 import math
@@ -32,7 +33,7 @@ FORCES, FINAL = "--forces" in argv, "--final" in argv
 K = 0.574  # a metaball's surface sits at K * radius at the default threshold
 
 # Mouse: 1 unit is 10 mm. The mouse is "Razer Viper Mini" by kimberly.h
-# (https://sketchfab.com/3d-models/razer-viper-mini-85e1735704c645e5aaead0278a1038fe), licensed under
+# (https://skfb.ly/oqIQA), licensed under
 # CC BY 4.0. It is scaled to the real mouse's 118 mm length, turned so its front faces +y, recoloured
 # in MOUSE_COLOR, and its logo and underside light strip are removed.
 # models/razer-viper-mini/license.txt holds the credit.
@@ -164,43 +165,98 @@ FINGERS = {
     "ring": (1.3, 0.35, (3.35, 2.25, 1.75), (0.63, 0.55, 0.48), lambda r: on_side(1, 0.9, 1.2, r)),
     "pinky": (2.75, 1.1, (2.65, 1.8, 1.55), (0.55, 0.49, 0.43), lambda r: on_side(1, -1.6, 0.9, r)),
 }
-THUMB = ((2.4, 2.3, 1.85), (0.8, 0.66, 0.54), lambda r: on_side(-1, -0.2, 1.35, r))
-THUMB_BASE = PALM_BACK + F * 2.2 - X * 2.6 - U * 0.35
+# The thumb has two segments past the palm, so it shows one joint, as a real thumb does.
+THUMB = ((3.3, 1.85), (0.8, 0.62, 0.54), lambda r: on_side(-1, -0.2, 1.35, r))
+THUMB_BASE = PALM_BACK + F * 2.2 - X * 2.6 - U * 0.6
+
+
+# Fingers and thumb are drawn FINGER_THICKNESS times the radii in their tables; the palm and wrist are
+# puffed out by BODY_PUFF, so the hand reads soft rather than bony.
+FINGER_THICKNESS, BODY_PUFF = 1.4, 1.08
+
+
+def finger_tube(elements, pts, r):
+    """A finger as closely spaced balls with radii eased along its bones. Capsules would overlap at
+    each joint and swell it; an even run of balls keeps the finger smooth from knuckle to tip."""
+    for i in range(len(pts) - 1):
+        a, b = pts[i], pts[i + 1]
+        n = max(2, int((b - a).length / 0.22))
+        for j in range(n):
+            t = j / n
+            elements.append(("ball", (a.lerp(b, t), (r[i] + (r[i + 1] - r[i]) * t) * 0.78)))
+    elements.append(("ball", (pts[-1], r[len(pts) - 1] * 0.78)))
 
 
 def build_skeleton():
     """Metaball elements as (kind, data), and each finger's joints and radii."""
     elements, joints = [], {}
     palm_mid = (PALM_BACK + PALM_FRONT) / 2
-    elements.append(("ellipsoid", (palm_mid, (3.35, (PALM_FRONT - PALM_BACK).length / 2 + 0.2, 1.0), F)))
-    elements.append(("capsule", (PALM_FRONT - X * 2.1 - F * 0.35 - U * 0.25, PALM_FRONT + X * 2.5 - F * 0.95 - U * 0.25, 0.85)))
-    elements.append(("ball", (PALM_BACK + F * 1.3 - X * 1.9 - U * 0.35, 1.3)))
-    elements.append(("ball", (PALM_BACK + F * 1.0 + X * 1.8 - U * 0.3, 1.15)))
+    k = BODY_PUFF
+    elements.append(("ellipsoid", (palm_mid, (3.35 * k, ((PALM_FRONT - PALM_BACK).length / 2 + 0.2) * k, 1.0 * k), F)))
+    elements.append(("capsule", (PALM_FRONT - X * 2.1 - F * 0.35 - U * 0.25, PALM_FRONT + X * 2.5 - F * 0.95 - U * 0.25, 0.85 * k)))
+    elements.append(("ball", (PALM_BACK + F * 1.3 - X * 1.9 - U * 0.35, 1.3 * k)))
+    elements.append(("ball", (PALM_BACK + F * 1.0 + X * 1.8 - U * 0.3, 1.15 * k)))
+    # A flat pad over the back of the hand hides the ridges the knuckle row and palm would show.
+    elements.append(("ellipsoid", (PALM_BACK.lerp(PALM_FRONT, 0.62) + U * 0.35, (3.0 * k, 2.6 * k, 0.55 * k), F)))
+    # The pad runs on toward the wrist and tapers, so the back of the hand falls to the wrist in one slope.
+    for i in range(1, 5):
+        t = i / 4
+        centre = PALM_BACK.lerp(PALM_FRONT, 0.62 - 0.62 * t).lerp(WRIST, 0.6 * t) + U * (0.35 - 0.3 * t)
+        elements.append(("ellipsoid", (centre, ((3.0 - 0.7 * t) * k, 1.6 * k, (0.55 - 0.1 * t) * k), F)))
+    # A second, wider pad on the thumb side fills the crease between the back of the hand and the web.
+    elements.append(("ellipsoid", (PALM_BACK.lerp(PALM_FRONT, 0.5) - X * 1.6 - U * 0.05, (1.6 * k, 2.8 * k, 0.42 * k), F)))
     # Wrist and forearm: closely spaced ovals, so the surface stays smooth instead of ribbed.
     arm_axis = (ELBOW - WRIST).normalized()
-    for i in range(4):
-        t = i / 3
-        elements.append(("ellipsoid", (PALM_BACK.lerp(WRIST, t) - U * 0.15, (2.7 - 0.45 * t, 1.0, 1.05 - 0.05 * t), F)))
-    for i in range(1, 29):
+    # The hollow between the back of the hand and the wrist is filled, so the two meet in a soft rise
+    # rather than a dip.
+    for i, (side, size) in enumerate(((-0.7, 2.0), (0.5, 1.8))):
+        centre = PALM_BACK.lerp(WRIST, 0.2 + 0.12 * i) + X * side + U * 0.3
+        elements.append(("ellipsoid", (centre, (size * k, 1.9 * k, 0.8 * k), F)))
+    # Many closely spaced ovals taper evenly from the back of the palm to the wrist, starting inside the
+    # palm, so the hand narrows into the wrist without a groove where the two meet.
+    start = PALM_BACK + F * 1.2
+    for i in range(10):
+        t = smoothstep(0.0, 1.0, i / 9)
+        width = 3.1 - 0.85 * t
+        elements.append(("ellipsoid", (start.lerp(WRIST, i / 9) - U * 0.05 * t, (width * k, 0.9, (1.0 - 0.02 * t) * k), F)))
+    for i in range(1, 5):
         t = i / 28
-        elements.append(("ellipsoid", (WRIST.lerp(ELBOW, t), (2.25 + 0.6 * t, 1.0, 1.25 + 0.55 * t), arm_axis)))
+        elements.append(("ellipsoid", (WRIST.lerp(ELBOW, t), ((2.25 + 0.6 * t) * k, 1.0, (1.25 + 0.55 * t) * k), arm_axis)))
     for name, (dx, back, lengths, radii, contact) in FINGERS.items():
-        radii = [v * 1.18 for v in radii]
+        radii = [v * FINGER_THICKNESS for v in radii]
         knuckle = PALM_FRONT - F * back + X * dx - U * 0.05
         lengths = [v * FINGER_LENGTH for v in lengths]
         pts = finger_chain(knuckle, contact(radii[2]), lengths, (0, 0, -1))
         joints[name] = (pts, radii)
-        r = (radii[0], radii[1], radii[2], radii[2] * 0.92)
-        for i in range(3):
-            elements.append(("capsule", (pts[i], pts[i + 1], (r[i] + r[i + 1]) / 2)))
+        finger_tube(elements, pts, (radii[0], radii[1], radii[2], radii[2] * 0.92))
     lengths, radii, contact = THUMB
-    radii = [v * 1.15 for v in radii]
+    radii = [v * FINGER_THICKNESS * 0.975 for v in radii]
     lengths = [v * THUMB_LENGTH for v in lengths]
     pts = finger_chain(THUMB_BASE, contact(radii[2]), lengths, (1, 0.1, -0.55))
     joints["thumb"] = (pts, radii)
-    r = (radii[0], radii[1], radii[2], radii[2] * 0.92)
-    for i in range(3):
-        elements.append(("capsule", (pts[i], pts[i + 1], (r[i] + r[i + 1]) / 2)))
+    # The thumb's first segment is mostly inside the hand: it is drawn as a thenar mass that blends into
+    # the palm, and the thumb proper starts partway along it, so no ridge runs across the palm.
+    root = pts[0].lerp(pts[1], 0.45)
+    thenar = pts[0].lerp(root, 0.5) - U * 0.1
+    elements.append(("ellipsoid", ((thenar + PALM_BACK.lerp(PALM_FRONT, 0.45) + X * 0.6) / 2,
+                                   (1.25 * k, (root - pts[0]).length * 0.75, 0.95 * k), root - pts[0])))
+    finger_tube(elements, [root, pts[1], pts[2]], (radii[0] * 1.05, radii[1], radii[2]))
+    # Fill the valley where the thumb's root meets the palm, so the two run together instead of meeting
+    # in a fold that catches a shadow.
+    for t in (0.0, 0.25, 0.5, 0.75, 1.0):
+        low = pts[0].lerp(root, 0.15 + 0.75 * t)
+        high = PALM_BACK.lerp(PALM_FRONT, 0.25 + 0.45 * t) - X * 1.3 + U * 0.12
+        elements.append(("ellipsoid", (low.lerp(high, 0.55), (1.45 * k, (high - low).length * 0.85, 1.15 * k), high - low)))
+    # The web between thumb and index finger: a thin fold of skin from the thumb's first segment to the
+    # index knuckle, lying in the plane of the back of the hand so it blends into that skin.
+    index_pts = joints["index"][0]
+    for t in (0.0, 0.5, 1.0):
+        thumb_side = THUMB_BASE.lerp(pts[1], 0.3 + 0.2 * t)
+        index_side = index_pts[0].lerp(index_pts[1], 0.05 + 0.12 * t)
+        mid = thumb_side.lerp(index_side, 0.5)
+        along = index_side - thumb_side
+        along -= U * along.dot(U)
+        elements.append(("ellipsoid", (mid, (0.5, along.length * 0.4, 0.32), along)))
     return elements, joints
 
 
@@ -263,11 +319,15 @@ def build_hand(elements):
     hand = bpy.data.objects.new("hand_mesh", mesh)
     bpy.context.collection.objects.link(hand)
     shade_smooth(hand)
+    # Metaball parts fuse with a fold where they meet, clearest around the thumb's root; relaxing the
+    # whole surface evens those out without losing the shape.
+    relax = hand.modifiers.new("relax", "SMOOTH")
+    relax.factor, relax.iterations = 1.0, 60
 
     # The sleeve starts in a clean ring past the wrist, cut in the shader rather than along mesh faces.
     # It stands slightly proud of the skin, so the cuff reads as an edge. UVs unwrap the arm, u around
     # and v along from the cuff, for the knit pattern.
-    cuff = WRIST - F * 1.6
+    cuff = CUFF
     axis = (ELBOW - cuff).normalized()
     e1 = (Vector((0, 0, 1)) - axis * axis.z).normalized()
     e2 = axis.cross(e1)
@@ -280,6 +340,111 @@ def build_hand(elements):
         d = p - axis * along
         uv.data[loop.index].uv = (math.atan2(d.dot(e2), d.dot(e1)) * 2.6, along)
     mesh.update()
+    mesh.materials.append(hand_material())
+
+
+# Forearm: "FPS Arm Rig" by Miles0707 (https://skfb.ly/o9Vty), licensed under CC BY 4.0. Only its right
+# forearm is kept, rolled palm-down, scaled to the hand's wrist and cut at the cuff.
+# models/fps-arm-rig/license.txt holds the credit.
+FOREARM_MODEL = Path(__file__).resolve().parent / "models" / "fps-arm-rig" / "scene.gltf"
+CUFF = WRIST - F * 1.6
+WRIST_WIDTH = 5.2
+
+
+def build_forearm():
+    """Import the rigged arm, keep its right forearm, lay it from the elbow to the wrist, and cut it
+    at the cuff so the sleeve starts where the hand's skin ends."""
+    import bmesh
+    from mathutils import Matrix
+    before = set(bpy.data.objects)
+    bpy.ops.import_scene.gltf(filepath=str(FOREARM_MODEL))
+    new = [o for o in bpy.data.objects if o not in before]
+    rig = next(o for o in new if o.type == "ARMATURE")
+    body = next(o for o in new if o.type == "MESH" and any(m.type == "ARMATURE" for m in o.modifiers))
+    bpy.context.view_layer.update()
+    world_matrix = rig.matrix_world.copy()
+    rig.parent = None
+    rig.matrix_world = world_matrix
+    for o in new:
+        if o not in (rig, body):
+            bpy.data.objects.remove(o)
+    bpy.context.view_layer.update()
+
+    def bone(prefix):
+        return next(pb for pb in rig.pose.bones if pb.name.startswith(prefix))
+
+    def head(pb):
+        return rig.matrix_world @ pb.head
+
+    # Keep the vertices that follow the right forearm bone.
+    group = next(g.index for g in body.vertex_groups if g.name.startswith("Forearm.R"))
+    bm = bmesh.new()
+    bm.from_mesh(body.data)
+    deform = bm.verts.layers.deform.active
+    doomed = [v for v in bm.verts if not v[deform] or max(v[deform].items(), key=lambda kv: kv[1])[0] != group]
+    bmesh.ops.delete(bm, geom=doomed, context="VERTS")
+    bm.to_mesh(body.data)
+    bm.free()
+
+    # Scale so the forearm near the wrist is as wide as the hand's wrist.
+    wrist0, elbow0 = head(bone("Hand.R")), head(bone("Forearm.R"))
+    along = (wrist0 - elbow0).normalized()
+    near = [body.matrix_world @ v.co for v in body.data.vertices
+            if 0 < (wrist0 - body.matrix_world @ v.co).dot(along) < (wrist0 - elbow0).length * 0.15]
+    width = max(q.x for q in near) - min(q.x for q in near)
+    rig.matrix_world = Matrix.Scale(WRIST_WIDTH / width, 4) @ rig.matrix_world
+    bpy.context.view_layer.update()
+
+    def turn(pb, rotation):
+        bpy.context.view_layer.update()
+        m = rig.matrix_world @ pb.matrix
+        pivot = m.translation.copy()
+        turned = Matrix.Translation(pivot) @ rotation.to_matrix().to_4x4() @ Matrix.Translation(-pivot) @ m
+        pb.matrix = rig.matrix_world.inverted() @ turned
+        bpy.context.view_layer.update()
+
+    forearm = bone("Forearm.R")
+    y = ((rig.matrix_world @ forearm.matrix).to_3x3() @ Vector((0, 1, 0))).normalized()
+    turn(forearm, y.rotation_difference((WRIST - ELBOW).normalized()))
+    y = ((rig.matrix_world @ forearm.matrix).to_3x3() @ Vector((0, 1, 0))).normalized()
+    have = head(bone("Index 3.R")) - head(bone("Little 3.R"))
+    have, want = have - y * have.dot(y), -X - y * (-X).dot(y)
+    turn(forearm, have.normalized().rotation_difference(want.normalized()))
+    rig.matrix_world = Matrix.Translation(WRIST - head(bone("Hand.R"))) @ rig.matrix_world
+    bpy.context.view_layer.update()
+
+    mesh = bpy.data.meshes.new_from_object(body.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+    mesh.transform(body.matrix_world)
+    bpy.data.objects.remove(body)
+    bpy.data.objects.remove(rig)
+
+    # Cut at the cuff, keeping the elbow side, and close both open ends.
+    arm_axis = (ELBOW - WRIST).normalized()
+    bm = bmesh.new()
+    bm.from_mesh(mesh)
+    bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:], plane_co=CUFF, plane_no=arm_axis,
+                           clear_inner=True)
+    bmesh.ops.holes_fill(bm, edges=[e for e in bm.edges if e.is_boundary], sides=0)
+    bm.to_mesh(mesh)
+    bm.free()
+
+    e1 = (Vector((0, 0, 1)) - arm_axis * arm_axis.z).normalized()
+    e2 = arm_axis.cross(e1)
+    while mesh.uv_layers:
+        mesh.uv_layers.remove(mesh.uv_layers[0])
+    mesh.materials.clear()
+    uv = mesh.uv_layers.new(name="sleeve")
+    for loop in mesh.loops:
+        q = mesh.vertices[loop.vertex_index].co - CUFF
+        along = q.dot(arm_axis)
+        d = q - arm_axis * along
+        uv.data[loop.index].uv = (math.atan2(d.dot(e2), d.dot(e1)) * 2.6, max(along, 0.001))
+    mesh.update()
+    obj = bpy.data.objects.new("forearm", mesh)
+    bpy.context.collection.objects.link(obj)
+    shade_smooth(obj)
+    smooth = obj.modifiers.new("smooth", "SUBSURF")
+    smooth.levels = smooth.render_levels = 1
     mesh.materials.append(hand_material())
 
 
@@ -365,6 +530,7 @@ def build():
     elements, joints = build_skeleton()
     if "--no-hand" not in argv:
         build_hand(elements)
+        build_forearm()
     mp, mr = joints["middle"]
     anchors = {
         "fingers": (mp[1] + mp[2]) / 2 + Vector((0, 0, mr[1])),

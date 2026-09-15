@@ -1,0 +1,11 @@
+Model Information:
+* title:	FPS Arm Rig
+* source:	https://sketchfab.com/3d-models/fps-arm-rig-18ce86b6b26e4ae1b02d2d695b669b62
+* author:	Miles0707 (https://sketchfab.com/milesdiduck)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "FPS Arm Rig" (https://sketchfab.com/3d-models/fps-arm-rig-18ce86b6b26e4ae1b02d2d695b669b62) by Miles0707 (https://sketchfab.com/milesdiduck) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

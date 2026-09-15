@@ -22,10 +22,13 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 PAGE = ROOT / "docs" / "wiki" / "fundamentals" / "tension-management.md"
 IMAGES = ROOT / "docs" / "assets" / "images" / "tension"
-# The renders' mouse is a CC BY 4.0 model, so its credit travels inside each image as well as under it.
+# The renders' mouse and forearm are CC BY 4.0 models, so their credit travels inside each image as
+# well as under it.
 MODEL_CREDIT = ('Mouse model: "Razer Viper Mini" (https://sketchfab.com/3d-models/'
                 'razer-viper-mini-85e1735704c645e5aaead0278a1038fe) by kimberly.h (https://sketchfab.com/kimberly.h), '
-                'CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Recoloured, logo removed.')
+                'CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Recoloured, logo removed. '
+                'Forearm model: "FPS Arm Rig" (https://skfb.ly/o9Vty) by Miles0707 (https://sketchfab.com/milesdiduck), '
+                'CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Posed, recoloured, cut at the wrist.')
 sys.path.insert(0, str(HERE))
 import diagrams as d  # noqa: E402
 
@@ -100,7 +103,8 @@ def authorship_xmp():
         f'<dc:creator><rdf:Seq><rdf:li>{d.AUTHOR}</rdf:li></rdf:Seq></dc:creator>'
         f'<dc:source>{d.SOURCE}</dc:source>'
         f'<xmpRights:WebStatement>{d.SOURCE}</xmpRights:WebStatement>'
-        f'<dc:contributor><rdf:Bag><rdf:li>kimberly.h (Razer Viper Mini model, CC BY 4.0)</rdf:li></rdf:Bag></dc:contributor>'
+        '<dc:contributor><rdf:Bag><rdf:li>kimberly.h (Razer Viper Mini model, CC BY 4.0)</rdf:li>'
+        '<rdf:li>Miles0707 (FPS Arm Rig model, CC BY 4.0)</rdf:li></rdf:Bag></dc:contributor>'
         f'<dc:description><rdf:Alt><rdf:li xml:lang="x-default">{MODEL_CREDIT}</rdf:li></rdf:Alt></dc:description>'
         f'<cc:license rdf:resource="{d.LICENSE}"/>'
         '</rdf:Description></rdf:RDF></x:xmpmeta><?xpacket end="r"?>'
