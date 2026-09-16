@@ -62,6 +62,12 @@ def strafe(phase):
     return tri
 
 
+def smooth(u):
+    """Smoothstep: 0 to 1 with both ends eased, for a value that starts and stops rather than jumps."""
+    u = max(0.0, min(1.0, u))
+    return u * u * (3 - 2 * u)
+
+
 def keyframes(name, values, fmt, prop="transform"):
     """Keyframes from one value per frame, dropping any frame whose value matches both neighbours,
     since linear timing between equal values changes nothing."""
@@ -205,36 +211,65 @@ BLD_T = 4.4                 # seconds per left-right-left cycle
 BLD_FRAMES = 120
 BLD_W, BLD_H = 600, 348
 BLD_CX = 300                # centre of the screen, and of the neutral hand
-BLD_A = 228                 # how far the target strafes from centre
-BLD_ELBOW, BLD_WRIST = 322, 226
-# Each joint's share of one strafe. The arm swings the furthest, the wrist adds a turn on top of it
-# and the fingers nudge the mouse the last few units.
-BLD_ARM_DEG, BLD_WRIST_DEG, BLD_FINGER_PX = 15.0, 10.0, 6.0
-# The wrist and the fingers arrive after the arm, which is what makes the motion read as one hand
-# rather than three parts moving in lockstep.
-BLD_WRIST_LAG, BLD_FINGER_LAG = 0.09, 0.18
+BLD_A = 262                 # how far the target strafes from centre
+BLD_ELBOW, BLD_WRIST, BLD_MOUSE = 322, 226, 193
+# How far each joint travels at the end of a strafe, and how much of the reach it has to cover
+# before the next one starts helping. A joint is never asked for its last drop of range on its own:
+# the fingers are already moving when the wrist joins, and both are moving when the arm joins.
+BLD_FINGER_PX, BLD_WRIST_DEG, BLD_ARM_DEG = 9.0, 16.0, 20.0
+BLD_ENGAGE = {"finger": (0.00, 0.18), "wrist": (0.15, 0.45), "arm": (0.40, 0.70)}
+# What a joint has given by the time the next one joins in: enough to be moving, far short of its
+# limit.
+BLD_HANDOVER = 0.4
 
 
-def bld_s(t):
-    return strafe((t / BLD_T) % 1.0)
+def bld_engage(u, joint):
+    """How much of a joint's range is in use at reach u, from 0 to 1. Each joint waits its turn,
+    hands over at BLD_HANDOVER of its range, then keeps going with the others."""
+    start, mid = BLD_ENGAGE[joint]
+    if u <= start:
+        return 0.0
+    if u <= mid:
+        return BLD_HANDOVER * smooth((u - start) / (mid - start))
+    return BLD_HANDOVER + (1 - BLD_HANDOVER) * smooth((u - mid) / (1 - mid))
+
+
+def bld_pose(t):
+    """The finger offset, wrist angle and arm angle at time t, and the mouse's travel from centre in
+    user units, which is what the crosshair on the screen above follows."""
+    s = strafe((t / BLD_T) % 1.0)
+    u, sign = abs(s), math.copysign(1.0, s)
+    finger = sign * bld_engage(u, "finger") * BLD_FINGER_PX
+    wrist = sign * bld_engage(u, "wrist") * BLD_WRIST_DEG
+    arm = sign * bld_engage(u, "arm") * BLD_ARM_DEG
+    travel = (finger
+              + math.sin(math.radians(wrist)) * (BLD_WRIST - BLD_MOUSE)
+              + math.sin(math.radians(arm)) * (BLD_ELBOW - BLD_MOUSE))
+    return finger, wrist, arm, travel
 
 
 def bld_hand(part):
-    """One part of the hand seen from above, in its neutral pose. mouse: the mouse the fingers push.
-    palm: the heel of the hand resting on its back. fingers: two fingers over the buttons and a thumb
-    down the left side."""
+    """One part of the hand seen from above, in its neutral pose. mouse: a mouse narrow enough that
+    the ring finger sits on its edge and the pinky beside it. palm: the heel of the hand on the back
+    of the mouse. fingers: four fingers reaching over the buttons, and a thumb down the left side."""
     if part == "mouse":
-        return ('<rect x="271" y="150" width="58" height="86" rx="26" class="fig-grid-fill" opacity="0.5"/>'
-                '<rect x="271" y="150" width="58" height="86" rx="26" class="fig-muted-stroke" '
-                'stroke-width="2" fill="none"/>'
-                '<path d="M300 150V186" class="fig-muted-stroke" stroke-width="2"/>')
+        return ('<path d="M300 144c14 0 22 12 22 30v42c0 16-10 24-22 24s-22-8-22-24v-42c0-18 8-30 22-30Z" '
+                'class="fig-grid-fill" opacity="0.5"/>'
+                '<path d="M300 144c14 0 22 12 22 30v42c0 16-10 24-22 24s-22-8-22-24v-42c0-18 8-30 22-30Z" '
+                'class="fig-muted-stroke" stroke-width="2" fill="none"/>'
+                '<path d="M300 145V186" class="fig-muted-stroke" stroke-width="1.5"/>')
     if part == "palm":
-        return ('<rect x="272" y="178" width="56" height="60" rx="22" class="fig-ink-fill" opacity="0.12"/>'
-                '<rect x="272" y="178" width="56" height="60" rx="22" class="fig-ink-stroke" '
-                'stroke-width="2" fill="none" opacity="0.55"/>')
-    return ('<path d="M288 192V158M310 192V156" class="fig-ink-stroke" stroke-width="6" '
-            'stroke-linecap="round"/>'
-            '<path d="M272 214L258 200" class="fig-ink-stroke" stroke-width="6" stroke-linecap="round"/>')
+        return ('<path d="M284 236c-6-14-6-28-2-40 3-9 9-14 18-14h4c9 0 15 5 18 14 4 12 4 26-2 40'
+                '-4 9-32 9-36 0Z" class="fig-ink-fill" opacity="0.14"/>'
+                '<path d="M284 236c-6-14-6-28-2-40 3-9 9-14 18-14h4c9 0 15 5 18 14 4 12 4 26-2 40'
+                '-4 9-32 9-36 0Z" class="fig-ink-stroke" stroke-width="2" fill="none" opacity="0.5"/>')
+    fingers = [("M290 194C288 178 288 166 291 157", 6.5),      # index, on the left button
+               ("M301 196C301 176 301 164 303 153", 6.5),      # middle, on the right button
+               ("M312 198C315 182 317 172 319 163", 6.0),      # ring, over the right edge
+               ("M320 206C326 196 329 188 330 181", 5.0),      # pinky, resting beside the mouse
+               ("M280 216C270 212 263 204 261 196", 7.0)]      # thumb, down the left side
+    return "".join(f'<path d="{d}" class="fig-ink-stroke" stroke-width="{w}" stroke-linecap="round" '
+                   'fill="none" opacity="0.55"/>' for d, w in fingers)
 
 
 def bld_chain(arm, wrist, fingers, opacity=None):
@@ -258,52 +293,54 @@ def bld_chain(arm, wrist, fingers, opacity=None):
 
 def blend():
     css, body = [], []
-    ts = [i / BLD_FRAMES * BLD_T for i in range(BLD_FRAMES + 1)]
-    css.append(keyframes("aimBldTarget", [bld_s(t) for t in ts],
-                         lambda v: f"translate({v * BLD_A:.1f}px,0)"))
-    css.append(keyframes("aimBldCursor", [bld_s(t - 0.05) for t in ts],
-                         lambda v: f"translate({v * BLD_A:.1f}px,0)"))
-    css.append(keyframes("aimBldArm", [bld_s(t) for t in ts],
-                         lambda v: f"rotate({v * BLD_ARM_DEG:.2f}deg)"))
-    css.append(keyframes("aimBldWrist", [bld_s(t - BLD_WRIST_LAG) for t in ts],
-                         lambda v: f"rotate({v * BLD_WRIST_DEG:.2f}deg)"))
-    css.append(keyframes("aimBldFingers", [bld_s(t - BLD_FINGER_LAG) for t in ts],
-                         lambda v: f"translate({v * BLD_FINGER_PX:.2f}px,0)"))
+    poses = [bld_pose(i / BLD_FRAMES * BLD_T) for i in range(BLD_FRAMES + 1)]
+    reach = max(abs(p[3]) for p in poses)
+    # The screen and the desk show one motion, so the target's travel is the mouse's travel, scaled
+    # up to the width of the screen above.
+    screen = [p[3] / reach * BLD_A for p in poses]
+    # The crosshair is the mouse a moment ago: a hair of lag is what balanced tracking looks like.
+    cursor = [bld_pose(i / BLD_FRAMES * BLD_T - 0.05)[3] / reach * BLD_A for i in range(BLD_FRAMES + 1)]
+    css.append(keyframes("aimBldTarget", screen, lambda v: f"translate({v:.1f}px,0)"))
+    css.append(keyframes("aimBldCursor", cursor, lambda v: f"translate({v:.1f}px,0)"))
+    css.append(keyframes("aimBldArm", poses, lambda p: f"rotate({p[2]:.2f}deg)"))
+    css.append(keyframes("aimBldWrist", poses, lambda p: f"rotate({p[1]:.2f}deg)"))
+    css.append(keyframes("aimBldFingers", poses, lambda p: f"translate({p[0]:.2f}px,0)"))
     # Screen half: the target strafes and the crosshair rides it.
     body.append(f'<rect x="8" y="4" width="{BLD_W - 16}" height="112" rx="12" class="fig-panel"/>')
     body.append(lane_label(24, 30, "On screen", "One smooth strafe"))
-    body.append('<path d="M24 78H576" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 6"/>')
+    body.append('<path d="M18 78H582" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 6"/>')
     body.append(f'<g class="aim-bld-anim" style="animation-name:aimBldTarget">'
                 f'<circle cx="{BLD_CX}" cy="78" r="12" class="fig-target"/></g>')
     body.append(f'<g class="aim-bld-anim" style="animation-name:aimBldCursor">'
                 f'{crosshair("fig-balanced-stroke", BLD_CX, 78)}</g>')
     # Desk half: the same motion, made by three joints at once.
     body.append(f'<rect x="8" y="124" width="{BLD_W - 16}" height="{BLD_H - 132}" rx="12" class="fig-panel"/>')
-    body.append(lane_label(24, 150, "On the desk", "Arm, wrist and fingers together"))
+    body.append(lane_label(24, 150, "On the desk", "One motion, three joints"))
     body.append(f'<path d="M{BLD_CX} 168V{BLD_H - 16}" class="fig-grid-stroke" stroke-width="1" '
                 'stroke-dasharray="2 6"/>')
-    body.append(bld_chain(None, None, None, opacity="0.16"))
+    body.append(bld_chain(None, None, None, opacity="0.13"))
     body.append(bld_chain("aimBldArm", "aimBldWrist", "aimBldFingers"))
-    # The joints are named down the left, each on a dotted line to the point it turns around.
-    for name, note, y, jx in (("Fingers", "fine finish", 172, 289),
-                              ("Wrist", "smooth follow", BLD_WRIST, BLD_CX),
-                              ("Arm", "wide sweep", 314, BLD_CX)):
-        body.append(f'<path d="M180 {y}H{jx - 16}" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 5"/>')
+    # The joints are named down the left edge, each on a dotted line to the point it turns around.
+    for name, note, y, jx in (("Fingers", "start it", 172, 291),
+                              ("Wrist", "joins next", BLD_WRIST, BLD_CX),
+                              ("Arm", "carries the rest", 314, BLD_CX)):
+        body.append(f'<path d="M132 {y}H{jx - 16}" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 5"/>')
         body.append(f'<circle cx="{jx}" cy="{y}" r="3.5" class="fig-ink-fill"/>')
-        body.append(f'<text x="174" y="{y + 4}" text-anchor="end">'
+        body.append(f'<text x="126" y="{y + 4}" text-anchor="end">'
                     f'<tspan font-size="13" font-weight="700" class="fig-ink fig-note">{name}</tspan>'
                     f'<tspan dx="8" font-size="12" font-weight="500" class="fig-muted fig-note">{note}</tspan></text>')
     css.append(f".aim-bld-anim{{animation-duration:{BLD_T}s;animation-timing-function:linear;"
                "animation-iteration-count:infinite}")
-    # Paused mid-sweep rather than at centre, where every joint sits at neutral and the figure would
-    # show nothing.
+    # Paused part way into a sweep rather than at centre, where every joint sits at neutral and the
+    # figure would show nothing.
     css.append("@media (prefers-reduced-motion:reduce){.aim-bld-anim{animation-play-state:paused;"
                f"animation-delay:-{BLD_T * 0.4:.2f}s!important}}}}")
     return (f'<svg viewBox="0 0 {BLD_W} {BLD_H}" class="fig-fit" role="img" aria-labelledby="fig-blend-title">'
             '<title id="fig-blend-title">A target strafes across the screen and a crosshair rides it. '
-            'Below, the same motion seen from above the desk: the forearm swings from the elbow, the wrist '
-            'turns a beat later, and the fingers slide the mouse the last little way, all at once. A faint '
-            'copy of the arm at rest shows how far each joint has moved.</title>' + metadata() +
+            'Below, the same motion seen from above the desk: the fingers start the mouse moving, the wrist '
+            'joins once they are part way through their range, and the forearm swings from the elbow to '
+            'carry the rest, so no joint reaches its limit alone. A faint copy of the arm at rest shows how '
+            'far each joint has moved.</title>' + metadata() +
             f'<style>{"".join(css)}</style>' + "".join(body) + "</svg>")
 
 
@@ -325,11 +362,6 @@ def flk_ease_out(u):
     return 1 - (1 - u) ** 3
 
 
-def flk_smooth(u):
-    u = max(0.0, min(1.0, u))
-    return u * u * (3 - 2 * u)
-
-
 def flk_pose(t, kind):
     """Crosshair (x, y) offsets from lane centre and tension 0..1 at time t."""
     t %= FLK_T
@@ -344,11 +376,11 @@ def flk_pose(t, kind):
         elif u < 0.44:
             p = 0.93 * flk_ease_out((u - 0.22) / 0.22)
         else:
-            p = 0.93 + 0.07 * flk_smooth((u - 0.44) / 0.3)
-        tension = (0.2 + 0.35 * flk_smooth(u / 0.22) if u < 0.22 else
-                   0.55 + 0.3 * flk_smooth((u - 0.22) / 0.08) if u < 0.30 else
-                   0.85 - 0.62 * flk_smooth((u - 0.30) / 0.16) if u < 0.46 else
-                   0.23 - 0.03 * flk_smooth((u - 0.46) / 0.3) if u < 0.8 else
+            p = 0.93 + 0.07 * smooth((u - 0.44) / 0.3)
+        tension = (0.2 + 0.35 * smooth(u / 0.22) if u < 0.22 else
+                   0.55 + 0.3 * smooth((u - 0.22) / 0.08) if u < 0.30 else
+                   0.85 - 0.62 * smooth((u - 0.30) / 0.16) if u < 0.46 else
+                   0.23 - 0.03 * smooth((u - 0.46) / 0.3) if u < 0.8 else
                    0.2)
         wob = 0.0
     else:
