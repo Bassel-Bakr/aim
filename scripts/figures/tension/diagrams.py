@@ -253,9 +253,12 @@ def flick():
              ("Held", "Tension never drops", "held", "fig-accent-stroke")]
     h = FLK_TOP + FLK_LANE_H * len(lanes) - 8
     css, body = [], []
-    # Phase strip: each label lights up while its phase runs, in every flick of the loop.
+    # Phase strip: each label lights up while its phase runs, in every flick of the loop. The strip
+    # starts clear of the tension meter and keeps that same margin at the right, so the labels sit
+    # centred over the lane below rather than pushed against its right edge.
     left = FLK_MX + 30
-    step = (FLK_W - 8 - left) / len(phases)
+    right = FLK_W - 8 - (left - 8)
+    step = (right - left) / len(phases)
     for pi, (label, a, b) in enumerate(phases):
         lit = []
         for i in range(FLK_FRAMES + 1):
