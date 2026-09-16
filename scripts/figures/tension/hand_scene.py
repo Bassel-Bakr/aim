@@ -578,10 +578,13 @@ def build():
         anchors["squeeze_left"] = arrow(left_tip, X, 3.0, squeeze)
         # The pair reads as one squeeze, so the right arrow meets the mouse's other flank on the same
         # line as the left one rather than chasing the ring finger's hidden tip.
-        anchors["squeeze_right"] = arrow(on_side(1, left_tip.y, left_tip.z, rr[2] + gap), -X, 3.0, squeeze)
+        # Pulled back a little further than the left one: the fingers on that flank would otherwise
+        # cover its head.
+        anchors["squeeze_right"] = arrow(on_side(1, left_tip.y, left_tip.z, rr[2] + gap + 0.5), -X, 3.0, squeeze)
         # Nearly straight down and short, so the arrow does not lie across the other fingers.
         press_dir = Vector((0.2, 0.0, -0.98)).normalized()
-        anchors["press"] = arrow(ip[-1] - press_dir * (ir[2] + gap), press_dir, 2.2, press)
+        # Held back off the fingertip as well, so the head reads clear of the finger it points at.
+        anchors["press"] = arrow(ip[-1] - press_dir * (ir[2] + gap + 1.5), press_dir, 2.2, press)
     return anchors
 
 
