@@ -105,12 +105,27 @@ def on_top(x, y, lift):
     return surface_hit((x, y, 20.0), (0, 0, -1), lift)
 
 
+def clear_of_mouse(p, radius):
+    """Move p out to the mouse's surface when it sits inside the shell or too close to it, so a finger
+    drawn around it never passes through the mouse."""
+    loc, normal, _index, _dist = BVH.find_nearest(Vector(p))
+    if loc is None:
+        return Vector(p)
+    out = Vector(p) - loc
+    if normal.dot(out) < 0:
+        normal = -normal
+    gap = radius * 1.15 + THUMB_GAP
+    return loc + normal * gap if out.length < gap else Vector(p)
+
+
 def on_side(side, y, z, lift):
     """The mouse's right (side 1) or left (side -1) flank at height z."""
     return surface_hit((side * 20.0, y, z), (-side, 0, 0), lift)
 
 
 BVH = load_mouse()
+THUMB_GAP = float(arg("--thumb-gap", "0"))   # skin kept this far off the shell along the thumb
+THUMB_OUT = float(arg("--thumb-out", "0"))    # the whole thumb moved this far out from the mouse
 
 
 # Skeleton.
@@ -120,8 +135,9 @@ U = Vector((0, -math.sin(PITCH), math.cos(PITCH)))  # out of the back of the han
 X = Vector((1, 0, 0))
 CONTACT = on_top(0.25, -4.1, 0.0)                    # palm heel on the rear of the hump
 PALM_T = 2.0
-PALM_BACK = CONTACT - F * 1.4 + U * (PALM_T / 2)
-PALM_FRONT = CONTACT + F * 5.8 + U * (PALM_T / 2 + 0.15)
+HAND_DROP = float(arg("--hand-drop", "0.65"))        # how far the whole hand sits down the mouse
+PALM_BACK = CONTACT - F * 1.4 + U * (PALM_T / 2 - HAND_DROP)
+PALM_FRONT = CONTACT + F * 5.8 + U * (PALM_T / 2 + 0.15 - HAND_DROP)
 WRIST = PALM_BACK - F * 1.9 + U * 0.1
 ELBOW = Vector((-2.2, WRIST.y - 21.0, 2.2))
 
@@ -156,18 +172,23 @@ def finger_chain(base, target, lengths, bend):
 
 # Phalanx lengths below are an adult hand's; the render uses them at FINGER_LENGTH, and the thumb at
 # THUMB_LENGTH, so the fingers do not dwarf the mouse.
-FINGER_LENGTH, THUMB_LENGTH = 0.85, 0.91
+FINGER_LENGTH, THUMB_LENGTH = 0.8, 0.956
 # name: knuckle offset across the palm, knuckle offset back along F, phalanx lengths,
 # radii at knuckle / middle / tip, fingertip contact as a function of fingertip radius.
+# A fingertip's skin sits at TIP_TOUCH of the radius its bone is given, so the contact is lifted by
+# that much: the pad rests on the mouse instead of floating above it.
+TIP_TOUCH = float(arg("--tip-touch", "0.6"))
 FINGERS = {
-    "index": (-2.05, 0.1, (3.1, 2.1, 1.7), (0.66, 0.58, 0.5), lambda r: on_top(-1.35, 4.3, r)),
-    "middle": (-0.35, 0.0, (3.4, 2.3, 1.8), (0.68, 0.6, 0.52), lambda r: on_top(1.2, 4.6, r)),
-    "ring": (1.3, 0.35, (3.35, 2.25, 1.75), (0.63, 0.55, 0.48), lambda r: on_side(1, 0.9, 1.2, r)),
-    "pinky": (2.75, 1.1, (2.65, 1.8, 1.55), (0.55, 0.49, 0.43), lambda r: on_side(1, -1.6, 0.9, r)),
+    "index": (-2.05, 0.1, (3.1, 2.1, 1.7), (0.66, 0.58, 0.5), lambda r: on_top(-1.35, 4.3, r * TIP_TOUCH)),
+    "middle": (-0.35, 0.0, (3.4, 2.3, 1.8), (0.68, 0.6, 0.52), lambda r: on_top(1.2, 4.6, r * TIP_TOUCH)),
+    "ring": (1.3, 0.35, (3.35, 2.25, 1.75), (0.63, 0.55, 0.48), lambda r: on_side(1, 0.9, 1.2, r * TIP_TOUCH)),
+    "pinky": (2.75, 1.1, (2.65, 1.8, 1.55), (0.55, 0.49, 0.43), lambda r: on_side(1, -1.6, 0.9, r * TIP_TOUCH)),
 }
 # The thumb has two segments past the palm, so it shows one joint, as a real thumb does.
-THUMB = ((3.3, 1.85), (0.8, 0.62, 0.54), lambda r: on_side(-1, -0.2, 1.35, r))
-THUMB_BASE = PALM_BACK + F * 2.2 - X * 2.6 - U * 0.6
+# The thumb rests low on the flank, below the side buttons, so both stay visible above it. Its contact
+# is lifted by more than the tip's radius, so the skin sits on the shell instead of sinking into it.
+THUMB = ((3.45, 2.05), (0.8, 0.62, 0.46), lambda r: on_side(-1, 4.5, 0.5, r * 10 + 0.1))
+THUMB_BASE = PALM_BACK + F * 2.2 - X * 2.8 - U * 0.6
 
 
 # Fingers and thumb are drawn FINGER_THICKNESS times the radii in their tables; the palm and wrist are
@@ -175,16 +196,20 @@ THUMB_BASE = PALM_BACK + F * 2.2 - X * 2.6 - U * 0.6
 FINGER_THICKNESS, BODY_PUFF = 1.4, 1.08
 
 
-def finger_tube(elements, pts, r):
+def finger_tube(elements, pts, r, clear=False):
     """A finger as closely spaced balls with radii eased along its bones. Capsules would overlap at
-    each joint and swell it; an even run of balls keeps the finger smooth from knuckle to tip."""
+    each joint and swell it; an even run of balls keeps the finger smooth from knuckle to tip. With
+    clear set, every ball is held outside the mouse, so no part of the finger sinks into the shell."""
+    def ball(centre, radius):
+        elements.append(("ball", (clear_of_mouse(centre, radius) if clear else centre, radius * 0.78)))
+
     for i in range(len(pts) - 1):
         a, b = pts[i], pts[i + 1]
         n = max(2, int((b - a).length / 0.22))
         for j in range(n):
             t = j / n
-            elements.append(("ball", (a.lerp(b, t), (r[i] + (r[i + 1] - r[i]) * t) * 0.78)))
-    elements.append(("ball", (pts[-1], r[len(pts) - 1] * 0.78)))
+            ball(a.lerp(b, t), r[i] + (r[i + 1] - r[i]) * t)
+    ball(pts[-1], r[len(pts) - 1])
 
 
 def build_skeleton():
@@ -233,14 +258,19 @@ def build_skeleton():
     radii = [v * FINGER_THICKNESS * 0.975 for v in radii]
     lengths = [v * THUMB_LENGTH for v in lengths]
     pts = finger_chain(THUMB_BASE, contact(radii[2]), lengths, (1, 0.1, -0.55))
+    # Every joint is held outside the shell, then the last segment turns in toward the mouse and
+    # forward, so the thumb arcs around it rather than passing through it.
+    pts = [clear_of_mouse(q - X * THUMB_OUT, rad) for q, rad in zip(pts, radii)]
+    tip_dir = (pts[2] - pts[1]).normalized() + X * 0.5 + F * 0.45
+    pts[2] = pts[1] + tip_dir.normalized() * (pts[2] - pts[1]).length
     joints["thumb"] = (pts, radii)
     # The thumb's first segment is mostly inside the hand: it is drawn as a thenar mass that blends into
     # the palm, and the thumb proper starts partway along it, so no ridge runs across the palm.
     root = pts[0].lerp(pts[1], 0.45)
     thenar = pts[0].lerp(root, 0.5) - U * 0.1
     elements.append(("ellipsoid", ((thenar + PALM_BACK.lerp(PALM_FRONT, 0.45) + X * 0.6) / 2,
-                                   (1.25 * k, (root - pts[0]).length * 0.75, 0.95 * k), root - pts[0])))
-    finger_tube(elements, [root, pts[1], pts[2]], (radii[0] * 1.05, radii[1], radii[2]))
+                                   (1.1 * k, (root - pts[0]).length * 0.75, 0.88 * k), root - pts[0])))
+    finger_tube(elements, [root, pts[1], pts[2]], (radii[0] * 1.05, radii[1], radii[2]), clear=True)
     # Fill the valley where the thumb's root meets the palm, so the two run together instead of meeting
     # in a fold that catches a shadow.
     for t in (0.0, 0.25, 0.5, 0.75, 1.0):
@@ -256,7 +286,7 @@ def build_skeleton():
         mid = thumb_side.lerp(index_side, 0.5)
         along = index_side - thumb_side
         along -= U * along.dot(U)
-        elements.append(("ellipsoid", (mid, (0.5, along.length * 0.4, 0.32), along)))
+        elements.append(("ellipsoid", (mid, (0.44, along.length * 0.4, 0.27), along)))
     return elements, joints
 
 
@@ -544,10 +574,14 @@ def build():
         tp, tr = joints["thumb"]
         rp, rr = joints["ring"]
         ip, ir = joints["index"]
-        anchors["squeeze_left"] = arrow(tp[-1] - X * (tr[2] + gap), X, 3.0, squeeze)
-        anchors["squeeze_right"] = arrow(rp[-1] + X * (rr[2] + gap), -X, 3.0, squeeze)
-        press_dir = Vector((0.55, 0.0, -0.84)).normalized()
-        anchors["press"] = arrow(ip[-1] - press_dir * (ir[2] + gap), press_dir, 2.8, press)
+        left_tip = tp[-1] - X * (tr[2] + gap)
+        anchors["squeeze_left"] = arrow(left_tip, X, 3.0, squeeze)
+        # The pair reads as one squeeze, so the right arrow meets the mouse's other flank on the same
+        # line as the left one rather than chasing the ring finger's hidden tip.
+        anchors["squeeze_right"] = arrow(on_side(1, left_tip.y, left_tip.z, rr[2] + gap), -X, 3.0, squeeze)
+        # Nearly straight down and short, so the arrow does not lie across the other fingers.
+        press_dir = Vector((0.2, 0.0, -0.98)).normalized()
+        anchors["press"] = arrow(ip[-1] - press_dir * (ir[2] + gap), press_dir, 2.2, press)
     return anchors
 
 
