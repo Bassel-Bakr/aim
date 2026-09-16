@@ -220,7 +220,7 @@ BLD_ELBOW, BLD_WRIST, BLD_MOUSE = 322, 226, 193
 BLD_FINGER_PX, BLD_WRIST_DEG, BLD_ARM_DEG = 9.0, 16.0, 20.0
 BLD_ENGAGE = {"finger": (0.00, 0.18), "wrist": (0.15, 0.45), "arm": (0.40, 0.70)}
 BLD_STEPS = 400             # steps in the reach table bld_reach reads
-BLD_LAG = 0.05              # seconds the crosshair trails the target
+BLD_LAG = 0.02              # seconds the crosshair trails the target: about 5 units at strafe speed
 # What a joint has given by the time the next one joins in: enough to be moving, far short of its
 # limit.
 BLD_HANDOVER = 0.4
