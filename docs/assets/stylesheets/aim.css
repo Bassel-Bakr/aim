@@ -69,6 +69,10 @@
   --aim-tense: #9c3522;
   --aim-loose: #1d6a8c;
   --aim-balanced: #2f7a43;
+  /* The hand in the blend figure. It lies over the mouse, so it is a solid tone rather than a tint
+   * of the ink: anything see-through there leaves the two shapes reading as one. */
+  --aim-hand: #cdc8c1;
+  --aim-hand-edge: #6d675f;
   --aim-grid: #14171c08;
   --aim-clicking: #9c3522;
   --aim-tracking: #1d6a8c;
@@ -115,6 +119,8 @@
   --aim-tense: #e38268;
   --aim-loose: #56b6d8;
   --aim-balanced: #6cc48a;
+  --aim-hand: #444b58;
+  --aim-hand-edge: #aab3c1;
   --aim-grid: #ffffff08;
   --aim-clicking: #e38268;
   --aim-tracking: #56b6d8;
@@ -1349,6 +1355,9 @@ body {
 /* The page behind the panels, for an object that has to read as a thing sitting on one rather than
  * as part of the drawing, such as the mouse under the hand in the blend figure. */
 .aim-figure .fig-surface { fill: var(--md-default-bg-color); }
+.aim-figure .fig-hand-fill { fill: var(--aim-hand); }
+.aim-figure .fig-hand-line { stroke: var(--aim-hand); }
+.aim-figure .fig-hand-stroke { stroke: var(--aim-hand-edge); }
 .aim-figure .fig-accent-fill { fill: var(--aim-accent); }
 .aim-figure .fig-accent-stroke { stroke: var(--aim-accent); }
 .aim-figure .fig-accent-text { fill: var(--aim-accent); }

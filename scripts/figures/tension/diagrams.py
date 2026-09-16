@@ -222,10 +222,10 @@ BLD_ELBOW, BLD_WRIST, BLD_MOUSE = 322, 226, 193
 # the fingers are already moving when the wrist joins, and both are moving when the arm joins.
 BLD_FINGER_PX, BLD_WRIST_DEG, BLD_ARM_DEG = 9.0, 16.0, 20.0
 BLD_ENGAGE = {"finger": (0.00, 0.18), "wrist": (0.15, 0.45), "arm": (0.40, 0.70)}
-# The hand is one translucent shape with a firmer edge, so every part of it reads as the same limb
-# and the mouse under it stays legible.
-BLD_SKIN = 'class="fig-ink-fill" opacity="0.2"'
-BLD_EDGE = 'class="fig-ink-stroke" opacity="0.55" fill="none"' 
+# The hand is one solid shape with a darker edge, so every part of it reads as the same limb and,
+# lying over the mouse, hides it rather than blending into it.
+BLD_SKIN = 'class="fig-hand-fill"'
+BLD_EDGE = 'class="fig-hand-stroke" fill="none"'
 BLD_STEPS = 400             # steps in the reach table bld_reach reads
 BLD_LAG = 0.02              # seconds the crosshair trails the target: about 5 units at strafe speed
 # What a joint has given by the time the next one joins in: enough to be moving, far short of its
@@ -306,14 +306,18 @@ def bld_hand(part):
         return (f'<path d="{heel}" {BLD_SKIN}/>'
                 f'<path d="{heel}" {BLD_EDGE} stroke-width="2"/>'
                 # The crease across the heel marks where the hand ends and the wrist turns.
-                '<path d="M286 231q14 7 28 0" class="fig-ink-stroke" stroke-width="1.5" fill="none" '
-                'opacity="0.3"/>')
+                '<path d="M286 231q14 7 28 0" class="fig-hand-stroke" stroke-width="1.5" fill="none" '
+                'opacity="0.45"/>')
     fingers = [("M290 194C288 178 288 166 291 157", 6.5),      # index, on the left button
                ("M301 196C301 176 301 164 303 153", 6.5),      # middle, on the right button
                ("M312 198C315 182 317 172 319 163", 6.0),      # ring, over the right edge
                ("M320 206C326 196 329 188 330 181", 5.0),      # pinky, resting beside the mouse
                ("M280 216C270 212 263 204 261 196", 7.0)]      # thumb, down the left side
-    return "".join(f'<path d="{d}" {BLD_EDGE} stroke-width="{w}" stroke-linecap="round"/>'
+    # Each finger is its edge colour with its own tone drawn back over it, which outlines the digit
+    # and, drawn one finger at a time, keeps the next finger's edge visible over the last one's back.
+    return "".join(f'<path d="{d}" {BLD_EDGE} stroke-width="{w + 3}" stroke-linecap="round"/>'
+                   f'<path d="{d}" class="fig-hand-line" stroke-width="{w}" stroke-linecap="round" '
+                   'fill="none"/>'
                    for d, w in fingers)
 
 
