@@ -222,8 +222,8 @@ BLD_ELBOW, BLD_WRIST, BLD_MOUSE = 322, 226, 193
 # most of the way through their range while the wrist is barely into its own, and the arm, which is
 # left whatever the other two do not cover, only really starts once they are both working. No joint
 # is ever asked for its last drop of range alone, and every one of them finishes together.
-BLD_FINGER_PX, BLD_WRIST_DEG, BLD_ARM_DEG = 9.0, 16.0, 20.0
-BLD_LEAD = {"finger": 5.5, "wrist": 1.2}
+BLD_FINGER_PX, BLD_WRIST_DEG, BLD_ARM_DEG = 9.0, 26.0, 20.0
+BLD_LEAD = {"finger": 5.0, "wrist": 1.2}
 BLD_LAG = 0.02              # seconds the crosshair trails the target: about 5 units at strafe speed
 
 
