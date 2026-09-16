@@ -367,18 +367,19 @@ def blend():
                 'stroke-dasharray="2 6"/>')
     body.append(bld_chain(None, None, None, opacity="0.13"))
     body.append(bld_chain("aimBldArm", "aimBldWrist", "aimBldFingers"))
-    # The joints are named down the left edge, in two columns so the names line up under each other
-    # and their verbs line up under each other, each row on a dotted line to the joint it names. The
-    # verbs are one word so the columns still clear the leader on a phone, where fig-note grows.
+    # The joints are named down the left edge, each name against the panel's own margin with its verb
+    # beside it, the way a panel's title carries its note, and each row on a dotted line to the joint
+    # it names. The verbs are one word so a row still clears the leader on a phone, where fig-note
+    # grows to make up for the scaling.
     for name, verb, y, jx in (("Fingers", "start", 182, 292),
                               ("Wrist", "joins", BLD_WRIST, BLD_CX),
                               ("Arm", "carries", 314, BLD_CX)):
         body.append(f'<path d="M196 {y}H{jx - 16}" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 5"/>')
         body.append(f'<circle cx="{jx}" cy="{y}" r="3.5" class="fig-ink-fill"/>')
-        body.append(f'<text x="24" y="{y + 4}" font-size="13" font-weight="700" '
-                    f'class="fig-ink fig-note">{name}</text>')
-        body.append(f'<text x="110" y="{y + 4}" font-size="12" font-weight="500" '
-                    f'class="fig-muted fig-note">{verb}</text>')
+        body.append(f'<text x="24" y="{y + 4}">'
+                    f'<tspan font-size="13" font-weight="700" class="fig-ink fig-note">{name}</tspan>'
+                    f'<tspan dx="8" font-size="12" font-weight="500" class="fig-muted fig-note">{verb}</tspan>'
+                    '</text>')
     css.append(f".aim-bld-anim{{animation-duration:{BLD_T}s;animation-timing-function:linear;"
                "animation-iteration-count:infinite}")
     # Paused part way into a sweep rather than at centre, where every joint sits at neutral and the
