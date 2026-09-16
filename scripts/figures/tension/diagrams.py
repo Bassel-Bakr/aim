@@ -219,6 +219,10 @@ BLD_ELBOW, BLD_WRIST, BLD_MOUSE = 322, 226, 193
 # the fingers are already moving when the wrist joins, and both are moving when the arm joins.
 BLD_FINGER_PX, BLD_WRIST_DEG, BLD_ARM_DEG = 9.0, 16.0, 20.0
 BLD_ENGAGE = {"finger": (0.00, 0.18), "wrist": (0.15, 0.45), "arm": (0.40, 0.70)}
+# The hand is one translucent shape with a firmer edge, so every part of it reads as the same limb
+# and the mouse under it stays legible.
+BLD_SKIN = 'class="fig-ink-fill" opacity="0.2"'
+BLD_EDGE = 'class="fig-ink-stroke" opacity="0.55" fill="none"' 
 BLD_STEPS = 400             # steps in the reach table bld_reach reads
 BLD_LAG = 0.02              # seconds the crosshair trails the target: about 5 units at strafe speed
 # What a joint has given by the time the next one joins in: enough to be moving, far short of its
@@ -275,27 +279,39 @@ def bld_pose(t):
 
 
 def bld_hand(part):
-    """One part of the hand seen from above, in its neutral pose. mouse: a mouse narrow enough that
-    the ring finger sits on its edge and the pinky beside it. palm: the heel of the hand on the back
-    of the mouse. fingers: four fingers reaching over the buttons, and a thumb down the left side."""
+    """One part of the hand seen from above, in its neutral pose. The mouse is drawn on the page's
+    own background with a thin edge, so it reads as an object lying on the panel, and the arm, palm
+    and fingers all share one translucent ink fill, so they read as one limb over it.
+
+    mouse: a mouse narrow enough that the ring finger sits on its edge and the pinky beside it.
+    forearm: the arm from the elbow to the wrist. palm: the heel of the hand on the back of the
+    mouse. fingers: four fingers over the buttons, and a thumb down the left side."""
     if part == "mouse":
-        return ('<path d="M300 144c14 0 22 12 22 30v42c0 16-10 24-22 24s-22-8-22-24v-42c0-18 8-30 22-30Z" '
-                'class="fig-grid-fill" opacity="0.5"/>'
-                '<path d="M300 144c14 0 22 12 22 30v42c0 16-10 24-22 24s-22-8-22-24v-42c0-18 8-30 22-30Z" '
-                'class="fig-muted-stroke" stroke-width="2" fill="none"/>'
-                '<path d="M300 145V186" class="fig-muted-stroke" stroke-width="1.5"/>')
+        shell = ("M300 144c14 0 22 12 22 30v42c0 16-10 24-22 24s-22-8-22-24v-42c0-18 8-30 22-30Z")
+        return (f'<path d="{shell}" class="fig-surface"/>'
+                f'<path d="{shell}" class="fig-muted-stroke" stroke-width="2" fill="none"/>'
+                '<path d="M300 145V180" class="fig-muted-stroke" stroke-width="1.5"/>'
+                '<rect x="297" y="156" width="6" height="14" rx="3" class="fig-muted-stroke" '
+                'stroke-width="1.5" fill="none"/>')
+    if part == "forearm":
+        return (f'<path d="M286 336 L289 {BLD_WRIST + 2}q11 -6 22 0 L314 336q-14 8 -28 0Z" '
+                f'{BLD_SKIN}/>'
+                f'<path d="M286 336 L289 {BLD_WRIST + 2}q11 -6 22 0 L314 336q-14 8 -28 0Z" '
+                f'{BLD_EDGE} stroke-width="2"/>')
     if part == "palm":
-        return ('<path d="M284 236c-6-14-6-28-2-40 3-9 9-14 18-14h4c9 0 15 5 18 14 4 12 4 26-2 40'
-                '-4 9-32 9-36 0Z" class="fig-ink-fill" opacity="0.14"/>'
-                '<path d="M284 236c-6-14-6-28-2-40 3-9 9-14 18-14h4c9 0 15 5 18 14 4 12 4 26-2 40'
-                '-4 9-32 9-36 0Z" class="fig-ink-stroke" stroke-width="2" fill="none" opacity="0.5"/>')
+        heel = ("M284 238c-6-14-6-28-2-40 3-9 9-14 18-14h4c9 0 15 5 18 14 4 12 4 26-2 40-4 9-32 9-36 0Z")
+        return (f'<path d="{heel}" {BLD_SKIN}/>'
+                f'<path d="{heel}" {BLD_EDGE} stroke-width="2"/>'
+                # The crease across the heel marks where the hand ends and the wrist turns.
+                '<path d="M286 231q14 7 28 0" class="fig-ink-stroke" stroke-width="1.5" fill="none" '
+                'opacity="0.3"/>')
     fingers = [("M290 194C288 178 288 166 291 157", 6.5),      # index, on the left button
                ("M301 196C301 176 301 164 303 153", 6.5),      # middle, on the right button
                ("M312 198C315 182 317 172 319 163", 6.0),      # ring, over the right edge
                ("M320 206C326 196 329 188 330 181", 5.0),      # pinky, resting beside the mouse
                ("M280 216C270 212 263 204 261 196", 7.0)]      # thumb, down the left side
-    return "".join(f'<path d="{d}" class="fig-ink-stroke" stroke-width="{w}" stroke-linecap="round" '
-                   'fill="none" opacity="0.55"/>' for d, w in fingers)
+    return "".join(f'<path d="{d}" {BLD_EDGE} stroke-width="{w}" stroke-linecap="round"/>'
+                   for d, w in fingers)
 
 
 def bld_chain(arm, wrist, fingers, opacity=None):
@@ -308,12 +324,15 @@ def bld_chain(arm, wrist, fingers, opacity=None):
         cls = ' class="aim-bld-anim"' if name else ""
         return f'<g{cls} style="{style}">{inner}</g>'
 
-    forearm = (f'<path d="M{BLD_CX} {BLD_ELBOW}V{BLD_WRIST}" class="fig-grid-stroke" stroke-width="26" '
-               'stroke-linecap="round"/>')
-    # The palm sits under the mouse and the fingers over it, so they are drawn either side of it.
-    hand = group(fingers, f"{BLD_CX}px 200px", bld_hand("mouse") + bld_hand("fingers"))
-    wrist_group = group(wrist, f"{BLD_CX}px {BLD_WRIST}px", bld_hand("palm") + hand)
-    body = group(arm, f"{BLD_CX}px {BLD_ELBOW}px", forearm + wrist_group)
+    # Back to front: the mouse, then the heel of the hand resting on it, then the fingers over the
+    # buttons. The mouse and the fingers move with the finger group and the palm does not, so the
+    # chain is walked three times rather than drawn in one pass.
+    def stack(part, with_fingers):
+        inner = group(fingers, f"{BLD_CX}px 200px", bld_hand(part)) if with_fingers else bld_hand(part)
+        return group(wrist, f"{BLD_CX}px {BLD_WRIST}px", inner)
+
+    body = group(arm, f"{BLD_CX}px {BLD_ELBOW}px",
+                 bld_hand("forearm") + stack("mouse", True) + stack("palm", False) + stack("fingers", True))
     return f'<g opacity="{opacity}">{body}</g>' if opacity else body
 
 

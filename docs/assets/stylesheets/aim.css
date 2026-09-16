@@ -1346,6 +1346,9 @@ body {
 .aim-figure .fig-grid-stroke { stroke: var(--md-default-fg-color--lighter); }
 .aim-figure .fig-grid-fill { fill: var(--md-default-fg-color--lighter); }
 .aim-figure .fig-panel { fill: var(--md-code-bg-color); }
+/* The page behind the panels, for an object that has to read as a thing sitting on one rather than
+ * as part of the drawing, such as the mouse under the hand in the blend figure. */
+.aim-figure .fig-surface { fill: var(--md-default-bg-color); }
 .aim-figure .fig-accent-fill { fill: var(--aim-accent); }
 .aim-figure .fig-accent-stroke { stroke: var(--aim-accent); }
 .aim-figure .fig-accent-text { fill: var(--aim-accent); }
