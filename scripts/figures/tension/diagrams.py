@@ -302,17 +302,21 @@ def bld_hand(part):
                 f'<path d="M286 336 L289 {BLD_WRIST + 2}q11 -6 22 0 L314 336q-14 8 -28 0Z" '
                 f'{BLD_EDGE} stroke-width="2"/>')
     if part == "palm":
-        heel = ("M284 238c-6-14-6-28-2-40 3-9 9-14 18-14h4c9 0 15 5 18 14 4 12 4 26-2 40-4 9-32 9-36 0Z")
+        heel = ("M284 238c-6-14-6-26-2-36 3-8 9-12 18-12h4c9 0 15 4 18 12 4 10 4 22-2 36-4 9-32 9-36 0Z")
         return (f'<path d="{heel}" {BLD_SKIN}/>'
                 f'<path d="{heel}" {BLD_EDGE} stroke-width="2"/>'
                 # The crease across the heel marks where the hand ends and the wrist turns.
                 '<path d="M286 231q14 7 28 0" class="fig-hand-stroke" stroke-width="1.5" fill="none" '
                 'opacity="0.45"/>')
-    fingers = [("M290 194C288 178 288 166 291 157", 6.5),      # index, on the left button
-               ("M301 196C301 176 301 164 303 153", 6.5),      # middle, on the right button
-               ("M312 198C315 182 317 172 319 163", 6.0),      # ring, over the right edge
-               ("M320 206C326 196 329 188 330 181", 5.0),      # pinky, resting beside the mouse
-               ("M280 216C270 212 263 204 261 196", 7.0)]      # thumb, down the left side
+    # Every finger starts well inside the heel, which is drawn over them: a finger slides a little
+    # against the palm as it works, and its knuckle has to stay covered while it does.
+    fingers = [("M288 226C288 200 288 170 291 157", 6.5),      # index, on the left button
+               ("M300 228C300 200 301 168 303 153", 6.5),      # middle, on the right button
+               ("M311 226C314 202 317 176 318 162", 6.0),      # ring, over the right edge
+               # The thumb and the pinky come round opposite flanks and press in: that side squeeze
+               # is what holds the mouse, so they meet its edges rather than lie on its back.
+               ("M318 230C333 216 332 200 325 191", 5.0),
+               ("M288 234C271 224 267 205 275 193", 7.0)]
     # Each finger is its edge colour with its own tone drawn back over it, which outlines the digit
     # and, drawn one finger at a time, keeps the next finger's edge visible over the last one's back.
     return "".join(f'<path d="{d}" {BLD_EDGE} stroke-width="{w + 3}" stroke-linecap="round"/>'
@@ -331,15 +335,15 @@ def bld_chain(arm, wrist, fingers, opacity=None):
         cls = ' class="aim-bld-anim"' if name else ""
         return f'<g{cls} style="{style}">{inner}</g>'
 
-    # Back to front: the mouse, then the heel of the hand resting on it, then the fingers over the
-    # buttons. The mouse and the fingers move with the finger group and the palm does not, so the
-    # chain is walked three times rather than drawn in one pass.
+    # Back to front: the mouse, then the fingers over the buttons, then the heel of the hand, which
+    # covers where the fingers meet it. The mouse and the fingers move with the finger group and the
+    # palm does not, so the chain is walked three times rather than drawn in one pass.
     def stack(part, with_fingers):
         inner = group(fingers, f"{BLD_CX}px 200px", bld_hand(part)) if with_fingers else bld_hand(part)
         return group(wrist, f"{BLD_CX}px {BLD_WRIST}px", inner)
 
     body = group(arm, f"{BLD_CX}px {BLD_ELBOW}px",
-                 bld_hand("forearm") + stack("mouse", True) + stack("palm", False) + stack("fingers", True))
+                 bld_hand("forearm") + stack("mouse", True) + stack("fingers", True) + stack("palm", False))
     return f'<g opacity="{opacity}">{body}</g>' if opacity else body
 
 
