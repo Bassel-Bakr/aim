@@ -22,10 +22,17 @@ import re
 
 import yaml
 from markdown.extensions import Extension
+from markdown.postprocessors import Postprocessor
 from markdown.preprocessors import Preprocessor
 from zensical.extensions.context import ContextPreprocessor
 
 CITATION = re.compile(r"\[\^(REF-[1-9]\d*)\](?!:)")
+# Two citations for one claim are written back to back, so their markers render as adjacent
+# <sup> elements with nothing between them. CSS cannot tell that pair from two markers with a
+# sentence in between — a sibling selector skips text — so the second marker of a real pair is
+# tagged here, where the gap is still visible, and aim.css draws the divider on that class.
+CITATION_RUN = re.compile(r'</sup><sup id="fnref')
+CITATION_RUN_CLASS = "aim-citation-run"
 REFERENCES_MARKER = "<!-- aim:references -->"
 REFERENCES_PAGE = "wiki/references.md"
 TYPE_LABELS = {
@@ -128,6 +135,13 @@ class ReferencesPreprocessor(Preprocessor):
         return out + [""]
 
 
+class CitationRunPostprocessor(Postprocessor):
+    """Mark every citation marker that follows another with no text between them."""
+
+    def run(self, text):
+        return CITATION_RUN.sub(f'</sup><sup class="{CITATION_RUN_CLASS}" id="fnref', text)
+
+
 class ReferencesExtension(Extension):
     def __init__(self, **kwargs):
         self.config = {"registry": ["references.yml", "Path to the reference registry, from the project root."]}
@@ -135,6 +149,8 @@ class ReferencesExtension(Extension):
 
     def extendMarkdown(self, md):
         md.preprocessors.register(ReferencesPreprocessor(md, self.getConfig("registry")), "aim_references", 25)
+        # After the footnotes extension has written the markers, so the pairs are there to find.
+        md.postprocessors.register(CitationRunPostprocessor(md), "aim_citation_runs", 25)
 
 
 def makeExtension(**kwargs):

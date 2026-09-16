@@ -46,7 +46,8 @@ zensical build --clean
 
 `scripts/check_pages.py` enforces three content rules: every `tags:` value is on the allowed list,
 each concept page and each resource page carries a `related:` list in front matter where every
-entry has a real reason, and every citation names an ID in `references.yml`. It also checks that every myth block's title matches a heading on
+entry has a real reason, and every citation names an ID in `references.yml` and runs together with
+any other citation on the same claim. It also checks that every myth block's title matches a heading on
 `docs/wiki/myths.md` and links there as "Evidence", that each entry on that page is a heading
 with `{ .aim-myth-title }` over an untitled myth block holding its verdict, that a myth block
 elsewhere repeats that verdict word for word, and enforces the readability rules in
@@ -125,8 +126,9 @@ agents most often miss:
 5. Write in your own words, and note that reusing a source's sentence with a few words changed is
    still copying — restate the claim from scratch, or quote and attribute it. Cite each fact with its
    source's ID from `references.yml` as a footnote marker, `[^REF-15]`, and never define it on the
-   page: `extensions/aim_references.py` adds the definition. Add a missing source to the registry
-   with the next unused ID; never renumber one. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full
+   page: `extensions/aim_references.py` adds the definition. Where a sentence rests on several
+   sources, run the markers together with nothing between them, `[^REF-77][^REF-74]`. Add a missing
+   source to the registry with the next unused ID; never renumber one. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full
    rule and its two exceptions. Outside those exceptions, do not name the source in the sentence
    ("Aimlabs puts…", "a coach recommends…"): state the claim and let the footnote say who.
    Never copy guides, tables, or images from other sites — content here is CC BY-SA 4.0 and the

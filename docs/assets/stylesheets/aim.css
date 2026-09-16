@@ -1216,6 +1216,18 @@ body {
   mask-image: var(--aim-icon-image);
 }
 
+/* Sources for one claim are cited back to back, [^REF-77][^REF-74], so their markers render as bare
+ * superscript numbers with nothing between them and two of them read as one number. A middot
+ * between neighbours separates them, the same divider the References page puts between an entry's
+ * details. It is drawn on the second marker of a pair, which aim_references.py marks with
+ * .aim-citation-run, so a lone marker and a marker that only follows an earlier sentence's carry
+ * none. */
+.md-typeset sup.aim-citation-run::before {
+  content: "·";
+  margin: 0 0.15em;
+  color: var(--md-default-fg-color--light);
+}
+
 /* A wiki page's footnotes render below a "References" heading, which already separates them from
  * the page, so the rule the theme draws above its footnote list is dropped there. */
 .md-typeset h2#references + .footnote > hr {

@@ -68,6 +68,16 @@ body.
    optional. Never renumber or reuse an ID: pages cite by ID. Footnotes are numbered in the order a
    page cites them.
 
+   Where one sentence rests on several sources, put the markers one after another, with nothing
+   between them, the way an encyclopedia stacks them:
+
+   ```markdown
+   Tense to start a fast motion, then release before you land.[^REF-77][^REF-74]
+   ```
+
+   A space, a comma, or an "and" between markers reads as part of the sentence, so
+   `scripts/check_pages.py` rejects it.
+
    A footnote that is not a source, such as a short aside, still works the normal way: give it any
    label other than a `REF-` ID and define it at the bottom of the page.
 

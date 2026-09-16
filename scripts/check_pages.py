@@ -44,6 +44,9 @@ REFERENCE_ID = re.compile(r"^REF-[1-9]\d*$")
 REFERENCE_CITATION = re.compile(r"\[\^(REF-[1-9]\d*)\](?!:)")
 REFERENCE_DEFINITION = re.compile(r"^\[\^(REF-[^\]]*)\]:", re.M)
 REFERENCE_MARKER = re.compile(r"\[\^(REF-[^\]]*)\](?!:)")
+# Several sources for one claim sit together, [^REF-1][^REF-2], the way an encyclopedia stacks
+# them: a comma or "and" between the markers reads as part of the sentence.
+REFERENCE_RUN = re.compile(r"\[\^REF-[1-9]\d*\]([\s,;]+(?:and\s+)?)(?=\[\^REF-[1-9]\d*\])")
 REFERENCES_HEADING = re.compile(r"^## References\s*$", re.M)
 REFERENCE_FIELDS = {"id", "author", "title", "url", "type", "publication", "notes"}
 REFERENCE_REQUIRED = {"id", "author", "title", "url", "type"}
@@ -271,6 +274,8 @@ def check(path, drafts, headings, known_ids):
         errors.append(f"{rel}: remove '## References'; the references extension adds it")
     for marker in sorted(set(REFERENCE_MARKER.findall(text)) - cited):
         errors.append(f"{rel}: [^{marker}] is not a valid reference ID; use REF-1 style, no leading zeros")
+    if REFERENCE_RUN.search(text):
+        errors.append(f"{rel}: citations for one claim run together as [^REF-1][^REF-2]; remove what separates them")
     for ref_id in sorted(cited - known_ids):
         errors.append(f"{rel}: cites {ref_id}, which is not in references.yml")
     for label in REFERENCE_DEFINITION.findall(text):
