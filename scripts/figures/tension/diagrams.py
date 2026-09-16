@@ -69,6 +69,13 @@ def smooth(u):
     return u * u * (3 - 2 * u)
 
 
+def ease_out(u):
+    """0 to 1 leaving at full speed and easing only into the end, for a value that is already moving
+    when it starts."""
+    u = max(0.0, min(1.0, u))
+    return u * (2 - u)
+
+
 def keyframes(name, values, fmt, prop="transform"):
     """Keyframes from one value per frame, dropping any frame whose value matches both neighbours,
     since linear timing between equal values changes nothing."""
@@ -235,12 +242,18 @@ BLD_HANDOVER = 0.4
 
 def bld_engage(u, joint):
     """How much of a joint's range is in use at reach u, from 0 to 1. Each joint waits its turn,
-    hands over at BLD_HANDOVER of its range, then keeps going with the others."""
+    hands over at BLD_HANDOVER of its range, then keeps going with the others.
+
+    A joint that waits eases in from rest. The first one does not: it leaves centre at full speed,
+    so that the travel it produces grows with reach rather than with reach squared. Otherwise the
+    reach that a given travel needs climbs vertically out of centre, and the hand snaps as the target
+    crosses the middle."""
     start, mid = BLD_ENGAGE[joint]
     if u <= start:
         return 0.0
+    entry = ease_out if start == 0 else smooth
     if u <= mid:
-        return BLD_HANDOVER * smooth((u - start) / (mid - start))
+        return BLD_HANDOVER * entry((u - start) / (mid - start))
     return BLD_HANDOVER + (1 - BLD_HANDOVER) * smooth((u - mid) / (1 - mid))
 
 
