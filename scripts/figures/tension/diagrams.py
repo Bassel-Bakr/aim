@@ -79,11 +79,14 @@ def keyframes(name, values, fmt, prop="transform"):
     return f"@keyframes {name}{{{''.join(parts)}}}"
 
 
-def lane_label(x, y, name, note):
+def lane_label(x, y, name, note=""):
     """A lane's name and a short note on one line, top-left inside its panel. The fig-name and fig-note
-    classes let aim.css enlarge them on phones, where a fitted diagram scales its text down."""
+    classes let aim.css enlarge them on phones, where a fitted diagram scales its text down. A lane
+    whose panel is already crowded can leave the note out."""
+    tail = (f'<tspan dx="10" font-size="13" font-weight="500" class="fig-muted fig-note">{note}</tspan>'
+            if note else "")
     return (f'<text x="{x}" y="{y}"><tspan font-size="16" font-weight="700" class="fig-ink fig-name">{name}</tspan>'
-            f'<tspan dx="10" font-size="13" font-weight="500" class="fig-muted fig-note">{note}</tspan></text>')
+            f'{tail}</text>')
 
 
 def crosshair(cls, x, y):
@@ -359,20 +362,23 @@ def blend():
                 f'{crosshair("fig-balanced-stroke", BLD_CX, 78)}</g>')
     # Desk half: the same motion, made by three joints at once.
     body.append(f'<rect x="8" y="124" width="{BLD_W - 16}" height="{BLD_H - 132}" rx="12" class="fig-panel"/>')
-    body.append(lane_label(24, 150, "On the desk", "One motion, three joints"))
+    body.append(lane_label(24, 148, "On the desk"))
     body.append(f'<path d="M{BLD_CX} 168V{BLD_H - 16}" class="fig-grid-stroke" stroke-width="1" '
                 'stroke-dasharray="2 6"/>')
     body.append(bld_chain(None, None, None, opacity="0.13"))
     body.append(bld_chain("aimBldArm", "aimBldWrist", "aimBldFingers"))
-    # The joints are named down the left edge, each on a dotted line to the point it turns around.
-    for name, note, y, jx in (("Fingers", "start it", 172, 291),
-                              ("Wrist", "joins next", BLD_WRIST, BLD_CX),
-                              ("Arm", "carries the rest", 314, BLD_CX)):
-        body.append(f'<path d="M132 {y}H{jx - 16}" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 5"/>')
+    # The joints are named down the left edge, in two columns so the names line up under each other
+    # and their verbs line up under each other, each row on a dotted line to the joint it names. The
+    # verbs are one word so the columns still clear the leader on a phone, where fig-note grows.
+    for name, verb, y, jx in (("Fingers", "start", 182, 292),
+                              ("Wrist", "joins", BLD_WRIST, BLD_CX),
+                              ("Arm", "carries", 314, BLD_CX)):
+        body.append(f'<path d="M196 {y}H{jx - 16}" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 5"/>')
         body.append(f'<circle cx="{jx}" cy="{y}" r="3.5" class="fig-ink-fill"/>')
-        body.append(f'<text x="126" y="{y + 4}" text-anchor="end">'
-                    f'<tspan font-size="13" font-weight="700" class="fig-ink fig-note">{name}</tspan>'
-                    f'<tspan dx="8" font-size="12" font-weight="500" class="fig-muted fig-note">{note}</tspan></text>')
+        body.append(f'<text x="24" y="{y + 4}" font-size="13" font-weight="700" '
+                    f'class="fig-ink fig-note">{name}</text>')
+        body.append(f'<text x="110" y="{y + 4}" font-size="12" font-weight="500" '
+                    f'class="fig-muted fig-note">{verb}</text>')
     css.append(f".aim-bld-anim{{animation-duration:{BLD_T}s;animation-timing-function:linear;"
                "animation-iteration-count:infinite}")
     # Paused part way into a sweep rather than at centre, where every joint sits at neutral and the
