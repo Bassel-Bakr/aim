@@ -63,6 +63,12 @@
   --aim-key-wash: #e0a8001f;
   --aim-key-tag-ink: var(--aim-night);
   --aim-tag-ink: var(--aim-night-fg);
+  /* Tension in the figures reads as a fixed three-colour scale, like the myth and NOTE blocks
+   * above: red is too tense, blue is too loose, green is balanced. aim-theme.js never writes these,
+   * so the meaning holds whatever colour a reader picks. */
+  --aim-tense: #9c3522;
+  --aim-loose: #1d6a8c;
+  --aim-balanced: #2f7a43;
   --aim-grid: #14171c08;
   --aim-clicking: #9c3522;
   --aim-tracking: #1d6a8c;
@@ -106,6 +112,9 @@
   --aim-key-ink: #f2c14e;
   --aim-key-wash: #f2c14e14;
   --aim-tag-ink: var(--aim-night);
+  --aim-tense: #e38268;
+  --aim-loose: #56b6d8;
+  --aim-balanced: #6cc48a;
   --aim-grid: #ffffff08;
   --aim-clicking: #e38268;
   --aim-tracking: #56b6d8;
@@ -1263,6 +1272,10 @@ body {
  * and cool (too little) for the two ends of a comparison, and target for the thing aimed at. Each
  * has a -fill and -stroke form; plain fig-ink, fig-muted and fig-accent-text set text colour.
  *
+ * Where a figure shows how tense a hand is, it uses tense, loose and balanced instead. Those three
+ * carry a meaning rather than a mood, so unlike accent they hold their colour whatever the reader
+ * picks: red is too tense, blue is too loose, green is balanced.
+ *
  * A diagram may animate with CSS keyframes in its own <style>. It has to pause on a telling frame
  * under prefers-reduced-motion. An <img> render works too, and gets rounded corners. Keep the SVG
  * free of blank lines, or Markdown splits it apart.
@@ -1339,3 +1352,9 @@ body {
 .aim-figure .fig-cool-fill { fill: var(--aim-tracking); }
 .aim-figure .fig-cool-stroke { stroke: var(--aim-tracking); }
 .aim-figure .fig-target { fill: var(--aim-key); }
+.aim-figure .fig-tense-fill { fill: var(--aim-tense); }
+.aim-figure .fig-tense-stroke { stroke: var(--aim-tense); }
+.aim-figure .fig-loose-fill { fill: var(--aim-loose); }
+.aim-figure .fig-loose-stroke { stroke: var(--aim-loose); }
+.aim-figure .fig-balanced-fill { fill: var(--aim-balanced); }
+.aim-figure .fig-balanced-stroke { stroke: var(--aim-balanced); }

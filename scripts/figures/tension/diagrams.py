@@ -29,9 +29,9 @@ def scale():
            'overcorrects and locks out.</title>', metadata()]
     x0, x1, y = 40, 720, 92
     seg = (x1 - x0) / 3
-    names = [("Too loose", "fig-cool-fill", ["Lags behind the target", "Stops and restarts", "Feels sluggish"]),
-             ("Balanced", "fig-ink-fill", ["Firm, not hard, hold", "One continuous motion", "Releases after a flick"]),
-             ("Too tight", "fig-accent-fill", ["Jitters ahead of the target", "Skips and overcorrects", "Tires fast, locks out"])]
+    names = [("Too loose", "fig-loose-fill", ["Lags behind the target", "Stops and restarts", "Feels sluggish"]),
+             ("Balanced", "fig-balanced-fill", ["Firm, not hard, hold", "One continuous motion", "Releases after a flick"]),
+             ("Too tight", "fig-tense-fill", ["Jitters ahead of the target", "Skips and overcorrects", "Tires fast, locks out"])]
     for i, (name, cls, symptoms) in enumerate(names):
         left = x0 + i * seg
         opacity = "1" if i == 1 else "0.85"
@@ -61,10 +61,12 @@ def lane_label(x, y, name, note):
 
 
 def crosshair(cls, x, y):
-    r = 12
-    return (f'<circle cx="{x}" cy="{y}" r="{r}" class="{cls}" stroke-width="2.8" fill="none"/>'
-            f'<path d="M{x - r - 8} {y}H{x - r + 6}M{x + r - 6} {y}H{x + r + 8}'
-            f'M{x} {y - r - 8}V{y - r + 6}M{x} {y + r - 6}V{y + r + 8}" class="{cls}" stroke-width="2.8"/>')
+    """A small tight crosshair: a ring with four ticks that cross it, drawn in the lane's tension
+    colour. It has to read at a glance against a target dot, so it stays smaller than one."""
+    r = 8
+    return (f'<circle cx="{x}" cy="{y}" r="{r}" class="{cls}" stroke-width="2.2" fill="none"/>'
+            f'<path d="M{x - r - 5} {y}H{x - r + 4}M{x + r - 4} {y}H{x + r + 5}'
+            f'M{x} {y - r - 5}V{y - r + 4}M{x} {y + r - 4}V{y + r + 5}" class="{cls}" stroke-width="2.2"/>')
 
 
 # Tracking: a target strafes at constant speed with quick turns, and three crosshairs chase it.
@@ -148,9 +150,9 @@ def trk_keyframes(name, xs, extra=None):
 def tracking():
     tg = [trk_target(i * TRK_T / TRK_FRAMES) for i in range(TRK_FRAMES + 1)]
     lanes = [
-        ("Too tight", "Overshoots and shakes", "fig-accent-stroke", trk_simulate(trk_tight), trk_tremor),
-        ("Too loose", "Lags and stalls", "fig-cool-stroke", trk_simulate(trk_loose), None),
-        ("Balanced", "Stays on the target", "fig-ink-stroke", trk_simulate(trk_balanced), None),
+        ("Too tight", "Overshoots and shakes", "fig-tense-stroke", trk_simulate(trk_tight), trk_tremor),
+        ("Too loose", "Lags and stalls", "fig-loose-stroke", trk_simulate(trk_loose), None),
+        ("Balanced", "Stays on the target", "fig-balanced-stroke", trk_simulate(trk_balanced), None),
     ]
     h = TRK_TOP * 2 + TRK_LANE_H * 3 - 8
     css = [trk_keyframes("aimTrkTarget", tg)]
@@ -161,7 +163,7 @@ def tracking():
         body.append(f'<rect x="8" y="{top}" width="{TRK_W - 16}" height="{TRK_LANE_H - 8}" rx="12" class="fig-panel"/>')
         body.append(lane_label(TRK_X0, top + 26, name, note))
         body.append(f'<path d="M{TRK_X0} {y}H{TRK_X1}" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 6"/>')
-        body.append(f'<g class="aim-trk-anim" style="animation-name:aimTrkTarget"><circle cx="{TRK_CX}" cy="{y}" r="15" class="fig-target"/></g>')
+        body.append(f'<g class="aim-trk-anim" style="animation-name:aimTrkTarget"><circle cx="{TRK_CX}" cy="{y}" r="12" class="fig-target"/></g>')
         anim = f"aimTrkCursor{i}"
         css.append(trk_keyframes(anim, xs, extra))
         for lag, opacity in ((0.22, 0.14), (0.11, 0.3)):
@@ -249,8 +251,8 @@ def flk_keyframes(name, values, fmt, prop="transform"):
 
 def flick():
     phases = [("Prepare", 0.0, 0.22), ("Flick", 0.22, 0.44), ("Micro", 0.44, 0.74), ("Shoot", 0.74, 1.0)]
-    lanes = [("Managed", "Tense, flick, release", "managed", "fig-ink-stroke"),
-             ("Held", "Tension never drops", "held", "fig-accent-stroke")]
+    lanes = [("Managed", "Tense, flick, release", "managed", "balanced"),
+             ("Held", "Tension never drops", "held", "tense")]
     h = FLK_TOP + FLK_LANE_H * len(lanes) - 8
     css, body = [], []
     # Phase strip: each label lights up while its phase runs, in every flick of the loop. The strip
@@ -268,7 +270,7 @@ def flick():
         css.append(flk_keyframes(anim, lit, lambda v: str(v), "opacity"))
         x = left + step * pi + step / 2
         body.append(f'<text x="{x:.0f}" y="24" text-anchor="middle" font-size="14" font-weight="700" class="fig-ink fig-phase aim-flk-anim" style="animation-name:{anim};animation-timing-function:steps(1,end)">{label.upper()}</text>')
-    for li, (name, note, kind, cls) in enumerate(lanes):
+    for li, (name, note, kind, tone) in enumerate(lanes):
         top = FLK_TOP + FLK_LANE_H * li
         cy = top + 70
         body.append(f'<rect x="8" y="{top}" width="{FLK_W - 16}" height="{FLK_LANE_H - 8}" rx="12" class="fig-panel"/>')
@@ -276,8 +278,8 @@ def flick():
         # Tension meter: a track, a lockout band at the top, and a fill that scales from the bottom.
         m_top, m_bottom = top + 14, top + 92
         body.append(f'<rect x="{FLK_MX - 8}" y="{m_top}" width="16" height="{m_bottom - m_top}" rx="4" class="fig-grid-fill" opacity="0.35"/>')
-        body.append(f'<rect x="{FLK_MX - 8}" y="{m_top}" width="16" height="{(m_bottom - m_top) * 0.16:.1f}" rx="4" class="fig-accent-fill" opacity="0.35"/>')
-        fill_cls = "fig-accent-fill" if kind == "held" else "fig-ink-fill"
+        body.append(f'<rect x="{FLK_MX - 8}" y="{m_top}" width="16" height="{(m_bottom - m_top) * 0.16:.1f}" rx="4" class="fig-tense-fill" opacity="0.35"/>')
+        fill_cls = f"fig-{tone}-fill"
         name_bar = f"aimFlkBar{li}"
         body.append(f'<rect x="{FLK_MX - 8}" y="{m_top}" width="16" height="{m_bottom - m_top}" rx="4" class="{fill_cls} aim-flk-anim aim-flk-bar" style="animation-name:{name_bar}"/>')
         body.append(f'<text x="{FLK_MX}" y="{m_bottom + 15}" text-anchor="middle" font-size="10" font-weight="600" class="fig-muted fig-caption">TENSION</text>')
@@ -293,10 +295,10 @@ def flick():
                 flash.append(s)
             anim = f"aimFlkDot{li}{k}"
             css.append(flk_keyframes(anim, flash, lambda v: f"scale({v:.2f})"))
-            body.append(f'<circle cx="{FLK_TX[k] + FLK_MX}" cy="{cy + FLK_TY[k]}" r="13" class="fig-target aim-flk-anim aim-flk-dot" style="animation-name:{anim}"/>')
+            body.append(f'<circle cx="{FLK_TX[k] + FLK_MX}" cy="{cy + FLK_TY[k]}" r="11" class="fig-target aim-flk-anim aim-flk-dot" style="animation-name:{anim}"/>')
         anim = f"aimFlkCursor{li}"
         css.append(flk_keyframes(anim, samples, lambda v: f"translate({v[0] + FLK_MX:.0f}px,{v[1]:.0f}px)"))
-        body.append(f'<g class="aim-flk-anim" style="animation-name:{anim}">{crosshair(cls, 0, cy)}</g>')
+        body.append(f'<g class="aim-flk-anim" style="animation-name:{anim}">{crosshair(f"fig-{tone}-stroke", 0, cy)}</g>')
     css.append(f".aim-flk-anim{{animation-duration:{FLK_T}s;animation-timing-function:linear;animation-iteration-count:infinite}}"
                ".aim-flk-bar,.aim-flk-dot{transform-box:fill-box;transform-origin:center}"
                ".aim-flk-bar{transform-origin:bottom}")
