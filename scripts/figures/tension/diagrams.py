@@ -2,6 +2,7 @@
 classes in aim.css, so each diagram follows the reader's scheme and picked colour. build.py splices them
 into the page; call it rather than this module.
 """
+import bisect
 import math
 
 AUTHOR = "Bassel Bakr"
@@ -218,6 +219,8 @@ BLD_ELBOW, BLD_WRIST, BLD_MOUSE = 322, 226, 193
 # the fingers are already moving when the wrist joins, and both are moving when the arm joins.
 BLD_FINGER_PX, BLD_WRIST_DEG, BLD_ARM_DEG = 9.0, 16.0, 20.0
 BLD_ENGAGE = {"finger": (0.00, 0.18), "wrist": (0.15, 0.45), "arm": (0.40, 0.70)}
+BLD_STEPS = 400             # steps in the reach table bld_reach reads
+BLD_LAG = 0.05              # seconds the crosshair trails the target
 # What a joint has given by the time the next one joins in: enough to be moving, far short of its
 # limit.
 BLD_HANDOVER = 0.4
@@ -234,18 +237,41 @@ def bld_engage(u, joint):
     return BLD_HANDOVER + (1 - BLD_HANDOVER) * smooth((u - mid) / (1 - mid))
 
 
-def bld_pose(t):
-    """The finger offset, wrist angle and arm angle at time t, and the mouse's travel from centre in
-    user units, which is what the crosshair on the screen above follows."""
-    s = strafe((t / BLD_T) % 1.0)
-    u, sign = abs(s), math.copysign(1.0, s)
-    finger = sign * bld_engage(u, "finger") * BLD_FINGER_PX
-    wrist = sign * bld_engage(u, "wrist") * BLD_WRIST_DEG
-    arm = sign * bld_engage(u, "arm") * BLD_ARM_DEG
+def bld_joints(u):
+    """The finger offset in user units and the wrist and arm angles in degrees at reach u, and how
+    far the three of them together carry the mouse from centre."""
+    finger = bld_engage(u, "finger") * BLD_FINGER_PX
+    wrist = bld_engage(u, "wrist") * BLD_WRIST_DEG
+    arm = bld_engage(u, "arm") * BLD_ARM_DEG
     travel = (finger
               + math.sin(math.radians(wrist)) * (BLD_WRIST - BLD_MOUSE)
               + math.sin(math.radians(arm)) * (BLD_ELBOW - BLD_MOUSE))
     return finger, wrist, arm, travel
+
+
+BLD_TRAVEL = [bld_joints(i / BLD_STEPS)[3] for i in range(BLD_STEPS + 1)]
+
+
+def bld_reach(travel):
+    """The reach that carries the mouse this far, as a fraction of its full travel: the inverse of
+    bld_joints, since here the screen leads and the hand is whatever produces it. Travel grows with
+    reach, so the table is searched in order and read between its two nearest entries."""
+    want = min(max(travel, 0.0), 1.0) * BLD_TRAVEL[-1]
+    i = bisect.bisect_left(BLD_TRAVEL, want)
+    if i == 0:
+        return 0.0
+    span = BLD_TRAVEL[i] - BLD_TRAVEL[i - 1]
+    between = (want - BLD_TRAVEL[i - 1]) / span if span else 0.0
+    return (i - 1 + between) / BLD_STEPS
+
+
+def bld_pose(t):
+    """The hand at time t, posed to put the mouse where the crosshair is. The crosshair trails the
+    target by BLD_LAG, which is what balanced tracking looks like."""
+    s = strafe(((t - BLD_LAG) / BLD_T) % 1.0)
+    u, sign = bld_reach(abs(s)), math.copysign(1.0, s)
+    finger, wrist, arm, _ = bld_joints(u)
+    return sign * finger, sign * wrist, sign * arm
 
 
 def bld_hand(part):
@@ -293,15 +319,14 @@ def bld_chain(arm, wrist, fingers, opacity=None):
 
 def blend():
     css, body = [], []
-    poses = [bld_pose(i / BLD_FRAMES * BLD_T) for i in range(BLD_FRAMES + 1)]
-    reach = max(abs(p[3]) for p in poses)
-    # The screen and the desk show one motion, so the target's travel is the mouse's travel, scaled
-    # up to the width of the screen above.
-    screen = [p[3] / reach * BLD_A for p in poses]
-    # The crosshair is the mouse a moment ago: a hair of lag is what balanced tracking looks like.
-    cursor = [bld_pose(i / BLD_FRAMES * BLD_T - 0.05)[3] / reach * BLD_A for i in range(BLD_FRAMES + 1)]
-    css.append(keyframes("aimBldTarget", screen, lambda v: f"translate({v:.1f}px,0)"))
-    css.append(keyframes("aimBldCursor", cursor, lambda v: f"translate({v:.1f}px,0)"))
+    ts = [i / BLD_FRAMES * BLD_T for i in range(BLD_FRAMES + 1)]
+    # The screen leads: the target strafes at a constant speed and the crosshair trails it. The hand
+    # below is then posed to put the mouse exactly where the crosshair is.
+    css.append(keyframes("aimBldTarget", [strafe((t / BLD_T) % 1.0) for t in ts],
+                         lambda v: f"translate({v * BLD_A:.1f}px,0)"))
+    css.append(keyframes("aimBldCursor", [strafe(((t - BLD_LAG) / BLD_T) % 1.0) for t in ts],
+                         lambda v: f"translate({v * BLD_A:.1f}px,0)"))
+    poses = [bld_pose(t) for t in ts]
     css.append(keyframes("aimBldArm", poses, lambda p: f"rotate({p[2]:.2f}deg)"))
     css.append(keyframes("aimBldWrist", poses, lambda p: f"rotate({p[1]:.2f}deg)"))
     css.append(keyframes("aimBldFingers", poses, lambda p: f"translate({p[0]:.2f}px,0)"))
