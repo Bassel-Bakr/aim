@@ -53,6 +53,25 @@ def scale():
     return "".join(out)
 
 
+def strafe(phase):
+    """A strafe across one cycle, as -1 to 1: constant speed, rounded just before each turn."""
+    tri = 4 * phase - 1 if phase < 0.5 else 3 - 4 * phase
+    if abs(tri) > 0.94:
+        excess = abs(tri) - 0.94
+        tri = math.copysign(0.94 + excess - excess ** 2 / 0.12, tri)
+    return tri
+
+
+def keyframes(name, values, fmt, prop="transform"):
+    """Keyframes from one value per frame, dropping any frame whose value matches both neighbours,
+    since linear timing between equal values changes nothing."""
+    text = [fmt(v) for v in values]
+    last = len(text) - 1
+    parts = [f"{i / last * 100:.4g}%{{{prop}:{v}}}" for i, v in enumerate(text)
+             if i in (0, last) or not (text[i - 1] == v == text[i + 1])]
+    return f"@keyframes {name}{{{''.join(parts)}}}"
+
+
 def lane_label(x, y, name, note):
     """A lane's name and a short note on one line, top-left inside its panel. The fig-name and fig-note
     classes let aim.css enlarge them on phones, where a fitted diagram scales its text down."""
@@ -83,13 +102,8 @@ TRK_CX = (TRK_X0 + TRK_X1) / 2
 
 
 def trk_target(t):
-    """Target offset from centre: a triangle wave, rounded just before each turn."""
-    phase = (t / TRK_T) % 1.0
-    tri = 4 * phase - 1 if phase < 0.5 else 3 - 4 * phase
-    if abs(tri) > 0.94:
-        excess = abs(tri) - 0.94
-        tri = math.copysign(0.94 + excess - excess ** 2 / 0.12, tri)
-    return tri * TRK_A
+    """Target offset from centre, in user units."""
+    return strafe((t / TRK_T) % 1.0) * TRK_A
 
 
 def trk_simulate(step):
@@ -181,6 +195,118 @@ def tracking():
             f'<style>{"".join(css)}</style>' + "".join(body) + "</svg>")
 
 
+# Blend: one smooth strafe, drawn twice. Above, the crosshair rides a target across the screen.
+# Below, the same motion seen from over the desk, split between the three joints that make it: the
+# forearm swings from the elbow, the wrist follows a beat later, and the fingers finish it. The
+# groups nest, so the mouse carries all three joints and the palm only the first two, which is what
+# makes the fingers visibly slide the mouse under the hand. A faint copy of the arm at rest stays
+# behind the moving one, so the reader sees how far each joint has left neutral.
+BLD_T = 4.4                 # seconds per left-right-left cycle
+BLD_FRAMES = 120
+BLD_W, BLD_H = 600, 348
+BLD_CX = 300                # centre of the screen, and of the neutral hand
+BLD_A = 228                 # how far the target strafes from centre
+BLD_ELBOW, BLD_WRIST = 322, 226
+# Each joint's share of one strafe. The arm swings the furthest, the wrist adds a turn on top of it
+# and the fingers nudge the mouse the last few units.
+BLD_ARM_DEG, BLD_WRIST_DEG, BLD_FINGER_PX = 15.0, 10.0, 6.0
+# The wrist and the fingers arrive after the arm, which is what makes the motion read as one hand
+# rather than three parts moving in lockstep.
+BLD_WRIST_LAG, BLD_FINGER_LAG = 0.09, 0.18
+
+
+def bld_s(t):
+    return strafe((t / BLD_T) % 1.0)
+
+
+def bld_hand(part):
+    """One part of the hand seen from above, in its neutral pose. mouse: the mouse the fingers push.
+    palm: the heel of the hand resting on its back. fingers: two fingers over the buttons and a thumb
+    down the left side."""
+    if part == "mouse":
+        return ('<rect x="271" y="150" width="58" height="86" rx="26" class="fig-grid-fill" opacity="0.5"/>'
+                '<rect x="271" y="150" width="58" height="86" rx="26" class="fig-muted-stroke" '
+                'stroke-width="2" fill="none"/>'
+                '<path d="M300 150V186" class="fig-muted-stroke" stroke-width="2"/>')
+    if part == "palm":
+        return ('<rect x="272" y="178" width="56" height="60" rx="22" class="fig-ink-fill" opacity="0.12"/>'
+                '<rect x="272" y="178" width="56" height="60" rx="22" class="fig-ink-stroke" '
+                'stroke-width="2" fill="none" opacity="0.55"/>')
+    return ('<path d="M288 192V158M310 192V156" class="fig-ink-stroke" stroke-width="6" '
+            'stroke-linecap="round"/>'
+            '<path d="M272 214L258 200" class="fig-ink-stroke" stroke-width="6" stroke-linecap="round"/>')
+
+
+def bld_chain(arm, wrist, fingers, opacity=None):
+    """The arm, wrist and fingers as nested groups, each carrying one joint's share of the motion, so
+    a part inherits every joint above it: the mouse moves with all three, the palm with the arm and
+    wrist only, which is what makes the fingers visibly slide the mouse under the hand. Passing None
+    for a group leaves that joint at rest, which draws the neutral pose."""
+    def group(name, origin, inner):
+        style = f"transform-origin:{origin}" + (f";animation-name:{name}" if name else "")
+        cls = ' class="aim-bld-anim"' if name else ""
+        return f'<g{cls} style="{style}">{inner}</g>'
+
+    forearm = (f'<path d="M{BLD_CX} {BLD_ELBOW}V{BLD_WRIST}" class="fig-grid-stroke" stroke-width="26" '
+               'stroke-linecap="round"/>')
+    # The palm sits under the mouse and the fingers over it, so they are drawn either side of it.
+    hand = group(fingers, f"{BLD_CX}px 200px", bld_hand("mouse") + bld_hand("fingers"))
+    wrist_group = group(wrist, f"{BLD_CX}px {BLD_WRIST}px", bld_hand("palm") + hand)
+    body = group(arm, f"{BLD_CX}px {BLD_ELBOW}px", forearm + wrist_group)
+    return f'<g opacity="{opacity}">{body}</g>' if opacity else body
+
+
+def blend():
+    css, body = [], []
+    ts = [i / BLD_FRAMES * BLD_T for i in range(BLD_FRAMES + 1)]
+    css.append(keyframes("aimBldTarget", [bld_s(t) for t in ts],
+                         lambda v: f"translate({v * BLD_A:.1f}px,0)"))
+    css.append(keyframes("aimBldCursor", [bld_s(t - 0.05) for t in ts],
+                         lambda v: f"translate({v * BLD_A:.1f}px,0)"))
+    css.append(keyframes("aimBldArm", [bld_s(t) for t in ts],
+                         lambda v: f"rotate({v * BLD_ARM_DEG:.2f}deg)"))
+    css.append(keyframes("aimBldWrist", [bld_s(t - BLD_WRIST_LAG) for t in ts],
+                         lambda v: f"rotate({v * BLD_WRIST_DEG:.2f}deg)"))
+    css.append(keyframes("aimBldFingers", [bld_s(t - BLD_FINGER_LAG) for t in ts],
+                         lambda v: f"translate({v * BLD_FINGER_PX:.2f}px,0)"))
+    # Screen half: the target strafes and the crosshair rides it.
+    body.append(f'<rect x="8" y="4" width="{BLD_W - 16}" height="112" rx="12" class="fig-panel"/>')
+    body.append(lane_label(24, 30, "On screen", "One smooth strafe"))
+    body.append('<path d="M24 78H576" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 6"/>')
+    body.append(f'<g class="aim-bld-anim" style="animation-name:aimBldTarget">'
+                f'<circle cx="{BLD_CX}" cy="78" r="12" class="fig-target"/></g>')
+    body.append(f'<g class="aim-bld-anim" style="animation-name:aimBldCursor">'
+                f'{crosshair("fig-balanced-stroke", BLD_CX, 78)}</g>')
+    # Desk half: the same motion, made by three joints at once.
+    body.append(f'<rect x="8" y="124" width="{BLD_W - 16}" height="{BLD_H - 132}" rx="12" class="fig-panel"/>')
+    body.append(lane_label(24, 150, "On the desk", "Arm, wrist and fingers together"))
+    body.append(f'<path d="M{BLD_CX} 168V{BLD_H - 16}" class="fig-grid-stroke" stroke-width="1" '
+                'stroke-dasharray="2 6"/>')
+    body.append(bld_chain(None, None, None, opacity="0.16"))
+    body.append(bld_chain("aimBldArm", "aimBldWrist", "aimBldFingers"))
+    # The joints are named down the left, each on a dotted line to the point it turns around.
+    for name, note, y, jx in (("Fingers", "fine finish", 172, 289),
+                              ("Wrist", "smooth follow", BLD_WRIST, BLD_CX),
+                              ("Arm", "wide sweep", 314, BLD_CX)):
+        body.append(f'<path d="M180 {y}H{jx - 16}" class="fig-grid-stroke" stroke-width="1" stroke-dasharray="2 5"/>')
+        body.append(f'<circle cx="{jx}" cy="{y}" r="3.5" class="fig-ink-fill"/>')
+        body.append(f'<text x="174" y="{y + 4}" text-anchor="end">'
+                    f'<tspan font-size="13" font-weight="700" class="fig-ink fig-note">{name}</tspan>'
+                    f'<tspan dx="8" font-size="12" font-weight="500" class="fig-muted fig-note">{note}</tspan></text>')
+    css.append(f".aim-bld-anim{{animation-duration:{BLD_T}s;animation-timing-function:linear;"
+               "animation-iteration-count:infinite}")
+    # Paused mid-sweep rather than at centre, where every joint sits at neutral and the figure would
+    # show nothing.
+    css.append("@media (prefers-reduced-motion:reduce){.aim-bld-anim{animation-play-state:paused;"
+               f"animation-delay:-{BLD_T * 0.4:.2f}s!important}}}}")
+    return (f'<svg viewBox="0 0 {BLD_W} {BLD_H}" class="fig-fit" role="img" aria-labelledby="fig-blend-title">'
+            '<title id="fig-blend-title">A target strafes across the screen and a crosshair rides it. '
+            'Below, the same motion seen from above the desk: the forearm swings from the elbow, the wrist '
+            'turns a beat later, and the fingers slide the mouse the last little way, all at once. A faint '
+            'copy of the arm at rest shows how far each joint has moved.</title>' + metadata() +
+            f'<style>{"".join(css)}</style>' + "".join(body) + "</svg>")
+
+
 # Flick: two lanes flick between the same three targets, each with a tension meter at its left edge,
 # under a strip that lights up the current phase. Managed builds tension to prepare, peaks for the
 # flick and drops it before landing just short, so a small smooth micro-correction finishes the
@@ -240,15 +366,6 @@ def flk_pose(t, kind):
     return x, y, tension
 
 
-def flk_keyframes(name, values, fmt, prop="transform"):
-    """Keyframes that skip any frame whose value matches both neighbours, since linear timing between
-    equal values changes nothing."""
-    text = [fmt(v) for v in values]
-    parts = [f"{i / FLK_FRAMES * 100:.4g}%{{{prop}:{v}}}" for i, v in enumerate(text)
-             if i in (0, len(text) - 1) or not (text[i - 1] == v == text[i + 1])]
-    return f"@keyframes {name}{{{''.join(parts)}}}"
-
-
 def flick():
     phases = [("Prepare", 0.0, 0.22), ("Flick", 0.22, 0.44), ("Micro", 0.44, 0.74), ("Shoot", 0.74, 1.0)]
     lanes = [("Managed", "Tense, flick, release", "managed", "balanced"),
@@ -267,7 +384,7 @@ def flick():
             local = (i / FLK_FRAMES * FLK_T) % FLK_SEG / FLK_SEG
             lit.append(1.0 if a <= local < b else 0.28)
         anim = f"aimFlkPhase{pi}"
-        css.append(flk_keyframes(anim, lit, lambda v: str(v), "opacity"))
+        css.append(keyframes(anim, lit, lambda v: str(v), "opacity"))
         x = left + step * pi + step / 2
         body.append(f'<text x="{x:.0f}" y="24" text-anchor="middle" font-size="14" font-weight="700" class="fig-ink fig-phase aim-flk-anim" style="animation-name:{anim};animation-timing-function:steps(1,end)">{label.upper()}</text>')
     for li, (name, note, kind, tone) in enumerate(lanes):
@@ -284,7 +401,7 @@ def flick():
         body.append(f'<rect x="{FLK_MX - 8}" y="{m_top}" width="16" height="{m_bottom - m_top}" rx="4" class="{fill_cls} aim-flk-anim aim-flk-bar" style="animation-name:{name_bar}"/>')
         body.append(f'<text x="{FLK_MX}" y="{m_bottom + 15}" text-anchor="middle" font-size="10" font-weight="600" class="fig-muted fig-caption">TENSION</text>')
         samples = [flk_pose(i / FLK_FRAMES * FLK_T, kind) for i in range(FLK_FRAMES + 1)]
-        css.append(flk_keyframes(name_bar, [s[2] for s in samples], lambda v: f"scaleY({v:.2f})"))
+        css.append(keyframes(name_bar, [s[2] for s in samples], lambda v: f"scaleY({v:.2f})"))
         # Targets, each flashing when the crosshair shoots it.
         for k in range(FLK_N):
             flash = []
@@ -294,10 +411,10 @@ def flick():
                 s = 1.0 + (0.45 * (1 - (local - 0.74) / 0.18) if 0.74 <= local < 0.92 else 0.0)
                 flash.append(s)
             anim = f"aimFlkDot{li}{k}"
-            css.append(flk_keyframes(anim, flash, lambda v: f"scale({v:.2f})"))
+            css.append(keyframes(anim, flash, lambda v: f"scale({v:.2f})"))
             body.append(f'<circle cx="{FLK_TX[k] + FLK_MX}" cy="{cy + FLK_TY[k]}" r="11" class="fig-target aim-flk-anim aim-flk-dot" style="animation-name:{anim}"/>')
         anim = f"aimFlkCursor{li}"
-        css.append(flk_keyframes(anim, samples, lambda v: f"translate({v[0] + FLK_MX:.0f}px,{v[1]:.0f}px)"))
+        css.append(keyframes(anim, samples, lambda v: f"translate({v[0] + FLK_MX:.0f}px,{v[1]:.0f}px)"))
         body.append(f'<g class="aim-flk-anim" style="animation-name:{anim}">{crosshair(f"fig-{tone}-stroke", 0, cy)}</g>')
     css.append(f".aim-flk-anim{{animation-duration:{FLK_T}s;animation-timing-function:linear;animation-iteration-count:infinite}}"
                ".aim-flk-bar,.aim-flk-dot{transform-box:fill-box;transform-origin:center}"

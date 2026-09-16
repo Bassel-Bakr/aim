@@ -49,7 +49,8 @@ RENDERS = {
 
 def diagrams():
     text = PAGE.read_text(encoding="utf-8")
-    for name, svg in (("scale", d.scale()), ("tracking", d.tracking()), ("flick", d.flick())):
+    for name, svg in (("scale", d.scale()), ("tracking", d.tracking()), ("flick", d.flick()),
+                      ("blend", d.blend())):
         pattern = re.compile(r'<svg [^>]*aria-labelledby="fig-%s-title".*?</svg>' % name, re.S)
         text, count = pattern.subn(lambda _: svg, text)
         if count != 1:
