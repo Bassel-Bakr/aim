@@ -2,7 +2,6 @@
 classes in aim.css, so each diagram follows the reader's scheme and picked colour. build.py splices them
 into the page; call it rather than this module.
 """
-import bisect
 import math
 
 AUTHOR = "Bassel Bakr"
@@ -68,12 +67,6 @@ def smooth(u):
     u = max(0.0, min(1.0, u))
     return u * u * (3 - 2 * u)
 
-
-def ease_out(u):
-    """0 to 1 leaving at full speed and easing only into the end, for a value that is already moving
-    when it starts."""
-    u = max(0.0, min(1.0, u))
-    return u * (2 - u)
 
 
 def keyframes(name, values, fmt, prop="transform"):
@@ -224,74 +217,50 @@ BLD_W, BLD_H = 600, 348
 BLD_CX = 300                # centre of the screen, and of the neutral hand
 BLD_A = 262                 # how far the target strafes from centre
 BLD_ELBOW, BLD_WRIST, BLD_MOUSE = 322, 226, 193
-# How far each joint travels at the end of a strafe, and how much of the reach it has to cover
-# before the next one starts helping. A joint is never asked for its last drop of range on its own:
-# the fingers are already moving when the wrist joins, and both are moving when the arm joins.
+# How far each joint travels at the end of a strafe, and how eagerly each one takes up the motion.
+# A joint's share of the reach is 1 - (1 - x) ** lead: a high lead front-loads it, so the fingers are
+# most of the way through their range while the wrist is barely into its own, and the arm, which is
+# left whatever the other two do not cover, only really starts once they are both working. No joint
+# is ever asked for its last drop of range alone, and every one of them finishes together.
 BLD_FINGER_PX, BLD_WRIST_DEG, BLD_ARM_DEG = 9.0, 16.0, 20.0
-BLD_ENGAGE = {"finger": (0.00, 0.18), "wrist": (0.15, 0.45), "arm": (0.40, 0.70)}
-# The hand is one solid shape with a darker edge, so every part of it reads as the same limb and,
-# lying over the mouse, hides it rather than blending into it.
-BLD_SKIN = 'class="fig-hand-fill"'
-BLD_EDGE = 'class="fig-hand-stroke" fill="none"'
-BLD_STEPS = 400             # steps in the reach table bld_reach reads
+BLD_LEAD = {"finger": 5.5, "wrist": 1.2}
 BLD_LAG = 0.02              # seconds the crosshair trails the target: about 5 units at strafe speed
-# What a joint has given by the time the next one joins in: enough to be moving, far short of its
-# limit.
-BLD_HANDOVER = 0.4
 
 
-def bld_engage(u, joint):
-    """How much of a joint's range is in use at reach u, from 0 to 1. Each joint waits its turn,
-    hands over at BLD_HANDOVER of its range, then keeps going with the others.
-
-    A joint that waits eases in from rest. The first one does not: it leaves centre at full speed,
-    so that the travel it produces grows with reach rather than with reach squared. Otherwise the
-    reach that a given travel needs climbs vertically out of centre, and the hand snaps as the target
-    crosses the middle."""
-    start, mid = BLD_ENGAGE[joint]
-    if u <= start:
-        return 0.0
-    entry = ease_out if start == 0 else smooth
-    if u <= mid:
-        return BLD_HANDOVER * entry((u - start) / (mid - start))
-    return BLD_HANDOVER + (1 - BLD_HANDOVER) * smooth((u - mid) / (1 - mid))
+def bld_swing(degrees, radius):
+    """How far a joint's rotation carries a point that sits `radius` along the limb from it."""
+    return math.sin(math.radians(degrees)) * radius
 
 
-def bld_joints(u):
-    """The finger offset in user units and the wrist and arm angles in degrees at reach u, and how
-    far the three of them together carry the mouse from centre."""
-    finger = bld_engage(u, "finger") * BLD_FINGER_PX
-    wrist = bld_engage(u, "wrist") * BLD_WRIST_DEG
-    arm = bld_engage(u, "arm") * BLD_ARM_DEG
-    travel = (finger
-              + math.sin(math.radians(wrist)) * (BLD_WRIST - BLD_MOUSE)
-              + math.sin(math.radians(arm)) * (BLD_ELBOW - BLD_MOUSE))
-    return finger, wrist, arm, travel
+BLD_WRIST_ARM = BLD_WRIST - BLD_MOUSE
+BLD_ELBOW_ARM = BLD_ELBOW - BLD_MOUSE
+BLD_TRAVEL = (BLD_FINGER_PX + bld_swing(BLD_WRIST_DEG, BLD_WRIST_ARM)
+              + bld_swing(BLD_ARM_DEG, BLD_ELBOW_ARM))
 
 
-BLD_TRAVEL = [bld_joints(i / BLD_STEPS)[3] for i in range(BLD_STEPS + 1)]
-
-
-def bld_reach(travel):
-    """The reach that carries the mouse this far, as a fraction of its full travel: the inverse of
-    bld_joints, since here the screen leads and the hand is whatever produces it. Travel grows with
-    reach, so the table is searched in order and read between its two nearest entries."""
-    want = min(max(travel, 0.0), 1.0) * BLD_TRAVEL[-1]
-    i = bisect.bisect_left(BLD_TRAVEL, want)
-    if i == 0:
-        return 0.0
-    span = BLD_TRAVEL[i] - BLD_TRAVEL[i - 1]
-    between = (want - BLD_TRAVEL[i - 1]) / span if span else 0.0
-    return (i - 1 + between) / BLD_STEPS
+def bld_share(x, joint):
+    """How much of a joint's range is in use once the hand has to reach x of its full travel."""
+    return 1 - (1 - x) ** BLD_LEAD[joint]
 
 
 def bld_pose(t):
     """The hand at time t, posed to put the mouse where the crosshair is. The crosshair trails the
-    target by BLD_LAG, which is what balanced tracking looks like."""
+    target by BLD_LAG, which is what balanced tracking looks like. The fingers and the wrist take
+    their share of that travel and the arm covers the remainder, so the mouse lands on the crosshair
+    exactly and the hand keeps moving evenly through the middle of the strafe, where it is fastest."""
     s = strafe(((t - BLD_LAG) / BLD_T) % 1.0)
-    u, sign = bld_reach(abs(s)), math.copysign(1.0, s)
-    finger, wrist, arm, _ = bld_joints(u)
+    x, sign = abs(s), math.copysign(1.0, s)
+    finger = bld_share(x, "finger") * BLD_FINGER_PX
+    wrist = bld_share(x, "wrist") * BLD_WRIST_DEG
+    left = BLD_TRAVEL * x - finger - bld_swing(wrist, BLD_WRIST_ARM)
+    arm = math.degrees(math.asin(min(max(left / BLD_ELBOW_ARM, 0.0), 1.0)))
     return sign * finger, sign * wrist, sign * arm
+
+
+# The hand is one solid shape with a darker edge, so every part of it reads as the same limb and,
+# lying over the mouse, hides it rather than blending into it.
+BLD_SKIN = 'class="fig-hand-fill"'
+BLD_EDGE = 'class="fig-hand-stroke" fill="none"'
 
 
 def bld_hand(part):
