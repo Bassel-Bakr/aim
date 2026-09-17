@@ -30,6 +30,28 @@ Follow the steps in [README.md](README.md#run-the-site-locally).
 Page titles come from the `title:` field in the front matter. Do not add a `#` heading in the page
 body.
 
+## Describe the page
+
+Every page carries a `description:` in front matter, on one folded line:
+
+```yaml
+description: >-
+  How sensitivity works, how to find one that suits you, and why changing it constantly costs you
+  progress.
+```
+
+That line is the page's meta description, the text under its search result, and the blurb on the
+card shown when someone pastes the link into Discord or a social network. A page without one is
+listed under the site's own description instead of its subject, so `scripts/check_pages.py`
+requires it.
+
+Write it for someone deciding whether to open the page:
+
+- 50 to 160 characters. Search engines cut it off around 160.
+- Say what the page answers, in the words a reader would search, not "This page covers…".
+- Leave out the site name. The template adds it.
+- No two pages share a description. Each one describes its own subject.
+
 ## Writing rules
 
 1. Write in your own words and link to the original source. Do not copy guides, tables, or images

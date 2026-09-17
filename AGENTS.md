@@ -44,10 +44,11 @@ python scripts/check_pages.py
 zensical build --clean
 ```
 
-`scripts/check_pages.py` enforces three content rules: every `tags:` value is on the allowed list,
+`scripts/check_pages.py` enforces four content rules: every `tags:` value is on the allowed list,
 each concept page and each resource page carries a `related:` list in front matter where every
-entry has a real reason, and every citation names an ID in `references.yml` and runs together with
-any other citation on the same claim. It also checks that every myth block's title matches a heading on
+entry has a real reason, every citation names an ID in `references.yml` and runs together with
+any other citation on the same claim, and every page carries a `description:` of 50 to 160
+characters that no other page uses. It also checks that every myth block's title matches a heading on
 `docs/wiki/myths.md` and links there as "Evidence", that each entry on that page is a heading
 with `{ .aim-myth-title }` over an untitled myth block holding its verdict, that a myth block
 elsewhere repeats that verdict word for word, and enforces the readability rules in
@@ -68,7 +69,8 @@ so a dead outbound link will not show up in the checks you run locally.
 | `docs/wiki/` | All wiki pages, grouped by section. Sourced, open to contributions. |
 | `docs/articles/` | Signed first-person pages. Not wiki pages, not open — see below. |
 | `docs/assets/` | Favicon, `stylesheets/aim.css`, which documents each page component it defines, `javascripts/aim-theme.js`, the colour picker, and `javascripts/aim-stats.js`, which counts the landing page's stats up from 0. |
-| `overrides/` | Theme template overrides. `main.html` loads the colour picker script in `<head>`, the Google Search Console verification tag from `extra.google_site_verification`, and the GoatCounter script from `extra.goatcounter_code`, both in `zensical.toml` and each left out while empty. |
+| `overrides/` | Theme template overrides. `main.html` loads the colour picker script in `<head>`, the Google Search Console verification tag from `extra.google_site_verification`, and the GoatCounter script from `extra.goatcounter_code`, both in `zensical.toml` and each left out while empty. It also builds every page's share card tags and its structured data from the page's `title:` and `description:`. Note that this template engine is not full Jinja: it has no `split`, `namespace` or `rstrip`, and does not set `page.is_homepage`. |
+| `docs/robots.txt` | Tells crawlers everything is open and points them at `sitemap.xml`. Copied to the site root by the build. |
 | `includes/abbreviations.md` | Abbreviation definitions shown as tooltips site-wide. |
 | `references.yml` | Every source the wiki cites, once, under a stable `REF-<number>` ID. |
 | `extensions/aim_related.py` | Markdown extension that writes the Related section from a page's `related:` front matter, adding bare links back from pages of the same kind that list it. Its helpers are shared by the checker and `scripts/suggest_related.py`. |
@@ -76,7 +78,7 @@ so a dead outbound link will not show up in the checks you run locally.
 | `extensions/aim_references.py` | Markdown extension that turns `[^REF-<number>]` citations into footnotes and builds the References page. Installed by `pyproject.toml` through `requirements.txt`. |
 | `templates/` | Page templates. Not published. |
 | `specs/` | Design documents. Not published. |
-| `scripts/` | Repository checks, `suggest_related.py`, `move_page.py`, which moves a page and repoints every link, related entry, nav entry and redirect to it, and `figures/`, the code that draws a page's diagrams and renders. Regenerate a page's figures with its `build.py` rather than editing them by hand. |
+| `scripts/` | Repository checks, `suggest_related.py`, `move_page.py`, which moves a page and repoints every link, related entry, nav entry and redirect to it, and `figures/`, the code that draws a page's diagrams and renders. Regenerate a page's figures with its `build.py` rather than editing them by hand. `figures/social/build.py` is the exception: it draws one card for the whole site, `docs/assets/images/social-card.png`, which every page's share tags point at. Rerun it after changing the wordmark or the tagline. |
 | `zensical.toml` | Site config and the `nav` tree. |
 
 ## Page components
@@ -93,6 +95,7 @@ that before using one, and add a new component only when a page actually needs i
 | `.aim-category` | Inline badge on a link naming a skill, with `.aim-category--clicking`, `--tracking` or `--switching` alongside it. |
 | `.aim-table-stack` | Wraps a table whose last column should drop onto its own line below 38em instead of squeezing. |
 | `.aim-figure` | A `<figure>` holding an inline SVG diagram or an image render, with a caption. Diagram colours come from its `fig-` classes, so they follow the scheme and picked colour. |
+| `.aim-figure-credit` | A `<span>` at the end of a figure's caption naming a third-party asset the figure uses, its author and its licence. |
 
 All of these except `.aim-category` are wrappers:
 
@@ -120,6 +123,10 @@ agents most often miss:
 1. Start from a template in `templates/` — `concept.md` for explanations, `resource.md` for
    communities, trainers and tools.
 2. Page titles come from the `title:` field in front matter. Do not add an `#` heading in the body.
+   Every page also carries a `description:`, one folded line of 50 to 160 characters saying what the
+   page answers. It becomes the page's meta description, its search result text and its share card
+   blurb, no two pages may share one, and `scripts/check_pages.py` rejects a page without it. See
+   [CONTRIBUTING.md](CONTRIBUTING.md#describe-the-page).
 3. Every new page needs a `nav` entry in `zensical.toml` and at least one inbound link from a related
    page.
 4. Use only the tags listed in [CONTRIBUTING.md](CONTRIBUTING.md#tags). Do not invent new ones.
@@ -132,7 +139,8 @@ agents most often miss:
    rule and its two exceptions. Outside those exceptions, do not name the source in the sentence
    ("Aimlabs puts…", "a coach recommends…"): state the claim and let the footnote say who.
    Never copy guides, tables, or images from other sites — content here is CC BY-SA 4.0 and the
-   sources are not.
+   sources are not. Third-party assets a figure is built from are the one exception; see
+   [Third-party assets](#third-party-assets).
 6. Do not assert a claim you cannot verify from a public source. Leave it out, or mark it with
    `<!-- REVIEW: what needs checking -->`.
 7. A page written from research but not yet fact-checked keeps the draft banner at the top, exactly
@@ -152,6 +160,23 @@ agents most often miss:
     pages do not support. Do the same for any bare link back the build shows on the other page.
 12. Move or rename a page only with `python scripts/move_page.py <old> <new>`, never with a plain
     `git mv`. Review the other mentions it lists, then run `zensical build --clean`.
+
+## Third-party assets
+
+A figure may be built from someone else's model or texture where its licence allows it, which is
+how `scripts/figures/tension/` renders a mouse and a forearm. Only a licence that permits reuse and
+modification, such as CC BY 4.0, and only with the credit that licence asks for. The credit lives
+in four places at once, and dropping any of them breaks the licence:
+
+1. The file's own `license.txt`, kept beside it under `scripts/figures/<page>/models/<name>/`.
+2. A `MODEL_CREDIT` constant in that page's `build.py`, naming each author, the asset and its
+   licence.
+3. The render's own metadata, written from that constant into EXIF `Artist`, `Copyright` and
+   `ImageDescription`, and into XMP, so a copied file still carries it.
+4. A visible `<span class="aim-figure-credit">` at the end of the figure's caption on the page.
+
+CC BY also requires saying that the asset was changed. The credit line says so where the render
+poses, recolours or cuts up the original, which it always does here.
 
 ## Articles are not wiki pages
 

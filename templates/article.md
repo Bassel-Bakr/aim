@@ -1,5 +1,7 @@
 ---
 title: "Article Title"
+description: >-
+  One line saying what this article argues or walks through, 50 to 160 characters.
 ---
 
 !!! info "Written by Bassel Bakr"

@@ -23,6 +23,12 @@ ALLOWED_TAGS = {
     "myth",
 }
 BANNER = '!!! warning "Draft"'
+# Every page describes itself in one line. overrides/main.html puts that line in the page's meta
+# description, its share card and its structured data, so a page without one is listed under the
+# site's own description instead of its subject. Search engines cut the line off around 160
+# characters, and one shorter than 50 says too little to be worth showing.
+DESCRIPTION_MIN = 50
+DESCRIPTION_MAX = 160
 # Articles live outside docs/wiki/ because they run on a different trust model: signed opinion
 # written from experience, carrying the author's name instead of a citation trail. They are not
 # wiki pages and do not follow wiki rules.
@@ -156,6 +162,24 @@ def related_errors(rel, meta):
     return errors
 
 
+def description_errors(rel, meta):
+    """Problems with the one-line description a page is listed under."""
+    description = meta.get("description")
+    if description is None:
+        return [f"{rel}: missing a 'description' in front matter, the line search results show"]
+    if not isinstance(description, str):
+        return [f"{rel}: 'description' must be one line of text"]
+    text = " ".join(description.split())
+    if text != description.strip():
+        return [f"{rel}: 'description' runs to several lines; write it as one, folded with '>-'"]
+    if not DESCRIPTION_MIN <= len(text) <= DESCRIPTION_MAX:
+        return [
+            f"{rel}: description of {len(text)} characters, "
+            f"expected {DESCRIPTION_MIN} to {DESCRIPTION_MAX}"
+        ]
+    return []
+
+
 def body(text):
     """The page without its front matter, comments, or fenced code."""
     text = re.sub(r"\A---\r?\n.*?\r?\n---\r?\n", "", text, flags=re.S)
@@ -267,6 +291,7 @@ def check(path, drafts, headings, known_ids):
     if in_wiki and RELATED_HEADING.search(text):
         errors.append(f"{rel}: remove the Related heading; list related pages in front matter instead")
     errors += related_errors(rel, meta)
+    errors += description_errors(rel, meta)
     # References are the sources for claims on this page; they sit under their own heading, apart
     # from Resources, which point readers to material for learning more.
     cited = set(REFERENCE_CITATION.findall(text))
@@ -331,6 +356,22 @@ def check(path, drafts, headings, known_ids):
     return errors
 
 
+def duplicate_descriptions(paths):
+    """Two pages listed under the same line give a search engine no reason to show both."""
+    seen = {}
+    for path in paths:
+        meta = front_matter(path.read_text(encoding="utf-8"))
+        description = meta.get("description")
+        if not isinstance(description, str) or not description.strip():
+            continue
+        seen.setdefault(" ".join(description.split()), []).append(path.relative_to(DOCS).as_posix())
+    return [
+        f"{' and '.join(pages)}: share one description; each page describes its own subject"
+        for pages in seen.values()
+        if len(pages) > 1
+    ]
+
+
 def main():
     args = sys.argv[1:]
     drafts = "--drafts" in args
@@ -339,6 +380,7 @@ def main():
     headings = myth_headings()
     known_ids, errors = registry_ids()
     errors += [error for path in paths for error in check(path, drafts, headings, known_ids)]
+    errors += duplicate_descriptions(paths)
     for error in errors:
         print(error)
     print(f"{len(errors)} problem(s) found" if errors else "All pages OK")

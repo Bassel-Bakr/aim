@@ -1,5 +1,7 @@
 ---
 title: "Concept Name"
+description: >-
+  One line saying what this page answers, 50 to 160 characters, in the words a reader would search.
 tags:
   - beginner
 related:

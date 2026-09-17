@@ -1,5 +1,7 @@
 ---
 title: "Resource Name"
+description: >-
+  One line saying what this resource is and who it suits, 50 to 160 characters.
 tags:
   - community
 related:
