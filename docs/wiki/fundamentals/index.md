@@ -1,5 +1,7 @@
 ---
 title: "Fundamentals"
+description: >-
+  The ideas underneath every category: how aim works, tension, practice method, and transfer to games.
 tags:
   - beginner
 ---

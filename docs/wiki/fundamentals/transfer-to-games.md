@@ -1,5 +1,7 @@
 ---
 title: "Transfer to Games"
+description: >-
+  Why trainer scores do not automatically become in-game aim, and how to close the gap.
 tags:
   - beginner
 related:

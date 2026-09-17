@@ -1,5 +1,7 @@
 ---
 title: "Switching"
+description: >-
+  Moving between targets you have already cleared, and what makes the second target harder than the first.
 tags:
   - switching
 related:

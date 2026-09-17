@@ -1,0 +1,5 @@
+# Everything here is meant to be indexed; the sitemap lists every page.
+User-agent: *
+Allow: /
+
+Sitemap: https://bassel-bakr.github.io/aim/sitemap.xml

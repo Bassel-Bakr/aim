@@ -1,5 +1,7 @@
 ---
 title: "Raw Accel"
+description: >-
+  The mouse acceleration driver, what it does, and why most players should leave it alone.
 tags:
   - tool
   - sensitivity

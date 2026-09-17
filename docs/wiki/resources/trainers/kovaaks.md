@@ -1,5 +1,7 @@
 ---
 title: "KovaaK's"
+description: >-
+  The paid trainer with the deepest scenario library, its playlists, and who it suits.
 tags:
   - trainer
   - benchmarks

@@ -1,5 +1,7 @@
 ---
 title: "Benchmarks"
+description: >-
+  What benchmarks measure, how to run them honestly, and how to read a rank without chasing it.
 tags:
   - benchmarks
 related:

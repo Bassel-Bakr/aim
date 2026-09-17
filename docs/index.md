@@ -1,5 +1,7 @@
 ---
 title: "Aim training wiki"
+description: >-
+  How mouse aim works, how to train it deliberately, and which trainers, communities and tools are worth your time.
 ---
 
 <div class="aim-hero" markdown>

@@ -1,5 +1,7 @@
 ---
 title: "Tracking"
+description: >-
+  Keeping the crosshair on a target that is already moving, across smooth, reactive and precise tracking.
 tags:
   - tracking
 related:

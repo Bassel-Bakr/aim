@@ -1,5 +1,7 @@
 ---
 title: "Resources"
+description: >-
+  The communities, trainers and tools this wiki draws on, and what each is good for.
 ---
 
 !!! warning "Draft"

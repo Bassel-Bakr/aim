@@ -1,5 +1,7 @@
 ---
 title: "Myths"
+description: >-
+  Widely repeated aim advice that its own cited sources do not support, with what the evidence actually says.
 tags:
   - myth
 ---

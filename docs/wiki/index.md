@@ -1,5 +1,7 @@
 ---
 title: "Aim Wiki"
+description: >-
+  The wiki's map: fundamentals, the three aim categories, training method, and the resources behind them.
 tags:
   - beginner
 ---

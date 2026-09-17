@@ -1,5 +1,7 @@
 ---
 title: "Training"
+description: >-
+  How to structure aim training across weeks: session rhythm, routines, benchmarks and rest.
 tags:
   - routines
 ---

@@ -1,5 +1,7 @@
 ---
 title: "Aim Trainers"
+description: >-
+  What aim trainers do, how they differ from playing, and how to choose between KovaaK's, Aimlabs and Aimbeast.
 tags:
   - beginner
 related:

@@ -1,5 +1,7 @@
 ---
 title: "Glossary"
+description: >-
+  Plain definitions of the aim-training terms used across this wiki, each linked to the page that explains it.
 ---
 
 !!! warning "Draft"

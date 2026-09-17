@@ -1,5 +1,7 @@
 ---
 title: "Progress and Plateaus"
+description: >-
+  Why progress stalls, what a real plateau looks like, and what to change when scores stop moving.
 tags:
   - routines
   - benchmarks

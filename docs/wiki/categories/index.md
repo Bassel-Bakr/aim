@@ -1,5 +1,7 @@
 ---
 title: "Categories"
+description: >-
+  The three mechanical categories behind almost every aim task: clicking, tracking and switching.
 tags:
   - clicking
   - tracking

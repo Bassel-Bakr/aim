@@ -1,5 +1,7 @@
 ---
 title: "References"
+description: >-
+  Every source this wiki cites, listed once with a stable ID that pages reference.
 ---
 
 !!! warning "Draft"

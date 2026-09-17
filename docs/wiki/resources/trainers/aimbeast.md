@@ -1,5 +1,7 @@
 ---
 title: "Aimbeast"
+description: >-
+  The paid trainer with ranked duels against real players, player-like bots and community-built playlists.
 tags:
   - trainer
   - benchmarks

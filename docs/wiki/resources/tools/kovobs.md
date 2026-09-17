@@ -1,5 +1,7 @@
 ---
 title: "KovOBS"
+description: >-
+  A small open-source app that puts your live KovaaK's stats on stream.
 tags:
   - tool
 related:

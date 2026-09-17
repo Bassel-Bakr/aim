@@ -1,5 +1,7 @@
 ---
 title: "Tension Management"
+description: >-
+  How hard your hand and arm work on the mouse, how to feel too much or too little, and drills to control it.
 tags:
   - clicking
   - tracking

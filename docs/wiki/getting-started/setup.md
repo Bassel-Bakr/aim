@@ -1,5 +1,7 @@
 ---
 title: "Setup and Gear"
+description: >-
+  The gear and settings that get out of your way: mouse, pad, polling rate, and what genuinely does not matter.
 tags:
   - beginner
 related:

@@ -1,5 +1,7 @@
 ---
 title: "Underaiming"
+description: >-
+  Holding the crosshair back from motion the shot does not need, and when restraint beats speed.
 tags:
   - clicking
   - tracking

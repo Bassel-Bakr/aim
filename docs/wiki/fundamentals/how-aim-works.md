@@ -1,5 +1,7 @@
 ---
 title: "How Aim Works"
+description: >-
+  Aim as a chain of decisions: reading, moving, correcting and clicking, and the speed-accuracy trade-off behind it.
 tags:
   - beginner
 related:

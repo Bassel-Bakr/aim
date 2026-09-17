@@ -1,5 +1,7 @@
 ---
 title: "Articles"
+description: >-
+  Signed first-person pages, written from experience rather than assembled from sources.
 ---
 
 Articles are signed pages: one person writing about a subject from experience rather than assembling

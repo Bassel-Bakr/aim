@@ -1,5 +1,7 @@
 ---
 title: "Aimlabs"
+description: >-
+  The free trainer with guided tasks and its own skill categories, and where it fits.
 tags:
   - trainer
   - benchmarks

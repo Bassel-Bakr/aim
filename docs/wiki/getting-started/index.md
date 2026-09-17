@@ -1,5 +1,7 @@
 ---
 title: "Start Here"
+description: >-
+  Where to begin if you want to train aim on purpose instead of playing and hoping to improve.
 tags:
   - beginner
 ---

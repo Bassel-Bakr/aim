@@ -1,5 +1,7 @@
 ---
 title: "Evxl Benchmark Tracker"
+description: >-
+  A web tracker that pulls your trainer scores and ranks them against community benchmarks.
 tags:
   - tool
   - benchmarks

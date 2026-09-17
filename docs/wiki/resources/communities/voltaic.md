@@ -1,5 +1,7 @@
 ---
 title: "Voltaic"
+description: >-
+  The community behind the Voltaic benchmarks, its guides, and how its ranks are structured.
 tags:
   - community
   - benchmarks

@@ -1,5 +1,7 @@
 ---
 title: "kova"
+description: >-
+  A public profile page for your gear, settings and KovaaK's personal bests, in one shareable link.
 tags:
   - tool
   - benchmarks

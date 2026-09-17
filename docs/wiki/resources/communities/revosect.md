@@ -1,5 +1,7 @@
 ---
 title: "Revosect"
+description: >-
+  Tiered KovaaK's and Aimlabs benchmarks, game-specific routines, and how they differ from Voltaic's.
 tags:
   - community
   - benchmarks

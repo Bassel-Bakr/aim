@@ -1,5 +1,7 @@
 ---
 title: "Routines"
+description: >-
+  Building a session you will actually repeat: scenario choice, order, length and when to change it.
 tags:
   - routines
 related:

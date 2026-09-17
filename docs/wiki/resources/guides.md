@@ -1,5 +1,7 @@
 ---
 title: "Guides"
+description: >-
+  External guides worth your time: videos and articles that teach a method, a mechanism, or a mistake.
 related:
   - page: wiki/resources/index.md
     why: who publishes these.

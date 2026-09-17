@@ -1,5 +1,7 @@
 ---
 title: "Sensitivity"
+description: >-
+  How sensitivity works, how to find one that suits you, and why changing it constantly costs you progress.
 tags:
   - sensitivity
   - beginner

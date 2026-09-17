@@ -1,5 +1,7 @@
 ---
 title: "Health and Rest"
+description: >-
+  Protecting your hands, wrists, eyes and neck over long sessions, and the warning signs to act on.
 tags:
   - beginner
 related:

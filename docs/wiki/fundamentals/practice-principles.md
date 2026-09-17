@@ -1,5 +1,7 @@
 ---
 title: "Practice Principles"
+description: >-
+  Five habits that decide whether your training hours turn into aim, from deliberate practice to rest.
 tags:
   - routines
 related:

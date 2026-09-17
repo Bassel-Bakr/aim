@@ -1,5 +1,7 @@
 ---
 title: "Clicking"
+description: >-
+  Acquiring a target and landing the shot: static, dynamic and linear clicking, and what each one trains.
 tags:
   - clicking
 related:
