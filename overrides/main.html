@@ -84,19 +84,14 @@
             "name": {{ config.site_name | tojson }},
             "item": {{ config.site_url | tojson }}
           }
-          {%- for ancestor in page.ancestors | reverse %},
+          {#-
+            Two crumbs, the site and this page. Google needs an item URL on every crumb but the last
+            and positions that run without gaps, and this theme's nav sections carry a title without a
+            URL, so they cannot sit in between.
+          -#},
           {
             "@type": "ListItem",
-            "position": {{ loop.index + 1 }},
-            "name": {{ ancestor.title | striptags | tojson }}
-            {%- if ancestor.url %},
-            "item": {{ (config.site_url ~ ancestor.url) | tojson }}
-            {%- endif %}
-          }
-          {%- endfor %},
-          {
-            "@type": "ListItem",
-            "position": {{ (page.ancestors | length) + 2 }},
+            "position": 2,
             "name": {{ (page.title | striptags) | tojson }}
             {%- if page.canonical_url %},
             "item": {{ page.canonical_url | tojson }}
