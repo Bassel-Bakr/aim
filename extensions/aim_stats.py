@@ -23,7 +23,9 @@ Configured in zensical.toml:
 """
 import os
 import re
+from typing import Any
 
+from markdown import Markdown
 from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 
@@ -36,9 +38,9 @@ GENERATED_PAGES = {"wiki/tags.md", REFERENCES_PAGE}
 GUIDE_ENTRY = re.compile(r"^- \[", re.M)
 
 
-def wiki_pages(docs_dir):
+def wiki_pages(docs_dir: str) -> list[str]:
     """Docs-relative paths of the wiki's own pages: no section index pages, no generated pages."""
-    pages = []
+    pages: list[str] = []
     for root, _dirs, files in os.walk(os.path.join(docs_dir, "wiki")):
         for name in files:
             page = os.path.relpath(os.path.join(root, name), docs_dir).replace("\\", "/")
@@ -47,7 +49,7 @@ def wiki_pages(docs_dir):
     return pages
 
 
-def stats(docs_dir, registry_path):
+def stats(docs_dir: str, registry_path: str) -> list[tuple[str, int, str]]:
     """(label, count, docs-relative page the count links to), in display order."""
     with open(os.path.join(docs_dir, GUIDES_PAGE), encoding="utf-8") as handle:
         guides = len(GUIDE_ENTRY.findall(handle.read()))
@@ -58,9 +60,9 @@ def stats(docs_dir, registry_path):
     ]
 
 
-def page_url(target, here, directory_urls):
+def page_url(target: str, here: str, directory_urls: bool) -> str:
     """The href from docs-relative page `here` to docs-relative page `target`."""
-    def url(page):
+    def url(page: str) -> str:
         stem = page[: -len(".md")]
         if not directory_urls:
             return stem + ".html"
@@ -76,11 +78,11 @@ def page_url(target, here, directory_urls):
 
 
 class StatsPreprocessor(Preprocessor):
-    def __init__(self, md, registry_path):
+    def __init__(self, md: Markdown, registry_path: str) -> None:
         super().__init__(md)
         self.registry_path = registry_path
 
-    def run(self, lines):
+    def run(self, lines: list[str]) -> list[str]:
         if STATS_MARKER not in (line.strip() for line in lines):
             return lines
         from zensical.extensions.context import ContextPreprocessor
@@ -91,7 +93,7 @@ class StatsPreprocessor(Preprocessor):
         docs_dir = context.config["docs_dir"]
         here = context.page.path.replace("\\", "/")
         directory_urls = context.config.get("use_directory_urls", True)
-        items = []
+        items: list[str] = []
         for label, count, target in stats(docs_dir, self.registry_path):
             inner = (f'<span class="aim-stats__count">{count}</span> '
                      f'<span class="aim-stats__label">{label}</span>')
@@ -103,13 +105,13 @@ class StatsPreprocessor(Preprocessor):
 
 
 class StatsExtension(Extension):
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         self.config = {"registry": ["references.yml", "Path to the reference registry, from the project root."]}
         super().__init__(**kwargs)
 
-    def extendMarkdown(self, md):
+    def extendMarkdown(self, md: Markdown) -> None:
         md.preprocessors.register(StatsPreprocessor(md, self.getConfig("registry")), "aim_stats", 27)
 
 
-def makeExtension(**kwargs):
+def makeExtension(**kwargs: Any) -> StatsExtension:
     return StatsExtension(**kwargs)

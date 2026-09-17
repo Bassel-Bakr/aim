@@ -7,11 +7,12 @@ Usage:
 """
 import re
 import sys
+from collections.abc import Iterator, Sequence
 from pathlib import Path
 
 import yaml
 from markdown.extensions.toc import slugify
-from aim_related import CONCEPT_DIRS, PLACEHOLDER, kind
+from aim_related import CONCEPT_DIRS, PLACEHOLDER, Meta, kind
 
 DOCS = Path(__file__).resolve().parent.parent / "docs"
 WIKI = DOCS / "wiki"
@@ -62,11 +63,12 @@ RELATED_HEADING = re.compile(r"^## Related( pages)?\s*$", re.M)
 RELATED_FIELDS = {"page", "why"}
 
 
-def registry_ids():
+def registry_ids() -> tuple[set[str], list[str]]:
     """Validate references.yml and return its IDs, with any problems found."""
-    errors = []
+    errors: list[str] = []
     entries = yaml.safe_load(REGISTRY.read_text(encoding="utf-8")) or []
-    ids, urls = set(), set()
+    ids: set[str] = set()
+    urls: set[str] = set()
     for index, entry in enumerate(entries):
         if not isinstance(entry, dict):
             errors.append(f"references.yml entry {index + 1}: not a mapping")
@@ -118,28 +120,29 @@ BRITISH = re.compile(
 )
 
 
-def front_matter(text):
+def front_matter(text: str) -> Meta:
     match = re.match(r"---\r?\n(.*?)\r?\n---\r?\n", text, re.S)
     if not match:
         return {}
     return yaml.safe_load(match.group(1)) or {}
 
 
-def myth_headings():
+def myth_headings() -> dict[str, str | None]:
     """Each heading on wiki/myths.md, mapped to the verdict in the myth block under it, if any."""
     text = (WIKI / "myths.md").read_text(encoding="utf-8")
     verdicts = {heading: " ".join(block.split()) for heading, block in HUB_VERDICT.findall(text)}
     return {heading: verdicts.get(heading) for heading in MYTH_HEADING.findall(text)}
 
 
-def related_errors(rel, meta):
+def related_errors(rel: str, meta: Meta) -> list[str]:
     """Problems with a page's related list."""
     related = meta.get("related")
     if related is None:
         return []
     if not isinstance(related, list):
         return [f"{rel}: 'related' must be a list of pages"]
-    errors, seen = [], set()
+    errors: list[str] = []
+    seen: set[str] = set()
     for index, entry in enumerate(related):
         where = f"{rel}: related entry {index + 1}"
         if not isinstance(entry, dict) or entry.keys() != RELATED_FIELDS:
@@ -162,7 +165,7 @@ def related_errors(rel, meta):
     return errors
 
 
-def description_errors(rel, meta):
+def description_errors(rel: str, meta: Meta) -> list[str]:
     """Problems with the one-line description a page is listed under."""
     description = meta.get("description")
     if description is None:
@@ -180,14 +183,14 @@ def description_errors(rel, meta):
     return []
 
 
-def body(text):
+def body(text: str) -> str:
     """The page without its front matter, comments, or fenced code."""
     text = re.sub(r"\A---\r?\n.*?\r?\n---\r?\n", "", text, flags=re.S)
     text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
     return re.sub(r"```.*?```", "", text, flags=re.S)
 
 
-def prose_blocks(text):
+def prose_blocks(text: str) -> Iterator[str]:
     """Paragraphs and lists that readers read as prose, with markup a reader never sees removed.
 
     Headings, tables, footnote definitions, and HTML are skipped: none of them is a run of prose.
@@ -208,13 +211,13 @@ def prose_blocks(text):
         yield stripped
 
 
-def plain(text):
+def plain(text: str) -> str:
     text = re.sub(r"\[\^[^\]]+\]", "", text)
     text = re.sub(r"!?\[([^\]]*)\]\([^)]*\)(\{[^}]*\})?", r"\1", text)
     return " ".join(re.sub(r"[*_`]", "", text).split())
 
 
-def units(block):
+def units(block: str) -> list[tuple[bool, str]]:
     """A list yields one unit per item; a prose block yields itself as one paragraph."""
     if re.match(r"([-*]|\d+\.)\s", block):
         items = re.split(r"\n\s*(?:[-*]|\d+\.)\s+", "\n" + block)
@@ -222,21 +225,21 @@ def units(block):
     return [(True, plain(block))]
 
 
-def sentences(text):
+def sentences(text: str) -> list[str]:
     shielded = DECIMAL.sub(r"\1§\2", ABBREVIATION.sub(lambda m: m.group(0).replace(".", "§"), text))
     return [part.replace("§", ".") for part in SENTENCE_END.split(shielded) if part.strip()]
 
 
-def words(text):
+def words(text: str) -> int:
     return len(WORD.findall(text))
 
 
-def excerpt(text):
+def excerpt(text: str) -> str:
     return text if len(text) <= 70 else text[:67] + "..."
 
 
-def readability(rel, text, concept):
-    errors = []
+def readability(rel: str, text: str, concept: bool) -> list[str]:
+    errors: list[str] = []
     for block in prose_blocks(text):
         for is_paragraph, unit in units(block):
             # A list item is read as a paragraph, so it gets the same limit.
@@ -272,7 +275,7 @@ def readability(rel, text, concept):
     return errors
 
 
-def check(path, drafts, headings, known_ids):
+def check(path: Path, drafts: bool, headings: dict[str, str | None], known_ids: set[str]) -> list[str]:
     text = path.read_text(encoding="utf-8")
     rel = path.relative_to(DOCS).as_posix()
     # Wiki pages live under docs/wiki/; their section is the first segment below that.
@@ -280,7 +283,7 @@ def check(path, drafts, headings, known_ids):
     section = path.relative_to(WIKI).as_posix().split("/")[0] if in_wiki else ""
     in_articles = path.is_relative_to(ARTICLES)
     is_index = path.name == "index.md"
-    errors = []
+    errors: list[str] = []
 
     for tag in front_matter(text).get("tags") or []:
         if tag not in ALLOWED_TAGS:
@@ -356,9 +359,9 @@ def check(path, drafts, headings, known_ids):
     return errors
 
 
-def duplicate_descriptions(paths):
+def duplicate_descriptions(paths: Sequence[Path]) -> list[str]:
     """Two pages listed under the same line give a search engine no reason to show both."""
-    seen = {}
+    seen: dict[str, list[str]] = {}
     for path in paths:
         meta = front_matter(path.read_text(encoding="utf-8"))
         description = meta.get("description")
@@ -372,7 +375,7 @@ def duplicate_descriptions(paths):
     ]
 
 
-def main():
+def main() -> int:
     args = sys.argv[1:]
     drafts = "--drafts" in args
     named = [Path(arg).resolve() for arg in args if not arg.startswith("--")]

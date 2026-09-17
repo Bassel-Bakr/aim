@@ -32,15 +32,15 @@ FENCE = re.compile(r"^\s*(```|~~~)")
 FRONT_MATTER = re.compile(r"\A(---\r?\n.*?\r?\n---\r?\n)", re.S)
 
 
-def normalize(path):
+def normalize(path: str) -> str:
     """A docs-relative path, whether or not it was given with a leading docs/."""
-    path = PurePosixPath(path.replace("\\", "/"))
-    return str(path.relative_to("docs")) if path.parts[:1] == ("docs",) else str(path)
+    given = PurePosixPath(path.replace("\\", "/"))
+    return str(given.relative_to("docs")) if given.parts[:1] == ("docs",) else str(given)
 
 
-def join(folder, href):
+def join(folder: str, href: str) -> str:
     """Resolve href against a repository-relative folder, collapsing . and .. segments."""
-    parts = []
+    parts: list[str] = []
     for part in (PurePosixPath(folder) / href).parts:
         if part == "..":
             if parts:
@@ -50,7 +50,7 @@ def join(folder, href):
     return "/".join(parts)
 
 
-def relative(target, folder):
+def relative(target: str, folder: str) -> str:
     """The relative path from a repository-relative folder to a repository-relative target."""
     target_parts, folder_parts = target.split("/"), [p for p in folder.split("/") if p not in ("", ".")]
     common = 0
@@ -59,11 +59,11 @@ def relative(target, folder):
     return "/".join([".."] * (len(folder_parts) - common) + target_parts[common:])
 
 
-def is_relative(href):
+def is_relative(href: str) -> bool:
     return not re.match(r"^([a-z][a-z0-9+.-]*:|#|/)", href, re.I)
 
 
-def rewrite_links(text, before, after, old, new):
+def rewrite_links(text: str, before: str, after: str, old: str, new: str) -> str:
     """Repoint links in one file. before/after are its repository-relative paths."""
     lines, fenced = text.split("\n"), False
     for index, line in enumerate(lines):
@@ -72,7 +72,7 @@ def rewrite_links(text, before, after, old, new):
         if fenced:
             continue
 
-        def repoint(match):
+        def repoint(match: re.Match[str]) -> str:
             href = match.group(2)
             if not is_relative(href):
                 return match.group(0)
@@ -89,7 +89,7 @@ def rewrite_links(text, before, after, old, new):
     return "\n".join(lines)
 
 
-def rewrite_related(text, old, new):
+def rewrite_related(text: str, old: str, new: str) -> str:
     match = FRONT_MATTER.match(text)
     if not match:
         return text
@@ -97,7 +97,7 @@ def rewrite_related(text, old, new):
     return front + text[match.end():]
 
 
-def rewrite_config(text, old, new):
+def rewrite_config(text: str, old: str, new: str) -> str:
     # The nav entry: the page's path in quotes inside the nav list.
     start = text.index("nav = [")
     end = text.index("\n]", start)
@@ -109,7 +109,7 @@ def rewrite_config(text, old, new):
     end = text.find("\n[", start)
     end = len(text) if end == -1 else end + 1
     entries = [line for line in text[start:end].splitlines() if line.strip()]
-    kept = []
+    kept: list[str] = []
     for line in entries:
         source, _, target = (part.strip().strip('"') for part in line.partition("="))
         if source == new:
@@ -119,8 +119,8 @@ def rewrite_config(text, old, new):
     return text[:start] + "\n".join(kept) + "\n" + ("\n" if end < len(text) else "") + text[end:]
 
 
-def broken_links():
-    problems = []
+def broken_links() -> list[str]:
+    problems: list[str] = []
     for path in sorted(DOCS.rglob("*.md")):
         rel = path.relative_to(ROOT).as_posix()
         fenced = False
@@ -136,7 +136,7 @@ def broken_links():
     return problems
 
 
-def main():
+def main() -> int:
     if len(sys.argv) != 3:
         sys.exit(__doc__)
     old_page, new_page = normalize(sys.argv[1]), normalize(sys.argv[2])
@@ -150,7 +150,7 @@ def main():
 
     tracked = subprocess.run(["git", "ls-files", "*.md"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split()
     files = [name for name in tracked if name.startswith("docs/") or "/" not in name]
-    changed = []
+    changed: list[str] = []
     for name in files:
         text = (ROOT / name).read_text(encoding="utf-8")
         updated = rewrite_links(text, name, new if name == old else name, old, new)

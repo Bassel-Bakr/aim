@@ -27,8 +27,10 @@ Configured in zensical.toml:
 """
 import os
 import re
+from typing import Any
 
 import yaml
+from markdown import Markdown
 from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 
@@ -37,14 +39,17 @@ TITLE_HEADING = re.compile(r"^# (.+)$", re.M)
 CONCEPT_DIRS = {"getting-started", "fundamentals", "categories", "techniques", "training"}
 # What a suggested entry carries until someone writes its reason; the checker rejects it.
 PLACEHOLDER = "TODO"
+# A page's front matter, as PyYAML loads it: keys the pages choose, values of whatever shape the
+# field takes. The checker and the suggestion script read the same blobs.
+Meta = dict[str, Any]
 
 
-def front_matter(text):
+def front_matter(text: str) -> Meta:
     match = FRONT_MATTER.match(text)
     return (yaml.safe_load(match.group(1)) or {}) if match else {}
 
 
-def kind(page):
+def kind(page: str) -> str | None:
     """'concept' or 'resource' for a docs-relative wiki page in those sections, else None."""
     parts = page.split("/")
     if len(parts) < 3 or parts[0] != "wiki":
@@ -52,7 +57,7 @@ def kind(page):
     return "concept" if parts[1] in CONCEPT_DIRS else "resource" if parts[1] == "resources" else None
 
 
-def listed(meta):
+def listed(meta: Meta) -> list[str]:
     """The pages a page's front matter lists as related, in order."""
     related = meta.get("related")
     if not isinstance(related, list):
@@ -60,9 +65,9 @@ def listed(meta):
     return [entry["page"] for entry in related if isinstance(entry, dict) and isinstance(entry.get("page"), str)]
 
 
-def related_lists(docs_dir):
+def related_lists(docs_dir: str | os.PathLike[str]) -> dict[str, list[str]]:
     """Every docs-relative page that carries a related list, mapped to the pages it lists."""
-    lists = {}
+    lists: dict[str, list[str]] = {}
     for root, _, files in os.walk(docs_dir):
         for name in files:
             if name.endswith(".md"):
@@ -74,7 +79,7 @@ def related_lists(docs_dir):
     return lists
 
 
-def links_back(lists, page):
+def links_back(lists: dict[str, list[str]], page: str) -> list[str]:
     """Pages of the same kind that list this page when it does not list them."""
     if page not in lists or kind(page) is None:
         return []
@@ -82,7 +87,7 @@ def links_back(lists, page):
                   if page in pages and source not in lists[page] and kind(source) == kind(page))
 
 
-def page_title(docs_dir, page):
+def page_title(docs_dir: str | os.PathLike[str], page: str) -> str:
     """The title a page shows: its front matter title, else its first heading, else its file name."""
     text = open(os.path.join(docs_dir, page), encoding="utf-8").read()
     title = front_matter(text).get("title")
@@ -93,7 +98,7 @@ def page_title(docs_dir, page):
 
 
 class RelatedPreprocessor(Preprocessor):
-    def run(self, lines):
+    def run(self, lines: list[str]) -> list[str]:
         # Imported here so the checker and the suggestion script can use this module without
         # Zensical's rendering machinery.
         from zensical.extensions.context import ContextPreprocessor
@@ -108,7 +113,7 @@ class RelatedPreprocessor(Preprocessor):
             return lines
         here = os.path.dirname(page) or "."
 
-        def link(target):
+        def link(target: str) -> str:
             href = os.path.relpath(target, here).replace("\\", "/")
             return f"[{page_title(docs_dir, target)}]({href})"
 
@@ -130,10 +135,10 @@ class RelatedPreprocessor(Preprocessor):
 
 
 class RelatedExtension(Extension):
-    def extendMarkdown(self, md):
+    def extendMarkdown(self, md: Markdown) -> None:
         # Runs before the references extension (priority 25), so References still lands last.
         md.preprocessors.register(RelatedPreprocessor(md), "aim_related", 26)
 
 
-def makeExtension(**kwargs):
+def makeExtension(**kwargs: Any) -> RelatedExtension:
     return RelatedExtension(**kwargs)

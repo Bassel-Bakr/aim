@@ -19,8 +19,10 @@ Configured in zensical.toml:
 """
 import os
 import re
+from typing import Any
 
 import yaml
+from markdown import Markdown
 from markdown.extensions import Extension
 from markdown.postprocessors import Postprocessor
 from markdown.preprocessors import Preprocessor
@@ -35,6 +37,9 @@ CITATION_RUN = re.compile(r'</sup><sup id="fnref')
 CITATION_RUN_CLASS = "aim-citation-run"
 REFERENCES_MARKER = "<!-- aim:references -->"
 REFERENCES_PAGE = "wiki/references.md"
+# One source as references.yml holds it: id, author, title, url and type, with publication and
+# notes where the source has them.
+Entry = dict[str, str]
 TYPE_LABELS = {
     "article": "Article",
     "document": "Document",
@@ -48,21 +53,21 @@ TYPE_LABELS = {
 }
 
 
-def load_registry(path):
+def load_registry(path: str) -> dict[str, Entry]:
     with open(path, encoding="utf-8") as handle:
         entries = yaml.safe_load(handle) or []
     return {entry["id"]: entry for entry in entries}
 
 
-def anchor(ref_id):
+def anchor(ref_id: str) -> str:
     return ref_id.lower()
 
 
-def sort_key(entry):
+def sort_key(entry: Entry) -> tuple[str, str]:
     return (entry["author"].casefold(), entry["title"].casefold())
 
 
-def source_text(entry):
+def source_text(entry: Entry) -> str:
     text = f"{entry['author']}, [{entry['title']}]({entry['url']})"
     if entry.get("publication"):
         text += f", {entry['publication']}"
@@ -70,21 +75,21 @@ def source_text(entry):
 
 
 class ReferencesPreprocessor(Preprocessor):
-    def __init__(self, md, registry_path):
+    def __init__(self, md: Markdown, registry_path: str) -> None:
         super().__init__(md)
         self.registry_path = registry_path
-        self._registry = None
+        self._registry: dict[str, Entry] | None = None
 
     @property
-    def registry(self):
+    def registry(self) -> dict[str, Entry]:
         if self._registry is None:
             self._registry = load_registry(self.registry_path)
         return self._registry
 
-    def run(self, lines):
+    def run(self, lines: list[str]) -> list[str]:
         if REFERENCES_MARKER in (line.strip() for line in lines):
             lines = [out for line in lines for out in (self.bibliography() if line.strip() == REFERENCES_MARKER else [line])]
-        cited = []
+        cited: list[str] = []
         fenced = False
         for line in lines:
             if line.lstrip().startswith(("```", "~~~")):
@@ -114,9 +119,9 @@ class ReferencesPreprocessor(Preprocessor):
             definitions.append(f"[^{ref_id}]: {text}")
         return lines + definitions
 
-    def bibliography(self):
-        out = []
-        letter = None
+    def bibliography(self) -> list[str]:
+        out: list[str] = []
+        letter: str | None = None
         for entry in sorted(self.registry.values(), key=sort_key):
             initial = entry["author"][0].upper()
             # A lone "#" would read as an empty Markdown heading, so digits and symbols group as 0–9.
@@ -138,20 +143,20 @@ class ReferencesPreprocessor(Preprocessor):
 class CitationRunPostprocessor(Postprocessor):
     """Mark every citation marker that follows another with no text between them."""
 
-    def run(self, text):
+    def run(self, text: str) -> str:
         return CITATION_RUN.sub(f'</sup><sup class="{CITATION_RUN_CLASS}" id="fnref', text)
 
 
 class ReferencesExtension(Extension):
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         self.config = {"registry": ["references.yml", "Path to the reference registry, from the project root."]}
         super().__init__(**kwargs)
 
-    def extendMarkdown(self, md):
+    def extendMarkdown(self, md: Markdown) -> None:
         md.preprocessors.register(ReferencesPreprocessor(md, self.getConfig("registry")), "aim_references", 25)
         # After the footnotes extension has written the markers, so the pairs are there to find.
         md.postprocessors.register(CitationRunPostprocessor(md), "aim_citation_runs", 25)
 
 
-def makeExtension(**kwargs):
+def makeExtension(**kwargs: Any) -> ReferencesExtension:
     return ReferencesExtension(**kwargs)

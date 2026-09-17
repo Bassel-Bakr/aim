@@ -27,7 +27,7 @@ BODY = "C:/Windows/Fonts/segoeui.ttf"
 TAGLINE = "Aim training concepts, routines, and the best existing resources."
 
 
-def main():
+def main() -> None:
     card = Image.new("RGBA", (W, H), NIGHT)
     grid = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     pen = ImageDraw.Draw(grid)

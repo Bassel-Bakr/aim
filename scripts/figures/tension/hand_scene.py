@@ -14,15 +14,34 @@ only, so no joint can bend backwards. A sidecar JSON gives label anchor points i
 import json
 import math
 import sys
+from collections.abc import Sequence
 from pathlib import Path
+from typing import TYPE_CHECKING, Any, TypeAlias, overload
 
 import bpy
 from mathutils import Vector
 
+if TYPE_CHECKING:
+    from mathutils import Quaternion
+    from mathutils.bvhtree import BVHTree
+
+# A point, written as a Vector or as the plain tuple the callers find easier to read.
+Point: TypeAlias = "Vector | tuple[float, float, float]"
+# One metaball: its kind, and the arguments build_hand needs to place it.
+Element = tuple[str, Any]
+
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 
 
-def arg(name, default=None):
+@overload
+def arg(name: str, default: str) -> str: ...
+
+
+@overload
+def arg(name: str, default: None = None) -> str | None: ...
+
+
+def arg(name: str, default: str | None = None) -> str | None:
     return argv[argv.index(name) + 1] if name in argv else default
 
 
@@ -44,10 +63,10 @@ MOUSE_LENGTH = 11.8
 MOUSE_COLOR = tuple(float(c) for c in arg("--mouse-color", "0.07,0.07,0.075").split(","))
 MOUSE_METALLIC = 0.0
 MOUSE_ROUGHNESS = {"Grain": 0.22, "Gloss": 0.12}
-BVH = None
+BVH: Any = None
 
 
-def load_mouse():
+def load_mouse() -> "BVHTree":
     """Import the mouse, place it on the pad centred at the origin, and keep a BVH of its surface for
     placing the hand."""
     from mathutils import Matrix
@@ -62,7 +81,8 @@ def load_mouse():
     centre = Vector(((lo.x + hi.x) / 2, (lo.y + hi.y) / 2, lo.z))
     place = (Matrix.Rotation(math.pi / 2, 4, "Z") @ Matrix.Scale(MOUSE_LENGTH / (hi.x - lo.x), 4) @
              Matrix.Translation(-centre))
-    verts, polys = [], []
+    verts: list[Any] = []
+    polys: list[list[int]] = []
     for o in meshes:
         o.data.transform(place @ o.matrix_world)
         o.parent = None
@@ -91,7 +111,7 @@ def load_mouse():
     return BVHTree.FromPolygons(verts, polys)
 
 
-def surface_hit(origin, direction, lift):
+def surface_hit(origin: Point, direction: Point, lift: float) -> Vector:
     loc, normal, _index, _dist = BVH.ray_cast(Vector(origin), Vector(direction).normalized())
     if loc is None:
         raise ValueError(f"no mouse surface from {origin} toward {direction}")
@@ -100,12 +120,12 @@ def surface_hit(origin, direction, lift):
     return loc + normal * lift
 
 
-def on_top(x, y, lift):
+def on_top(x: float, y: float, lift: float) -> Vector:
     """The mouse surface straight below (x, y), lifted along its normal."""
     return surface_hit((x, y, 20.0), (0, 0, -1), lift)
 
 
-def clear_of_mouse(p, radius):
+def clear_of_mouse(p: Point, radius: float) -> Vector:
     """Move p out to the mouse's surface when it sits inside the shell or too close to it, so a finger
     drawn around it never passes through the mouse."""
     loc, normal, _index, _dist = BVH.find_nearest(Vector(p))
@@ -118,7 +138,7 @@ def clear_of_mouse(p, radius):
     return loc + normal * gap if out.length < gap else Vector(p)
 
 
-def on_side(side, y, z, lift):
+def on_side(side: int, y: float, z: float, lift: float) -> Vector:
     """The mouse's right (side 1) or left (side -1) flank at height z."""
     return surface_hit((side * 20.0, y, z), (-side, 0, 0), lift)
 
@@ -142,7 +162,7 @@ WRIST = PALM_BACK - F * 1.9 + U * 0.1
 ELBOW = Vector((-2.2, WRIST.y - 21.0, 2.2))
 
 
-def finger_chain(base, target, lengths, bend):
+def finger_chain(base: Point, target: Point, lengths: Sequence[float], bend: Point) -> list[Vector]:
     """Joints from base to target for a finger that only flexes toward `bend`.
 
     Segment directions are cos(a)*forward + sin(a)*bend, with cumulative angles knuckle,
@@ -154,7 +174,7 @@ def finger_chain(base, target, lengths, bend):
     rel = target - base
     fwd = (rel - b * rel.dot(b)).normalized()
     goal = (rel.dot(fwd), rel.dot(b))
-    best = None
+    best: tuple[float, tuple[int, int, int]] | None = None
     for knuckle in range(-35, 71):
         for middle in range(0, 101):
             angles = (knuckle, knuckle + middle, knuckle + middle)
@@ -164,6 +184,7 @@ def finger_chain(base, target, lengths, bend):
             if best is None or err < best[0]:
                 best = (err, angles)
     pts = [base]
+    assert best is not None
     for length, a in zip(lengths, best[1]):
         r = math.radians(a)
         pts.append(pts[-1] + (fwd * math.cos(r) + b * math.sin(r)) * length)
@@ -196,11 +217,12 @@ THUMB_BASE = PALM_BACK + F * 2.2 - X * 2.8 - U * 0.6
 FINGER_THICKNESS, BODY_PUFF = 1.4, 1.08
 
 
-def finger_tube(elements, pts, r, clear=False):
+def finger_tube(elements: list[Element], pts: Sequence[Vector], r: Sequence[float],
+                clear: bool = False) -> None:
     """A finger as closely spaced balls with radii eased along its bones. Capsules would overlap at
     each joint and swell it; an even run of balls keeps the finger smooth from knuckle to tip. With
     clear set, every ball is held outside the mouse, so no part of the finger sinks into the shell."""
-    def ball(centre, radius):
+    def ball(centre: Vector, radius: float) -> None:
         elements.append(("ball", (clear_of_mouse(centre, radius) if clear else centre, radius * 0.78)))
 
     for i in range(len(pts) - 1):
@@ -212,9 +234,10 @@ def finger_tube(elements, pts, r, clear=False):
     ball(pts[-1], r[len(pts) - 1])
 
 
-def build_skeleton():
+def build_skeleton() -> tuple[list[Element], dict[str, tuple[list[Vector], list[float]]]]:
     """Metaball elements as (kind, data), and each finger's joints and radii."""
-    elements, joints = [], {}
+    elements: list[Element] = []
+    joints: dict[str, tuple[list[Vector], list[float]]] = {}
     palm_mid = (PALM_BACK + PALM_FRONT) / 2
     k = BODY_PUFF
     elements.append(("ellipsoid", (palm_mid, (3.35 * k, ((PALM_FRONT - PALM_BACK).length / 2 + 0.2) * k, 1.0 * k), F)))
@@ -247,17 +270,17 @@ def build_skeleton():
     for i in range(1, 5):
         t = i / 28
         elements.append(("ellipsoid", (WRIST.lerp(ELBOW, t), ((2.25 + 0.6 * t) * k, 1.0, (1.25 + 0.55 * t) * k), arm_axis)))
-    for name, (dx, back, lengths, radii, contact) in FINGERS.items():
-        radii = [v * FINGER_THICKNESS for v in radii]
+    for name, (dx, back, bones, widths, contact) in FINGERS.items():
+        radii = [v * FINGER_THICKNESS for v in widths]
         knuckle = PALM_FRONT - F * back + X * dx - U * 0.05
-        lengths = [v * FINGER_LENGTH for v in lengths]
+        lengths = [v * FINGER_LENGTH for v in bones]
         pts = finger_chain(knuckle, contact(radii[2]), lengths, (0, 0, -1))
         joints[name] = (pts, radii)
         finger_tube(elements, pts, (radii[0], radii[1], radii[2], radii[2] * 0.92))
-    lengths, radii, contact = THUMB
-    radii = [v * FINGER_THICKNESS * 0.975 for v in radii]
-    lengths = [v * THUMB_LENGTH for v in lengths]
-    pts = finger_chain(THUMB_BASE, contact(radii[2]), lengths, (1, 0.1, -0.55))
+    thumb_bones, thumb_widths, thumb_contact = THUMB
+    radii = [v * FINGER_THICKNESS * 0.975 for v in thumb_widths]
+    lengths = [v * THUMB_LENGTH for v in thumb_bones]
+    pts = finger_chain(THUMB_BASE, thumb_contact(radii[2]), lengths, (1, 0.1, -0.55))
     # Every joint is held outside the shell, then the last segment turns in toward the mouse and
     # forward, so the thumb arcs around it rather than passing through it.
     pts = [clear_of_mouse(q - X * THUMB_OUT, rad) for q, rad in zip(pts, radii)]
@@ -290,7 +313,8 @@ def build_skeleton():
     return elements, joints
 
 
-def material(name, color, rough=0.55, emit=0.0, sss=0.0):
+def material(name: str, color: tuple[float, float, float], rough: float = 0.55,
+             emit: float = 0.0, sss: float = 0.0) -> bpy.types.Material:
     m = bpy.data.materials.new(name)
     m.use_nodes = True
     bsdf = m.node_tree.nodes["Principled BSDF"]
@@ -306,22 +330,22 @@ def material(name, color, rough=0.55, emit=0.0, sss=0.0):
     return m
 
 
-def shade_smooth(obj):
+def shade_smooth(obj: bpy.types.Object) -> None:
     for poly in obj.data.polygons:
         poly.use_smooth = True
 
 
-def look(obj, target):
+def look(obj: bpy.types.Object, target: Point) -> None:
     obj.rotation_mode = "QUATERNION"
     obj.rotation_quaternion = (Vector(target) - obj.location).to_track_quat("-Z", "Y")
 
 
-def smoothstep(e0, e1, x):
+def smoothstep(e0: float, e1: float, x: float) -> float:
     t = max(0.0, min(1.0, (x - e0) / (e1 - e0)))
     return t * t * (3 - 2 * t)
 
 
-def build_hand(elements):
+def build_hand(elements: list[Element]) -> None:
     mb = bpy.data.metaballs.new("hand")
     mb.resolution = 0.12
     mb.render_resolution = 0.06 if FINAL else 0.1
@@ -381,7 +405,7 @@ CUFF = WRIST - F * 1.6
 WRIST_WIDTH = 5.2
 
 
-def build_forearm():
+def build_forearm() -> None:
     """Import the rigged arm, keep its right forearm, lay it from the elbow to the wrist, and cut it
     at the cuff so the sleeve starts where the hand's skin ends."""
     import bmesh
@@ -400,10 +424,10 @@ def build_forearm():
             bpy.data.objects.remove(o)
     bpy.context.view_layer.update()
 
-    def bone(prefix):
+    def bone(prefix: str) -> bpy.types.PoseBone:
         return next(pb for pb in rig.pose.bones if pb.name.startswith(prefix))
 
-    def head(pb):
+    def head(pb: bpy.types.PoseBone) -> Vector:
         return rig.matrix_world @ pb.head
 
     # Keep the vertices that follow the right forearm bone.
@@ -425,7 +449,7 @@ def build_forearm():
     rig.matrix_world = Matrix.Scale(WRIST_WIDTH / width, 4) @ rig.matrix_world
     bpy.context.view_layer.update()
 
-    def turn(pb, rotation):
+    def turn(pb: bpy.types.PoseBone, rotation: "Quaternion") -> None:
         bpy.context.view_layer.update()
         m = rig.matrix_world @ pb.matrix
         pivot = m.translation.copy()
@@ -478,7 +502,7 @@ def build_forearm():
     mesh.materials.append(hand_material())
 
 
-def hand_material():
+def hand_material() -> bpy.types.Material:
     """Flat grey skin, and past the cuff a compression sleeve: matte black knit with a ribbed cuff and
     two accent bands near it."""
     skin, base = (0.2, 0.2, 0.205), (0.012, 0.013, 0.015)
@@ -492,7 +516,7 @@ def hand_material():
     sep = nt.nodes.new("ShaderNodeSeparateXYZ")
     nt.links.new(uvn.outputs["UV"], sep.inputs["Vector"])
 
-    def math_node(op, a, b=None):
+    def math_node(op: str, a: Any, b: Any = None) -> bpy.types.Node:
         n = nt.nodes.new("ShaderNodeMath")
         n.operation = op
         for i, x in enumerate((a, b)):
@@ -536,7 +560,8 @@ def hand_material():
     return m
 
 
-def arrow(tip, direction, length, mat, radius=0.12):
+def arrow(tip: Point, direction: Point, length: float, mat: bpy.types.Material,
+          radius: float = 0.12) -> Vector:
     """A slim arrow ending at tip; returns the tail point."""
     d = Vector(direction).normalized()
     tip = Vector(tip)
@@ -554,7 +579,7 @@ def arrow(tip, direction, length, mat, radius=0.12):
     return tip - d * length
 
 
-def build():
+def build() -> dict[str, Vector]:
     bpy.ops.mesh.primitive_plane_add(size=120, location=(0, -6, -0.01))
     bpy.context.object.data.materials.append(material("pad", (0.085, 0.09, 0.1), 0.95))
     elements, joints = build_skeleton()
@@ -588,7 +613,7 @@ def build():
     return anchors
 
 
-def lights_camera():
+def lights_camera() -> None:
     world = bpy.data.worlds.new("world")
     bpy.context.scene.world = world
     world.use_nodes = True
@@ -599,22 +624,22 @@ def lights_camera():
         light = bpy.context.object
         light.data.energy, light.data.size = energy, size
         look(light, (0, -2, 3))
-    cams = {
+    cams: dict[str, tuple[Point, Point, int]] = {
         "front": ((-13.5, 16.0, 16.0), (0.3, -2.6, 3.2), 42),
         "mouse": ((-7.5, 11.5, 9.0), (0.2, 0.6, 1.6), 50),
         "threequarter": ((-6.5, 20.5, 17.5), (0.2, -1.6, 2.9), 42),
         "side": ((-60, 0.0, 2.2), (0, 0.0, 2.0), 110),
         "top": ((0, 0, 60), (0, 0.01, 0), 110),
     }
-    loc, target, lens = cams[VIEW]
-    bpy.ops.object.camera_add(location=loc)
+    cam_loc, cam_target, lens = cams[VIEW]
+    bpy.ops.object.camera_add(location=cam_loc)
     cam = bpy.context.object
-    look(cam, target)
+    look(cam, cam_target)
     cam.data.lens = lens
     bpy.context.scene.camera = cam
 
 
-def render(anchors):
+def render(anchors: dict[str, Vector]) -> None:
     from bpy_extras.object_utils import world_to_camera_view
     scene = bpy.context.scene
     scene.render.resolution_x, scene.render.resolution_y = (1600, 1000) if FINAL else (800, 500)
@@ -630,7 +655,7 @@ def render(anchors):
     scene.view_settings.view_transform = "AgX"
     scene.render.filepath = str(Path(OUT).resolve())
     bpy.context.view_layer.update()
-    out = {}
+    out: dict[str, list[float]] = {}
     for name, p in anchors.items():
         c = world_to_camera_view(scene, scene.camera, Vector(p))
         out[name] = [round(c.x, 4), round(1 - c.y, 4)]

@@ -81,6 +81,18 @@ so a dead outbound link will not show up in the checks you run locally.
 | `scripts/` | Repository checks, `suggest_related.py`, `move_page.py`, which moves a page and repoints every link, related entry, nav entry and redirect to it, and `figures/`, the code that draws a page's diagrams and renders. Regenerate a page's figures with its `build.py` rather than editing them by hand. `figures/social/build.py` is the exception: it draws one card for the whole site, `docs/assets/images/social-card.png`, which every page's share tags point at. Rerun it after changing the wordmark or the tagline. |
 | `zensical.toml` | Site config and the `nav` tree. |
 
+## Python
+
+Everything under `scripts/` and `extensions/` carries type annotations: parameters, return types, and
+the empty collections whose element type is otherwise invisible. Keep them on code you add or
+change. Nothing enforces this — no checker runs in CI — so a missing annotation shows up only when
+someone reads the function. Run `mypy scripts extensions --ignore-missing-imports` locally if you
+want them verified; `bpy` and `zensical` ship no stubs, which is what that flag is for.
+
+Shapes that repeat have an alias rather than being spelled out at each use: `Meta` for a page's front
+matter and `Element` for a metaball, among others. Import the alias instead of writing the shape
+again, so the two places that read it cannot drift apart.
+
 ## Page components
 
 `docs/assets/stylesheets/aim.css` defines a handful of classes that Markdown pages opt into. Each

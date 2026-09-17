@@ -28,16 +28,16 @@ PAGE_LINK = re.compile(r"\]\(([^)\s#]+\.md)(?:#[^)]*)?\)")
 BODY = re.compile(r"\A---\r?\n.*?\r?\n---\r?\n|<!--.*?-->|```.*?```", re.S)
 
 
-def candidates(page, pages, lists):
+def candidates(page: str, pages: dict[str, str], lists: dict[str, list[str]]) -> list[tuple[str, list[str]]]:
     """(target, reasons) pairs for one page, strongest first."""
     text = pages[page]
     meta = front_matter(text)
     tags = set(meta.get("tags") or [])
     taken = set(listed(meta)) | {page}
     allowed = {"concept"} if kind(page) == "concept" else {"concept", "resource"}
-    found = {}
+    found: dict[str, list[str]] = {}
 
-    def add(target, reason):
+    def add(target: str, reason: str) -> None:
         if target in pages and target not in taken and kind(target) in allowed:
             found.setdefault(target, []).append(reason)
 
@@ -54,7 +54,7 @@ def candidates(page, pages, lists):
     return sorted(found.items(), key=lambda item: (-len(item[1]), item[0]))
 
 
-def main():
+def main() -> None:
     pages = {path.relative_to(DOCS).as_posix(): path.read_text(encoding="utf-8") for path in sorted(DOCS.rglob("*.md"))}
     lists = related_lists(DOCS)
     named = [Path(arg).resolve().relative_to(DOCS).as_posix() for arg in sys.argv[1:]]

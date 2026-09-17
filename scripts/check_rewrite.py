@@ -22,7 +22,7 @@ FRONT_MATTER = re.compile(r"\A---\r?\n.*?\r?\n---\r?\n", re.S)
 BANNER = '!!! warning "Draft"'
 
 
-def invariants(text):
+def invariants(text: str) -> dict[str, set[str]]:
     front = FRONT_MATTER.match(text)
     return {
         "link target": set(LINK.findall(text)),
@@ -33,7 +33,7 @@ def invariants(text):
     }
 
 
-def compare(ref, page):
+def compare(ref: str, page: str) -> list[str]:
     rel = Path(page).resolve().relative_to(ROOT).as_posix()
     before = subprocess.run(
         ["git", "show", f"{ref}:{rel}"], cwd=ROOT, capture_output=True, text=True, encoding="utf-8"
@@ -42,7 +42,7 @@ def compare(ref, page):
         return [f"{rel}: not found at {ref}"]
     after = (ROOT / rel).read_text(encoding="utf-8")
     old, new = invariants(before.stdout), invariants(after)
-    errors = []
+    errors: list[str] = []
     for name in old:
         for item in sorted(old[name] - new[name]):
             errors.append(f"{rel}: {name} removed: {item.strip()}")
@@ -51,7 +51,7 @@ def compare(ref, page):
     return errors
 
 
-def main():
+def main() -> int:
     if len(sys.argv) < 3:
         print(__doc__)
         return 2

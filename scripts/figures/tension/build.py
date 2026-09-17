@@ -17,6 +17,10 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:  # Pillow is only needed for the renders, so it is imported where it is used.
+    from PIL.Image import Exif
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -47,7 +51,7 @@ RENDERS = {
 }
 
 
-def diagrams():
+def diagrams() -> None:
     text = PAGE.read_text(encoding="utf-8")
     for name, svg in (("scale", d.scale()), ("tracking", d.tracking()), ("flick", d.flick()),
                       ("blend", d.blend())):
@@ -59,7 +63,8 @@ def diagrams():
     print(f"diagrams written to {PAGE.relative_to(ROOT)}")
 
 
-def label(render, anchors, labels, out):
+def label(render: Path, anchors: dict[str, tuple[float, float]],
+          labels: list[tuple[str, str, int, int]], out: Path) -> None:
     from PIL import Image, ImageDraw, ImageFont
 
     img = Image.open(render).convert("RGB")
@@ -85,7 +90,7 @@ def label(render, anchors, labels, out):
     img.save(out, quality=88, exif=authorship_exif(), xmp=authorship_xmp())
 
 
-def authorship_exif():
+def authorship_exif() -> "Exif":
     from PIL import Image
 
     exif = Image.Exif()
@@ -95,7 +100,7 @@ def authorship_exif():
     return exif
 
 
-def authorship_xmp():
+def authorship_xmp() -> bytes:
     return (
         '<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>'
         '<x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'
@@ -112,7 +117,7 @@ def authorship_xmp():
     ).encode("utf-8")
 
 
-def renders():
+def renders() -> None:
     blender = os.environ.get("BLENDER") or shutil.which("blender")
     if not blender:
         sys.exit("Blender not found: set BLENDER to blender.exe or put blender on PATH.")

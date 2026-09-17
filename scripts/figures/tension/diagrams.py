@@ -3,25 +3,32 @@ classes in aim.css, so each diagram follows the reader's scheme and picked colou
 into the page; call it rather than this module.
 """
 import math
+from collections.abc import Callable, Sequence
+from typing import Any
+
+# One step of a tracking follower: it takes the time, the crosshair's position and speed, the step
+# and a dict it keeps its own state in, and returns the next position and speed.
+Follower = Callable[[float, float, float, float, dict[str, Any]], tuple[float, float]]
 
 AUTHOR = "Bassel Bakr"
 SOURCE = "https://github.com/Bassel-Bakr/aim"
 LICENSE = "https://creativecommons.org/licenses/by-sa/4.0/"
 
 
-def metadata():
+def metadata() -> str:
     """Authorship inside each SVG, so a copied diagram still names its author, source and licence."""
     return ('<metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" '
             'xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#">'
             f'<cc:Work rdf:about=""><dc:creator>{AUTHOR}</dc:creator><dc:source>{SOURCE}</dc:source>'
             f'<cc:license rdf:resource="{LICENSE}"/></cc:Work></rdf:RDF></metadata>')
 
-def text(x, y, s, cls="fig-ink", anchor="middle", size=15, weight=600):
+def text(x: float, y: float, s: str, cls: str = "fig-ink", anchor: str = "middle",
+         size: int = 15, weight: int = 600) -> str:
     return (f'<text x="{x}" y="{y}" class="{cls}" text-anchor="{anchor}" font-size="{size}" '
             f'font-weight="{weight}">{s}</text>')
 
 
-def scale():
+def scale() -> str:
     w, h = 760, 250
     out = [f'<svg viewBox="0 0 {w} {h}" role="img" aria-labelledby="fig-scale-title">',
            '<title id="fig-scale-title">A tension scale from too loose to too tight. Too loose lags behind '
@@ -53,7 +60,7 @@ def scale():
     return "".join(out)
 
 
-def strafe(phase):
+def strafe(phase: float) -> float:
     """A strafe across one cycle, as -1 to 1: constant speed, rounded just before each turn."""
     tri = 4 * phase - 1 if phase < 0.5 else 3 - 4 * phase
     if abs(tri) > 0.94:
@@ -62,14 +69,15 @@ def strafe(phase):
     return tri
 
 
-def smooth(u):
+def smooth(u: float) -> float:
     """Smoothstep: 0 to 1 with both ends eased, for a value that starts and stops rather than jumps."""
     u = max(0.0, min(1.0, u))
     return u * u * (3 - 2 * u)
 
 
 
-def keyframes(name, values, fmt, prop="transform"):
+def keyframes(name: str, values: Sequence[Any], fmt: Callable[[Any], str],
+              prop: str = "transform") -> str:
     """Keyframes from one value per frame, dropping any frame whose value matches both neighbours,
     since linear timing between equal values changes nothing."""
     text = [fmt(v) for v in values]
@@ -79,7 +87,7 @@ def keyframes(name, values, fmt, prop="transform"):
     return f"@keyframes {name}{{{''.join(parts)}}}"
 
 
-def lane_label(x, y, name, note=""):
+def lane_label(x: float, y: float, name: str, note: str = "") -> str:
     """A lane's name and a short note on one line, top-left inside its panel. The fig-name and fig-note
     classes let aim.css enlarge them on phones, where a fitted diagram scales its text down. A lane
     whose panel is already crowded can leave the note out."""
@@ -89,7 +97,7 @@ def lane_label(x, y, name, note=""):
             f'{tail}</text>')
 
 
-def crosshair(cls, x, y):
+def crosshair(cls: str, x: float, y: float) -> str:
     """A small tight crosshair: a ring with four ticks that cross it, drawn in the lane's tension
     colour. It has to read at a glance against a target dot, so it stays smaller than one."""
     r = 8
@@ -111,17 +119,17 @@ TRK_A = (TRK_X1 - TRK_X0) / 2 - 26
 TRK_CX = (TRK_X0 + TRK_X1) / 2
 
 
-def trk_target(t):
+def trk_target(t: float) -> float:
     """Target offset from centre, in user units."""
     return strafe((t / TRK_T) % 1.0) * TRK_A
 
 
-def trk_simulate(step):
+def trk_simulate(step: Follower) -> list[float]:
     """Run a follower for several cycles and keep the last, so the loop is seamless."""
     dt = TRK_T / 2000
     x, v = 0.0, 0.0
-    state = {}
-    out = []
+    state: dict[str, Any] = {}
+    out: list[float] = []
     for i in range(2000 * 6):
         t = i * dt
         x, v = step(t, x, v, dt, state)
@@ -130,7 +138,7 @@ def trk_simulate(step):
     return out
 
 
-def trk_tight(t, x, v, dt, state):
+def trk_tight(t: float, x: float, v: float, dt: float, state: dict[str, Any]) -> tuple[float, float]:
     k, c = 61.0, 2.3
     a = k * (trk_target(t + 0.094) - x) - c * v
     v += a * dt
@@ -138,7 +146,7 @@ def trk_tight(t, x, v, dt, state):
     return x, v
 
 
-def trk_loose(t, x, v, dt, state):
+def trk_loose(t: float, x: float, v: float, dt: float, state: dict[str, Any]) -> tuple[float, float]:
     err = trk_target(t) - x
     moving = state.get("moving", False)
     if not moving and abs(err) > 55:
@@ -152,18 +160,19 @@ def trk_loose(t, x, v, dt, state):
     return x, v
 
 
-def trk_balanced(t, x, v, dt, state):
+def trk_balanced(t: float, x: float, v: float, dt: float, state: dict[str, Any]) -> tuple[float, float]:
     return trk_target(t - 0.047), 0.0
 
 
-def trk_tremor(i, n):
+def trk_tremor(i: int, n: int) -> float:
     t = i / n
     return 3.2 * math.sin(t * 2 * math.pi * 23) + 2.2 * math.sin(t * 2 * math.pi * 37 + 1.3)
 
 
-def trk_keyframes(name, xs, extra=None):
+def trk_keyframes(name: str, xs: Sequence[float],
+                  extra: Callable[[int, int], float] | None = None) -> str:
     n = len(xs)
-    parts = []
+    parts: list[str] = []
     for f in range(TRK_FRAMES + 1):
         i = min(int(f / TRK_FRAMES * n), n - 1)
         dx = xs[i] + (extra(f, TRK_FRAMES) if extra else 0)
@@ -171,7 +180,7 @@ def trk_keyframes(name, xs, extra=None):
     return f"@keyframes {name}{{{''.join(parts)}}}"
 
 
-def tracking():
+def tracking() -> str:
     tg = [trk_target(i * TRK_T / TRK_FRAMES) for i in range(TRK_FRAMES + 1)]
     lanes = [
         ("Too tight", "Overshoots and shakes", "fig-tense-stroke", trk_simulate(trk_tight), trk_tremor),
@@ -227,7 +236,7 @@ BLD_LEAD = {"finger": 5.0, "wrist": 1.2}
 BLD_LAG = 0.02              # seconds the crosshair trails the target: about 5 units at strafe speed
 
 
-def bld_swing(degrees, radius):
+def bld_swing(degrees: float, radius: float) -> float:
     """How far a joint's rotation carries a point that sits `radius` along the limb from it."""
     return math.sin(math.radians(degrees)) * radius
 
@@ -238,12 +247,12 @@ BLD_TRAVEL = (BLD_FINGER_PX + bld_swing(BLD_WRIST_DEG, BLD_WRIST_ARM)
               + bld_swing(BLD_ARM_DEG, BLD_ELBOW_ARM))
 
 
-def bld_share(x, joint):
+def bld_share(x: float, joint: str) -> float:
     """How much of a joint's range is in use once the hand has to reach x of its full travel."""
     return 1 - (1 - x) ** BLD_LEAD[joint]
 
 
-def bld_pose(t):
+def bld_pose(t: float) -> tuple[float, float, float]:
     """The hand at time t, posed to put the mouse where the crosshair is. The crosshair trails the
     target by BLD_LAG, which is what balanced tracking looks like. The fingers and the wrist take
     their share of that travel and the arm covers the remainder, so the mouse lands on the crosshair
@@ -263,7 +272,7 @@ BLD_SKIN = 'class="fig-hand-fill"'
 BLD_EDGE = 'class="fig-hand-stroke" fill="none"'
 
 
-def bld_hand(part):
+def bld_hand(part: str) -> str:
     """One part of the hand seen from above, in its neutral pose. The mouse is drawn on the page's
     own background with a thin edge, so it reads as an object lying on the panel, and the arm, palm
     and fingers all share one translucent ink fill, so they read as one limb over it.
@@ -307,12 +316,13 @@ def bld_hand(part):
                    for d, w in fingers)
 
 
-def bld_chain(arm, wrist, fingers, opacity=None):
+def bld_chain(arm: str | None, wrist: str | None, fingers: str | None,
+              opacity: str | None = None) -> str:
     """The arm, wrist and fingers as nested groups, each carrying one joint's share of the motion, so
     a part inherits every joint above it: the mouse moves with all three, the palm with the arm and
     wrist only, which is what makes the fingers visibly slide the mouse under the hand. Passing None
     for a group leaves that joint at rest, which draws the neutral pose."""
-    def group(name, origin, inner):
+    def group(name: str | None, origin: str, inner: str) -> str:
         style = f"transform-origin:{origin}" + (f";animation-name:{name}" if name else "")
         cls = ' class="aim-bld-anim"' if name else ""
         return f'<g{cls} style="{style}">{inner}</g>'
@@ -320,7 +330,7 @@ def bld_chain(arm, wrist, fingers, opacity=None):
     # Back to front: the mouse, then the fingers over the buttons, then the heel of the hand, which
     # covers where the fingers meet it. The mouse and the fingers move with the finger group and the
     # palm does not, so the chain is walked three times rather than drawn in one pass.
-    def stack(part, with_fingers):
+    def stack(part: str, with_fingers: bool) -> str:
         inner = group(fingers, f"{BLD_CX}px 200px", bld_hand(part)) if with_fingers else bld_hand(part)
         return group(wrist, f"{BLD_CX}px {BLD_WRIST}px", inner)
 
@@ -329,7 +339,7 @@ def bld_chain(arm, wrist, fingers, opacity=None):
     return f'<g opacity="{opacity}">{body}</g>' if opacity else body
 
 
-def blend():
+def blend() -> str:
     css, body = [], []
     ts = [i / BLD_FRAMES * BLD_T for i in range(BLD_FRAMES + 1)]
     # The screen leads: the target strafes at a constant speed and the crosshair trails it. The hand
@@ -399,11 +409,11 @@ FLK_TX = [90, 430, 250]     # target x per stop, measured from the meter
 FLK_TY = [-12, 8, 18]       # target y offset per stop
 
 
-def flk_ease_out(u):
+def flk_ease_out(u: float) -> float:
     return 1 - (1 - u) ** 3
 
 
-def flk_pose(t, kind):
+def flk_pose(t: float, kind: str) -> tuple[float, float, float]:
     """Crosshair (x, y) offsets from lane centre and tension 0..1 at time t."""
     t %= FLK_T
     k = int(t // FLK_SEG)
@@ -439,7 +449,7 @@ def flk_pose(t, kind):
     return x, y, tension
 
 
-def flick():
+def flick() -> str:
     phases = [("Prepare", 0.0, 0.22), ("Flick", 0.22, 0.44), ("Micro", 0.44, 0.74), ("Shoot", 0.74, 1.0)]
     lanes = [("Managed", "Tense, flick, release", "managed", "balanced"),
              ("Held", "Tension never drops", "held", "tense")]
