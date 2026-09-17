@@ -4,6 +4,20 @@ on:
   push:
     branches:
       - main
+    # Files the built site cannot depend on. A push touching only these publishes the same bytes
+    # again, so it is skipped. Anything the build reads stays off this list: docs/, overrides/,
+    # includes/, extensions/, zensical.toml, references.yml and requirements.txt. Figure code under
+    # scripts/ is safe here because its output is committed under docs/, which triggers on its own.
+    paths-ignore:
+      - AGENTS.md
+      - CLAUDE.md
+      - CONTRIBUTING.md
+      - README.md
+      - LICENSE
+      - specs/**
+      - templates/**
+      - scripts/**
+      - .github/workflows/check.yml
   workflow_dispatch:
 
 permissions:
@@ -27,6 +41,7 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+          cache: pip
       - run: pip install -r requirements.txt
       - run: zensical build --clean
       - uses: actions/upload-pages-artifact@v5

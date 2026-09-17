@@ -191,5 +191,8 @@ link if asked; send anything touching the argument itself back to the author.
 
 ## Deployment
 
-`.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every push to `main`. Do not
-commit the `site/` directory; it is generated and ignored.
+`.github/workflows/deploy.yml` builds and publishes to GitHub Pages on a push to `main`, unless the
+push touches nothing the site is built from: its `paths-ignore` list skips guides, `specs/`,
+`templates/` and `scripts/`, which cannot change a published byte. Add a path there only if that
+holds, and never one the build reads. Run the workflow by hand from the Actions tab to publish
+anyway. Do not commit the `site/` directory; it is generated and ignored.
