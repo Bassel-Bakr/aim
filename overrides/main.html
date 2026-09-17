@@ -19,10 +19,12 @@
     card image drawn by scripts/figures/social/build.py.
   -#}
   {% set share_title = page.meta.title if page.meta and page.meta.title else page.title | striptags %}
-  {% set share_title = share_title ~ " - " ~ config.site_name if page and not page.is_homepage else config.site_name %}
+  {#- This theme does not set page.is_homepage; the landing page is the one with an empty URL. -#}
+  {% set home = page and page.url in ["", ".", "/", "index.html"] %}
+  {% set share_title = config.site_name if home else share_title ~ " - " ~ config.site_name %}
   {% set share_text = page.meta.description if page and page.meta and page.meta.description else config.site_description %}
   {% set share_image = config.site_url ~ "assets/images/social-card.png" %}
-  <meta property="og:type" content="{{ 'website' if page and page.is_homepage else 'article' }}">
+  <meta property="og:type" content="{{ 'website' if home else 'article' }}">
   <meta property="og:site_name" content="{{ config.site_name }}">
   <meta property="og:title" content="{{ share_title }}">
   <meta property="og:description" content="{{ share_text }}">
@@ -36,6 +38,74 @@
   <meta name="twitter:title" content="{{ share_title }}">
   <meta name="twitter:description" content="{{ share_text }}">
   <meta name="twitter:image" content="{{ share_image }}">
+
+  {#-
+    Structured data. The landing page describes the site itself; every other page describes its own
+    article and the path through the nav that leads to it, which search engines may show as a
+    breadcrumb under the result.
+  -#}
+  {% if home %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": {{ config.site_name | tojson }},
+        "description": {{ config.site_description | tojson }},
+        "url": {{ config.site_url | tojson }},
+        "inLanguage": "en"
+      }
+    </script>
+  {% elif page %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": {{ (page.meta.title if page.meta and page.meta.title else page.title | striptags) | tojson }},
+        "description": {{ share_text | tojson }},
+        "image": {{ share_image | tojson }},
+        {% if page.canonical_url %}"url": {{ page.canonical_url | tojson }},{% endif %}
+        "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": {{ config.site_name | tojson }},
+          "url": {{ config.site_url | tojson }}
+        },
+        "inLanguage": "en"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": {{ config.site_name | tojson }},
+            "item": {{ config.site_url | tojson }}
+          }
+          {%- for ancestor in page.ancestors | reverse %},
+          {
+            "@type": "ListItem",
+            "position": {{ loop.index + 1 }},
+            "name": {{ ancestor.title | striptags | tojson }}
+            {%- if ancestor.url %},
+            "item": {{ (config.site_url ~ ancestor.url) | tojson }}
+            {%- endif %}
+          }
+          {%- endfor %},
+          {
+            "@type": "ListItem",
+            "position": {{ (page.ancestors | length) + 2 }},
+            "name": {{ (page.title | striptags) | tojson }}
+            {%- if page.canonical_url %},
+            "item": {{ page.canonical_url | tojson }}
+            {%- endif %}
+          }
+        ]
+      }
+    </script>
+  {% endif %}
 
   <script src="{{ 'assets/javascripts/aim-theme.js' | url }}"></script>
 {% endblock %}
