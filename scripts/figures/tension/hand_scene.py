@@ -2,8 +2,12 @@
 
     blender -b -P hand_scene.py -- --out file.png [--view front|threequarter|side|top|mouse]
         [--forces] [--final] [--no-hand] [--mouse-color r,g,b]
+    blender -b -P hand_scene.py -- --shots shots.json [--final] ...
 
-build.py runs this for the page; call it directly only to try a new view.
+build.py runs this for the page; call it directly only to try a new view. --shots takes a JSON list
+of {"out", "view", "forces"} and renders every one of them from a scene built once, which is what
+build.py uses: the hand costs about twice what a render does, so paying for it per figure was the
+slowest thing here.
 
 The mouse is "Razer Viper Mini" by kimberly.h, CC BY 4.0, from Sketchfab; see the note above MODEL.
 The hand is metaballs, so joints blend into one smooth surface, converted to a mesh. The forearm is
@@ -48,6 +52,19 @@ def arg(name: str, default: str | None = None) -> str | None:
 OUT = arg("--out", "render.png")
 VIEW = arg("--view", "front")
 FORCES, FINAL = "--forces" in argv, "--final" in argv
+SHOTS = arg("--shots")
+# One render: where it goes, which viewpoint, and whether the force arrows are in it.
+Shot = tuple[str, str, bool]
+# The anchors that belong to those arrows, left out of a shot that does not show them.
+FORCE_ANCHORS = ("squeeze_left", "squeeze_right", "press")
+
+
+def shots() -> list[Shot]:
+    """Every render this run produces: the list in the --shots file, or the single one on argv."""
+    if SHOTS is None:
+        return [(OUT, VIEW, FORCES)]
+    jobs = json.loads(Path(SHOTS).read_text(encoding="utf-8"))
+    return [(job["out"], job["view"], bool(job.get("forces"))) for job in jobs]
 
 K = 0.574  # a metaball's surface sits at K * radius at the default threshold
 
@@ -560,9 +577,13 @@ def hand_material() -> bpy.types.Material:
     return m
 
 
+ARROWS: list[bpy.types.Object] = []
+
+
 def arrow(tip: Point, direction: Point, length: float, mat: bpy.types.Material,
           radius: float = 0.12) -> Vector:
-    """A slim arrow ending at tip; returns the tail point."""
+    """A slim arrow ending at tip; returns the tail point. Every arrow is kept in ARROWS, so a shot
+    without forces can hide them all rather than rebuilding the scene without them."""
     d = Vector(direction).normalized()
     tip = Vector(tip)
     head_len, head_r = 0.7, radius * 3.0
@@ -576,6 +597,7 @@ def arrow(tip: Point, direction: Point, length: float, mat: bpy.types.Material,
         part.rotation_mode = "QUATERNION"
         part.rotation_quaternion = d.to_track_quat("Z", "Y")
         part.data.materials.append(mat)
+        ARROWS.append(part)
     return tip - d * length
 
 
@@ -592,28 +614,50 @@ def build() -> dict[str, Vector]:
         "wrist": WRIST + U * 1.3,
         "arm": WRIST.lerp(ELBOW, 0.35) + Vector((0, 0, 1.7)),
     }
-    if FORCES:
-        squeeze = material("squeeze", (0.1, 0.55, 0.88), 0.4, 0.8)
-        press = material("press", (0.93, 0.42, 0.16), 0.4, 0.8)
-        gap = 0.12
-        tp, tr = joints["thumb"]
-        rp, rr = joints["ring"]
-        ip, ir = joints["index"]
-        left_tip = tp[-1] - X * (tr[2] + gap)
-        anchors["squeeze_left"] = arrow(left_tip, X, 3.0, squeeze)
-        # The pair reads as one squeeze, so the right arrow meets the mouse's other flank on the same
-        # line as the left one rather than chasing the ring finger's hidden tip.
-        # Pulled back a little further than the left one: the fingers on that flank would otherwise
-        # cover its head.
-        anchors["squeeze_right"] = arrow(on_side(1, left_tip.y, left_tip.z, rr[2] + gap + 0.5), -X, 3.0, squeeze)
-        # Nearly straight down and short, so the arrow does not lie across the other fingers.
-        press_dir = Vector((0.2, 0.0, -0.98)).normalized()
-        # Held back off the fingertip as well, so the head reads clear of the finger it points at.
-        anchors["press"] = arrow(ip[-1] - press_dir * (ir[2] + gap + 1.5), press_dir, 2.2, press)
+    squeeze = material("squeeze", (0.1, 0.55, 0.88), 0.4, 0.8)
+    press = material("press", (0.93, 0.42, 0.16), 0.4, 0.8)
+    gap = 0.12
+    tp, tr = joints["thumb"]
+    rp, rr = joints["ring"]
+    ip, ir = joints["index"]
+    left_tip = tp[-1] - X * (tr[2] + gap)
+    anchors["squeeze_left"] = arrow(left_tip, X, 3.0, squeeze)
+    # The pair reads as one squeeze, so the right arrow meets the mouse's other flank on the same
+    # line as the left one rather than chasing the ring finger's hidden tip.
+    # Pulled back a little further than the left one: the fingers on that flank would otherwise
+    # cover its head.
+    anchors["squeeze_right"] = arrow(on_side(1, left_tip.y, left_tip.z, rr[2] + gap + 0.5), -X, 3.0, squeeze)
+    # Nearly straight down and short, so the arrow does not lie across the other fingers.
+    press_dir = Vector((0.2, 0.0, -0.98)).normalized()
+    # Held back off the fingertip as well, so the head reads clear of the finger it points at.
+    anchors["press"] = arrow(ip[-1] - press_dir * (ir[2] + gap + 1.5), press_dir, 2.2, press)
     return anchors
 
 
-def lights_camera() -> None:
+CAMS: dict[str, tuple[Point, Point, int]] = {
+    "front": ((-13.5, 16.0, 16.0), (0.3, -2.6, 3.2), 42),
+    "mouse": ((-7.5, 11.5, 9.0), (0.2, 0.6, 1.6), 50),
+    "threequarter": ((-6.5, 20.5, 17.5), (0.2, -1.6, 2.9), 42),
+    "side": ((-60, 0.0, 2.2), (0, 0.0, 2.0), 110),
+    "top": ((0, 0, 60), (0, 0.01, 0), 110),
+}
+
+
+def camera(view: str) -> None:
+    """Put the one camera at a named viewpoint. Shots differ by where it stands, so it is moved
+    rather than rebuilt."""
+    cam_loc, cam_target, lens = CAMS[view]
+    cam = bpy.context.scene.camera
+    if cam is None:
+        bpy.ops.object.camera_add()
+        cam = bpy.context.object
+        bpy.context.scene.camera = cam
+    cam.location = Vector(cam_loc)
+    look(cam, cam_target)
+    cam.data.lens = lens
+
+
+def lights() -> None:
     world = bpy.data.worlds.new("world")
     bpy.context.scene.world = world
     world.use_nodes = True
@@ -624,23 +668,10 @@ def lights_camera() -> None:
         light = bpy.context.object
         light.data.energy, light.data.size = energy, size
         look(light, (0, -2, 3))
-    cams: dict[str, tuple[Point, Point, int]] = {
-        "front": ((-13.5, 16.0, 16.0), (0.3, -2.6, 3.2), 42),
-        "mouse": ((-7.5, 11.5, 9.0), (0.2, 0.6, 1.6), 50),
-        "threequarter": ((-6.5, 20.5, 17.5), (0.2, -1.6, 2.9), 42),
-        "side": ((-60, 0.0, 2.2), (0, 0.0, 2.0), 110),
-        "top": ((0, 0, 60), (0, 0.01, 0), 110),
-    }
-    cam_loc, cam_target, lens = cams[VIEW]
-    bpy.ops.object.camera_add(location=cam_loc)
-    cam = bpy.context.object
-    look(cam, cam_target)
-    cam.data.lens = lens
-    bpy.context.scene.camera = cam
 
 
-def render(anchors: dict[str, Vector]) -> None:
-    from bpy_extras.object_utils import world_to_camera_view
+def setup_render() -> None:
+    """Engine, device and image settings, which every shot in a run shares."""
     scene = bpy.context.scene
     scene.render.resolution_x, scene.render.resolution_y = (1600, 1000) if FINAL else (800, 500)
     scene.render.engine = "CYCLES"
@@ -653,16 +684,29 @@ def render(anchors: dict[str, Vector]) -> None:
     scene.cycles.samples = 256 if FINAL else 32
     scene.cycles.use_denoising = True
     scene.view_settings.view_transform = "AgX"
-    scene.render.filepath = str(Path(OUT).resolve())
+
+
+def shoot(shot: Shot, anchors: dict[str, Vector]) -> None:
+    """One render, and the sidecar JSON giving its label anchors in image space."""
+    from bpy_extras.object_utils import world_to_camera_view
+    out_path, view, forces = shot
+    for part in ARROWS:
+        part.hide_render = not forces
+    camera(view)
+    scene = bpy.context.scene
+    scene.render.filepath = str(Path(out_path).resolve())
     bpy.context.view_layer.update()
+    seen = {name: p for name, p in anchors.items() if forces or name not in FORCE_ANCHORS}
     out: dict[str, list[float]] = {}
-    for name, p in anchors.items():
+    for name, p in seen.items():
         c = world_to_camera_view(scene, scene.camera, Vector(p))
         out[name] = [round(c.x, 4), round(1 - c.y, 4)]
-    Path(OUT).with_suffix(".json").write_text(json.dumps(out))
+    Path(out_path).with_suffix(".json").write_text(json.dumps(out))
     bpy.ops.render.render(write_still=True)
 
 
-anchors = build()
-lights_camera()
-render(anchors)
+scene_anchors = build()
+lights()
+setup_render()
+for one in shots():
+    shoot(one, scene_anchors)

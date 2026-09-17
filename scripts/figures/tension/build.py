@@ -7,7 +7,9 @@
 Diagrams are rewritten in place inside the page, matched by each <svg>'s aria-labelledby id, so edit
 the drawing code in diagrams.py, never the SVG in the page. Renders run hand_scene.py in Blender (the
 BLENDER environment variable, or blender on PATH), then add the callout labels and write WebP files
-to docs/assets/images/tension/. Renders need Blender and Pillow; a GPU with OptiX makes them fast.
+to docs/assets/images/tension/. Both renders come out of one Blender run, which builds the hand once
+and moves the camera, because building it costs about twice what rendering it does. Renders need
+Blender and Pillow; a GPU with OptiX makes them fast.
 """
 import json
 import os
@@ -36,14 +38,15 @@ MODEL_CREDIT = ('Mouse model: "Razer Viper Mini" (https://sketchfab.com/3d-model
 sys.path.insert(0, str(HERE))
 import diagrams as d  # noqa: E402
 
-# name: (scene arguments, labels as anchor, text, offset x, offset y in render pixels)
+# name: (viewpoint, whether the force arrows show, labels as anchor, text, offset x, offset y in
+# render pixels)
 RENDERS = {
-    "grip-zones": (["--view", "front"], [
+    "grip-zones": ("front", False, [
         ("fingers", "Fingertips  ·  micro-corrections", -110, -270),
         ("wrist", "Wrist  ·  narrow, smooth motion", 160, 300),
         ("arm", "Forearm and shoulder  ·  wide, fast motion", -520, -80),
     ]),
-    "grip-forces": (["--view", "threequarter", "--forces"], [
+    "grip-forces": ("threequarter", True, [
         ("squeeze_left", "Side squeeze", 80, -140),
         ("squeeze_right", "Side squeeze", -60, -140),
         ("press", "Downward press", 140, -150),
@@ -123,10 +126,14 @@ def renders() -> None:
         sys.exit("Blender not found: set BLENDER to blender.exe or put blender on PATH.")
     IMAGES.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
-        for name, (scene_args, labels) in RENDERS.items():
+        shots = [{"out": str(Path(tmp) / f"{name}.png"), "view": view, "forces": forces}
+                 for name, (view, forces, _labels) in RENDERS.items()]
+        plan = Path(tmp) / "shots.json"
+        plan.write_text(json.dumps(shots), encoding="utf-8")
+        subprocess.run([blender, "-b", "-P", str(HERE / "hand_scene.py"), "--",
+                        "--shots", str(plan), "--final"], check=True, capture_output=True)
+        for name, (_view, _forces, labels) in RENDERS.items():
             render = Path(tmp) / f"{name}.png"
-            subprocess.run([blender, "-b", "-P", str(HERE / "hand_scene.py"), "--", "--out", str(render),
-                            *scene_args, "--final"], check=True, capture_output=True)
             anchors = json.loads(render.with_suffix(".json").read_text())
             out = IMAGES / f"{name}.webp"
             label(render, anchors, labels, out)
