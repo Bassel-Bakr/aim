@@ -14,6 +14,13 @@
   {% endif %}
 
   {#-
+    What a search engine may show of a page, not what it may index. Left out, the defaults are
+    cautious: a short snippet and a thumbnail at most. These lift each limit, so a result can carry
+    a full-width image, which on this site is the share card or the page's own figure.
+  -#}
+  <meta name="robots" content="max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  {#-
     Share cards. A link pasted into Discord, Reddit or a social network shows these rather than a
     bare URL: the page's own title and description where it has one, the site's otherwise, and one
     card image drawn by scripts/figures/social/build.py.
