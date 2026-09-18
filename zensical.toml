@@ -71,6 +71,7 @@ nav = [
   ] },
   { "Articles" = [
     "articles/index.md",
+    "articles/metronome-method.md",
   ] },
 ]
 

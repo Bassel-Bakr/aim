@@ -23,7 +23,8 @@ one person's reading of that material, not a correction to it.
 
 ## Articles
 
-No articles published yet.
+- [The Metronome Method](metronome-method.md): finding your own tempo, reading accuracy to know
+  when to raise it, and using the beat as a reference rather than a trigger.
 
 ## Writing one
 
