@@ -63,6 +63,19 @@ do not rely on the exit code alone.
 External links are checked separately by lychee, on a weekly schedule rather than per pull request,
 so a dead outbound link will not show up in the checks you run locally.
 
+Colours are checked separately, because they change rarely and the check is about the palette rather
+than the pages:
+
+```bash
+python scripts/check_contrast.py
+```
+
+It reads the tokens from `docs/assets/stylesheets/aim.css`, resolves them for both schemes, and
+reports the contrast of every pair a reader reads, against WCAG AAA: 7:1 for text, 4.5:1 for large
+text. Run it after changing any colour token, and read the whole report rather than the exit code,
+since a pair can drop below AAA in one scheme while the other is fine. It is not part of the pull
+request checks while known pairs are still below the line.
+
 ## Layout
 
 | Path | Contents |
