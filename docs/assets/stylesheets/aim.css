@@ -126,6 +126,15 @@
   --aim-tracking: #56b6d8;
   --aim-switching: #b18cf0;
 
+  /* The theme's dark ink is 82% opaque, which lands at #bcbec3 on this background: 10:1, against
+   * 16:1 for the light scheme's near-black on white, so dark pages read dimmer for no reason. These
+   * are brighter, but deliberately short of the light scheme's contrast: light text at the top of
+   * the range blooms into a dark background, which is worse to read than it is to measure. */
+  --md-default-fg-color: #d5d9e2;
+  --md-default-fg-color--light: #a2aaba;
+  --md-default-fg-color--lighter: #79808f;
+  --md-default-fg-color--lightest: #333a47;
+
   --md-default-bg-color: #0f1115;
   --md-primary-fg-color: #0b0d11;
   --md-primary-fg-color--light: #2a2f39;
@@ -1419,6 +1428,9 @@ body {
 .aim-figure .fig-cool-fill { fill: var(--aim-tracking); }
 .aim-figure .fig-cool-stroke { stroke: var(--aim-tracking); }
 .aim-figure .fig-target { fill: var(--aim-key); }
+/* The key colour as text rather than as a wash: it darkens in the light scheme, where the wash
+ * itself is too pale to carry a label. */
+.aim-figure .fig-key-text { fill: var(--aim-key-ink); }
 .aim-figure .fig-tense-fill { fill: var(--aim-tense); }
 .aim-figure .fig-tense-stroke { stroke: var(--aim-tense); }
 .aim-figure .fig-loose-fill { fill: var(--aim-loose); }

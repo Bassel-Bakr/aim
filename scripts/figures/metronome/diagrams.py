@@ -217,7 +217,10 @@ def ramp() -> str:
         body.append(f'<rect x="{RAMP_X0}" y="{top:.1f}" width="{RAMP_X1 - RAMP_X0}" '
                     f'height="{bottom - top:.1f}" class="{fill}" opacity="0.14"/>')
         edge = RAMP_X0 + 12 if side == "start" else RAMP_X1 - 10
-        body.append(text(edge, (top + bottom) / 2, label, "fig-muted", side, 12, 700, middle=True))
+        # The label takes its band's own colour rather than the muted ink: a wash this faint leaves
+        # grey text unreadable on a dark background.
+        ink = "fig-key-text" if fill == "fig-target" else fill
+        body.append(text(edge, (top + bottom) / 2, label, ink, side, 12, 700, middle=True))
     for accuracy in (0.5, RAMP_STAY, RAMP_RAISE, 1.0):
         y = ramp_y(accuracy)
         body.append(f'<path d="M{RAMP_X0} {y:.1f}H{RAMP_X1}" class="fig-grid-stroke" stroke-width="1" '
