@@ -31,6 +31,7 @@ jobs:
       - run: node --test scripts/aim-theme.test.mjs
       - run: pip install -r requirements.txt
       - run: python scripts/check_pages.py
+      - run: python scripts/check_contrast.py
       - run: zensical build --clean
 
   links:

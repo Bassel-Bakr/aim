@@ -28,6 +28,8 @@ THEME = {
 }
 AAA_BODY = 7.0
 AAA_LARGE = 4.5
+# Not an AAA rule: WCAG holds a graphic that carries meaning, such as a bar in a chart, to 3:1.
+AAA_GRAPHIC = 3.0
 # Each pair is (what it is, ink token, background token, the threshold it has to clear).
 PAIRS = [
     ("body text", "--md-default-fg-color", "--md-default-bg-color", AAA_BODY),
@@ -40,11 +42,15 @@ PAIRS = [
     ("myth tag", "--aim-tag-ink", "--aim-myth", AAA_BODY),
     ("key tag", "--aim-key-tag-ink", "--aim-key", AAA_BODY),
     ("key title", "--aim-key-ink", "--md-default-bg-color", AAA_LARGE),
-    # Figure ink sits on a panel, and its labels are small.
-    ("figure: too tense", "--aim-tense", "--md-code-bg-color", AAA_BODY),
-    ("figure: too loose", "--aim-loose", "--md-code-bg-color", AAA_BODY),
-    ("figure: balanced", "--aim-balanced", "--md-code-bg-color", AAA_BODY),
-    ("figure: accent", "--aim-accent", "--md-code-bg-color", AAA_BODY),
+    # A figure's labels sit on its panel and are small, so they take the ink tokens. The fills those
+    # inks shadow are graphics, which WCAG holds to 3:1 rather than 7:1.
+    ("figure label: tense", "--aim-tense-ink", "--md-code-bg-color", AAA_BODY),
+    ("figure label: loose", "--aim-loose-ink", "--md-code-bg-color", AAA_BODY),
+    ("figure label: balanced", "--aim-balanced-ink", "--md-code-bg-color", AAA_BODY),
+    ("figure label: accent", "--aim-accent-ink", "--md-code-bg-color", AAA_BODY),
+    ("figure shape: tense", "--aim-tense", "--md-code-bg-color", AAA_GRAPHIC),
+    ("figure shape: loose", "--aim-loose", "--md-code-bg-color", AAA_GRAPHIC),
+    ("figure shape: balanced", "--aim-balanced", "--md-code-bg-color", AAA_GRAPHIC),
     ("category: clicking", "--aim-clicking", "--md-default-bg-color", AAA_BODY),
     ("category: tracking", "--aim-tracking", "--md-default-bg-color", AAA_BODY),
     ("category: switching", "--aim-switching", "--md-default-bg-color", AAA_BODY),

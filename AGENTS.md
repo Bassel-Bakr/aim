@@ -73,8 +73,12 @@ python scripts/check_contrast.py
 It reads the tokens from `docs/assets/stylesheets/aim.css`, resolves them for both schemes, and
 reports the contrast of every pair a reader reads, against WCAG AAA: 7:1 for text, 4.5:1 for large
 text. Run it after changing any colour token, and read the whole report rather than the exit code,
-since a pair can drop below AAA in one scheme while the other is fine. It is not part of the pull
-request checks while known pairs are still below the line.
+since a pair can drop below AAA in one scheme while the other is fine. It runs on every pull request
+too, so a colour that fails one scheme cannot land.
+
+A figure's colours are checked twice, because they do two jobs. A bar or a band is a graphic, held
+to 3:1, and its fill token carries that. A label is text, held to 7:1, and takes an `-ink` token of
+the same hue: in the light scheme a fill pale enough to read as a bar cannot carry 12px text.
 
 ## Layout
 
