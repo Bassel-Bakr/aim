@@ -734,6 +734,20 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* A route whose steps are each one line wants its numbers centred on that line instead. A badge is
+ * taller than a line box, so the top alignment above, which is right when a step runs to a
+ * paragraph, leaves a one-line step looking hung from its number:
+ *
+ *   <div class="aim-steps aim-steps--tight" markdown>
+ */
+.md-typeset .aim-steps--tight > ol > li::before {
+  top: calc(0.8em - 0.9rem);
+}
+
+.md-typeset .aim-steps--tight > ol > li:not(:last-child)::after {
+  top: calc(0.8em + 1.1rem);
+}
+
 /* The line joining one step to the next, so the list reads as a route rather than as six
  * unrelated items. */
 .md-typeset .aim-steps > ol > li:not(:last-child)::after {
@@ -962,6 +976,47 @@ body {
 }
 
 .md-typeset h2.aim-myth-title + .admonition.myth {
+  margin-top: 0;
+  font-size: inherit;
+}
+
+/* A key block can open a section the same way, so the point is a real heading rather than a line
+ * inside a box: the anchor the contents list links to, at heading size.
+ *
+ *   ## The beat is a reference, not necessarily a trigger { .aim-key-title }
+ *
+ *   !!! key ""
+ *       The tick measures how fast you are going, not when to click.
+ *
+ * The rules are the key block's own: at most one per page, the heading states the point, and the
+ * untitled block under it carries at most two sentences. */
+.md-typeset h2.aim-key-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  padding: 0.6rem 0.8rem 0.1rem;
+  border-left: 3px solid var(--aim-key);
+  background-color: var(--aim-key-wash);
+}
+
+.md-typeset h2.aim-key-title::before {
+  content: "Note";
+  flex: none;
+  position: relative;
+  top: -0.15em;
+  padding: 0.1rem 0.35rem;
+  color: var(--aim-key-tag-ink);
+  background-color: var(--aim-key);
+  font-family: var(--aim-display);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.md-typeset h2.aim-key-title + .admonition.key {
   margin-top: 0;
   font-size: inherit;
 }

@@ -275,7 +275,9 @@ def readability(rel: str, text: str, concept: bool) -> list[str]:
     return errors
 
 
-def check(path: Path, drafts: bool, headings: dict[str, str | None], known_ids: set[str]) -> list[str]:
+def check(path: Path, drafts: bool, headings: dict[str, str | None],
+          known_ids: set[str]) -> tuple[list[str], list[str]]:
+    """Problems that fail the check, and advice that does not."""
     text = path.read_text(encoding="utf-8")
     rel = path.relative_to(DOCS).as_posix()
     # Wiki pages live under docs/wiki/; their section is the first segment below that.
@@ -284,6 +286,7 @@ def check(path: Path, drafts: bool, headings: dict[str, str | None], known_ids: 
     in_articles = path.is_relative_to(ARTICLES)
     is_index = path.name == "index.md"
     errors: list[str] = []
+    advice: list[str] = []
 
     for tag in front_matter(text).get("tags") or []:
         if tag not in ALLOWED_TAGS:
@@ -317,6 +320,10 @@ def check(path: Path, drafts: bool, headings: dict[str, str | None], known_ids: 
                 errors.append(f"{rel}: missing '## Further resources' section")
         if front_matter(text).get("tags"):
             errors.append(f"{rel}: articles do not carry tags")
+        # An article's paragraphs are read by the same person who reads the wiki, so the length
+        # limits are worth meeting here too. They are advice rather than a rule: an article is signed
+        # by its author, and how it reads is the author's call in a way a wiki page's never is.
+        advice += readability(rel, text, False)
     elif drafts and rel not in EXEMPT_FROM_BANNER and BANNER not in text:
         errors.append(f"{rel}: missing draft banner")
     if in_wiki:
@@ -356,7 +363,7 @@ def check(path: Path, drafts: bool, headings: dict[str, str | None], known_ids: 
         keys = len(KEY_BLOCK.findall(text))
         if keys > 1:
             errors.append(f"{rel}: {keys} key blocks, a page carries at most one")
-    return errors
+    return errors, advice
 
 
 def duplicate_descriptions(paths: Sequence[Path]) -> list[str]:
@@ -382,10 +389,18 @@ def main() -> int:
     paths = named or sorted(DOCS.rglob("*.md"))
     headings = myth_headings()
     known_ids, errors = registry_ids()
-    errors += [error for path in paths for error in check(path, drafts, headings, known_ids)]
+    advice: list[str] = []
+    for path in paths:
+        page_errors, page_advice = check(path, drafts, headings, known_ids)
+        errors += page_errors
+        advice += page_advice
     errors += duplicate_descriptions(paths)
     for error in errors:
         print(error)
+    if advice:
+        print("Readability, strongly recommended but not required:")
+        for note in advice:
+            print(f"  {note}")
     print(f"{len(errors)} problem(s) found" if errors else "All pages OK")
     return 1 if errors else 0
 

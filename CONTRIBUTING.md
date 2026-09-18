@@ -179,6 +179,12 @@ Nothing in this document applies to articles. They are written by the site's mai
 take no tags, and do not require footnotes. `scripts/check_pages.py` enforces those rules for
 anything under `docs/articles/`.
 
+One rule is strongly recommended rather than enforced there: the
+[readability](#readability) limits on paragraph and sentence length. The checker prints them for an
+article as advice and does not fail on them. The reader is the same person who reads the wiki, so an
+article that ignores them is harder to read for the same reasons; the shape rules about answer
+bullets and a closing action stay wiki-only.
+
 To suggest an article, or a correction to one, open an issue rather than a pull request.
 
 ## How a wiki page ends

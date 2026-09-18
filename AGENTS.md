@@ -52,8 +52,10 @@ characters that no other page uses. It also checks that every myth block's title
 `docs/wiki/myths.md` and links there as "Evidence", that each entry on that page is a heading
 with `{ .aim-myth-title }` over an untitled myth block holding its verdict, that a myth block
 elsewhere repeats that verdict word for word, and enforces the readability rules in
-[CONTRIBUTING.md](CONTRIBUTING.md#readability). Pass `--drafts` to also require the draft banner on
-every page. Name pages after the flags to check only those.
+[CONTRIBUTING.md](CONTRIBUTING.md#readability). It reports the same readability rules for articles
+under a separate heading, as advice rather than failures: the limits are worth meeting there too, but
+an article is signed, so how it reads is its author's call. Pass `--drafts` to also require the draft
+banner on every page. Name pages after the flags to check only those.
 `zensical build` catches broken internal links and missing nav targets. The build no longer runs
 with `--strict`, so link problems appear as warnings rather than failures — read the build output,
 do not rely on the exit code alone.

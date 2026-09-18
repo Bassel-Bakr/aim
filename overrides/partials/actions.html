@@ -1,0 +1,35 @@
+{#-
+  The page actions, overriding the theme's own partial.
+
+  A wiki page keeps the edit pencil: it is open to contributions, and the pencil opens GitHub's
+  editor on the file. An article does not. It carries its author's name, so a stranger editing its
+  argument would break what the byline promises, and CONTRIBUTING sends corrections to an issue
+  instead. Articles therefore get a button that opens a pre-filled issue rather than the editor.
+-#}
+{% set article = page and "articles/" in page.url %}
+{% if article %}
+  {% set title = page.meta.title if page.meta and page.meta.title else page.title | striptags %}
+  <a href="{{ config.repo_url }}/issues/new?labels=correction&title=Correction:+{{ title | urlencode }}"
+     title="Suggest a correction" class="md-content__button md-icon" rel="nofollow noopener"
+     target="_blank">
+    {% include ".icons/material/comment-quote-outline.svg" %}
+  </a>
+{% elif page.edit_url %}
+  {% if "content.action.edit" in features %}
+    <a href="{{ page.edit_url }}" title="{{ lang.t('action.edit') }}" class="md-content__button md-icon" rel="edit">
+      {% set icon = config.theme.icon.edit or "material/file-edit-outline" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </a>
+  {% endif %}
+  {% if "content.action.view" in features %}
+    {% if "/blob/" in page.edit_url %}
+      {% set part = "/blob/" %}
+    {% else %}
+      {% set part = "/edit/" %}
+    {% endif %}
+    <a href="{{ page.edit_url | replace(part, '/raw/') }}" title="{{ lang.t('action.view') }}" class="md-content__button md-icon">
+      {% set icon = config.theme.icon.view or "material/file-eye-outline" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </a>
+  {% endif %}
+{% endif %}

@@ -3,29 +3,18 @@ classes in aim.css, so each diagram follows the reader's scheme and picked colou
 into the page; call it rather than this module.
 """
 import math
+import sys
 from collections.abc import Callable, Sequence
+from pathlib import Path
 from typing import Any
+
+# The kit sits a folder up, beside the other pages' figure code, and is not an installed package.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from figure_kit import crosshair, keyframes, lane_label, metadata, smooth, text  # noqa: E402
 
 # One step of a tracking follower: it takes the time, the crosshair's position and speed, the step
 # and a dict it keeps its own state in, and returns the next position and speed.
 Follower = Callable[[float, float, float, float, dict[str, Any]], tuple[float, float]]
-
-AUTHOR = "Bassel Bakr"
-SOURCE = "https://github.com/Bassel-Bakr/aim"
-LICENSE = "https://creativecommons.org/licenses/by-sa/4.0/"
-
-
-def metadata() -> str:
-    """Authorship inside each SVG, so a copied diagram still names its author, source and licence."""
-    return ('<metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" '
-            'xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#">'
-            f'<cc:Work rdf:about=""><dc:creator>{AUTHOR}</dc:creator><dc:source>{SOURCE}</dc:source>'
-            f'<cc:license rdf:resource="{LICENSE}"/></cc:Work></rdf:RDF></metadata>')
-
-def text(x: float, y: float, s: str, cls: str = "fig-ink", anchor: str = "middle",
-         size: int = 15, weight: int = 600) -> str:
-    return (f'<text x="{x}" y="{y}" class="{cls}" text-anchor="{anchor}" font-size="{size}" '
-            f'font-weight="{weight}">{s}</text>')
 
 
 def scale() -> str:
@@ -67,43 +56,6 @@ def strafe(phase: float) -> float:
         excess = abs(tri) - 0.94
         tri = math.copysign(0.94 + excess - excess ** 2 / 0.12, tri)
     return tri
-
-
-def smooth(u: float) -> float:
-    """Smoothstep: 0 to 1 with both ends eased, for a value that starts and stops rather than jumps."""
-    u = max(0.0, min(1.0, u))
-    return u * u * (3 - 2 * u)
-
-
-
-def keyframes(name: str, values: Sequence[Any], fmt: Callable[[Any], str],
-              prop: str = "transform") -> str:
-    """Keyframes from one value per frame, dropping any frame whose value matches both neighbours,
-    since linear timing between equal values changes nothing."""
-    text = [fmt(v) for v in values]
-    last = len(text) - 1
-    parts = [f"{i / last * 100:.4g}%{{{prop}:{v}}}" for i, v in enumerate(text)
-             if i in (0, last) or not (text[i - 1] == v == text[i + 1])]
-    return f"@keyframes {name}{{{''.join(parts)}}}"
-
-
-def lane_label(x: float, y: float, name: str, note: str = "") -> str:
-    """A lane's name and a short note on one line, top-left inside its panel. The fig-name and fig-note
-    classes let aim.css enlarge them on phones, where a fitted diagram scales its text down. A lane
-    whose panel is already crowded can leave the note out."""
-    tail = (f'<tspan dx="10" font-size="13" font-weight="500" class="fig-muted fig-note">{note}</tspan>'
-            if note else "")
-    return (f'<text x="{x}" y="{y}"><tspan font-size="16" font-weight="700" class="fig-ink fig-name">{name}</tspan>'
-            f'{tail}</text>')
-
-
-def crosshair(cls: str, x: float, y: float) -> str:
-    """A small tight crosshair: a ring with four ticks that cross it, drawn in the lane's tension
-    colour. It has to read at a glance against a target dot, so it stays smaller than one."""
-    r = 8
-    return (f'<circle cx="{x}" cy="{y}" r="{r}" class="{cls}" stroke-width="2.2" fill="none"/>'
-            f'<path d="M{x - r - 5} {y}H{x - r + 4}M{x + r - 4} {y}H{x + r + 5}'
-            f'M{x} {y - r - 5}V{y - r + 4}M{x} {y + r - 4}V{y + r + 5}" class="{cls}" stroke-width="2.2"/>')
 
 
 # Tracking: a target strafes at constant speed with quick turns, and three crosshairs chase it.
