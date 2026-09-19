@@ -15,6 +15,10 @@ related:
     why: measuring the broad improvement these habits aim at.
   - page: wiki/training/health.md
     why: posture, rest, and recovery in more detail.
+  - page: wiki/scenarios/making-a-scenario.md
+    why: shaping a well-defined practice goal into a scenario you can run.
+  - page: wiki/scenarios/designing-around-a-weakness.md
+    why: giving a well-defined practice goal the form of a scenario.
 ---
 
 !!! warning "Draft"

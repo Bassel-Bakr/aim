@@ -124,7 +124,6 @@ that before using one, and add a new component only when a page actually needs i
 | `.aim-cards` | Turns a list of links into a card grid. The whole card is the link, so each item needs exactly one link, written as its title. A second link in the same item ends up under the stretched hit area and cannot be clicked. |
 | `.aim-steps` | Turns an ordered list into a numbered route. |
 | `.aim-category` | Inline badge on a link naming a skill, with `.aim-category--clicking`, `--tracking` or `--switching` alongside it. |
-| `.aim-table-stack` | Wraps a table whose last column should drop onto its own line below 38em instead of squeezing. |
 | `.aim-figure` | A `<figure>` holding an inline SVG diagram or an image render, with a caption. Diagram colours come from its `fig-` classes, so they follow the scheme and picked colour. |
 | `.aim-figure-credit` | A `<span>` at the end of a figure's caption naming a third-party asset the figure uses, its author and its licence. |
 

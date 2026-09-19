@@ -15,6 +15,8 @@ related:
     why: acquisition, jumping to a new target, as a category of its own.
   - page: wiki/categories/tracking.md
     why: correction, staying on a target that is already moving.
+  - page: wiki/scenarios/tuning-difficulty.md
+    why: the same trade-off applied to settings in a scenario editor.
 ---
 
 !!! warning "Draft"

@@ -12,6 +12,8 @@ related:
     why: how to track a score trend rather than a single result.
   - page: wiki/getting-started/sensitivity.md
     why: sensitivity change as one supported way to break a plateau.
+  - page: wiki/scenarios/testing-and-iterating.md
+    why: reading a new scenario's scores against the same noise.
 ---
 
 !!! warning "Draft"

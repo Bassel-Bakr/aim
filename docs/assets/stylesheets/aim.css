@@ -7,7 +7,7 @@
  * Three parts, in order: the colour and type layer, which overrides the theme's own custom
  * properties; the chrome, which restyles the header, tabs, footer and typeset defaults; and the
  * page components. Each component is documented above its rules with the Markdown that produces
- * it: .aim-hero, .aim-cards, .aim-steps, .aim-category, .aim-table-stack, .aim-myth, .aim-key,
+ * it: .aim-hero, .aim-cards, .aim-steps, .aim-category, .aim-myth, .aim-key,
  * .aim-theme-picker, .aim-links, .aim-figure.
  */
 
@@ -378,6 +378,33 @@ body {
 
 /* Numbers are read against each other all over this wiki: sensitivities, cm/360, refresh rates,
  * benchmark scores. Tabular figures keep them aligned down a column. */
+/* The theme makes a table an inline-block, so it shrinks to its content and a narrow table leaves
+ * the rest of the line empty. A table here is a layout of the whole measure, like a figure.
+ *
+ * Three rules, because the theme's script wraps every table at runtime: the page ships a bare
+ * <table>, and the script puts it inside .md-typeset__scrollwrap > .md-typeset__table, which is
+ * itself an inline-block. Styling only the table leaves it sized by that wrapper, so the wrapper
+ * has to be widened too. Both states are covered, so the width does not depend on the script. */
+.md-typeset table:not([class]) {
+  display: table;
+  width: 100%;
+}
+
+/* The theme pulls the scroll wrapper out past the text column and pads the table back in, so a
+ * table that overflows bleeds to the screen edge. That inset leaves every table misaligned with
+ * the prose above it, so it is cancelled: a table still scrolls when it has to, it just starts and
+ * ends on the same line as the paragraphs around it. */
+.md-typeset__scrollwrap {
+  width: 100%;
+  margin-inline: 0;
+}
+
+.md-typeset__table {
+  display: block;
+  width: 100%;
+  padding: 0;
+}
+
 .md-typeset table:not([class]) td {
   font-variant-numeric: tabular-nums;
 }
@@ -812,48 +839,65 @@ body {
 .md-typeset .aim-category--switching { color: var(--aim-switching); }
 
 /* ---------------------------------------------------------------------------
- * .aim-table-stack — a table whose last column drops onto its own line on a
- * narrow screen, so the remaining columns keep a readable width instead of
- * wrapping to one word per line.
+ * Narrow tables — below 38em a table stops being a grid. Each row becomes its
+ * own block, and each cell a label and value pair, so a three-column table
+ * does not squeeze down to one word per line.
  *
- *   <div class="aim-table-stack" markdown>
- *
- *   | Skill | What it is | Subcategories |
- *   | --- | --- | --- |
- *   | Clicking | Acquiring a target. | Static, dynamic, linear |
- *
- *   </div>
- *
- * The stacked cell carries no header: its column heading is hidden, because a
- * heading sitting once at the top of the table no longer lines up with cells
- * repeated under every row.
+ * The label is the text of that column's heading, copied onto every cell under
+ * it as data-label by assets/javascripts/aim-tables.js, because CSS cannot
+ * read another element's text. Without that script a reader still gets every
+ * value in row order, only unlabelled.
  * ------------------------------------------------------------------------ */
 
 @media screen and (max-width: 38em) {
-  .md-typeset .aim-table-stack table:not([class]) {
+  .md-typeset table:not([class]) {
     display: block;
-    width: 100%;
     overflow: visible;
+    border: 0;
+    background-color: transparent;
   }
 
-  .md-typeset .aim-table-stack tr {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .md-typeset .aim-table-stack :is(th, td):not(:last-child) {
-    flex: 1 1 0;
-    min-width: 0;
-  }
-
-  .md-typeset .aim-table-stack th:last-child {
+  /* The heading row is dropped: a heading sitting once at the top no longer lines up with cells
+   * repeated under every row, and each cell now carries its own label. */
+  .md-typeset table:not([class]) thead {
     display: none;
   }
 
-  .md-typeset .aim-table-stack td:last-child {
-    flex: 1 0 100%;
-    border-top: 1px solid var(--md-typeset-table-color);
+  .md-typeset table:not([class]) tr {
+    display: block;
+    margin-bottom: 0.5rem;
+    padding: 0.1rem 0.6rem;
+    border: 1px solid var(--md-typeset-table-color);
+    border-radius: 0.1rem;
+    background-color: var(--md-default-bg-color);
   }
+
+  /* Label over value rather than beside it. A label column wide enough for a real heading leaves
+   * the value squeezed into what is left, which is the squeeze this whole block exists to avoid. */
+  .md-typeset table:not([class]) td {
+    display: block;
+    padding: 0.4rem 0;
+    border: 0;
+  }
+
+  .md-typeset table:not([class]) td:not(:last-child) {
+    border-bottom: 1px solid var(--md-typeset-table-color);
+  }
+
+  /* The heading, printed per cell. It reads as a label rather than as content, so it takes the
+   * same display face and letter-spacing the real table header has. */
+  .md-typeset table:not([class]) td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.1rem;
+    color: var(--md-default-fg-color--light);
+    font-family: var(--aim-display);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
 }
 
 /* .aim-myth and .aim-key are admonition types, not classes you write. They share one shape, a

@@ -19,6 +19,8 @@ related:
     why: the tracking subcategories a benchmark scores.
   - page: wiki/categories/switching.md
     why: the switching subcategories a benchmark scores.
+  - page: wiki/scenarios/designing-around-a-weakness.md
+    why: turning the subcategory a benchmark flags into a scenario.
 ---
 
 !!! warning "Draft"

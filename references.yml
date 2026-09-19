@@ -491,3 +491,102 @@
   url: "https://1-hp.org/blog/healthy-movement/3-tips-to-stop-death-griping-mouse/"
   type: article
   notes: By Dr. Elliot Smithson, PT, DPT.
+
+- id: REF-79
+  author: KovaaK's
+  title: Intro to Scenario Creation
+  url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/Intro"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-80
+  author: KovaaK's
+  title: Edit Scenario Window
+  url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/EditScenario"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-81
+  author: KovaaK's
+  title: Character Profiles
+  url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/CharacterProfiles"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-82
+  author: KovaaK's
+  title: Bot Profiles
+  url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/BotProfiles"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-83
+  author: KovaaK's
+  title: Dodge Profiles
+  url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/DodgeProfiles"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-84
+  author: KovaaK's
+  title: Session Manager
+  url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/SessionManager"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-85
+  author: KovaaK
+  title: How to create your own scenarios and uploading to the Steam Workshop
+  url: "https://steamcommunity.com/sharedfiles/filedetails/?id=1349644104"
+  type: document
+  publication: Steam Community
+  notes: Written by the game's developer.
+
+- id: REF-86
+  author: KovaaK's
+  title: Weapon Profiles
+  url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/WeaponProfiles"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-87
+  author: KovaaK's
+  title: Ability Profiles
+  url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/AbilityProfiles"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-88
+  author: KovaaK's
+  title: "KMC: the basics"
+  url: "https://wiki.kovaaks.com/en/home/KovaaK'sMapCreator/home"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-89
+  author: KovaaK's
+  title: "KMC: the interface"
+  url: "https://wiki.kovaaks.com/en/home/KovaaK'sMapCreator/the-interface"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-90
+  author: KovaaK's
+  title: "KMC: creating maps"
+  url: "https://wiki.kovaaks.com/en/home/KovaaK'sMapCreator/map-editing"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-91
+  author: KovaaK's
+  title: "KMC: frequently asked questions"
+  url: "https://wiki.kovaaks.com/en/home/KovaaK'sMapCreator/faq"
+  type: documentation
+  publication: KovaaK's Wiki
+
+- id: REF-92
+  author: KovaaK's
+  title: Aim Profiles
+  url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/AimProfiles"
+  type: documentation
+  publication: KovaaK's Wiki

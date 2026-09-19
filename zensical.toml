@@ -8,7 +8,7 @@ edit_uri = "edit/main/docs/"
 copyright = "Content licensed under <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>"
 
 extra_css = ["assets/stylesheets/aim.css"]
-extra_javascript = ["assets/javascripts/aim-stats.js"]
+extra_javascript = ["assets/javascripts/aim-stats.js", "assets/javascripts/aim-tables.js"]
 
 nav = [
   { "Home" = "index.md" },
@@ -42,6 +42,26 @@ nav = [
       "wiki/training/benchmarks.md",
       "wiki/training/progress-and-plateaus.md",
       "wiki/training/health.md",
+    ] },
+    { "Making Scenarios" = [
+      "wiki/scenarios/index.md",
+      "wiki/scenarios/making-a-scenario.md",
+      "wiki/scenarios/designing-around-a-weakness.md",
+      "wiki/scenarios/designing-target-motion.md",
+      "wiki/scenarios/tuning-difficulty.md",
+      "wiki/scenarios/keeping-the-score-readable.md",
+      "wiki/scenarios/testing-and-iterating.md",
+      { "Editors" = [
+        "wiki/scenarios/scenario-editor.md",
+        "wiki/scenarios/character-profile.md",
+        "wiki/scenarios/weapon-profile.md",
+        "wiki/scenarios/bot-profile.md",
+        "wiki/scenarios/dodge-profile.md",
+        "wiki/scenarios/aim-profile.md",
+        "wiki/scenarios/ability-profile.md",
+      ] },
+      "wiki/scenarios/where-settings-live.md",
+      "wiki/scenarios/sharing-to-the-workshop.md",
     ] },
     { "Resources" = [
       "wiki/resources/index.md",
