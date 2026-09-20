@@ -172,6 +172,51 @@ It ends by checking that every link in `docs/` resolves, and lists any other men
 path, such as in a template, for you to update by hand. Links stay ordinary relative Markdown, so
 they work on GitHub and in editors as well as on the site.
 
+## Sentence structure
+
+[Readability](#readability) caps how long a sentence runs. These rules decide how it is built. They
+come from ASD-STE100, the controlled English the aerospace industry writes maintenance manuals in,
+which exists to stop a sentence having two readings. A wiki page is read once, fast, often by
+someone who is tired, so the same discipline applies.
+
+1. **No semicolons.** Split the clauses into two sentences. A semicolon joins two complete thoughts
+   without saying how they relate, and the reader has to work that out.
+
+   One exception stands on this wiki: a semicolon separating two groups inside a list, as in
+   Voltaic's category names on [How Aim Works](docs/wiki/fundamentals/how-aim-works.md). That is a
+   separator rather than a clause join, and splitting the sentence is not possible.
+2. **No em dash in prose.** Use a comma, a colon, or two sentences. ASD-STE100 allows the mark, so
+   this one is the wiki's own rule. A dash can stand for any of those three, and the reader has to
+   work out which. It also multiplies once a page has one, which is the fastest way to make prose
+   read as though nobody wrote it.
+
+   The Guides page is the exception. `docs/wiki/resources/guides.md` puts a dash between a title,
+   its author and year, and its one-line description. That is a field separator rather than
+   punctuation.
+3. **Active voice where the actor is known.** "OBS records the run", not "the run is recorded".
+   The passive is right where the actor is genuinely unknown or beside the point: naming a thing
+   ("this is called death gripping"), reporting a belief without endorsing it ("the motion is
+   stored"), or a platform rule with no nameable enforcer ("low-effort copies are removed"). Naming
+   an actor the source does not name adds a fact.
+4. **One plain verb, not a two-word one.** "Aim divides into three categories", not "breaks down
+   into". "Strain accumulates", not "builds up". The pair means something its parts do not predict,
+   which is a second reading the reader has to rule out.
+
+   Two-word verbs stay where they are the domain's own term, such as "warm up", and where a single
+   verb would rotate synonyms against a page title, as "set up" does against Setup.
+5. **Three words at most stacked in front of a noun.** "Season 5 benchmark for KovaaK's", not
+   "Season 5 KovaaK's benchmark". Past three, the reader cannot tell which word modifies which.
+6. **Keep a hedge as strong as you found it.** A source saying a stall "can" last weeks does not
+   become one saying it "does". Confidence is content, and a shorter sentence that upgrades a hedge
+   is a different claim, not a simpler one.
+7. **Keep the present perfect where it carries now.** "A subcategory that has stopped moving" says
+   something "stopped moving" does not. Elsewhere, prefer the simple tense.
+8. **Never edit quoted source text**, even where it breaks one of these rules. The quotation on
+   [Switching](docs/wiki/categories/switching.md) keeps "seamless" because Aimlabs wrote it.
+
+Nothing here is checked automatically. `scripts/check_pages.py` enforces the length caps in
+[Readability](#readability) and stops there. These rules are for the writer and the reviewer.
+
 ## Articles are not part of the wiki
 
 Articles live at `/articles`, outside `docs/wiki/`, because they run on a different trust model. A
@@ -217,7 +262,7 @@ A concept page ends with up to three sections, in this order, each with one job:
    to paste, strongest first: pages that already link here, pages linked in this page's text, and
    pages sharing two or more tags. Each carries `why: TODO`; write the reason or drop the entry, since
    the checker rejects a TODO.
-2. **Resources**: where to go to learn more — resource pages, and the matching section of
+2. **Resources**: where to go to learn more. Resource pages, and the matching section of
    [Guides](docs/wiki/resources/guides.md). These are recommendations, not evidence.
 3. **References**: the sources for this page's claims. Do not write this heading: it is added
    automatically, with the cited sources under it, on any page that cites one.
@@ -228,8 +273,8 @@ resource; it goes on Guides, not into this page's footnotes.
 
 ## The Guides page
 
-`docs/wiki/resources/guides.md` catalogues external learning material — guides, videos,
-playlists, documents, posts — grouped by what it helps with, never by format. It works differently
+`docs/wiki/resources/guides.md` catalogues external learning material: guides, videos,
+playlists, documents and posts, grouped by what it helps with, never by format. It works differently
 from the rest of the wiki in two ways.
 
 The entry is the citation. A line there names the piece, its publisher, and its year where the

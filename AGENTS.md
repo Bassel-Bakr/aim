@@ -1,7 +1,7 @@
 # Agent guide
 
 Instructions for AI coding agents working in this repository. Human contributors should read
-[CONTRIBUTING.md](CONTRIBUTING.md) instead — this file points at the same rules and adds nothing
+[CONTRIBUTING.md](CONTRIBUTING.md) instead. This file points at the same rules and adds nothing
 that contradicts them.
 
 ## What this repository is
@@ -57,7 +57,7 @@ under a separate heading, as advice rather than failures: the limits are worth m
 an article is signed, so how it reads is its author's call. Pass `--drafts` to also require the draft
 banner on every page. Name pages after the flags to check only those.
 `zensical build` catches broken internal links and missing nav targets. The build no longer runs
-with `--strict`, so link problems appear as warnings rather than failures — read the build output,
+with `--strict`, so link problems appear as warnings rather than failures. Read the build output,
 do not rely on the exit code alone.
 
 External links are checked separately by lychee, on a weekly schedule rather than per pull request,
@@ -86,7 +86,7 @@ the same hue: in the light scheme a fill pale enough to read as a bar cannot car
 | --- | --- |
 | `docs/index.md` | Site landing page. Not a wiki page. |
 | `docs/wiki/` | All wiki pages, grouped by section. Sourced, open to contributions. |
-| `docs/articles/` | Signed first-person pages. Not wiki pages, not open — see below. |
+| `docs/articles/` | Signed first-person pages. Not wiki pages, not open. See below. |
 | `docs/assets/` | Favicon, `stylesheets/aim.css`, which documents each page component it defines, `javascripts/aim-theme.js`, the colour picker, and `javascripts/aim-stats.js`, which counts the landing page's stats up from 0. |
 | `overrides/` | Theme template overrides. `main.html` loads the colour picker script in `<head>`, the Google Search Console verification tag from `extra.google_site_verification`, and the GoatCounter script from `extra.goatcounter_code`, both in `zensical.toml` and each left out while empty. It also builds every page's share card tags and its structured data from the page's `title:` and `description:`. Note that this template engine is not full Jinja: it has no `split`, `namespace` or `rstrip`, and does not set `page.is_homepage`. |
 | `docs/robots.txt` | Tells crawlers everything is open and points them at `sitemap.xml`. Copied to the site root by the build. |
@@ -104,7 +104,7 @@ the same hue: in the light scheme a fill pale enough to read as a bar cannot car
 
 Everything under `scripts/` and `extensions/` carries type annotations: parameters, return types, and
 the empty collections whose element type is otherwise invisible. Keep them on code you add or
-change. Nothing enforces this — no checker runs in CI — so a missing annotation shows up only when
+change. Nothing enforces this: no checker runs in CI. A missing annotation shows up only when
 someone reads the function. Run `mypy scripts extensions --ignore-missing-imports` locally if you
 want them verified; `bpy` and `zensical` ship no stubs, which is what that flag is for.
 
@@ -150,7 +150,7 @@ keeps its default colour under every picked colour, and no test catches that.
 Read [CONTRIBUTING.md](CONTRIBUTING.md) in full before adding a page. These are the constraints
 agents most often miss:
 
-1. Start from a template in `templates/` — `concept.md` for explanations, `resource.md` for
+1. Start from a template in `templates/`: `concept.md` for explanations, `resource.md` for
    communities, trainers and tools.
 2. Page titles come from the `title:` field in front matter. Do not add an `#` heading in the body,
    unless the page's nav label differs from its title: the nav label wins over `title:` for the
@@ -164,14 +164,14 @@ agents most often miss:
    page.
 4. Use only the tags listed in [CONTRIBUTING.md](CONTRIBUTING.md#tags). Do not invent new ones.
 5. Write in your own words, and note that reusing a source's sentence with a few words changed is
-   still copying — restate the claim from scratch, or quote and attribute it. Cite each fact with its
+   still copying. Restate the claim from scratch, or quote and attribute it. Cite each fact with its
    source's ID from `references.yml` as a footnote marker, `[^REF-15]`, and never define it on the
    page: `extensions/aim_references.py` adds the definition. Where a sentence rests on several
    sources, run the markers together with nothing between them, `[^REF-77][^REF-74]`. Add a missing
    source to the registry with the next unused ID; never renumber one. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full
    rule and its two exceptions. Outside those exceptions, do not name the source in the sentence
    ("Aimlabs puts…", "a coach recommends…"): state the claim and let the footnote say who.
-   Never copy guides, tables, or images from other sites — content here is CC BY-SA 4.0 and the
+   Never copy guides, tables, or images from other sites. Content here is CC BY-SA 4.0 and the
    sources are not. Third-party assets a figure is built from are the one exception; see
    [Third-party assets](#third-party-assets).
 6. Do not assert a claim you cannot verify from a public source. Leave it out, or mark it with
@@ -183,15 +183,20 @@ agents most often miss:
    [CONTRIBUTING.md](CONTRIBUTING.md#readability): 45-word paragraphs, 25-word sentences, and on
    concept pages three to five answer bullets up top and a `**Do this next.**` paragraph at the end.
    Run `python scripts/check_pages.py <page>` on any page you write or edit.
-10. When restructuring an existing page, run `python scripts/check_rewrite.py <base> <page>` before
+10. Sentence structure follows
+    [CONTRIBUTING.md](CONTRIBUTING.md#sentence-structure): no semicolons, no em dashes in prose,
+    active voice where the actor is known, single plain verbs rather than two-word ones, and at
+    most three words stacked in front of a noun. Nothing checks these. Never weaken a hedge or edit
+    quoted text to satisfy one of them.
+11. When restructuring an existing page, run `python scripts/check_rewrite.py <base> <page>` before
     committing, where `<base>` is the commit before you started. It must print
     `Invariants unchanged`. A rewrite that drops a link or renames a heading breaks pages that link
     to it, and the build does not always say so.
-11. When you add or edit a page's `related:` list, run `python scripts/suggest_related.py <page>`.
+12. When you add or edit a page's `related:` list, run `python scripts/suggest_related.py <page>`.
     Draft a reason for each suggestion worth keeping from what both pages actually say, and drop the
     rest. A reason names how the other page connects to this one; do not invent a connection the
     pages do not support. Do the same for any bare link back the build shows on the other page.
-12. Move or rename a page only with `python scripts/move_page.py <old> <new>`, never with a plain
+13. Move or rename a page only with `python scripts/move_page.py <old> <new>`, never with a plain
     `git mv`. Review the other mentions it lists, then run `zensical build --clean`.
 
 ## Third-party assets
