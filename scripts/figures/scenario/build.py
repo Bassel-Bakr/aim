@@ -1,21 +1,21 @@
-"""Regenerates the figures on docs/wiki/scenarios/making-a-scenario.md.
+"""Regenerates the figures cited by the Making Scenarios pages.
 
     python scripts/figures/scenario/build.py
 
-Each diagram is rewritten in place inside the page, matched by its <svg>'s aria-labelledby id, so
-edit the drawing code in diagrams.py and never the SVG in the page. The page keeps whatever caption
-sits under each figure.
+Each figure is written to docs/figures, where the marker line on its page picks it up at build
+time. Edit the drawing code in diagrams.py, or the field spec in the tabs modules; the page keeps
+the caption under each figure.
 """
-import re
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
-SECTION = ROOT / "docs" / "wiki" / "scenarios"
 sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parent))
 import diagrams as d  # noqa: E402
 import sheets  # noqa: E402
+from publish import publish  # noqa: E402
 
 # Which diagrams belong to which page of the section, by the id each <svg> is matched on.
 PAGES: dict[str, tuple[str, ...]] = {
@@ -54,20 +54,14 @@ PAGES: dict[str, tuple[str, ...]] = {
 
 
 def main() -> None:
-    for filename, names in PAGES.items():
-        page = SECTION / filename
-        text = page.read_text(encoding="utf-8")
+    figures = {}
+    for names in PAGES.values():
         for name in names:
             # Bespoke figures live in diagrams.py; per-field sheets are generated
-            # from tabs.py. A page names either the same way.
+            # from the tabs modules. A page names either the same way.
             maker = getattr(d, name, None) or getattr(sheets, name)
-            svg = maker()
-            pattern = re.compile(r'<svg [^>]*aria-labelledby="fig-%s-title".*?</svg>' % name, re.S)
-            text, count = pattern.subn(lambda _: svg, text)
-            if count != 1:
-                sys.exit(f"expected one fig-{name} diagram in {filename}, found {count}")
-        page.write_text(text, encoding="utf-8", newline="\n")
-        print(f"diagrams written to {page.relative_to(ROOT)}")
+            figures[name] = maker()
+    publish(figures)
 
 
 if __name__ == "__main__":

@@ -382,6 +382,31 @@ def duplicate_descriptions(paths: Sequence[Path]) -> list[str]:
     ]
 
 
+def figure_files(paths: Sequence[Path]) -> list[str]:
+    """Every figure file is cited, and every citation has a file.
+
+    The aim_figures extension already fails the build on a marker with no file. The other way round
+    is quieter: a renamed figure leaves its old SVG on disk, where nothing renders it and nothing
+    complains, until someone wonders which of the two is live.
+    """
+    folder = DOCS / "figures"
+    if not folder.is_dir():
+        return []
+    cited: dict[str, list[str]] = {}
+    for path in paths:
+        for name in re.findall(r"<!--\s*aim:figure\s+([A-Za-z0-9_-]+)\s*-->",
+                               path.read_text(encoding="utf-8")):
+            cited.setdefault(name, []).append(path.relative_to(DOCS).as_posix())
+    on_disk = {svg.stem for svg in folder.glob("*.svg")}
+    errors = [f"docs/figures/{name}.svg: no page cites this figure"
+              for name in sorted(on_disk - set(cited))]
+    errors += [f"{pages[0]}: cites figure {name}, which has no file in docs/figures"
+               for name, pages in sorted(cited.items()) if name not in on_disk]
+    errors += [f"{' and '.join(pages)}: both cite the figure {name}; a figure belongs to one page"
+               for name, pages in sorted(cited.items()) if len(pages) > 1]
+    return errors
+
+
 def main() -> int:
     args = sys.argv[1:]
     drafts = "--drafts" in args
@@ -395,6 +420,7 @@ def main() -> int:
         errors += page_errors
         advice += page_advice
     errors += duplicate_descriptions(paths)
+    errors += figure_files(paths)
     for error in errors:
         print(error)
     if advice:

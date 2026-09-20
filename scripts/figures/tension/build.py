@@ -4,8 +4,8 @@
     python scripts/figures/tension/build.py --diagrams   # only the three inline SVG diagrams
     python scripts/figures/tension/build.py --renders    # only the two Blender renders
 
-Diagrams are rewritten in place inside the page, matched by each <svg>'s aria-labelledby id, so edit
-the drawing code in diagrams.py, never the SVG in the page. Renders run hand_scene.py in Blender (the
+Diagrams are written to docs/figures, where the page's marker lines pick them up at build time, so
+edit the drawing code in diagrams.py. Renders run hand_scene.py in Blender (the
 BLENDER environment variable, or blender on PATH), then add the callout labels and write WebP files
 to docs/assets/images/tension/. Both renders come out of one Blender run, which builds the hand once
 and moves the camera, because building it costs about twice what rendering it does. Renders need
@@ -36,7 +36,9 @@ MODEL_CREDIT = ('Mouse model: "Razer Viper Mini" (https://sketchfab.com/3d-model
                 'Forearm model: "FPS Arm Rig" (https://skfb.ly/o9Vty) by Miles0707 (https://sketchfab.com/milesdiduck), '
                 'CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Posed, recoloured, cut at the wrist.')
 sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parent))
 import diagrams as d  # noqa: E402
+from publish import publish  # noqa: E402
 
 # name: (viewpoint, whether the force arrows show, labels as anchor, text, offset x, offset y in
 # render pixels)
@@ -55,15 +57,8 @@ RENDERS = {
 
 
 def diagrams() -> None:
-    text = PAGE.read_text(encoding="utf-8")
-    for name, svg in (("scale", d.scale()), ("tracking", d.tracking()), ("flick", d.flick()),
-                      ("blend", d.blend())):
-        pattern = re.compile(r'<svg [^>]*aria-labelledby="fig-%s-title".*?</svg>' % name, re.S)
-        text, count = pattern.subn(lambda _: svg, text)
-        if count != 1:
-            sys.exit(f"expected one fig-{name} diagram in {PAGE.name}, found {count}")
-    PAGE.write_text(text, encoding="utf-8", newline="\n")
-    print(f"diagrams written to {PAGE.relative_to(ROOT)}")
+    publish({"scale": d.scale(), "tracking": d.tracking(), "flick": d.flick(),
+             "blend": d.blend()})
 
 
 def label(render: Path, anchors: dict[str, tuple[float, float]],
