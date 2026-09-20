@@ -106,7 +106,7 @@ Everything under `scripts/` and `extensions/` carries type annotations: paramete
 the empty collections whose element type is otherwise invisible. Keep them on code you add or
 change. Nothing enforces this: no checker runs in CI. A missing annotation shows up only when
 someone reads the function. Run `mypy scripts extensions --ignore-missing-imports` locally if you
-want them verified; `bpy` and `zensical` ship no stubs, which is what that flag is for.
+want them verified. `bpy` and `zensical` ship no stubs, which is what that flag is for.
 
 Shapes that repeat have an alias rather than being spelled out at each use: `Meta` for a page's front
 matter and `Element` for a metaball, among others. Import the alias instead of writing the shape
@@ -168,11 +168,11 @@ agents most often miss:
    source's ID from `references.yml` as a footnote marker, `[^REF-15]`, and never define it on the
    page: `extensions/aim_references.py` adds the definition. Where a sentence rests on several
    sources, run the markers together with nothing between them, `[^REF-77][^REF-74]`. Add a missing
-   source to the registry with the next unused ID; never renumber one. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full
+   source to the registry with the next unused ID. Never renumber one. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full
    rule and its two exceptions. Outside those exceptions, do not name the source in the sentence
    ("Aimlabs puts…", "a coach recommends…"): state the claim and let the footnote say who.
    Never copy guides, tables, or images from other sites. Content here is CC BY-SA 4.0 and the
-   sources are not. Third-party assets a figure is built from are the one exception; see
+   sources are not. Third-party assets a figure is built from are the one exception. See
    [Third-party assets](#third-party-assets).
 6. Do not assert a claim you cannot verify from a public source. Leave it out, or mark it with
    `<!-- REVIEW: what needs checking -->`.
@@ -194,7 +194,7 @@ agents most often miss:
     to it, and the build does not always say so.
 12. When you add or edit a page's `related:` list, run `python scripts/suggest_related.py <page>`.
     Draft a reason for each suggestion worth keeping from what both pages actually say, and drop the
-    rest. A reason names how the other page connects to this one; do not invent a connection the
+    rest. A reason names how the other page connects to this one. Do not invent a connection the
     pages do not support. Do the same for any bare link back the build shows on the other page.
 13. Move or rename a page only with `python scripts/move_page.py <old> <new>`, never with a plain
     `git mv`. Review the other mentions it lists, then run `zensical build --clean`.
@@ -225,7 +225,7 @@ take no tags, and do not require footnotes. `scripts/check_pages.py` enforces th
 
 Never write or edit an article on your own initiative. A byline names a real person as
 accountable for every claim on the page, so its content is theirs to decide. Fix a typo or a dead
-link if asked; send anything touching the argument itself back to the author.
+link if asked. Send anything touching the argument itself back to the author.
 
 ## Deployment
 
@@ -233,4 +233,4 @@ link if asked; send anything touching the argument itself back to the author.
 push touches nothing the site is built from: its `paths-ignore` list skips guides, `specs/`,
 `templates/` and `scripts/`, which cannot change a published byte. Add a path there only if that
 holds, and never one the build reads. Run the workflow by hand from the Actions tab to publish
-anyway. Do not commit the `site/` directory; it is generated and ignored.
+anyway. Do not commit the `site/` directory. It is generated and ignored.

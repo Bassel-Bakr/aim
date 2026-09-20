@@ -21,7 +21,7 @@ Follow the steps in [README.md](README.md#run-the-site-locally).
    - `concept.md` for pages that explain aim concepts or training advice.
    - `resource.md` for pages about a community, a trainer, or a tool.
 
-   `templates/article.md` is not a wiki template; see
+   `templates/article.md` is not a wiki template. See
    [Articles are not part of the wiki](#articles-are-not-part-of-the-wiki).
 2. Save the file in the matching folder under `docs/wiki/`. (`docs/index.md` is the site's landing page, not a wiki page.)
 3. Add the page to the `nav` list in `zensical.toml`.
@@ -90,7 +90,7 @@ Write it for someone deciding whether to open the page:
      type: article
    ```
 
-   `author` is the person or organization; `type` is one of article, document, documentation,
+   `author` is the person or organization, and `type` is one of article, document, documentation,
    encyclopedia, post, repository, study, video, or website. `publication` and `notes` are
    optional. Never renumber or reuse an ID: pages cite by ID. Footnotes are numbered in the order a
    page cites them.
@@ -232,7 +232,7 @@ anything under `docs/articles/`.
 One rule is strongly recommended rather than enforced there: the
 [readability](#readability) limits on paragraph and sentence length. The checker prints them for an
 article as advice and does not fail on them. The reader is the same person who reads the wiki, so an
-article that ignores them is harder to read for the same reasons; the shape rules about answer
+article that ignores them is harder to read for the same reasons. The shape rules about answer
 bullets and a closing action stay wiki-only.
 
 To suggest an article, or a correction to one, open an issue rather than a pull request.
@@ -260,7 +260,7 @@ A concept page ends with up to three sections, in this order, each with one job:
 
    To find pages worth listing, run `python scripts/suggest_related.py <page>`. It prints entries
    to paste, strongest first: pages that already link here, pages linked in this page's text, and
-   pages sharing two or more tags. Each carries `why: TODO`; write the reason or drop the entry, since
+   pages sharing two or more tags. Each carries `why: TODO`. Write the reason or drop the entry, since
    the checker rejects a TODO.
 2. **Resources**: where to go to learn more. Resource pages, and the matching section of
    [Guides](docs/wiki/resources/guides.md). These are recommendations, not evidence.
@@ -269,7 +269,7 @@ A concept page ends with up to three sections, in this order, each with one job:
 
 Keep the two kinds of external link apart. A link that supports a claim on the page is a
 reference and becomes a footnote. A link that is simply good material on the subject is a
-resource; it goes on Guides, not into this page's footnotes.
+resource. It goes on Guides, not into this page's footnotes.
 
 ## The Guides page
 
@@ -278,7 +278,7 @@ playlists, documents and posts, grouped by what it helps with, never by format. 
 from the rest of the wiki in two ways.
 
 The entry is the citation. A line there names the piece, its publisher, and its year where the
-source states one, so it takes no footnote; adding one would double every line.
+source states one, so it takes no footnote. Adding one would double every line.
 
 A link earns its place by teaching something: a method, a mechanism, or a mistake. A benchmark
 announcement, a score sheet, or a routine handed over without an explanation of how to play it is
