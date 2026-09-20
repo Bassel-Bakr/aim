@@ -26,7 +26,7 @@ related:
 
 ## What it is
 
-Revosect is an aim-training and esports-improvement community that runs its own benchmark seasons, training routines, and guides. It also runs a Discord server, per the [Revosect homepage](https://revosect.com). One-on-one and group coaching is planned but listed as "coming soon" rather than live, per the same page.
+Revosect is an aim-training and esports-improvement community that runs its own benchmark seasons, training routines, and guides. It also runs a Discord server, per the [Revosect homepage](https://revosect.com). Revosect plans one-on-one and group coaching, but the same page lists it as "coming soon" rather than live.
 
 ## Who it suits
 

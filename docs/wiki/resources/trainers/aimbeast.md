@@ -43,7 +43,7 @@ It also suits players who like configuring their own training. Scenarios are com
 - **Arena**: ranked one-on-one duels against other players on dedicated servers in Europe, North America, and Asia, plus custom games for up to 32 players. Duels are built around tracking, reactivity, precision, and movement rather than static drills.[^REF-2]
 - **Bots**: the selling point of the single-player side is bot movement that behaves like a player, not a fixed pattern. It is configurable.[^REF-2]
 - **[Sensitivity](../../getting-started/sensitivity.md) and input**: sensitivity can be matched to another game directly, and controllers are supported with selectable input curves.[^REF-2]
-- **[Benchmarks](../../training/benchmarks.md)**: community benchmarks written for Aimbeast are collected by the [Evxl Benchmark Tracker](../tools/evxl.md). It lists an official Aimbeast V2 sheet alongside community sheets such as VRTCL and a Matty_OW Overwatch benchmark.[^REF-24]
+- **[Benchmarks](../../training/benchmarks.md)**: the [Evxl Benchmark Tracker](../tools/evxl.md) collects the community benchmarks written for Aimbeast. It lists an official Aimbeast V2 sheet alongside community sheets such as VRTCL and a Matty_OW Overwatch benchmark.[^REF-24]
 
 ## Key content
 

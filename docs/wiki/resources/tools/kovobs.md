@@ -24,7 +24,7 @@ related:
 ## What it is
 
 A small open-source desktop application that watches your [KovaaK's](../trainers/kovaaks.md) stats
-folder. When you set a personal best, it tells OBS to save a replay-buffer clip. The run is recorded
+folder. When you set a personal best, it tells OBS to save a replay-buffer clip. OBS records the run
 without you reaching for a hotkey mid-scenario.[^REF-35]
 
 ## Who it suits

@@ -81,7 +81,7 @@ For a drill you compare across sessions, leave it at zero and let the time limit
 Then lock hipfire FOV with a locked FOV range, and a force particle effects switch.[^REF-33]
 
 **Lock Hipfire FOV makes the scenario the same for everyone.** A target's angular size depends on
-the field of view it is seen at. Unclamped, your scenario is a slightly different drill for every
+the field of view you see it at. Unclamped, your scenario is a slightly different drill for every
 reader who plays it.
 
 <figure class="aim-figure">

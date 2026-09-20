@@ -16,8 +16,8 @@ This wiki is for anyone who wants to train aim deliberately. It covers:
 - how to structure a training session
 - the community benchmarks, routines, and trainers it draws on
 
-Every page is written in our own words from public guides and articles, with facts linked back to
-where they came from.
+We write every page in our own words from public guides and articles, and link each fact back to
+where it came from.
 
 [**Start here**](getting-started/index.md) if this is your first visit. It walks through gear and
 sensitivity, picking a trainer, and running your first benchmark, roughly in the order most players

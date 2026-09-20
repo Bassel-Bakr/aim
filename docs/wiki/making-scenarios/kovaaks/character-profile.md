@@ -167,7 +167,7 @@ head when there is one, and from the middle of the body when there is not.[^REF-
 </figure>
 
 A head is therefore not decoration. It creates a smaller high-value area and shifts the viewpoint
-the scenario is played from.
+you play the scenario from.
 
 <figure class="aim-figure">
 <!-- aim:figure hitboxes -->

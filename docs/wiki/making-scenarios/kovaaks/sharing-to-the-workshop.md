@@ -54,7 +54,7 @@ lights the upload control again, and until you use it, other players still have 
 version.[^REF-85]
 
 That includes the map. A map lives inside the scenario, so an edited map only reaches anyone once
-the scenario itself is uploaded again.[^REF-91]
+you upload the scenario itself again.[^REF-91]
 
 <figure class="aim-figure">
 <!-- aim:figure upload -->
@@ -65,7 +65,7 @@ it.</figcaption>
 **The name has to be unique, and the upload is not instant.** A duplicate title blocks the upload
 outright, and a successful one takes a few minutes to propagate before anyone can play it.[^REF-85]
 
-Deleting is done on the Steam Workshop website rather than in the game.[^REF-85]
+You delete a scenario on the Steam Workshop website rather than in the game.[^REF-85]
 
 ## Common mistakes
 

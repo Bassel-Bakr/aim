@@ -157,7 +157,7 @@ long strafe, keep that tension constant instead of adjusting it mid-track.[^REF-
 target, and keep only a little for the micro-correction.[^REF-77]
 
 Think of the cycle as breathing: prepare the tension for the next flick, flick, then relax.[^REF-74]
-Do not shoot until the next flick is prepared, and do not stay tense for long.[^REF-74]
+Do not shoot until you prepare the next flick, and do not stay tense for long.[^REF-74]
 
 <figure class="aim-figure">
 <!-- aim:figure flick -->

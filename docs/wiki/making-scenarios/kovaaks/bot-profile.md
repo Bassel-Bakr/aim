@@ -71,7 +71,7 @@ each other.[^REF-33]
 A no aiming or shooting switch, a fire weapons switch, and a weapon switch timer. Then a row per
 weapon slot pairing an aim profile with a frequency.[^REF-33][^REF-82]
 
-The panel notes that the weapons listed are pulled from the character profile chosen on the Main
+The panel notes that the weapons listed come from the character profile chosen on the Main
 tab.[^REF-33]
 
 **Two switches, three behaviors.** No Aiming/Shooting strips the aiming logic out entirely. Fire

@@ -38,8 +38,8 @@ ammo per shot.[^REF-33]
 A movement ability adds two more tabs. H-Box gives it a hurtbox so targets near it take damage or
 knockback, and Input controls which inputs are allowed during it.[^REF-87]
 
-**Charges and cooldown set the rhythm.** They decide how often the scenario is interrupted by
-something that is not aiming.
+**Charges and cooldown set the rhythm.** They decide how often something that is not aiming
+interrupts the scenario.
 
 Max Charges is the ceiling, Charges On Spawn is how many are ready at the start, and the charge
 timer refills them.[^REF-33]
