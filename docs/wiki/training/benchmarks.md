@@ -71,13 +71,13 @@ them from the benchmark's own site, not from a table reproduced elsewhere.
 Two communities run the benchmarks most players on this wiki will encounter. Both build primarily on
 [KovaaK's](../resources/trainers/kovaaks.md).
 
-- [Voltaic](../resources/communities/voltaic.md) runs a Season 5 KovaaK's benchmark and a Season 3
-  [Aimlabs](../resources/trainers/aimlabs.md) one. Each splits into subcategories per category,
+- [Voltaic](../resources/communities/voltaic.md) runs a Season 5 benchmark for KovaaK's and a Season 3 one for
+  [Aimlabs](../resources/trainers/aimlabs.md). Each splits into subcategories per category,
   across three difficulty bands: Novice, Intermediate, and Advanced.[^REF-50][^REF-49]
     - You get a rank only once you have a score in every subcategory. It's driven by an overall
       "Energy" score that combines subcategories with a harmonic mean, which weights your weakest
       more heavily than your strongest.[^REF-48]
-- [Revosect](../resources/communities/revosect.md) runs a Season 5 KovaaK's benchmark covering six
+- [Revosect](../resources/communities/revosect.md) runs a Season 5 benchmark for KovaaK's covering six
   subcategories across the same three categories. It has Entry, Intermediate, and Advanced tiers. The top
   tier requires a recorded VOD to verify a score.[^REF-43]
 

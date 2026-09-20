@@ -24,7 +24,7 @@ related:
 !!! warning "Draft"
     Written from public sources, pending review.
 
-How much you improve depends less on how many hours you put in than on what you do with them. Five
+How much you improve depends less on how many hours you spend than on what you do with them. Five
 habits, drawn from motor-learning research and from how the community's benchmark and coaching
 groups train, separate real progress from practice that just feels productive.
 

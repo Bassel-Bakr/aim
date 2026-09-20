@@ -41,7 +41,7 @@ For your eyes, periodically look at something farther off, instead of staring at
 minutes.[^REF-22]
 
 **Warm-up before intense sessions.** Long stretches of repetitive mouse movement and static posture
-build up strain on the same joints and tendons, session after session.
+accumulate strain on the same joints and tendons, session after session.
 [Aimlabs](../resources/trainers/aimlabs.md) argues a short stretch or warm-up belongs inside your
 training routine itself, not as an optional extra bolted on.[^REF-6]
 
@@ -56,13 +56,13 @@ Mayo Clinic's office ergonomics guide also flags the mouse specifically:
 - Avoid bending your wrist up, down, or sideways while you use it.[^REF-37]
 
 **Signs of strain.** Pain, tingling, numbness, or a dull ache in your hand, wrist, forearm, or
-shoulder are common early symptoms of repetitive strain injury. They typically build up gradually
+shoulder are common early symptoms of repetitive strain injury. They typically develop gradually
 rather than appearing suddenly.[^REF-40]
 
 Catching these early and backing off matters more than pushing through them.
 
 The same NHS guidance also warns against the opposite overcorrection: stopping activity outright for
-an extended period. An under-used body part can end up stiffer and less capable than before.
+an extended period. An under-used body part can become stiffer and less capable than before.
 
 So the aim is to scale training back and ease it up again, not to abandon it indefinitely.
 

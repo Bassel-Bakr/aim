@@ -69,7 +69,7 @@ You delete a scenario on the Steam Workshop website rather than in the game.[^RE
 
 ## Common mistakes
 
-- Publishing a scenario you have never put in a routine.
+- Publishing a scenario you have never used in a routine.
 - Leaving Tags empty, which makes the scenario unsearchable.[^REF-80]
 - Editing a map and expecting players to see it without re-uploading.[^REF-91]
 - Publishing a lightly-changed copy, which gets removed.[^REF-85]

@@ -97,7 +97,7 @@ since every change costs you some readjustment time. See
 [Progress and Plateaus](../training/progress-and-plateaus.md) for more on working through a stalled
 score.
 
-**Do this next.** Work out your current cm/360, then leave that sensitivity alone long enough to
+**Do this next.** Measure your current cm/360, then leave that sensitivity alone long enough to
 judge it fairly.
 
 ## Resources

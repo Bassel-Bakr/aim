@@ -36,7 +36,7 @@ target makes the shot purely a question of precision. A moving one means the fli
 for where the target will be when the click lands.
 
 Aimlabs splits flicking two ways, static and dynamic.[^REF-11]
-[Voltaic](../resources/communities/voltaic.md)'s Season 5 KovaaK's benchmark adds linear between
+[Voltaic](../resources/communities/voltaic.md)'s Season 5 benchmark for KovaaK's adds linear between
 them.[^REF-50]
 
 ## Static clicking

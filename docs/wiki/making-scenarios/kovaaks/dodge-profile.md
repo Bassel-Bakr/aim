@@ -62,7 +62,7 @@ an even drill into one about a direction you are worse at.
 
 <figure class="aim-figure">
 <!-- aim:figure strafe-multiplier -->
-<figcaption>Same base timing, one side doubled. The target ends up living on the right.</figcaption>
+<figcaption>Same base timing, one side doubled. The target lives on the right.</figcaption>
 </figure>
 
 Cooldown Time is how long before this dodge profile can be used again, with zero meaning no

@@ -33,7 +33,7 @@ weakness-targeted practice beats just logging hours.
 
 ## Explanation
 
-**Warm-up.** Repetitive mouse movement and a long static posture build up strain on the same joints
+**Warm-up.** Repetitive mouse movement and a long static posture accumulate strain on the same joints
 and tendons over a session.
 
 [Aimlabs](../resources/trainers/aimlabs.md) argues a short stretch or warm-up belongs inside the
@@ -76,7 +76,7 @@ the moment. See [Benchmarks](benchmarks.md).
 
 Your own matches are the other place to look. Go back through fights you lost in replays or clips,
 and ask whether a decision or your mechanics lost each one. When it was mechanics, that tells you
-what to put in your next focus block.[^REF-10]
+what to train in your next focus block.[^REF-10]
 
 Build your focus block from scenarios in that subcategory. Keep at least a little time on the others,
 so a fixed weakness doesn't quietly become a new one. That's the variety-over-repetition point in

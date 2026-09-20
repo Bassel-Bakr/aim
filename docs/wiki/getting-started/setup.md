@@ -107,5 +107,5 @@ Windows.
 ## Resources
 
 - [KovaaK's](../resources/trainers/kovaaks.md): where to put a consistent sensitivity and settings
-  to work once your gear and Windows settings are sorted out.
+  to work once your gear and Windows settings are ready.
 - [Guides](../resources/guides.md#gear-and-settings): guides on gear, grips and settings.

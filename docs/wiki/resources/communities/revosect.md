@@ -43,7 +43,7 @@ Revosect's [benchmarks](https://revosect.com/benchmarks) have three difficulty t
 ## Key content
 
 - [Revosect Resources](https://revosect.com/resources): index of Revosect's benchmarks, progression sheets, guides, and game-specific routines.
-- [Revosect Benchmarks](https://revosect.com/benchmarks): rules, difficulty tiers, and scoring for the current Season 5 KovaaK's benchmark.
+- [Revosect Benchmarks](https://revosect.com/benchmarks): rules, difficulty tiers, and scoring for the current Season 5 benchmark for KovaaK's.
 
 ## Our take
 

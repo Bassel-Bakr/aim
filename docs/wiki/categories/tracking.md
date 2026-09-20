@@ -38,7 +38,7 @@ A target moving along a smooth, predictable line asks you to hold position accur
 that changes direction without warning asks you to respond to each change as it happens.
 
 Those are different demands, and the benchmark communities separate them the same way.
-[Voltaic](../resources/communities/voltaic.md)'s Season 5 KovaaK's benchmark names the three cases
+[Voltaic](../resources/communities/voltaic.md)'s Season 5 benchmark for KovaaK's names the three cases
 below precise, reactive, and control.[^REF-50]
 
 [Aimlabs](../resources/trainers/aimlabs.md) frames the same split as "pure horizontal tracking and

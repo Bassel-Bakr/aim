@@ -160,7 +160,7 @@ down, treat it as fatigue first.
 !!! myth ""
     Hours only count when they're focused and rested. Past a point, more of them make you worse.
 
-**Why people believe it.** Improvement is volume. Whoever puts in the most hours improves the most,
+**Why people believe it.** Improvement is volume. Whoever trains the most hours improves the most,
 so the way to get better faster is to train longer.
 
 **What sources say.** General motor-learning research finds shorter, more frequent sessions with

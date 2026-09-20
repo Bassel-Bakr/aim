@@ -34,7 +34,7 @@ move once you arrive. Distance sets how fast the transition has to be. Target mo
 much work is left after the flick lands.
 
 Aimlabs splits switching two ways, static and dynamic.[^REF-11]
-[Voltaic](../resources/communities/voltaic.md)'s Season 5 KovaaK's benchmark names the three cases
+[Voltaic](../resources/communities/voltaic.md)'s Season 5 benchmark for KovaaK's names the three cases
 below speed, evasive, and stability.[^REF-50]
 
 ## Speed switching

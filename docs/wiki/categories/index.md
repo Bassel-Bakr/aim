@@ -11,7 +11,7 @@ tags:
 !!! warning "Draft"
     Written from public sources, pending review.
 
-Aim breaks down into three underlying mechanical categories that show up in almost every
+Aim divides into three underlying mechanical categories that appear in almost every
 scenario and benchmark: clicking, tracking, and switching. [Aimlabs](../resources/trainers/aimlabs.md)
 treats these as aim's three foundational categories and recommends a training playlist draw from
 all three rather than lean on one.[^REF-8]

@@ -60,7 +60,7 @@ knockback, speed modifiers, stun, tagging and aim punch.[^REF-33]
 size, so a drill can be made forgiving without redrawing the target.
 
 **Piercing lets one shot reach several targets.** The editor describes it as allowing hitscan
-weapons to go through targets and damage more than one thing.[^REF-33]
+weapons to penetrate targets and damage more than one thing.[^REF-33]
 
 That changes what a line of targets asks for. Without it, a row is a selection problem. With it, a
 row is one shot taken at the right angle.

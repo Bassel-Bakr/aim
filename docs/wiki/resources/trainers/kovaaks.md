@@ -57,4 +57,4 @@ Players comfortable choosing and configuring their own scenarios and playlists, 
 
 KovaaK's has the larger scenario library of the two main trainers on this wiki. It's also the base game most benchmark communities, including [Voltaic](../communities/voltaic.md) and Revosect, build their seasons on.
 
-It's a one-time Steam purchase rather than free-to-play. Its Sandbox-first design rewards players who are willing to find and set up scenarios and playlists themselves.[^REF-33]
+It's a one-time Steam purchase rather than free-to-play. Its Sandbox-first design rewards players who are willing to find and configure scenarios and playlists themselves.[^REF-33]
