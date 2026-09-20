@@ -30,7 +30,7 @@ Aimlabs is a free-to-play aim-training platform used by more than 40 million pla
 
 ## Who it suits
 
-Players who want built-in, game-specific practice rather than assembling their own routine: Aimlabs ships Training Programs that curate playlists per game or aim category and adapt task difficulty to the player's skill level.[^REF-7]
+Aimlabs suits players who want built-in, game-specific practice rather than assembling their own routine. It ships Training Programs that curate playlists per game or aim category, and adapt task difficulty to the player's skill level.[^REF-7]
 
 Its scale and free access also suit complete beginners, while Aimlabs+ adds tools aimed at players chasing measurable improvement.
 

@@ -46,7 +46,7 @@ nothing about your scores or ranks.
 ## Requirements
 
 OBS Studio 28 or later with the built-in WebSocket server and Replay Buffer both enabled. Windows
-is the supported platform; the project notes Linux as reported working but untested.[^REF-35]
+is the supported platform. The project notes Linux as reported working but untested.[^REF-35]
 
 ## Key content
 

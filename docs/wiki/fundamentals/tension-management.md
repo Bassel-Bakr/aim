@@ -27,7 +27,7 @@ related:
 Tension is how hard your hand, wrist and arm work to hold and steer the mouse. Managing it means
 using the right amount, in the right place, at the right moment.
 
-- **You need some.** Too tight a grip jitters ahead of the target; too loose a grip lags behind it.[^REF-67]
+- **You need some.** Too tight a grip jitters ahead of the target. Too loose a grip lags behind it.[^REF-67]
 - **Spend it in bursts.** Tense to start a fast motion, then release before you land.[^REF-77][^REF-74]
 - **Put it where the motion is.** Arm for wide motion, wrist for narrow, fingertips for micros.[^REF-70][^REF-71]
 - **Read it on screen.** Jitter, overshoot and rushed clicks are often tension before they are aim.[^REF-67][^REF-76]
@@ -57,7 +57,7 @@ control of the whole motion.[^REF-68]
 
 <figure class="aim-figure">
 <!-- aim:figure scale -->
-<figcaption>The two ends fail differently. A loose hand trails and stalls; a tight hand runs ahead and shakes.</figcaption>
+<figcaption>The two ends fail differently. A loose hand trails and stalls. A tight hand runs ahead and shakes.</figcaption>
 </figure>
 
 ## Where tension lives
@@ -86,7 +86,7 @@ which is easier. It also sidesteps the harder skill of balancing fingertip tensi
 
 <figure class="aim-figure">
 <!-- aim:figure blend -->
-<figcaption>One strafe, shared out. The fingers start it, the wrist joins once they are part way through, and the arm carries the rest; the faint arm behind shows neutral.</figcaption>
+<figcaption>One strafe, shared out. The fingers start it, the wrist joins once they are part way through, and the arm carries the rest. The faint arm behind shows neutral.</figcaption>
 </figure>
 
 ## How the hand holds
@@ -125,7 +125,7 @@ sluggish.[^REF-67]
 
 <figure class="aim-figure">
 <!-- aim:figure tracking -->
-<figcaption>One target strafing at a constant speed, chased three ways. Tight overshoots each turn and shakes; loose stalls, then catches up.</figcaption>
+<figcaption>One target strafing at a constant speed, chased three ways. Tight overshoots each turn and shakes. Loose stalls, then catches up.</figcaption>
 </figure>
 
 **Watch your clicks.** Shooting the instant you react spikes tension and makes the motion shaky.[^REF-76]
@@ -205,7 +205,7 @@ scenarios.[^REF-77]
 
 **Control Sphere and Whisphere.** Control Sphere has a strict, learnable pattern that tests how smoothly
 you react to small changes in acceleration.[^REF-68] It suits low sensitivities and wrist or finger
-motion; Whisphere is the better choice for balancing forearm tension at higher
+motion. Whisphere is the better choice for balancing forearm tension at higher
 sensitivities.[^REF-68]
 
 **Withholding on Air bots.** On Air Angelic or Air Voltaic, the bots do not strafe erratically. Hold

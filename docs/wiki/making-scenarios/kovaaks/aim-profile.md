@@ -59,7 +59,7 @@ Flick Speed is defined relative to that reaction time: it is how fast the bot fl
 estimated location.[^REF-33]
 
 **Reaction time is also how you model a human.** A bot with a short one punishes you for breaking
-cover; a long one gives you a window.
+cover. A long one gives you a window.
 
 **Max Turn On Mousepad is the field that makes a bot feel human.** It is how many degrees from the
 bot's mousepad center before an aiming penalty starts.[^REF-33]

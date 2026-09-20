@@ -32,7 +32,7 @@ Shape matters most. A mouse that doesn't match your hand size and grip style cau
 inconsistent aim, however good its sensor.[^REF-57]
 
 Weight is a smaller, personal factor after shape. Some players prefer very light mice for lower
-inertia; others find them harder to control.[^REF-57]
+inertia. Others find them harder to control.[^REF-57]
 
 **Mousepad: control versus speed surfaces.** Pad surfaces trade glide against stopping power.
 

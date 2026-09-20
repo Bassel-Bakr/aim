@@ -18,13 +18,13 @@ related:
 !!! warning "Draft"
     Written from public sources, pending review.
 
-Motion is the single biggest design decision in a scenario. Target size changes how hard a shot is;
-motion changes which skill the shot belongs to.
+Motion is the single biggest design decision in a scenario. Target size changes how hard a shot is.
+Motion changes which skill the shot belongs to.
 
 - **Readable and unreadable train different things.** Pick one on purpose.[^REF-15]
 - **A learnable path becomes recall.** That is useful, and it is not reading.[^REF-15]
 - **Mixed behavior costs comparability.** Weighted evenly, a run's difficulty is luck.[^REF-82]
-- **Travel time is motion too.** A projectile has to be led; hitscan does not.[^REF-86]
+- **Travel time is motion too.** A projectile has to be led. Hitscan does not.[^REF-86]
 
 ## Readable against unreadable
 
@@ -60,7 +60,7 @@ much attention a bot pays to the route it was given.[^REF-91]
 
 <figure class="aim-figure">
 <!-- aim:figure waypoints -->
-<figcaption>The same three waypoints, two settings. One loops forever; the other abandons the route
+<figcaption>The same three waypoints, two settings. One loops forever. The other abandons the route
 on contact.</figcaption>
 </figure>
 

@@ -20,7 +20,7 @@ related:
 A scenario is a question you ask your aim. A vague question gets a vague answer, so the design work
 happens before the editor opens.
 
-- **Name the weakness first.** "Tracking" is not a weakness; a subcategory is.[^REF-44]
+- **Name the weakness first.** "Tracking" is not a weakness. A subcategory is.[^REF-44]
 - **Practice needs a defined goal.** That is what separates it from repetition.[^REF-36]
 - **One scenario, one demand.** A drill that tests three things diagnoses none.
 - **Check for the shortcut.** If the drill can be beaten another way, it will be.

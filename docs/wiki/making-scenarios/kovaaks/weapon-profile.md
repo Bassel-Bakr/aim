@@ -23,7 +23,7 @@ The weapon decides what a click costs. It is also where most of a score's noise 
 drill about aim, the job here is mostly taking things out.
 
 - **Two tabs add randomness.** Spread and Recoil, unless you use their patterned forms.[^REF-33]
-- **Type changes the skill.** Hitscan points; projectile leads.[^REF-33][^REF-86]
+- **Type changes the skill.** Hitscan points. Projectile leads.[^REF-33][^REF-86]
 - **Cheats are a building tool.** Not something to leave on.[^REF-86]
 - **Most tabs are cosmetic.** Graphics and Explosives change nothing about aiming.[^REF-33]
 
@@ -72,7 +72,7 @@ row is one shot taken at the right angle.
 
 <figure class="aim-figure">
 <!-- aim:figure hit-radius -->
-<figcaption>Two ways to make the same miss count. One you can see coming; the other you cannot.</figcaption>
+<figcaption>Two ways to make the same miss count. One you can see coming. The other you cannot.</figcaption>
 </figure>
 
 The knockback and stun fields shape fights, not aim. Leave them alone for a drill.

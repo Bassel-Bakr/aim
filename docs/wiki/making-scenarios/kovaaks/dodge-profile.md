@@ -48,7 +48,7 @@ cannot. Set it deliberately.
 
 <figure class="aim-figure">
 <!-- aim:figure rhythm -->
-<figcaption>Same distance, same speed. Evenly spaced direction changes can be learned; irregular ones cannot.</figcaption>
+<figcaption>Same distance, same speed. Evenly spaced direction changes can be learned. Irregular ones cannot.</figcaption>
 </figure>
 
 **Strafe Swap Pause is the hardest setting in the profile.** A pause at the direction change is the

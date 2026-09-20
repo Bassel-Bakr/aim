@@ -71,7 +71,7 @@ lands cleanly builds the technique that survives when difficulty goes back up.[^
 
 <figure class="aim-figure">
 <!-- aim:figure slower -->
-<figcaption>Same distance, two paces. One lands; the other overshoots and saws back onto the target.</figcaption>
+<figcaption>Same distance, two paces. One lands. The other overshoots and saws back onto the target.</figcaption>
 </figure>
 
 ## How hard is hard enough

@@ -34,7 +34,7 @@ are, how a run becomes a number, and whether anyone can find it.
 Scenario name, and the lists of player characters and bots in use.[^REF-33][^REF-80] Each list has
 an Add Profile button, and each entry can be removed.
 
-This tab is the inventory, not the rules. Adding a profile here makes it available; it does not put
+This tab is the inventory, not the rules. Adding a profile here makes it available. It does not put
 it into a challenge run.[^REF-85]
 
 <figure class="aim-figure">
@@ -103,7 +103,7 @@ constant you control. For a drill you want to compare, use static.
 
 <figure class="aim-figure">
 <!-- aim:figure adapt -->
-<figcaption>The same nine runs. Against a fixed bar the rise is improvement; against a rising one it says much less.</figcaption>
+<figcaption>The same nine runs. Against a fixed bar the rise is improvement. Against a rising one it says much less.</figcaption>
 </figure>
 
 **The disable switches are about feedback.** Turning off hit markers and hit sounds removes the

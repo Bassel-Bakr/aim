@@ -106,7 +106,7 @@ Give it a range and the fight becomes winnable.
 ## In practice
 
 **Add one only when the fight needs it.** An ability makes a scenario more like a game and less like
-a measurement. Both are useful; they are not the same thing.
+a measurement. Both are useful. They are not the same thing.
 
 **Do this next.** If your scenario is about aim, check that your character has no abilities
 assigned, so nothing interrupts the run.

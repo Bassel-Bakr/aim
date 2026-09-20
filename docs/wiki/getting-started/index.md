@@ -33,7 +33,7 @@ A first pass through the wiki looks like this:
    your mechanics lost.[^REF-10] See [Benchmarks](../training/benchmarks.md).
 5. **Follow a routine.** Turn your benchmark result into a repeatable practice session instead of
    randomly picking scenarios. See [Routines](../training/routines.md).
-6. **Track progress and handle plateaus.** Improvement is not linear; know how to measure it and
+6. **Track progress and handle plateaus.** Improvement is not linear. Know how to measure it and
    what to do when your scores stop moving. See
    [Progress and Plateaus](../training/progress-and-plateaus.md).
 

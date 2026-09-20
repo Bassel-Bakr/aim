@@ -41,7 +41,7 @@ That single number moves a scenario between two categories, so set it deliberate
 inheriting it from whatever you copied.
 
 Respawn delays decide the pace between targets. Long delays give reset time and make the drill
-about the shot; short ones keep pressure on and make it about recovery.
+about the shot. Short ones keep pressure on and make it about recovery.
 
 **Headshot Only narrows the target without resizing it.** It uses the head box from the Boxes tab
 rather than the body, which is a different demand from shrinking the whole character.

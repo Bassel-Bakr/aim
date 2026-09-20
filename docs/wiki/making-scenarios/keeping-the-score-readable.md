@@ -35,7 +35,7 @@ different outcomes, so a bad run may be the weapon rather than the aim.
 
 <figure class="aim-figure">
 <!-- aim:figure spread -->
-<figcaption>Two volleys each. Spread lands somewhere new; per bullet spread repeats itself exactly.</figcaption>
+<figcaption>Two volleys each. Spread lands somewhere new. Per bullet spread repeats itself exactly.</figcaption>
 </figure>
 
 **Recoil has the same split.** Recoil sets vertical and horizontal kick. Per shot recoil gives a
@@ -74,11 +74,11 @@ drill is teaching something nobody chose.
 
 <figure class="aim-figure">
 <!-- aim:figure scoring -->
-<figcaption>The same nine shots, scored two ways. The run did not change; what it was worth did.</figcaption>
+<figcaption>The same nine shots, scored two ways. The run did not change. What it was worth did.</figcaption>
 </figure>
 
 That is the speed-against-accuracy trade-off with a price attached. Push the pace and accuracy
-falls; the score model decides whether that trade pays.[^REF-17]
+falls. The score model decides whether that trade pays.[^REF-17]
 
 ## Common mistakes
 
