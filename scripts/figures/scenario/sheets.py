@@ -173,7 +173,7 @@ def stagsfields() -> str:
 
 
 def aimfields() -> str:
-    return fields.sheet("aimfields", "AI Aim Profile, every field",
+    return fields.sheet("aimfields", "Aim Profile, every field",
                         "Where the bot thinks you are, and how far off it lands.",
                         tabs_aim.AIM)
 

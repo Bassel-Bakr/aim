@@ -7,11 +7,11 @@ tags:
   - beginner
   - routines
 related:
-  - page: wiki/scenarios/designing-around-a-weakness.md
+  - page: wiki/making-scenarios/designing-around-a-weakness.md
     why: choosing the demand before anything else.
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the tab that holds each decision made here.
-  - page: wiki/scenarios/testing-and-iterating.md
+  - page: wiki/making-scenarios/testing-and-iterating.md
     why: checking the finished scenario trains what you meant.
   - page: wiki/training/routines.md
     why: where a scenario you made fits into a week of practice.
@@ -102,4 +102,4 @@ existing scenario closest to it.
 ## Resources
 
 - [Where Each Setting Lives](where-settings-live.md): the lookup table for every decision above.
-- [KovaaK's](../resources/trainers/kovaaks.md): the trainer, and its own documentation.
+- [KovaaK's](../../resources/trainers/kovaaks.md): the trainer, and its own documentation.

@@ -6,11 +6,11 @@ description: >-
 tags:
   - routines
 related:
-  - page: wiki/scenarios/tuning-difficulty.md
+  - page: wiki/making-scenarios/tuning-difficulty.md
     why: the dials you move between one test and the next.
   - page: wiki/training/progress-and-plateaus.md
     why: reading a trend rather than a single run.
-  - page: wiki/scenarios/making-a-scenario.md
+  - page: wiki/making-scenarios/kovaaks/making-a-scenario.md
     why: the build this testing loop follows.
 ---
 

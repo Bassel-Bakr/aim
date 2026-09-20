@@ -6,9 +6,9 @@ description: >-
 tags:
   - routines
 related:
-  - page: wiki/scenarios/making-a-scenario.md
+  - page: wiki/making-scenarios/kovaaks/making-a-scenario.md
     why: the build this map is the lookup table for.
-  - page: wiki/scenarios/tuning-difficulty.md
+  - page: wiki/making-scenarios/tuning-difficulty.md
     why: which of these settings are worth changing and how far.
 ---
 
@@ -96,4 +96,4 @@ that tab.
 
 ## Resources
 
-- [KovaaK's](../resources/trainers/kovaaks.md): the trainer, and its own documentation.
+- [KovaaK's](../../resources/trainers/kovaaks.md): the trainer, and its own documentation.

@@ -6,11 +6,13 @@ description: >-
 tags:
   - routines
 related:
-  - page: wiki/scenarios/character-profile.md
+  - page: wiki/making-scenarios/kovaaks/character-profile.md
     why: the character that carries up to four abilities and a global cooldown.
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the shorter lookup this page is the long form of.
 ---
+
+# Ability Profile
 
 !!! warning "Draft"
     Written from public sources, pending review.
@@ -113,4 +115,4 @@ assigned, so nothing interrupts the run.
 
 - [Ability Profiles](https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/AbilityProfiles):
   the official page for this editor.
-- [Transfer to Games](../fundamentals/transfer-to-games.md): what a game-like scenario buys you.
+- [Transfer to Games](../../fundamentals/transfer-to-games.md): what a game-like scenario buys you.

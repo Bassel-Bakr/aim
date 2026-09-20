@@ -774,12 +774,7 @@ COPY_T = 6.0
 def copying() -> str:
     """The section's premise in one loop: a published scenario is copied, unpacked into profiles,
     and one of them is replaced. Nothing here starts from an empty scenario."""
-    css = ["@keyframes aimCopyIn{0%{opacity:0}6%{opacity:1}100%{opacity:1}}",
-           ".aim-copy-step{opacity:0;animation-name:aimCopyIn;animation-iteration-count:infinite;"
-           f"animation-duration:{COPY_T}s}}",
-           "@keyframes aimCopySwap{0%{opacity:0}66%{opacity:0}72%{opacity:1}100%{opacity:1}}",
-           ".aim-copy-swap{opacity:0;animation-name:aimCopySwap;animation-iteration-count:infinite;"
-           f"animation-duration:{COPY_T}s}}"]
+    css: list[str] = []
     body = [f'<rect x="12" y="46" width="736" height="{COPY_H - 72}" rx="12" class="fig-panel"/>']
     body.append(lane_label(32, 30, "Every scenario starts as a copy",
                            "the editor offers no blank one"))
@@ -790,28 +785,24 @@ def copying() -> str:
     body.append('<path d="M202 143H262" class="fig-grid-stroke" stroke-width="2" '
                 'marker-end="url(#fig-copy-arrow)"/>')
     body.append(text(232, 124, "unpack", "fig-muted", size=12, weight=500))
-    # The unpacked profiles arrive one after another, which is what unpacking actually produces.
     for order, label in enumerate(("character", "bot", "dodge")):
         top = 96 + order * 40
-        body.append(f'<g class="aim-copy-step" style="animation-delay:{0.5 + order * 0.5:.2f}s">'
-                    f'<rect x="276" y="{top}" width="150" height="32" rx="8" class="fig-panel '
+        body.append(f'<g><rect x="276" y="{top}" width="150" height="32" rx="8" class="fig-panel '
                     'fig-grid-stroke" stroke-width="2"/>'
                     + text(351, top + 16, label, "fig-muted", size=13, weight=600, middle=True)
                     + "</g>")
     body.append('<path d="M436 143H496" class="fig-grid-stroke" stroke-width="2" '
                 'marker-end="url(#fig-copy-arrow)"/>')
     body.append(text(466, 124, "replace", "fig-muted", size=12, weight=500))
-    body.append('<g class="aim-copy-swap"><rect x="510" y="110" width="176" height="66" rx="10" '
+    body.append('<g><rect x="510" y="110" width="176" height="66" rx="10" '
                 'class="fig-panel fig-accent-stroke" stroke-width="2.4"/>'
                 + text(598, 138, "Your scenario", "fig-accent-text", size=14, weight=700)
                 + text(598, 160, "one profile changed", "fig-muted", size=12, weight=500)
                 + "</g>")
-    css.append("@media (prefers-reduced-motion:reduce){.aim-copy-step,.aim-copy-swap{opacity:1;"
-               "animation:none!important}}")
     return (f'<svg viewBox="0 0 {COPY_W} {COPY_H}" class="fig-fit" role="img" '
             'aria-labelledby="fig-copying-title"><title id="fig-copying-title">An existing scenario '
             'on the left. Unpacking it produces a character profile, a bot profile and a dodge '
-            'profile, which appear one after another. Replacing one of them produces your own '
+            'profile. Replacing one of them produces your own '
             'scenario on the right.</title>'
             '<defs><marker id="fig-copy-arrow" viewBox="0 0 10 10" refX="9" refY="5" '
             'markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" '
@@ -940,11 +931,7 @@ def testloop() -> str:
            "100%{opacity:0.25}}",
            ".aim-loop-step{opacity:0.25;animation-name:aimLoopStep;animation-iteration-count:"
            f"infinite;animation-duration:{LOOP_T}s}}",
-           "@keyframes aimLoopDrop{0%{opacity:0}62%{opacity:0}68%{opacity:1}92%{opacity:1}"
-           "100%{opacity:0}}",
-           ".aim-loop-drop{opacity:0;animation-name:aimLoopDrop;animation-iteration-count:infinite;"
-           f"animation-duration:{LOOP_T}s}}",
-           "@media (prefers-reduced-motion:reduce){.aim-loop-step,.aim-loop-drop{opacity:1;"
+           "@media (prefers-reduced-motion:reduce){.aim-loop-step{opacity:1;"
            "animation:none!important}}"]
     body = []
     for index, (x, name, note, keeps) in enumerate((
@@ -971,7 +958,7 @@ def testloop() -> str:
         cls = "fig-balanced-fill" if keeps else "fig-tense-fill"
         body.append(f'<path d="M{x + 232} 126H{x + 244}" class="fig-grid-stroke" '
                     'stroke-width="2"/>')
-        body.append(f'<g class="aim-loop-drop"><rect x="{x + 244}" y="104" width="96" height="44" '
+        body.append(f'<g><rect x="{x + 244}" y="104" width="96" height="44" '
                     f'rx="9" class="fig-panel {cls.replace("-fill", "-stroke")}" stroke-width="2"/>'
                     + text(x + 292, 126, outcome, cls, size=13, weight=700, middle=True)
                     + "</g>")
@@ -1120,10 +1107,7 @@ def isolate() -> str:
     css = ["@keyframes aimIsoIn{0%{opacity:0}6%{opacity:1}100%{opacity:1}}",
            ".aim-iso-in{opacity:0;animation-name:aimIsoIn;animation-iteration-count:infinite;"
            f"animation-duration:{ISO_T}s}}",
-           "@keyframes aimIsoOut{0%{opacity:0}30%{opacity:0}38%{opacity:1}100%{opacity:1}}",
-           ".aim-iso-out{opacity:0;animation-name:aimIsoOut;animation-iteration-count:infinite;"
-           f"animation-duration:{ISO_T}s}}",
-           "@media (prefers-reduced-motion:reduce){.aim-iso-in,.aim-iso-out{opacity:1;"
+           "@media (prefers-reduced-motion:reduce){.aim-iso-in{opacity:1;"
            "animation:none!important}}"]
     body = []
     for index, (x, name, note, inputs) in enumerate((
@@ -1148,16 +1132,16 @@ def isolate() -> str:
                 body.append(f'<path d="M{x + 158} {top + 17}H{x + 214}" class="fig-grid-stroke" '
                             'stroke-width="2" opacity="0.6"/>')
         if index == 0:
-            body.append('<g class="aim-iso-out">'
+            body.append('<g>'
                         + text(x + 268, 130, "one score", "fig-tense-fill", size=16, weight=700)
                         + text(x + 268, 154, "moved: unknown", "fig-muted", size=12, weight=500)
                         + "</g>")
         else:
             for order, label in enumerate(("score A", "score B")):
-                body.append(f'<g class="aim-iso-out" style="animation-delay:{order * 0.3:.2f}s">'
+                body.append(f'<g style="animation-delay:{order * 0.3:.2f}s">'
                             + text(x + 268, 114 + order * 44, label, "fig-balanced-fill", size=15,
                                    weight=700) + "</g>")
-            body.append('<g class="aim-iso-out">'
+            body.append('<g>'
                         + text(x + 268, 204, "moved: readable", "fig-muted", size=12, weight=500)
                         + "</g>")
     return (f'<svg viewBox="0 0 {ISO_W} {ISO_H}" class="fig-fit" role="img" '
@@ -1472,11 +1456,7 @@ def weakest() -> str:
            ".aim-weak-bar{transform-box:fill-box;transform-origin:center bottom;"
            "animation-name:aimWeakGrow;"
            f"animation-iteration-count:infinite;animation-duration:{WEAK_T}s}}",
-           "@keyframes aimWeakPick{0%{opacity:0}52%{opacity:0}60%{opacity:1}100%{opacity:1}}",
-           ".aim-weak-pick{opacity:0;animation-name:aimWeakPick;animation-iteration-count:infinite;"
-           f"animation-duration:{WEAK_T}s}}",
-           "@media (prefers-reduced-motion:reduce){.aim-weak-bar{animation:none!important}"
-           ".aim-weak-pick{opacity:1;animation:none!important}}"]
+           "@media (prefers-reduced-motion:reduce){.aim-weak-bar{animation:none!important}}"]
     base, top = 206, 84
     body = [f'<rect x="12" y="46" width="736" height="{WEAK_H - 72}" rx="12" class="fig-panel"/>']
     body.append(lane_label(32, 30, "Your last benchmark", "lowest relative, not worst feeling"))
@@ -1490,7 +1470,7 @@ def weakest() -> str:
                     f'style="animation-delay:{order * 0.09:.2f}s"/>')
         body.append(text(x + 28, base + 20, name, "fig-muted", size=12, weight=500))
     px = 72 + lowest * 108
-    body.append(f'<g class="aim-weak-pick"><path d="M{px + 28} {base + 34}V{base + 48}" '
+    body.append(f'<g><path d="M{px + 28} {base + 34}V{base + 48}" '
                 'class="fig-accent-stroke" stroke-width="2"/>'
                 + text(px + 28, base + 66, "build for this one", "fig-accent-text", size=13,
                        weight=700) + "</g>")
@@ -1595,10 +1575,7 @@ def loweffort() -> str:
     css = ["@keyframes aimLowIn{0%{opacity:0}6%{opacity:1}100%{opacity:1}}",
            ".aim-low-in{opacity:0;animation-name:aimLowIn;animation-iteration-count:infinite;"
            f"animation-duration:{LOWEFF_T}s}}",
-           "@keyframes aimLowVerdict{0%{opacity:0}46%{opacity:0}54%{opacity:1}100%{opacity:1}}",
-           ".aim-low-verdict{opacity:0;animation-name:aimLowVerdict;animation-iteration-count:"
-           f"infinite;animation-duration:{LOWEFF_T}s}}",
-           "@media (prefers-reduced-motion:reduce){.aim-low-in,.aim-low-verdict{opacity:1;"
+           "@media (prefers-reduced-motion:reduce){.aim-low-in{opacity:1;"
            "animation:none!important}}"]
     body = []
     for index, (x, name, change, verdict, tone) in enumerate((
@@ -1615,7 +1592,7 @@ def loweffort() -> str:
                         + text(x + 178, top + 20, label, "fig-muted", size=12, weight=600)
                         + text(x + 178, top + 38, change if slot else "someone else's work",
                                "fig-muted", size=11, weight=500) + "</g>")
-        body.append(f'<g class="aim-low-verdict">'
+        body.append(f'<g>'
                     f'<rect x="{x + 108}" y="218" width="140" height="36" rx="9" '
                     f'class="fig-panel {tone.replace("-fill", "-stroke")}" stroke-width="2"/>'
                     + text(x + 178, 236, verdict, tone, size=14, weight=700, middle=True)
@@ -1638,10 +1615,7 @@ def anchor() -> str:
     css = ["@keyframes aimAncIn{0%{opacity:0}8%{opacity:1}100%{opacity:1}}",
            ".aim-anc-in{opacity:0;animation-name:aimAncIn;animation-iteration-count:infinite;"
            f"animation-duration:{ANCHOR_T}s}}",
-           "@keyframes aimAncRead{0%{opacity:0}54%{opacity:0}62%{opacity:1}100%{opacity:1}}",
-           ".aim-anc-read{opacity:0;animation-name:aimAncRead;animation-iteration-count:infinite;"
-           f"animation-duration:{ANCHOR_T}s}}",
-           "@media (prefers-reduced-motion:reduce){.aim-anc-in,.aim-anc-read{opacity:1;"
+           "@media (prefers-reduced-motion:reduce){.aim-anc-in{opacity:1;"
            "animation:none!important}}"]
     body = [f'<rect x="12" y="46" width="736" height="{ANCHOR_H - 72}" rx="12" class="fig-panel"/>']
     body.append(lane_label(32, 30, "One session, two scenarios", "the known one is the reading"))
@@ -1667,7 +1641,7 @@ def anchor() -> str:
                 'class="fig-accent-fill"/></g>')
     body.append(text(470, 226, "new scenario", "fig-ink", size=14, weight=700))
     body.append(text(470, 246, "one run, no history", "fig-muted", size=12, weight=500))
-    body.append('<g class="aim-anc-read">'
+    body.append('<g>'
                 + text(620, 140, "known run low today", "fig-muted", size=13, weight=500)
                 + text(620, 164, "so the new one is not", "fig-balanced-fill", size=14, weight=700)
                 + text(620, 186, "the design's fault", "fig-balanced-fill", size=14, weight=700)
@@ -1692,10 +1666,7 @@ def comfortable() -> str:
     css = ["@keyframes aimCfyHit{0%{opacity:0}5%{opacity:1}100%{opacity:1}}",
            ".aim-cfy-hit{opacity:0;animation-name:aimCfyHit;animation-iteration-count:infinite;"
            f"animation-duration:{COMFY_T}s}}",
-           "@keyframes aimCfyCall{0%{opacity:0}58%{opacity:0}66%{opacity:1}100%{opacity:1}}",
-           ".aim-cfy-call{opacity:0;animation-name:aimCfyCall;animation-iteration-count:infinite;"
-           f"animation-duration:{COMFY_T}s}}",
-           "@media (prefers-reduced-motion:reduce){.aim-cfy-hit,.aim-cfy-call{opacity:1;"
+           "@media (prefers-reduced-motion:reduce){.aim-cfy-hit{opacity:1;"
            "animation:none!important}}"]
     body = []
     for index, (x, name, hits, verdict) in enumerate((
@@ -1712,7 +1683,7 @@ def comfortable() -> str:
                         f'<path d="M{cx - 6} {cy}l4 5l8 -10" class="fig-panel" fill="none" '
                         'stroke="currentColor" stroke-width="2.4" stroke-linecap="round" '
                         'stroke-linejoin="round"/></g>')
-        body.append(f'<g class="aim-cfy-call">'
+        body.append(f'<g>'
                     + text(x + 178, 246, verdict, "fig-tense-fill", size=14, weight=700) + "</g>")
     return (f'<svg viewBox="0 0 {COMFY_W} {COMFY_H}" class="fig-fit" role="img" '
             'aria-labelledby="fig-comfortable-title"><title id="fig-comfortable-title">Two panels, '
@@ -1784,12 +1755,8 @@ def tradeoff() -> str:
     the pace axis and accuracy falls away under it, which is the exchange being measurable."""
     css = [".aim-trd-anim{animation-timing-function:linear;animation-iteration-count:infinite;"
            f"animation-duration:{TRADE_T}s}}",
-           "@keyframes aimTrdBand{0%{opacity:0}40%{opacity:0}48%{opacity:1}100%{opacity:1}}",
-           ".aim-trd-band{opacity:0;animation-name:aimTrdBand;animation-iteration-count:infinite;"
-           f"animation-duration:{TRADE_T}s}}",
            "@media (prefers-reduced-motion:reduce){.aim-trd-anim{animation-play-state:paused;"
-           f"animation-delay:-{TRADE_T * 0.62:.2f}s!important}}"
-           ".aim-trd-band{opacity:1;animation:none!important}}"]
+           f"animation-delay:-{TRADE_T * 0.62:.2f}s!important}}}}"]
     left, right, base, top = 96, 660, 234, 82
     body = [f'<rect x="12" y="46" width="736" height="{TRADE_H - 70}" rx="12" class="fig-panel"/>']
     body.append(lane_label(32, 30, "Pace against accuracy", "the exchange is measurable"))
@@ -1813,7 +1780,7 @@ def tradeoff() -> str:
     body.append(f'<polyline points="{curve}" class="fig-accent-stroke" stroke-width="3" '
                 'fill="none" stroke-linecap="round"/>')
     # The band worth training in: fast enough to cost something, slow enough to still land.
-    body.append(f'<g class="aim-trd-band"><rect x="{px(0.34):.1f}" y="{top - 6}" '
+    body.append(f'<g><rect x="{px(0.34):.1f}" y="{top - 6}" '
                 f'width="{px(0.62) - px(0.34):.1f}" height="{base - top + 6:.1f}" rx="6" '
                 'class="fig-balanced-fill" opacity="0.16"/>'
                 + text((px(0.34) + px(0.62)) / 2, base + 48, "build accuracy here, then push",
@@ -1943,10 +1910,7 @@ def versions() -> str:
     css = ["@keyframes aimVerIn{0%{opacity:0}8%{opacity:1}100%{opacity:1}}",
            ".aim-ver-in{opacity:0;animation-name:aimVerIn;animation-iteration-count:infinite;"
            f"animation-duration:{VER_T}s}}",
-           "@keyframes aimVerRead{0%{opacity:0}56%{opacity:0}64%{opacity:1}100%{opacity:1}}",
-           ".aim-ver-read{opacity:0;animation-name:aimVerRead;animation-iteration-count:infinite;"
-           f"animation-duration:{VER_T}s}}",
-           "@media (prefers-reduced-motion:reduce){.aim-ver-in,.aim-ver-read{opacity:1;"
+           "@media (prefers-reduced-motion:reduce){.aim-ver-in{opacity:1;"
            "animation:none!important}}"]
     dials = ("size", "spread", "speed", "bots", "time")
     body = []
@@ -1967,7 +1931,7 @@ def versions() -> str:
             body.append(f'<g class="aim-ver-in" style="animation-delay:{order * 0.12:.2f}s">'
                         f'<circle cx="{at}" cy="{cy}" r="7" '
                         f'class="{"fig-accent-fill" if moved else "fig-grid-fill"}"/></g>')
-        body.append(f'<g class="aim-ver-read">'
+        body.append(f'<g>'
                     + text(x + 178, 262, verdict, tone, size=14, weight=700) + "</g>")
     return (f'<svg viewBox="0 0 {VER_W} {VER_H}" class="fig-fit" role="img" '
             'aria-labelledby="fig-versions-title"><title id="fig-versions-title">Two second '
@@ -2199,13 +2163,8 @@ def aimcone() -> str:
     well; outside it, the penalty multiplier degrades it, which is a thing you can play around."""
     css = [".aim-cone-anim{animation-timing-function:linear;animation-iteration-count:infinite;"
            f"animation-duration:{CONE_T}s}}",
-           "@keyframes aimConeWarn{0%{opacity:0}30%{opacity:0}38%{opacity:1}62%{opacity:1}"
-           "70%{opacity:0}100%{opacity:0}}",
-           ".aim-cone-warn{opacity:0;animation-name:aimConeWarn;animation-iteration-count:infinite;"
-           f"animation-duration:{CONE_T}s}}",
            "@media (prefers-reduced-motion:reduce){.aim-cone-anim{animation-play-state:paused;"
-           f"animation-delay:-{CONE_T * 0.12:.2f}s!important}}"
-           ".aim-cone-warn{opacity:1;animation:none!important}}"]
+           f"animation-delay:-{CONE_T * 0.12:.2f}s!important}}}}"]
     # The panel runs from y=46 to y=CONE_H-28, so every label has to sit inside that band. An
     # earlier version put two of them below the floor, where they rendered outside the figure.
     bot_x, bot_y = 176, 168
@@ -2232,7 +2191,7 @@ def aimcone() -> str:
                 + crosshair("fig-ink-stroke", bot_x + 392, bot_y - 44) + "</g>")
     css.append(keyframes("aimConeYou", frames, lambda p: f"translate(0,{p[1]:.1f}px)"))
     css.append(".aim-cone-you{animation-name:aimConeYou}")
-    body.append('<g class="aim-cone-warn">'
+    body.append('<g>'
                 + text(bot_x + 300, bot_y + 116, "step out and you fight a worse opponent",
                        "fig-balanced-fill", size=13, weight=700) + "</g>")
     return (f'<svg viewBox="0 0 {CONE_W} {CONE_H}" class="fig-fit" role="img" '
@@ -2362,10 +2321,6 @@ def blocked() -> str:
     """Trigger On Blocking Collision, and the reaction time beside it: when the bot works out it
     cannot keep strafing, how long before it turns around."""
     css = [".aim-blk-anim{animation-timing-function:linear;animation-iteration-count:infinite;"
-           f"animation-duration:{BLK_T}s}}",
-           "@keyframes aimBlkStuck{0%{opacity:0}28%{opacity:0}33%{opacity:1}52%{opacity:1}"
-           "57%{opacity:0}100%{opacity:0}}",
-           ".aim-blk-stuck{opacity:0;animation-name:aimBlkStuck;animation-iteration-count:infinite;"
            f"animation-duration:{BLK_T}s}}"]
     body = []
     for index, (x, name, note, waits) in enumerate((
@@ -2398,14 +2353,13 @@ def blocked() -> str:
                              lambda p: f"translate({p[0]:.1f}px,0)"))
         css.append(f".aim-blk-{index}{{animation-name:aimBlkPath{index}}}")
         if waits:
-            body.append(f'<g class="aim-blk-stuck">'
+            body.append(f'<g>'
                         + text(cx + 20, cy - 74, "stuck on the wall", "fig-tense-fill", size=13,
                                weight=700) + "</g>")
         body.append(text(cx, cy + 92, "counter strafe on collision" if not waits
                          else "counter strafe, after a delay", "fig-muted", size=13, weight=500))
     css.append("@media (prefers-reduced-motion:reduce){.aim-blk-anim{animation-play-state:paused;"
-               f"animation-delay:-{BLK_T * 0.44:.2f}s!important}}"
-               ".aim-blk-stuck{opacity:1;animation:none!important}}")
+               f"animation-delay:-{BLK_T * 0.44:.2f}s!important}}}}")
     return (f'<svg viewBox="0 0 {BLK_W} {BLK_H}" class="fig-fit" role="img" '
             'aria-labelledby="fig-blocked-title"><title id="fig-blocked-title">Two targets strafing '
             'into a wall. With no reaction time the target turns around the moment it collides. '
@@ -2425,10 +2379,6 @@ def playbackmode() -> str:
     Input Only replays keystrokes and gets shoved off course; Absolute Position matches the recorded
     location regardless; Moveable Absolute Position is the first until it is hit, then the second."""
     css = [".aim-pbm-anim{animation-timing-function:linear;animation-iteration-count:infinite;"
-           f"animation-duration:{PBM_T}s}}",
-           "@keyframes aimPbmHit{0%{opacity:0}34%{opacity:0}38%{opacity:1}50%{opacity:1}"
-           "54%{opacity:0}100%{opacity:0}}",
-           ".aim-pbm-hit{opacity:0;animation-name:aimPbmHit;animation-iteration-count:infinite;"
            f"animation-duration:{PBM_T}s}}"]
     body = []
     for index, (x, name, note) in enumerate((
@@ -2463,14 +2413,13 @@ def playbackmode() -> str:
         css.append(keyframes(f"aimPbmPath{index}", frames,
                              lambda p: f"translate({p[0]:.1f}px,{p[1]:.1f}px)"))
         css.append(f".aim-pbm-{index}{{animation-name:aimPbmPath{index}}}")
-        body.append(f'<g class="aim-pbm-hit"><path d="M{cx + 4} {cy - 58}V{cy - 30}" '
+        body.append(f'<g><path d="M{cx + 4} {cy - 58}V{cy - 30}" '
                     'class="fig-tense-stroke" stroke-width="3" '
                     'marker-end="url(#fig-pbm-arrow)"/>'
                     + text(cx + 4, cy - 66, "knockback", "fig-tense-fill", size=11, weight=700)
                     + "</g>")
     css.append("@media (prefers-reduced-motion:reduce){.aim-pbm-anim{animation-play-state:paused;"
-               f"animation-delay:-{PBM_T * 0.72:.2f}s!important}}"
-               ".aim-pbm-hit{opacity:1;animation:none!important}}")
+               f"animation-delay:-{PBM_T * 0.72:.2f}s!important}}}}")
     return (f'<svg viewBox="0 0 {PBM_W} {PBM_H}" class="fig-fit" role="img" '
             'aria-labelledby="fig-playbackmode-title"><title id="fig-playbackmode-title">Three '
             'panels, each with the same recorded path and the same knockback arriving partway '
@@ -2495,10 +2444,7 @@ def profileswap() -> str:
            "100%{opacity:0.2}}",
            ".aim-swp-step{opacity:0.2;animation-name:aimSwpStep;animation-iteration-count:infinite;"
            f"animation-duration:{SWAP_T}s}}",
-           "@keyframes aimSwpAlt{0%{opacity:0}58%{opacity:0}64%{opacity:1}100%{opacity:1}}",
-           ".aim-swp-alt{opacity:0;animation-name:aimSwpAlt;animation-iteration-count:infinite;"
-           f"animation-duration:{SWAP_T}s}}",
-           "@media (prefers-reduced-motion:reduce){.aim-swp-step,.aim-swp-alt{opacity:1;"
+           "@media (prefers-reduced-motion:reduce){.aim-swp-step{opacity:1;"
            "animation:none!important}}"]
     body = ['<defs><marker id="fig-swp-arrow" viewBox="0 0 10 10" refX="9" refY="5" '
             'markerWidth="6" markerHeight="6" orient="auto">'
@@ -2520,7 +2466,7 @@ def profileswap() -> str:
             body.append(f'<path d="M{bx + 198} 137H{bx + 216}" class="fig-grid-stroke" '
                         'stroke-width="2" marker-end="url(#fig-swp-arrow)"/>')
     # The fallback the tooltip describes: if no Ignore profile exists, anything at all.
-    body.append('<g class="aim-swp-alt">'
+    body.append('<g>'
                 '<path d="M591 176V212H400" class="fig-grid-stroke" stroke-width="2" '
                 'stroke-dasharray="5 5" fill="none" marker-end="url(#fig-swp-arrow)"/>'
                 + text(392, 216, "none available? it picks at random", "fig-muted", anchor="end",
@@ -2662,9 +2608,6 @@ def lockdeadzone() -> str:
     stops tracking. Inside it the aimbot lets go, so the shot lands near the target rather than
     dead on it: the difference between a build tool and an unbeatable opponent."""
     css = [".aim-lck-anim{animation-timing-function:linear;animation-iteration-count:infinite;"
-           f"animation-duration:{LCK_T}s}}",
-           "@keyframes aimLckLet{0%{opacity:0}52%{opacity:0}58%{opacity:1}100%{opacity:1}}",
-           ".aim-lck-let{opacity:0;animation-name:aimLckLet;animation-iteration-count:infinite;"
            f"animation-duration:{LCK_T}s}}"]
     body = []
     for index, (x, name, note, dead) in enumerate((
@@ -2690,14 +2633,13 @@ def lockdeadzone() -> str:
         css.append(keyframes(f"aimLckPath{index}", frames,
                              lambda p: f"translate({p[0]:.1f}px,0)"))
         css.append(f".aim-lck-{index}{{animation-name:aimLckPath{index}}}")
-        body.append(f'<g class="aim-lck-let">'
+        body.append(f'<g>'
                     + text(x + 178, cy + 92, "lock releases here" if dead
                            else "lock never releases",
                            "fig-balanced-fill" if dead else "fig-tense-fill", size=13, weight=700)
                     + "</g>")
     css.append("@media (prefers-reduced-motion:reduce){.aim-lck-anim{animation-play-state:paused;"
-               f"animation-delay:-{LCK_T * 0.62:.2f}s!important}}"
-               ".aim-lck-let{opacity:1;animation:none!important}}")
+               f"animation-delay:-{LCK_T * 0.62:.2f}s!important}}}}")
     return (f'<svg viewBox="0 0 {LCK_W} {LCK_H}" class="fig-fit" role="img" '
             'aria-labelledby="fig-lockdeadzone-title"><title id="fig-lockdeadzone-title">Two '
             'panels, each with a locked crosshair dragged toward a target. With no deadzone it '
@@ -3017,10 +2959,7 @@ def multipliers() -> str:
     css = ["@keyframes aimMulStep{0%{opacity:0}6%{opacity:1}100%{opacity:1}}",
            ".aim-mul-step{opacity:0;animation-name:aimMulStep;animation-iteration-count:infinite;"
            f"animation-duration:{MUL_T}s}}",
-           "@keyframes aimMulWarn{0%{opacity:0}62%{opacity:0}70%{opacity:1}100%{opacity:1}}",
-           ".aim-mul-warn{opacity:0;animation-name:aimMulWarn;animation-iteration-count:infinite;"
-           f"animation-duration:{MUL_T}s}}",
-           "@media (prefers-reduced-motion:reduce){.aim-mul-step,.aim-mul-warn{opacity:1;"
+           "@media (prefers-reduced-motion:reduce){.aim-mul-step{opacity:1;"
            "animation:none!important}}"]
     body = []
     for index, (x, name, note, chain, final, tone) in enumerate((
@@ -3045,7 +2984,7 @@ def multipliers() -> str:
                     + text(x + 40, y + 12, final, tone, anchor="start", size=20, weight=700)
                     + "</g>")
         if index == 1:
-            body.append('<g class="aim-mul-warn">'
+            body.append('<g>'
                         + text(x + 178, MUL_H - 34, "the editor advises against this",
                                "fig-tense-fill", size=13, weight=700) + "</g>")
     return (f'<svg viewBox="0 0 {MUL_W} {MUL_H}" class="fig-fit" role="img" '

@@ -30,6 +30,11 @@ Follow the steps in [README.md](README.md#run-the-site-locally).
 Page titles come from the `title:` field in the front matter. Do not add a `#` heading in the page
 body.
 
+One exception: where a page's nav label is deliberately shorter than its title, the nav label would
+otherwise become the page's heading too. Those pages carry an explicit `#` heading matching their
+`title:`. The Making Scenarios editor pages do this, so the nav can read Char, Weapon, Abilities,
+Bot, Dodge and Aim as the game's own tabs do, while each page still opens with its full name.
+
 ## Describe the page
 
 Every page carries a `description:` in front matter, on one folded line:

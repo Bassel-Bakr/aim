@@ -46,7 +46,7 @@ WEAPON: tuple[Field, ...] = (
      "botfire", "holds fire", "shoots back"),
     ("Weapon Switch Timer", "How long the bot keeps a weapon before swapping to another one its "
      "character profile carries.", "weaponhold", "it swaps constantly", "it keeps one"),
-    ("Slot Aim Profile", "Which AI aim profile the bot uses for this weapon slot. It decides how "
+    ("Slot Aim Profile", "Which aim profile the bot uses for this weapon slot. It decides how "
      "accurate and how fast the bot is.", "slot", "nothing chosen", "an aim profile"),
     ("Slot Frequency", "How often this slot is chosen when the bot swaps. The column weights the "
      "slots against each other.", "weight", "one slot, mostly", "a coin flip"),

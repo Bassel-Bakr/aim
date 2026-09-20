@@ -6,11 +6,11 @@ description: >-
 tags:
   - routines
 related:
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the tab that holds each setting named here.
   - page: wiki/fundamentals/how-aim-works.md
     why: the speed-accuracy trade-off behind every difficulty dial.
-  - page: wiki/scenarios/designing-around-a-weakness.md
+  - page: wiki/making-scenarios/designing-around-a-weakness.md
     why: deciding what the scenario should be hard at before making it hard.
 ---
 

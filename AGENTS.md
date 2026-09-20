@@ -152,7 +152,10 @@ agents most often miss:
 
 1. Start from a template in `templates/` — `concept.md` for explanations, `resource.md` for
    communities, trainers and tools.
-2. Page titles come from the `title:` field in front matter. Do not add an `#` heading in the body.
+2. Page titles come from the `title:` field in front matter. Do not add an `#` heading in the body,
+   unless the page's nav label differs from its title: the nav label wins over `title:` for the
+   heading, so the Making Scenarios editor pages carry an explicit `#` to keep the full name on the
+   page while the nav shows the game's own short tab name.
    Every page also carries a `description:`, one folded line of 50 to 160 characters saying what the
    page answers. It becomes the page's meta description, its search result text and its share card
    blurb, no two pages may share one, and `scripts/check_pages.py` rejects a page without it. See

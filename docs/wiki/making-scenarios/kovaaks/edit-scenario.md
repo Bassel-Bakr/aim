@@ -6,13 +6,15 @@ description: >-
 tags:
   - routines
 related:
-  - page: wiki/scenarios/making-a-scenario.md
+  - page: wiki/making-scenarios/kovaaks/making-a-scenario.md
     why: the build these tabs sit at the top of.
-  - page: wiki/scenarios/keeping-the-score-readable.md
+  - page: wiki/making-scenarios/keeping-the-score-readable.md
     why: what the Scoring tab decides your drill is rewarding.
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the shorter lookup this page is the long form of.
 ---
+
+# Scenario Editor
 
 !!! warning "Draft"
     Written from public sources, pending review.
@@ -202,4 +204,4 @@ what you have been practicing, whether or not you meant to.
 
 - [Edit Scenario Window](https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/EditScenario):
   the official page for this window.
-- [Keeping the Score Readable](keeping-the-score-readable.md): choosing a scoring model on purpose.
+- [Keeping the Score Readable](../keeping-the-score-readable.md): choosing a scoring model on purpose.

@@ -11,9 +11,9 @@ related:
     why: how to find which subcategory to build a routine around.
   - page: wiki/getting-started/aim-trainers.md
     why: the software a routine runs in, and choosing one.
-  - page: wiki/scenarios/making-a-scenario.md
+  - page: wiki/making-scenarios/kovaaks/making-a-scenario.md
     why: what to do when no existing scenario fits the weakness a routine targets.
-  - page: wiki/scenarios/testing-and-iterating.md
+  - page: wiki/making-scenarios/testing-and-iterating.md
     why: where a scenario you built earns its place in a session.
 ---
 
@@ -83,7 +83,7 @@ so a fixed weakness doesn't quietly become a new one. That's the variety-over-re
 [Practice Principles](../fundamentals/practice-principles.md).
 
 Sometimes nothing in the subcategory isolates the exact thing you are losing.
-[Making Your Own Scenario](../scenarios/making-a-scenario.md) covers building one out of a scenario
+[Making Your Own Scenario](../making-scenarios/kovaaks/making-a-scenario.md) covers building one out of a scenario
 that already exists.
 
 ## Using existing playlists

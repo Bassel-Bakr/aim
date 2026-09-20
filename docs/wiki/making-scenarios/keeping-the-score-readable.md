@@ -6,9 +6,9 @@ description: >-
 tags:
   - routines
 related:
-  - page: wiki/scenarios/testing-and-iterating.md
+  - page: wiki/making-scenarios/testing-and-iterating.md
     why: reading a score once the noise in it is under control.
-  - page: wiki/scenarios/tuning-difficulty.md
+  - page: wiki/making-scenarios/tuning-difficulty.md
     why: difficulty that is hard on purpose rather than hard by accident.
   - page: wiki/training/progress-and-plateaus.md
     why: what score movement looks like when nothing has actually changed.

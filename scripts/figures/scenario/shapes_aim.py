@@ -1,4 +1,4 @@
-"""Shapes for the AI aim profile and the ability profile.
+"""Shapes for the aim profile and the ability profile.
 
 An aim profile is about a second crosshair: where the bot thinks you are, how fast it gets there,
 and how far off it lands. An ability profile is about charges and the conditions that release them.

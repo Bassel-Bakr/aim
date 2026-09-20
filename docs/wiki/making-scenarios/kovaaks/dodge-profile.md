@@ -7,13 +7,15 @@ tags:
   - tracking
   - switching
 related:
-  - page: wiki/scenarios/designing-target-motion.md
+  - page: wiki/making-scenarios/designing-target-motion.md
     why: the design decisions these settings carry out.
-  - page: wiki/scenarios/bot-profile.md
+  - page: wiki/making-scenarios/kovaaks/bot-profile.md
     why: the bot that attaches this profile, and at what weight.
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the shorter lookup this page is the long form of.
 ---
+
+# Dodge Profile
 
 !!! warning "Draft"
     Written from public sources, pending review.
@@ -206,4 +208,4 @@ time range. That range is why the scenario feels the way it does.
 
 - [Dodge Profiles](https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/DodgeProfiles): the
   official page for this editor.
-- [Designing Target Motion](designing-target-motion.md): what to aim these settings at.
+- [Designing Target Motion](../designing-target-motion.md): what to aim these settings at.

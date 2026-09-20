@@ -1,4 +1,4 @@
-"""The AI aim profile's one tab and the ability profile's tabs, one line per field.
+"""The aim profile's one tab and the ability profile's tabs, one line per field.
 
 An aim profile field is about a second crosshair: where the bot thinks you are, how fast it gets
 there, and how far off it lands. An ability field is about charges and the conditions that release

@@ -392,8 +392,10 @@ def figure_files(paths: Sequence[Path]) -> list[str]:
     folder = DOCS / "figures"
     if not folder.is_dir():
         return []
+    # Every page, not just the ones being checked: the editor hook lints one page at a time, and a
+    # citation map built from that one page would call all the other figures orphans.
     cited: dict[str, list[str]] = {}
-    for path in paths:
+    for path in sorted(DOCS.rglob("*.md")):
         for name in re.findall(r"<!--\s*aim:figure\s+([A-Za-z0-9_-]+)\s*-->",
                                path.read_text(encoding="utf-8")):
             cited.setdefault(name, []).append(path.relative_to(DOCS).as_posix())

@@ -6,11 +6,11 @@ description: >-
 tags:
   - routines
 related:
-  - page: wiki/scenarios/making-a-scenario.md
+  - page: wiki/making-scenarios/kovaaks/making-a-scenario.md
     why: the scenario this publishes, and the unique name it needs.
-  - page: wiki/scenarios/testing-and-iterating.md
+  - page: wiki/making-scenarios/testing-and-iterating.md
     why: proving the scenario is worth publishing before you publish it.
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the Tags tab that decides whether anyone finds the upload.
 ---
 
@@ -84,5 +84,5 @@ description as the weakness it isolates, then upload it.
 
 ## Resources
 
-- [Routines](../training/routines.md): whether the scenario earned its place first.
-- [KovaaK's](../resources/trainers/kovaaks.md): the trainer whose workshop this is.
+- [Routines](../../training/routines.md): whether the scenario earned its place first.
+- [KovaaK's](../../resources/trainers/kovaaks.md): the trainer whose workshop this is.

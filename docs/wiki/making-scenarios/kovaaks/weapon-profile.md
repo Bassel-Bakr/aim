@@ -6,13 +6,15 @@ description: >-
 tags:
   - clicking
 related:
-  - page: wiki/scenarios/keeping-the-score-readable.md
+  - page: wiki/making-scenarios/keeping-the-score-readable.md
     why: the randomness this profile is the usual source of.
-  - page: wiki/scenarios/character-profile.md
+  - page: wiki/making-scenarios/kovaaks/character-profile.md
     why: the character that carries up to eight of these.
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the shorter lookup this page is the long form of.
 ---
+
+# Weapon Profile
 
 !!! warning "Draft"
     Written from public sources, pending review.
@@ -311,4 +313,4 @@ any, copy the scenario with spread at zero and compare a session on each.
 
 - [Weapon Profiles](https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/WeaponProfiles):
   the official page for this editor.
-- [Keeping the Score Readable](keeping-the-score-readable.md): why the randomness here matters.
+- [Keeping the Score Readable](../keeping-the-score-readable.md): why the randomness here matters.

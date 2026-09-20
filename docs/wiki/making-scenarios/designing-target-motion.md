@@ -7,9 +7,9 @@ tags:
   - tracking
   - switching
 related:
-  - page: wiki/scenarios/designing-around-a-weakness.md
+  - page: wiki/making-scenarios/designing-around-a-weakness.md
     why: picking the demand this motion is supposed to create.
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the profile and tab each of these choices is set on.
   - page: wiki/categories/tracking.md
     why: the category motion design affects most.

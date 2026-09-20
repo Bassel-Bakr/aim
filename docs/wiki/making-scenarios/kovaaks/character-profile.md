@@ -6,13 +6,15 @@ description: >-
 tags:
   - routines
 related:
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the shorter lookup this page is the long form of.
-  - page: wiki/scenarios/tuning-difficulty.md
+  - page: wiki/making-scenarios/tuning-difficulty.md
     why: how far to move the settings this profile holds.
-  - page: wiki/scenarios/making-a-scenario.md
+  - page: wiki/making-scenarios/kovaaks/making-a-scenario.md
     why: the build this profile is one step of.
 ---
+
+# Character Profile
 
 !!! warning "Draft"
     Written from public sources, pending review.

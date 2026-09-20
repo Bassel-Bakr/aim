@@ -1,16 +1,18 @@
 ---
-title: "AI Aim Profile"
+title: "Aim Profile"
 description: >-
-  What a KovaaK's AI aim profile controls, why most aim drills never need one, and how to use it to
+  What a KovaaK's aim profile controls, why most aim drills never need one, and how to use it to
   model an opponent's aim.
 tags:
   - routines
 related:
-  - page: wiki/scenarios/bot-profile.md
+  - page: wiki/making-scenarios/kovaaks/bot-profile.md
     why: the bot that assigns this profile per weapon.
-  - page: wiki/scenarios/where-settings-live.md
+  - page: wiki/making-scenarios/kovaaks/where-settings-live.md
     why: the shorter lookup this page is the long form of.
 ---
+
+# Aim Profile
 
 !!! warning "Draft"
     Written from public sources, pending review.

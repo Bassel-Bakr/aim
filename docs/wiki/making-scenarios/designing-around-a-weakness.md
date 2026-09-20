@@ -10,7 +10,7 @@ related:
     why: the deliberate-practice reasoning a scenario has to satisfy.
   - page: wiki/training/benchmarks.md
     why: where the weakness a scenario targets should come from.
-  - page: wiki/scenarios/making-a-scenario.md
+  - page: wiki/making-scenarios/kovaaks/making-a-scenario.md
     why: building the scenario once you know what it should demand.
 ---
 

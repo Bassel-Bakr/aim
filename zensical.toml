@@ -43,25 +43,35 @@ nav = [
       "wiki/training/progress-and-plateaus.md",
       "wiki/training/health.md",
     ] },
+    # The five pages above the trainer group are about what a scenario should demand and whether
+    # it measures anything, which is the same question in any trainer. Everything below is one
+    # trainer's editor, so it sits under that trainer's name: Aimlabs and Aimbeast have editors of
+    # their own and get their own group when they are written.
     { "Making Scenarios" = [
-      "wiki/scenarios/index.md",
-      "wiki/scenarios/making-a-scenario.md",
-      "wiki/scenarios/designing-around-a-weakness.md",
-      "wiki/scenarios/designing-target-motion.md",
-      "wiki/scenarios/tuning-difficulty.md",
-      "wiki/scenarios/keeping-the-score-readable.md",
-      "wiki/scenarios/testing-and-iterating.md",
-      { "Editors" = [
-        "wiki/scenarios/scenario-editor.md",
-        "wiki/scenarios/character-profile.md",
-        "wiki/scenarios/weapon-profile.md",
-        "wiki/scenarios/bot-profile.md",
-        "wiki/scenarios/dodge-profile.md",
-        "wiki/scenarios/aim-profile.md",
-        "wiki/scenarios/ability-profile.md",
+      "wiki/making-scenarios/index.md",
+      "wiki/making-scenarios/designing-around-a-weakness.md",
+      "wiki/making-scenarios/designing-target-motion.md",
+      "wiki/making-scenarios/tuning-difficulty.md",
+      "wiki/making-scenarios/keeping-the-score-readable.md",
+      "wiki/making-scenarios/testing-and-iterating.md",
+      # The editors are named and ordered as the game's own Profile Manager tabs are: Char,
+      # Weapon, Abilities, Bot, Dodge, Aim, with the Edit Scenario window first. A reader with the
+      # game open reads the same words in the same order. Each page keeps its own title, so search
+      # results and links still say Character Profile.
+      { "KovaaK's" = [
+        # First in the group, so navigation.indexes makes the group's own label open this page.
+        "wiki/making-scenarios/kovaaks/index.md",
+        "wiki/making-scenarios/kovaaks/making-a-scenario.md",
+        { "Scenario" = "wiki/making-scenarios/kovaaks/edit-scenario.md" },
+        { "Char" = "wiki/making-scenarios/kovaaks/character-profile.md" },
+        { "Weapon" = "wiki/making-scenarios/kovaaks/weapon-profile.md" },
+        { "Abilities" = "wiki/making-scenarios/kovaaks/ability-profile.md" },
+        { "Bot" = "wiki/making-scenarios/kovaaks/bot-profile.md" },
+        { "Dodge" = "wiki/making-scenarios/kovaaks/dodge-profile.md" },
+        { "Aim" = "wiki/making-scenarios/kovaaks/aim-profile.md" },
+        "wiki/making-scenarios/kovaaks/where-settings-live.md",
+        "wiki/making-scenarios/kovaaks/sharing-to-the-workshop.md",
       ] },
-      "wiki/scenarios/where-settings-live.md",
-      "wiki/scenarios/sharing-to-the-workshop.md",
     ] },
     { "Resources" = [
       "wiki/resources/index.md",

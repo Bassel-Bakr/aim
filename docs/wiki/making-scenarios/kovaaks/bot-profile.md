@@ -6,13 +6,15 @@ description: >-
 tags:
   - routines
 related:
-  - page: wiki/scenarios/character-profile.md
+  - page: wiki/making-scenarios/kovaaks/character-profile.md
     why: the body a bot wears, and where its size and spawn live.
-  - page: wiki/scenarios/dodge-profile.md
+  - page: wiki/making-scenarios/kovaaks/dodge-profile.md
     why: the profile that decides how this bot moves.
-  - page: wiki/scenarios/designing-target-motion.md
+  - page: wiki/making-scenarios/designing-target-motion.md
     why: choosing what the motion these settings produce should train.
 ---
+
+# Bot Profile
 
 !!! warning "Draft"
     Written from public sources, pending review.
@@ -86,7 +88,7 @@ watches you, which reads very differently from one that ignores you.
 **Most aim drills want one of the first two.** A target that never shoots back is a target you can
 study, and most pure aim scenarios use exactly that.
 
-The aim column names which AI aim profile the bot uses per weapon, and the frequency column weights
+The aim column names which aim profile the bot uses per weapon, and the frequency column weights
 how often each is chosen.
 
 <figure class="aim-figure">
@@ -125,4 +127,4 @@ it names. Those two are what you would actually edit.
 
 - [Bot Profiles](https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/BotProfiles): the
   official page for this editor.
-- [Designing Target Motion](designing-target-motion.md): what to do with the dodges you attach.
+- [Designing Target Motion](../designing-target-motion.md): what to do with the dodges you attach.
