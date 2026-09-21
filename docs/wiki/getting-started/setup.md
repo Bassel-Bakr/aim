@@ -68,7 +68,7 @@ A setup you can comfortably hold for a full practice session does more for your 
 any single piece of gear.
 
 **Monitor refresh rate and FPS.** A higher refresh rate reduces the time between frames the display
-can show. For example, a 240Hz display refreshes roughly 2.7ms faster per frame than a 144Hz
+can show. For example, a 240Hz display refreshes roughly 2.8ms faster per frame than a 144Hz
 display.[^REF-23]
 
 Blur Busters' testing also found that running your in-game frame rate above your monitor's refresh

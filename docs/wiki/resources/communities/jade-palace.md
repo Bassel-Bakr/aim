@@ -1,7 +1,7 @@
 ---
 title: "Jade Palace"
 description: >-
-  An application-only Discord where elite aimers and aim-training creators collaborate, organised by MattyOW.
+  An application-only Discord where elite aimers and aim-training creators collaborate, organized by MattyOW.
 tags:
   - community
 related:
