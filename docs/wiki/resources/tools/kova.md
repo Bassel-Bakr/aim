@@ -19,7 +19,7 @@ related:
 
 <!-- aim:sources checked -->
 
-**Links:** [Website](https://pyvno.xyz)
+**Links:** [Website](https://kova.page)
 
 ## What it is
 
@@ -51,7 +51,7 @@ trainer and a rank-up planner, which this page does not cover.
 
 ## Key content
 
-- [kova](https://pyvno.xyz): browse existing profiles to see how other players document their gear
+- [kova](https://kova.page): browse existing profiles to see how other players document their gear
   and settings before building your own.
 
 ## Our take
