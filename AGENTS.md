@@ -64,6 +64,21 @@ do not rely on the exit code alone.
 External links are checked separately by lychee, on a weekly schedule rather than per pull request,
 so a dead outbound link will not show up in the checks you run locally.
 
+lychee passes a link that redirects, because a redirect is not a dead link. A source that moves to a
+new domain therefore keeps passing until the redirect lapses, and then the citation points nowhere.
+This finds the move while the redirect still works:
+
+```bash
+python scripts/check_redirects.py
+```
+
+It follows each registry URL by hand and reports any that lands somewhere else, ignoring a trailing
+slash or a `www.` prefix. Name references after the command to check only those, as in
+`python scripts/check_redirects.py REF-30`. Read the report rather than the exit code: a redirect can
+be a rename worth following into `references.yml`, or a login wall, or a regional edition, and only a
+person can tell which. It needs the network, so it does not run on pull requests. Run it when a
+source feels stale.
+
 Colours are checked separately, because they change rarely and the check is about the palette rather
 than the pages:
 
