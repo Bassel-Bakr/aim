@@ -19,13 +19,17 @@ related:
 !!! warning "Draft"
     Written from public sources, pending review.
 
+!!! note "Read from the editor"
+    Field names, tooltip text and defaults here were read from the KovaaK's scenario editor in
+    September 2026. The official wiki documents tabs rather than fields.
+
 A bot profile is wiring, not content. It names a character, decides whether that character shoots,
 and attaches the dodges that make it move.
 
-- **It holds almost no settings of its own.** It points at other profiles.[^REF-33]
+- **It holds almost no settings of its own.** It points at other profiles.
 - **Three tabs.** Main, Weapon, Dodge.[^REF-82]
-- **Two switches change scoring.** Disable Scoring and Untargetable.[^REF-33]
-- **Weapons come from the character.** Not from this profile.[^REF-33]
+- **Two switches change scoring.** Disable Scoring and Untargetable.
+- **Weapons come from the character.** Not from this profile.
 
 ## Tabs
 
@@ -33,7 +37,7 @@ and attaches the dodges that make it move.
 
 Profile name and the character profile the bot wears. Spawn group, a bot X-ray switch, ability use
 timer and ability usage as a frequency with a min and max. A laser pointer switch. Then use minimum
-respawn time, disable scoring and untargetable.[^REF-33][^REF-82]
+respawn time, disable scoring and untargetable.[^REF-82]
 
 **The character profile is the important line.** Everything about the target's size, health and
 spawn behavior comes from there, not from here.
@@ -53,13 +57,13 @@ Spawn Group ties the bot to a spawn point group on the map, which is how differe
 different places.
 
 **One switch is about performance, not behavior.** Checking it removes all dodging and movement
-logic from the bot, which helps when a scenario wants a great many simple targets.[^REF-33]
+logic from the bot, which helps when a scenario wants a great many simple targets.
 
 Ability Usage is a frequency rather than a schedule. Every interval between its minimum and maximum
-the bot re-evaluates whether it may use abilities at all.[^REF-33]
+the bot re-evaluates whether it may use abilities at all.
 
 Untargetable means other bots cannot target it, which matters only in scenarios where bots fight
-each other.[^REF-33]
+each other.
 
 <figure class="aim-figure">
 <!-- aim:figure bot-main-fields -->
@@ -69,15 +73,15 @@ each other.[^REF-33]
 ### Weapon
 
 A no aiming or shooting switch, a fire weapons switch, and a weapon switch timer. Then a row per
-weapon slot pairing an aim profile with a frequency.[^REF-33][^REF-82]
+weapon slot pairing an aim profile with a frequency.[^REF-82]
 
 The panel notes that the weapons listed come from the character profile chosen on the Main
-tab.[^REF-33]
+tab.
 
 **Two switches, three behaviors.** No Aiming/Shooting strips the aiming logic out entirely. Fire
-Weapons left unchecked keeps the aim but holds the trigger.[^REF-33]
+Weapons left unchecked keeps the aim but holds the trigger.
 
-Unchecked, the bot still aims at its target and simply fires nothing.[^REF-33] That is a target that
+Unchecked, the bot still aims at its target and simply fires nothing. That is a target that
 watches you, which reads very differently from one that ignores you.
 
 <figure class="aim-figure">
@@ -110,10 +114,10 @@ the same rep. Weighted evenly and which drill you got is luck.
 
 ## Common mistakes
 
-- Editing the bot to change target size. Size is on its character profile.[^REF-33]
+- Editing the bot to change target size. Size is on its character profile.
 - Building a dodge profile and never attaching it here.[^REF-82]
 - Stacking several dodges at similar weights, then wondering why scores jump.[^REF-82]
-- Leaving bots shooting in a drill that is only about your own aim.[^REF-33]
+- Leaving bots shooting in a drill that is only about your own aim.
 
 ## In practice
 

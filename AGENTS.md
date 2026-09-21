@@ -175,7 +175,10 @@ agents most often miss:
    sources are not. Third-party assets a figure is built from are the one exception. See
    [Third-party assets](#third-party-assets).
 6. Do not assert a claim you cannot verify from a public source. Leave it out, or mark it with
-   `<!-- REVIEW: what needs checking -->`.
+   `<!-- REVIEW: what needs checking -->`. One exception covers software with no public
+   reference: read the field names and tooltips from the software, carry a note at the top of
+   the page saying so and when, and give those claims no footnote. See
+   [CONTRIBUTING.md](CONTRIBUTING.md#writing-rules). The KovaaK's editor pages work this way.
 7. A page written from research but not yet fact-checked keeps the draft banner at the top, exactly
    as shown in [CONTRIBUTING.md](CONTRIBUTING.md).
 8. New abbreviations go in both `docs/wiki/glossary.md` and `includes/abbreviations.md`.

@@ -17,12 +17,16 @@ related:
 !!! warning "Draft"
     Written from public sources, pending review.
 
+!!! note "Read from the editor"
+    Field names, tooltip text and defaults here were read from the KovaaK's scenario editor in
+    September 2026. The official wiki documents tabs rather than fields.
+
 An ability is a movement, melee, sprint or recall action a character can use.[^REF-87] For a pure
 aim drill you will not need one. For a scenario that resembles a real fight, you might.
 
 - **Four kinds.** Movement, melee, sprint and recall.[^REF-87]
 - **Two tabs each.** Main for what it does, AI Use for when bots use it.[^REF-87]
-- **A character holds four.** Plus one global cooldown across them.[^REF-33]
+- **A character holds four.** Plus one global cooldown across them.
 - **Skip it for a pure aim drill.** It trains using the ability.
 
 ## Tabs
@@ -30,10 +34,10 @@ aim drill you will not need one. For a scenario that resembles a real fight, you
 ### Main
 
 Profile name, max charges, charges on spawn and a charge timer. Charges refunded on kill, delay
-between uses, and a fully-auto switch.[^REF-33]
+between uses, and a fully-auto switch.
 
 Then the weapon to shoot, a block attack timer, whether the ability is blocked when attacking, and
-ammo per shot.[^REF-33]
+ammo per shot.
 
 A movement ability adds two more tabs. H-Box gives it a hurtbox so targets near it take damage or
 knockback, and Input controls which inputs are allowed during it.[^REF-87]
@@ -42,7 +46,7 @@ knockback, and Input controls which inputs are allowed during it.[^REF-87]
 interrupts the scenario.
 
 Max Charges is the ceiling, Charges On Spawn is how many are ready at the start, and the charge
-timer refills them.[^REF-33]
+timer refills them.
 
 <figure class="aim-figure">
 <!-- aim:figure charges -->
@@ -50,7 +54,7 @@ timer refills them.[^REF-33]
 </figure>
 
 Fully Auto means the ability can be held down to keep using it, rather than pressed per
-use.[^REF-33] Ammo Per Shot takes ammo from the selected weapon.[^REF-33]
+use. Ammo Per Shot takes ammo from the selected weapon.
 
 For a drill where you want aiming to be continuous, that interruption is the problem. For a drill
 about fighting through an ability, it is the point.
@@ -73,21 +77,21 @@ about fighting through an ability, it is the point.
 ### AI Use
 
 When bots use it, rather than what it does. Uses on ground, in air, in combat and out of combat.
-Then a reuse timer.[^REF-33][^REF-87]
+Then a reuse timer.[^REF-87]
 
 Then the conditions. Self health range, target health range and target distance range, each as a
-min and max. Maximum FoV to target.[^REF-33]
+min and max. Maximum FoV to target.
 
 Then the reactions. Whether taking damage activates the ability, a chance to ignore damage, and a
-reaction delay as a min and max.[^REF-33]
+reaction delay as a min and max.
 
-A damage reaction block closes the tab with a cooldown, a threshold and a reset time.[^REF-33]
+A damage reaction block closes the tab with a cooldown, a threshold and a reset time.
 
 **The ranges are how you make a bot behave plausibly.** A bot that only dashes when hurt, or only
 when you are close, reads as a player rather than a script.
 
 Maximum FoV to Target adds a condition of its own. Using the ability in combat, the bot must be
-aiming within that many degrees of you.[^REF-33]
+aiming within that many degrees of you.
 
 **Reaction delay is the honesty setting.** At zero the bot answers instantly, which no human does.
 Give it a range and the fight becomes winnable.
@@ -100,8 +104,8 @@ Give it a range and the fight becomes winnable.
 ## Common mistakes
 
 - Building an ability scenario and calling it aim practice.
-- Leaving reaction delay at zero, which produces an opponent nobody can beat.[^REF-33]
-- Forgetting the character's global cooldown, which caps all four abilities at once.[^REF-33]
+- Leaving reaction delay at zero, which produces an opponent nobody can beat.
+- Forgetting the character's global cooldown, which caps all four abilities at once.
 
 ## In practice
 

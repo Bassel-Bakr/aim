@@ -17,26 +17,30 @@ related:
 !!! warning "Draft"
     Written from public sources, pending review.
 
+!!! note "Read from the editor"
+    Field names, tooltip text and defaults here were read from the KovaaK's scenario editor in
+    September 2026. The official wiki documents tabs rather than fields.
+
 An aim profile tells a bot how to aim at you.[^REF-92] It has one tab, and most aim drills never
 touch it, because most aim drills use targets that never shoot back.
 
-- **One tab, about twenty fields.**[^REF-33]
+- **One tab, about twenty fields.**
 - **Irrelevant if bots do not fire.** Which covers most aim scenarios.[^REF-79]
-- **It models a human, badly or well.** Reaction time, speed and error.[^REF-33]
-- **It is also how you build an aimbot.** For testing, not for scoring.[^REF-33]
+- **It models a human, badly or well.** Reaction time, speed and error.
+- **It is also how you build an aimbot.** For testing, not for scoring.
 
 ## Tabs
 
 ### Main
 
 Profile name and an aiming style. Reaction time as a min and max. Self movement fix time as a min
-and max.[^REF-33]
+and max.
 
-Then the aim itself: flick FOV, flick speed, flick error, track speed and track error.[^REF-33]
+Then the aim itself: flick FOV, flick speed, flick error, track speed and track error.
 
 Then the limits. Max turn on mousepad, and mouse re-center time as a min and max. Optimal aim FOV
 and an outer aim penalty multiplier. Shoot FOV, a vertical aim offset and a tolerable
-spread.[^REF-33]
+spread.
 
 **Speed and error are the pair that matter.** Speed sets how fast the bot closes on you. Error sets
 how much it misses by, which is what stops it being perfect.
@@ -45,7 +49,7 @@ Set error to zero and you have an aimbot. That is genuinely useful while buildin
 you check whether a scenario's geometry and spawns work without your own aim in the way.
 
 **Reaction time is a sampling rate, not a delay.** The editor describes it as how often the bot
-estimates its opponent's position and its own.[^REF-33]
+estimates its opponent's position and its own.
 
 Estimate rarely and the bot aims where you were when it last looked. That is what makes a slow bot
 feel beatable rather than merely slow.
@@ -56,16 +60,16 @@ feel beatable rather than merely slow.
 </figure>
 
 Flick Speed is defined relative to that reaction time: it is how fast the bot flicks to the
-estimated location.[^REF-33]
+estimated location.
 
 **Reaction time is also how you model a human.** A bot with a short one punishes you for breaking
 cover. A long one gives you a window.
 
 **Max Turn On Mousepad is the field that makes a bot feel human.** It is how many degrees from the
-bot's mousepad center before an aiming penalty starts.[^REF-33]
+bot's mousepad center before an aiming penalty starts.
 
 Track Error is a random value from zero up to the amount you set, multiplied by that mousepad
-penalty, then clamped at Max Aiming Error.[^REF-33]
+penalty, then clamped at Max Aiming Error.
 
 <figure class="aim-figure">
 <!-- aim:figure mousepad -->
@@ -97,7 +101,7 @@ a worse opponent.
 ## Common mistakes
 
 - Tuning an aim profile for a scenario whose bots never fire.[^REF-79]
-- Leaving error at zero outside of testing, which makes an unbeatable opponent.[^REF-33]
+- Leaving error at zero outside of testing, which makes an unbeatable opponent.
 - Expecting this profile to change how a bot moves. Motion is a dodge profile.[^REF-83]
 
 ## In practice

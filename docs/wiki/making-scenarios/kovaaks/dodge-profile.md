@@ -20,13 +20,17 @@ related:
 !!! warning "Draft"
     Written from public sources, pending review.
 
+!!! note "Read from the editor"
+    Field names, tooltip text and defaults here were read from the KovaaK's scenario editor in
+    September 2026. The official wiki documents tabs rather than fields.
+
 The dodge profile is the most important editor in the game for aim training. It decides how a target
 moves, which decides which skill your scenario trains.
 
-- **Strafe timing is the core.** Toggle times and swap pauses set the rhythm.[^REF-33]
-- **React makes a target unlearnable.** It answers you instead of repeating.[^REF-33][^REF-83]
+- **Strafe timing is the core.** Toggle times and swap pauses set the rhythm.
+- **React makes a target unlearnable.** It answers you instead of repeating.[^REF-83]
 - **Waypoint Logic decides whether a route runs.** Four settings.[^REF-91]
-- **Playback replaces motion with a recording.** A fixed path, every run.[^REF-33]
+- **Playback replaces motion with a recording.** A fixed path, every run.
 
 ## Tabs
 
@@ -38,7 +42,7 @@ for it.
 Toggle L/R time as a min and max, a strafe time multiplier per side, and a strafe swap pause. Then
 toggle forward and back, and a profile change time.
 
-Waypoint logic, waypoint turn rate and cooldown time close the tab.[^REF-33][^REF-83]
+Waypoint logic, waypoint turn rate and cooldown time close the tab.[^REF-83]
 
 **Toggle L/R Time is the strafe rhythm.** A narrow min and max makes a metronome you can learn. A
 wide one makes a target you have to read.
@@ -55,7 +59,7 @@ cannot. Set it deliberately.
 moment your crosshair either stays on target or sails past.
 
 **Strafe Time Multiplier biases one side.** It multiplies how long the bot keeps going once it
-starts strafing that way.[^REF-33]
+starts strafing that way.
 
 Set the two sides differently and the target spends more time on one side of its track. That turns
 an even drill into one about a direction you are worse at.
@@ -66,7 +70,7 @@ an even drill into one about a direction you are worse at.
 </figure>
 
 Cooldown Time is how long before this dodge profile can be used again, with zero meaning no
-cooldown at all.[^REF-33]
+cooldown at all.
 
 Target Distance keeps the bot within a range of you. That is how a scenario holds a consistent
 angular size instead of letting the target drift near and far.
@@ -84,13 +88,13 @@ reacts to you.
 
 ### React
 
-Target Strafe Reaction, with a strafe reaction delay as a min and max.[^REF-33][^REF-83]
+Target Strafe Reaction, with a strafe reaction delay as a min and max.[^REF-83]
 
 Then a damage reaction block. Whether taking damage toggles left/right or forward/back, and a
 chance to ignore damage. A delay, a cooldown, a threshold and a reset time. Finally, whether it
 triggers a profile change.
 
-A blocked movement checks block follows, including trigger on blocking collision.[^REF-33]
+A blocked movement checks block follows, including trigger on blocking collision.
 
 **This tab is what makes a target unlearnable.** Target Strafe Reaction set to mimic means the bot
 answers your movement rather than running its own pattern.
@@ -101,10 +105,10 @@ provokes a dodge and sometimes does not, so you cannot learn the response.
 That is useful for a reaction drill and ruinous for a scenario you want to compare across sessions.
 
 **Triggers Profile Change ejects the bot entirely.** Under Mimic or Oppose, a damage reaction
-pushes it out of this dodge profile.[^REF-33]
+pushes it out of this dodge profile.
 
 It then looks for a dodge profile set to Ignore. If none exists, it picks one at
-random.[^REF-33] A scenario with one dodge profile therefore behaves differently from one with
+random. A scenario with one dodge profile therefore behaves differently from one with
 several.
 
 <figure class="aim-figure">
@@ -113,10 +117,10 @@ several.
 </figure>
 
 **Blocked movement is its own reaction.** Trigger On Blocking Collision fires a counter strafe when
-the bot hits something that would stop it.[^REF-33]
+the bot hits something that would stop it.
 
 The reaction time beside it sets how long the bot presses into the obstacle before turning
-around.[^REF-33] At zero it turns instantly, which reads as unnaturally sharp.
+around. At zero it turns instantly, which reads as unnaturally sharp.
 
 <figure class="aim-figure">
 <!-- aim:figure blocked -->
@@ -131,16 +135,16 @@ around.[^REF-33] At zero it turns instantly, which reads as unnaturally sharp.
 ### Move
 
 Alternate jump and crouch input, jump frequency, jump time, crouching frequency and crouch
-time.[^REF-33][^REF-83]
+time.[^REF-83]
 
 **Two approaches, chosen by one switch.** With Alternate Jump/Crouch Input unchecked you set how
-often the bot presses and holds jump or crouch.[^REF-33]
+often the bot presses and holds jump or crouch.
 
 Checked, the bot alternates between holding jump and holding crouch instead. That mode is meant for
-character profiles where holding jump flies up and holding crouch flies down.[^REF-33]
+character profiles where holding jump flies up and holding crouch flies down.
 
 Crouching Frequency is a percentage of time rather than a rate: zero never crouches, one holds
-crouch permanently.[^REF-33]
+crouch permanently.
 
 **Vertical motion is a different demand.** A jumping target adds a vertical correction that most
 aim benchmarks deliberately leave out.
@@ -156,22 +160,22 @@ horizontal tracking.
 ### Playback
 
 Profile name, override movement, override rotation, override weapon input, override ability input,
-loop upon completion, and a playback mode.[^REF-33]
+loop upon completion, and a playback mode.
 
 **Playback replaces the dodge with a recording.** The target repeats a captured path exactly, every
 run, which is the most repeatable motion the editor can produce.
 
 **Playback Mode decides what a knockback does to that recording.** Three options, and the difference
-only shows once something hits the bot.[^REF-33]
+only shows once something hits the bot.
 
 Input Only replays the keyboard inputs from wherever the bot happens to be, so knockback takes
-effect and pushes it off course.[^REF-33]
+effect and pushes it off course.
 
 Absolute Position matches the recorded location at all times. The bot teleports to the start of the
-path, and knockback or obstructions cannot pull it off.[^REF-33]
+path, and knockback or obstructions cannot pull it off.
 
 Moveable Absolute Position uses Absolute Position until something knocks it, then falls back to
-Input Only for the rest of the playback.[^REF-33]
+Input Only for the rest of the playback.
 
 <figure class="aim-figure">
 <!-- aim:figure playback-mode -->
@@ -192,8 +196,8 @@ the React tab.
 ## Common mistakes
 
 - Building a route on the map and leaving Waypoint Logic on Ignore.[^REF-91]
-- Setting a wide Toggle L/R range for a drill you meant to be repeatable.[^REF-33]
-- Leaving Chance to Ignore Damage below certain in a scenario you score across sessions.[^REF-33]
+- Setting a wide Toggle L/R range for a drill you meant to be repeatable.
+- Leaving Chance to Ignore Damage below certain in a scenario you score across sessions.
 - Editing the bot or character profile to change motion. It lives here.[^REF-82][^REF-83]
 
 ## In practice

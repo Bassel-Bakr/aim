@@ -127,6 +127,20 @@ Write it for someone deciding whether to open the page:
 4. If you cannot verify a claim from a public source, leave it out, or mark it with
    `<!-- REVIEW: what needs checking -->`. HTML comments are hidden on the page but still visible
    in the page source.
+5. Some software has no public reference. Where a page documents a field name, a tooltip or a
+   default that no published source records, read it from the software and say so at the top of the
+   page:
+
+   ```markdown
+   !!! note "Read from the editor"
+       Field names, tooltip text and defaults here were read from the KovaaK's scenario editor in
+       September 2026. The official wiki documents tabs rather than fields.
+   ```
+
+   Those claims then take no footnote. The note is the citation, and a marker pointing at a source
+   that does not carry the field is worse than no marker at all. Everything else on the page cites
+   normally. Name the month, so a reader can see how old the reading is, and read it again when a
+   release changes the software.
 
 ## Readability
 

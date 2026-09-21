@@ -19,19 +19,23 @@ related:
 !!! warning "Draft"
     Written from public sources, pending review.
 
+!!! note "Read from the editor"
+    Field names, tooltip text and defaults here were read from the KovaaK's scenario editor in
+    September 2026. The official wiki documents tabs rather than fields.
+
 Profiles describe the pieces. This window describes the match: which pieces play, what the rules
 are, how a run becomes a number, and whether anyone can find it.
 
 - **Challenge is a separate list.** Profiles on Main do not reach it alone.[^REF-80][^REF-85]
-- **Scoring is a training instruction.** Whatever it pays for is what you practice.[^REF-33]
-- **Two fields end a run.** Time limit, or a kill count.[^REF-33]
+- **Scoring is a training instruction.** Whatever it pays for is what you practice.
+- **Two fields end a run.** Time limit, or a kill count.
 - **Tags decide whether it exists.** Search runs on them.[^REF-80]
 
 ## Tabs
 
 ### Main
 
-Scenario name, and the lists of player characters and bots in use.[^REF-33][^REF-80] Each list has
+Scenario name, and the lists of player characters and bots in use.[^REF-80] Each list has
 an Add Profile button, and each entry can be removed.
 
 This tab is the inventory, not the rules. Adding a profile here makes it available. It does not put
@@ -58,7 +62,7 @@ Map scale and time scale. Target speed and target size, each with a static or ad
 mode.[^REF-33][^REF-80]
 
 Then the end conditions. Time limit, time regained per kill, end after a number of kills, and end
-after a damage amount.[^REF-33]
+after a damage amount.
 
 **They are a race, not a menu.** Set more than one and the run stops at whichever fires first.
 That is an easy way to build a scenario that never reaches its time limit.
@@ -78,7 +82,7 @@ that does not, so two scores were not measured over the same amount of time.
 
 For a drill you compare across sessions, leave it at zero and let the time limit be the time limit.
 
-Then lock hipfire FOV with a locked FOV range, and a force particle effects switch.[^REF-33]
+Then lock hipfire FOV with a locked FOV range, and a force particle effects switch.
 
 **Lock Hipfire FOV makes the scenario the same for everyone.** A target's angular size depends on
 the field of view you see it at. Unclamped, your scenario is a slightly different drill for every
@@ -93,7 +97,7 @@ That matters most for a scenario you intend to share. A score should mean the sa
 someone else's machine as on yours.
 
 A disable block closes the tab: projectile predictors, cheats, health bars, hit markers and hit
-sounds.[^REF-33]
+sounds.
 
 **Static against adapt is the interesting pair.** Static holds target speed and size where you set
 them. Adapt moves them with your performance.
@@ -133,13 +137,13 @@ worth more than a length you optimize.
 ### Scoring
 
 Score to win. Then a score-per block: damage, hit, an over-damage switch, kill, midair direct, any
-direct, time left and distance traveled.[^REF-33]
+direct, time left and distance traveled.
 
 A movement-based scoring block follows, with its own enable switch. Then a score-loss-per block:
-damage taken, death, and more.[^REF-33]
+damage taken, death, and more.
 
 Final score multipliers close the tab, including accuracy, square root accuracy, damage efficiency
-and kill efficiency.[^REF-33]
+and kill efficiency.
 
 **Whatever this tab rewards is what you will practice.** A model paying only for hits trains volume.
 One that subtracts for misses trains restraint.
@@ -151,10 +155,10 @@ teaches something nobody chose.
 a run is judged more on what you did and less on one bad stretch.
 
 **The multipliers stack, and two of them overlap.** They apply to the subtotal the rest of the tab
-produces.[^REF-33]
+produces.
 
 The editor recommends not checking both Accuracy and Damage Efficiency, because the same misses are
-then charged for twice.[^REF-33]
+then charged for twice.
 
 <figure class="aim-figure">
 <!-- aim:figure multipliers -->
@@ -162,7 +166,7 @@ then charged for twice.[^REF-33]
 </figure>
 
 Enable Over Damage decides whether damage past what was needed to kill still counts toward the
-score.[^REF-33]
+score.
 
 <figure class="aim-figure">
 <!-- aim:figure scenario-scoring-fields -->
@@ -172,7 +176,7 @@ score.[^REF-33]
 ### Tags
 
 Tags, a difficulty rating, a description, an aim type and an aim sub type, a flicking switch, and a
-thumbnail.[^REF-33][^REF-80]
+thumbnail.[^REF-80]
 
 **Aim Type and Aim Sub Type are how a drill is found.** They feed the browser's filters, so a
 scenario tagged by the skill it trains reaches the person looking for that skill.
@@ -188,7 +192,7 @@ drill is searching by what it fixes.
 ## Common mistakes
 
 - Adding a profile on Main and testing in challenge mode, where nothing changed.[^REF-80][^REF-85]
-- Leaving target speed or size on adapt in a scenario you want to compare across sessions.[^REF-33]
+- Leaving target speed or size on adapt in a scenario you want to compare across sessions.
 - Keeping the copied scenario's scoring without checking what it pays for.
 - Leaving Tags empty, which makes the scenario unsearchable.[^REF-80]
 
