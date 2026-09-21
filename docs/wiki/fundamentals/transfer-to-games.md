@@ -47,8 +47,7 @@ abilities, which no generic scenario reproduces.
 
 Even Voltaic, whose own benchmarks measure raw aim, says its benchmarks "represent just one piece of
 the puzzle for in-game performance". It says they should be paired with game sense and movement
-practiced in the actual game, per its
-[Season 5 benchmark announcement](https://blog.voltaic.gg/announcing-the-voltaic-season-5-aiming-benchmarks-beta-for-kovaaks/).
+practiced in the actual game.[^REF-50]
 
 ## Common mistakes
 
@@ -68,8 +67,7 @@ time in your own game does more for you than more trainer time.[^REF-8]
 
 [Voltaic](../resources/communities/voltaic.md) structures its own [routines](../training/routines.md)
 around this split. General Fundamental Routines cover overall mouse control. Separate game-specific
-routines cover the aspects of aiming a given game leans on most, per its
-[Getting Started guide](https://blog.voltaic.gg/getting-started-with-voltaic/).
+routines cover the aspects of aiming a given game leans on most.[^REF-52]
 
 Both [KovaaK's](../resources/trainers/kovaaks.md) and [Aimlabs](../resources/trainers/aimlabs.md)
 similarly offer game-specific benchmarks and training programs, alongside their general scenario

@@ -32,7 +32,7 @@ Revosect is an aim-training and esports-improvement community that runs its own 
 
 Players who want a tiered benchmark to measure raw aim, similar in spirit to [Voltaic](voltaic.md), plus curated practice routines for specific games.
 
-Revosect's [benchmarks](https://revosect.com/benchmarks) have three difficulty tiers: Entry, Intermediate, and Advanced. Newer and experienced players both have a track to climb. The top Advanced ranks require a recorded VOD to verify scores.
+Revosect's benchmarks have three difficulty tiers: Entry, Intermediate, and Advanced.[^REF-43] Newer and experienced players both have a track to climb. The top Advanced ranks require a recorded VOD to verify scores.
 
 ## What it covers
 

@@ -51,10 +51,9 @@ to correct small tracking errors, but demands a larger mousepad and more arm mov
 A higher sensitivity (lower cm/360) lets you turn and flick with small wrist movements and less desk
 space. The catch: the same small hand tremor produces a much larger error on screen.
 
-Some sources, including [Aimlabs](https://aimlabs.com/articles/aimlabs/a-quick-explainer-on-cm-360-and-the-common-cm-360-by-game/),
-publish typical cm/360 ranges used by players per game. Treat these as a starting reference, not a
-target. The article itself notes the right number depends on your equipment, desk space, posture,
-and comfort.
+Published cm/360 ranges show what players typically use in each game.[^REF-4] Treat these as a
+starting reference, not a target. The right number depends on your equipment, desk space, posture,
+and comfort.[^REF-4]
 
 ## Choosing a starting point
 
@@ -74,9 +73,9 @@ sensitivity. That keeps your muscle memory consistent instead of forcing you to 
 title.
 
 - **KovaaK's** publishes an official web-based [sensitivity converter](https://kovaaks.com/kovaaks/sens-converter)
-  for a fixed list of supported games. Its open-source
+  for a fixed list of supported games.[^REF-31] Its open-source
   [Sensitivity Matcher](https://github.com/KovaaK/SensitivityMatcher) measures your actual in-game
-  turn rate, for games not on that list. Both are on the [KovaaK's](../resources/trainers/kovaaks.md)
+  turn rate, for games not on that list.[^REF-32] Both are on the [KovaaK's](../resources/trainers/kovaaks.md)
   resource page.
 - **Aimlabs** has a built-in Sensitivity Finder for calibrating your in-app sensitivity, per the
   [Aimlabs](../resources/trainers/aimlabs.md) resource page.
