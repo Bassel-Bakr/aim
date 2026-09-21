@@ -40,7 +40,7 @@ Its scale and free access also suit complete beginners, while Aimlabs+ adds tool
 - **Tasks and playlists**: 50,000+ tasks and playlists,[^REF-7] including community-built ones made with Aimlabs' Creator Studio and Playlist Editor and shared through the Aimlabs Steam Workshop.[^REF-12]
 - **Game-specific training** across 500 FPS game profiles. It includes official partnership content for VALORANT and Tom Clancy's Rainbow Six Siege.[^REF-7]
 - **[Sensitivity](../../getting-started/sensitivity.md) tools**: a Sensitivity Finder for calibrating mouse settings, listed for Aimlabs+ members.[^REF-7]
-- **Benchmarks**: Aimlabs runs its own official Benchmarks, with Entry, Intermediate, and Elite tiers across tapping, tracking, and switching categories.[^REF-16] These are separate from third-party benchmarks such as [Voltaic](../communities/voltaic.md) Season 3, released as a beta for Aimlabs.[^REF-49]
+- **Benchmarks**: Aimlabs runs its own official Benchmarks, with Entry, Intermediate, and Elite tiers across tapping, tracking, and switching categories.[^REF-16] These are separate from third-party benchmarks such as [Voltaic](../communities/voltaic.md) Season 3, which also runs inside Aimlabs.[^REF-48]
 - **Stats**: per-task leaderboards with filters for period, mode, and weapon, plus a personal ranking indicator.[^REF-13]
 
 ## Key content

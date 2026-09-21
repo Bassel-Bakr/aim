@@ -44,7 +44,7 @@ Players comfortable choosing and configuring their own scenarios and playlists, 
 ## What it covers
 
 - **Scenarios and playlists** covering [Clicking](../../categories/clicking.md), [Tracking](../../categories/tracking.md), and [Switching](../../categories/switching.md) drills, created by the developer and the community and shared through the in-game [Steam Workshop](https://steamcommunity.com/app/824270/workshop/).
-- **Benchmarks**: built-in game-specific benchmarks for VALORANT, Apex Legends, Fortnite, and Overwatch. It is also the base game that third-party [benchmark](../../training/benchmarks.md) seasons run on, including Revosect Season 5[^REF-43] and Voltaic's Season 5 beta.[^REF-50]
+- **Benchmarks**: built-in game-specific benchmarks for VALORANT, Apex Legends, Fortnite, and Overwatch. It is also the base game that third-party [benchmark](../../training/benchmarks.md) seasons run on, including Revosect Season 5[^REF-43] and Voltaic's Season 5.[^REF-48]
 - **[Sensitivity](../../getting-started/sensitivity.md) matching**: the official site hosts a web-based [sensitivity converter](https://kovaaks.com/kovaaks/sens-converter) for a set list of games.[^REF-31] The developer separately publishes an open-source [Sensitivity Matcher](https://github.com/KovaaK/SensitivityMatcher) script. It measures in-game turn rate, to match sensitivity for games not on that list.[^REF-32]
 - **Stats and editor**: Steam leaderboards and stat tracking, plus a map and scenario editor for building custom content.[^REF-33]
 
