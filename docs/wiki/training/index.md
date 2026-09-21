@@ -17,7 +17,7 @@ How you train matters more across weeks than within any single session. A workab
 4. Re-run the benchmark every few weeks, not every session.
 
 Skill develops between sessions as well as during them, so rest is part of the plan throughout, not
-a step. See [Health and Rest](health.md).
+a step.[^REF-26] See [Health and Rest](health.md).
 
 A single day's result moves around too much on its own to prove anything. Judge your training by the
 trend across several runs, covered on [Progress and Plateaus](progress-and-plateaus.md), rather than

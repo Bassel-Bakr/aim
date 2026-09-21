@@ -43,4 +43,4 @@ The editor is one trainer's, so the second half sits under that trainer's name.
 - **[Making Scenarios in KovaaK's](kovaaks/index.md)**: the copy-and-replace model the game is
   built on, and a figure for every option in all seven editors.
 
-Aimlabs and Aimbeast have editors of their own, and are not covered here yet.
+Aimlabs[^REF-12] and Aimbeast[^REF-2] have editors of their own, and are not covered here yet.

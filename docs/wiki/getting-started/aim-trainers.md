@@ -40,7 +40,10 @@ carry over.
 
 **Dedicated trainer versus in-game practice.** Your game's deathmatch, practice range, and custom
 modes have one edge a trainer can't fully match. They use your real crosshair, recoil, movement,
-and hitboxes, so practice there transfers directly.
+and hitboxes.
+
+<!-- REVIEW: no public source found that tests what carries from an aim trainer into a game. The
+transfer claims on this page are this wiki's own reading, not a sourced finding. -->
 
 The trade-off is that you can't isolate a single category the way a scenario does. Your reps are
 mixed in with everything else happening in that mode.

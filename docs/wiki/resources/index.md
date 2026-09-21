@@ -17,8 +17,8 @@ covers. That way you can decide where to spend time instead of guessing.
 
 - [Voltaic](communities/voltaic.md): an aim-training community and coaching group built around
   structured benchmarks and routines for KovaaK's and Aimlabs.
-- [Jade Palace](communities/jade-palace.md): an application-only Discord server where elite aimers
-  and aim-training creators collaborate. It is not a general public resource.
+- [Jade Palace](communities/jade-palace.md): a Discord server where elite aimers and aim-training
+  creators collaborate, which you join by application.
 - [Revosect](communities/revosect.md): a community running its own benchmark seasons, training
   routines, and guides for KovaaK's and Aimlabs, with coaching planned but not yet live.
 - [x76](communities/x76.md): a player-run community for arena shooters, with game servers, an Elo

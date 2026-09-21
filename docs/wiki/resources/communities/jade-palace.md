@@ -1,12 +1,12 @@
 ---
 title: "Jade Palace"
 description: >-
-  An application-only Discord where elite aimers and aim-training creators collaborate, organized by MattyOW.
+  A Discord server where elite aimers and aim-training content creators chat and collaborate.
 tags:
   - community
 related:
   - page: wiki/training/routines.md
-    why: where to find practice routines, since Jade Palace publishes none of its own.
+    why: practice routines, which this page does not cover.
 ---
 
 !!! warning "Draft"
@@ -16,26 +16,27 @@ related:
 
 ## What it is
 
-Jade Palace is an application-based Discord server where elite-level aimers and aim-training content creators chat and collaborate. Its organizer announced it in a [March 2025 post](https://x.com/Matty_OW/status/1901508775044854146). It is not a general-audience community: joining requires an application, and access is gated.
+Jade Palace is a Discord server where elite-level aimers and aim-training content creators chat and collaborate, announced in March 2025.[^REF-94] Joining runs through applications, which open and close over time.[^REF-95]
 
 ## Who it suits
 
-Elite aimers and aim-focused content creators who already have some standing in the aim-training space. It is not aimed at beginners or casual visitors, since membership is by application only.
+Elite aimers and aim-focused content creators. The announcement describes it as a space for elite-level aimers and aiming content creators.[^REF-94]
 
 ## What it covers
 
-Public detail about Jade Palace's internal activity is limited, since most of it happens inside the private Discord.
+Little about the server's internal activity is public.
 
-What is confirmed publicly: applications to join open and close over time. They were reopened as of an [August 2025 post](https://x.com/Matty_OW/status/1961519224884523098). That post also announced a new channel where the community can propose topics for Jade Palace's elite aim-training members to cover.
+Applications were unfrozen in August 2025, alongside a new channel for submitting questions and suggestions about what people want to see from elite aim-training players.[^REF-95]
 
-<!-- REVIEW: confirm who currently runs/moderates Jade Palace day to day, and whether an official public application link or form is posted anywhere besides these X posts. -->
+<!-- REVIEW: no public source names who runs or moderates Jade Palace, and no official application
+link or form is posted anywhere besides these X posts. -->
 
 ## Key content
 
-- No guides, routines, or videos are published under the Jade Palace name itself. Individual members publish their own content on their own channels.
+- Jade Palace benchmarks are tracked on the [Evxl Benchmark Tracker](../tools/evxl.md).[^REF-25]
 
 ## Our take
 
-Jade Palace is worth knowing about as a landmark in the elite aim-training scene, but it is not a public resource. There is no open Discord invite, benchmark, or routine to point to here.
+Jade Palace is worth knowing about as a landmark in the elite aim-training scene, but the server itself is not open to browse.
 
 Most readers will get more direct value from the public output of its individual members than from the server itself.
