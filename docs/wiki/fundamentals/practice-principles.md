@@ -37,15 +37,15 @@ groups train, separate real progress from practice that just feels productive.
 
 ## Explanation
 
-**Deliberate practice.** Psychologist Anders Ericsson's original definition of deliberate practice
-is narrower than "practice on purpose."
+**Purposeful practice.** Psychologist Anders Ericsson's definition of deliberate practice is
+narrower than "practice on purpose." Its first requirement is a qualified teacher who assesses you
+and prescribes what to work on.[^REF-36]
 
-It is individualized training built around a specific, well-defined performance goal. It gives
-immediate feedback on each attempt, and a sequence of tasks that gets harder as the trainee
-improves. Traditionally, a qualified coach directs it.[^REF-36]
+Solo aim training has no such teacher. Ericsson has a name for what is left: purposeful
+practice.[^REF-36] It keeps the goal, the feedback and the progression, drops the coach, and he
+rates it below the coached kind.[^REF-36]
 
-Most solo aim training has no coach designing the sequence. The same shape still applies without
-one:
+That shape is still worth holding to:
 
 1. Pick a scenario because it targets a specific weakness, not because it's comfortable.
 2. Use a stat or replay to check whether a given attempt actually improved.

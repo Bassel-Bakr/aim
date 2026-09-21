@@ -1499,7 +1499,7 @@ def deliberate() -> str:
            "@media (prefers-reduced-motion:reduce){.aim-del-step{opacity:1;"
            "animation:none!important}}"]
     body = [f'<rect x="12" y="46" width="736" height="{DELIB_H - 76}" rx="12" class="fig-panel"/>']
-    body.append(lane_label(32, 30, "What makes practice deliberate", "drop a step and it is reps"))
+    body.append(lane_label(32, 30, "What makes practice purposeful", "drop a step and it is reps"))
     for order, (name, note) in enumerate(DELIB_STEPS):
         x = 56 + order * 224
         body.append(f'<g class="aim-del-step" style="animation-delay:{order * DELIB_T * 0.2:.2f}s">'

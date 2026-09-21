@@ -171,9 +171,9 @@ affects performance while training.[^REF-26]
 Sustained training without enough recovery can tip into overreaching, then overtraining syndrome,
 where performance actually declines.[^REF-46]
 
-Ericsson's original definition of deliberate practice is also narrower than time spent. It requires
-a specific performance goal, immediate feedback on each attempt, and tasks that get harder as you
-improve.[^REF-36]
+Ericsson's definition of deliberate practice is also narrower than time spent. It requires a
+qualified teacher, a goal you can hold in mind, immediate feedback on each attempt, and repeated
+revised attempts at the goal.[^REF-36]
 
 **What to do instead.** Spend the time on your current weakness in sessions short enough to stay
 sharp, with rest between them. [Practice Principles](fundamentals/practice-principles.md) covers

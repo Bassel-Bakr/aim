@@ -21,7 +21,7 @@ A scenario is a question you ask your aim. A vague question gets a vague answer,
 happens before the editor opens.
 
 - **Name the weakness first.** "Tracking" is not a weakness. A subcategory is.[^REF-44]
-- **Practice needs a defined goal.** That is what separates it from repetition.[^REF-36]
+- **Practice needs a defined goal.** Without one, a session is repetition.
 - **One scenario, one demand.** A drill that tests three things diagnoses none.
 - **Check for the shortcut.** If the drill can be beaten another way, it will be.
 
@@ -38,8 +38,9 @@ others, which is not always the one that feels worst.[^REF-44]
 Your own matches are the other source. Review lost fights and ask whether a decision or your
 mechanics lost each one. The mechanical losses tell you what to build.[^REF-10]
 
-**Deliberate practice has a shape.** It is built around a specific, well-defined performance goal,
-gives feedback on each attempt, and gets harder as you improve.[^REF-36]
+**Purposeful practice has a shape.** It is built around a specific, well-defined performance goal,
+gives feedback on each attempt, and gets harder as you improve. Ericsson reserves "deliberate
+practice" for the version a qualified teacher directs.[^REF-36]
 
 <figure class="aim-figure">
 <!-- aim:figure deliberate -->
