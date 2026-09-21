@@ -214,7 +214,7 @@
 
 - id: REF-30
   author: kova
-  title: the portfolio platform for aimers
+  title: A portfolio for aimers who obsess over their gear.
   url: "https://kova.page"
   type: website
   tier: vendor
@@ -271,7 +271,7 @@
 - id: REF-38
   author: Microsoft
   title: Change mouse settings
-  url: "https://support.microsoft.com/en-us/windows/change-mouse-settings-e81356a4-0e74-fe38-7d01-9d79fbf8712b"
+  url: "https://support.microsoft.com/en-us/windows/hardware/input-devices/change-mouse-settings"
   type: documentation
   tier: vendor
 
