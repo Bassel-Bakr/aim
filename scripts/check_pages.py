@@ -55,9 +55,12 @@ REFERENCE_MARKER = re.compile(r"\[\^(REF-[^\]]*)\](?!:)")
 # them: a comma or "and" between the markers reads as part of the sentence.
 REFERENCE_RUN = re.compile(r"\[\^REF-[1-9]\d*\]([\s,;]+(?:and\s+)?)(?=\[\^REF-[1-9]\d*\])")
 REFERENCES_HEADING = re.compile(r"^## References\s*$", re.M)
-REFERENCE_FIELDS = {"id", "author", "title", "url", "type", "publication", "notes"}
-REFERENCE_REQUIRED = {"id", "author", "title", "url", "type"}
+REFERENCE_FIELDS = {"id", "author", "title", "url", "type", "tier", "publication", "notes"}
+REFERENCE_REQUIRED = {"id", "author", "title", "url", "type", "tier"}
 REFERENCE_TYPES = {"article", "document", "documentation", "encyclopedia", "post", "repository", "study", "video", "website"}
+# How much weight a source carries, which decides how strongly a claim may be worded.
+# See CONTRIBUTING.md#source-tiers.
+REFERENCE_TIERS = {"research", "testing", "practitioner", "vendor", "reference"}
 # Related pages are listed in front matter and written out by extensions/aim_related.py.
 RELATED_HEADING = re.compile(r"^## Related( pages)?\s*$", re.M)
 RELATED_FIELDS = {"page", "why"}
@@ -89,6 +92,8 @@ def registry_ids() -> tuple[set[str], list[str]]:
             errors.append(f"{where}: url must start with https://")
         if entry.get("type") not in REFERENCE_TYPES:
             errors.append(f"{where}: type '{entry.get('type')}' is not one of {', '.join(sorted(REFERENCE_TYPES))}")
+        if entry.get("tier") not in REFERENCE_TIERS:
+            errors.append(f"{where}: tier '{entry.get('tier')}' is not one of {', '.join(sorted(REFERENCE_TIERS))}")
         ids.add(ref_id)
         urls.add(url)
     return ids, errors

@@ -13,174 +13,203 @@
   title: "Esports health: it starts with ergonomics and posture"
   url: "https://1-hp.org/blog/hpforgamers/esports-health-it-starts-with-ergonomics-and-posture/"
   type: article
+  tier: practitioner
 
 - id: REF-2
   author: Aimbeast
   title: Steam store page
   url: "https://store.steampowered.com/app/1100990/Aimbeast/"
   type: website
+  tier: vendor
 
 - id: REF-3
   author: aimbetween.games
   title: flick training
   url: "https://aimbetween.games/modes/flick"
   type: website
+  tier: practitioner
 
 - id: REF-4
   author: Aimlabs
   title: A quick explainer on cm/360 and the common cm/360 by game
   url: "https://aimlabs.com/articles/aimlabs/a-quick-explainer-on-cm-360-and-the-common-cm-360-by-game/"
   type: article
+  tier: vendor
 
 - id: REF-5
   author: Aimlabs
   title: Aimlabs+
   url: "https://aimlabs.com/aimlabs-plus"
   type: article
+  tier: vendor
 
 - id: REF-6
   author: Aimlabs
   title: Are you taking care of your body between gaming sessions?
   url: "https://aimlabs.com/articles/aimlabs/are-you-taking-care-of-your-body-between-gaming-sessions/"
   type: article
+  tier: vendor
 
 - id: REF-7
   author: Aimlabs
   title: homepage
   url: "https://aimlabs.com/"
   type: article
+  tier: vendor
 
 - id: REF-8
   author: Aimlabs
   title: How to build a well balanced aim training playlist
   url: "https://aimlabs.com/articles/aimlabs/how-to-build-a-well-balanced-aim-training-playlist/"
   type: article
+  tier: vendor
 
 - id: REF-9
   author: Aimlabs
   title: How to develop your own aim training regimen
   url: "https://aimlabs.com/articles/aimlabs/how-to-develop-your-own-aim-training-regimen/"
   type: article
+  tier: vendor
 
 - id: REF-10
   author: Aimlabs
   title: How to start aim training for Fortnite
   url: "https://aimlabs.com/articles/fortnite/how-to-start-aim-training-for-fortnite/"
   type: article
+  tier: vendor
 
 - id: REF-11
   author: Aimlabs
   title: "Introduction to aim training: the basics of Aimlabs"
   url: "https://aimlabs.com/articles/aimlabs/introduction-to-aim-training-the-basics-of-aimlabs/"
   type: article
+  tier: vendor
 
 - id: REF-12
   author: Aimlabs
   title: "It came from the Workshop: our second look at trending tasks and playlists"
   url: "https://aimlabs.com/articles/aimlabs/it-came-from-the-workshop-our-second-look-at-trending-tasks-and-playlists-on-aimlabs/"
   type: article
+  tier: vendor
 
 - id: REF-13
   author: Aimlabs
   title: leaderboards
   url: "https://aimlabs.com/leaderboards"
   type: article
+  tier: vendor
 
 - id: REF-14
   author: Aimlabs
   title: Master tracking and switching with the Apex Legends aim basics routine
   url: "https://aimlabs.com/articles/aim-basics-routines/master-tracking-and-switching-with-the-apex-legends-aim-basics-routine/"
   type: article
+  tier: vendor
 
 - id: REF-15
   author: Aimlabs
   title: "Stop predicting and start reacting: get better at reactive tracking"
   url: "https://aimlabs.com/articles/aimlabs/stop-predicting-and-start-reacting-get-better-at-reactive-tracking/"
   type: article
+  tier: vendor
 
 - id: REF-16
   author: Aimlabs
   title: The Aimlabs official benchmarks first season is now live
   url: "https://aimlabs.com/articles/aimlabs/the-aimlabs-official-benchmarks-first-season-is-now-live/"
   type: article
+  tier: vendor
 
 - id: REF-17
   author: Aimlabs
   title: The speed-accuracy tradeoff and what it means for your aim training
   url: "https://aimlabs.com/articles/aimlabs/the-speed-accuracy-tradeoff-and-what-it-means-for-your-aim-training/"
   type: article
+  tier: vendor
 
 - id: REF-18
   author: Aimlabs
   title: Tracking and switching moving targets in Apex Legends
   url: "https://aimlabs.com/articles/aimlabs/tracking-and-switching-moving-targets-in-apex-legends/"
   type: article
+  tier: vendor
 
 - id: REF-19
   author: Aimlabs
   title: Train flicking and tracking in The Finals aim basics routine
   url: "https://aimlabs.com/articles/aimlabs/train-flicking-and-tracking-in-the-finals-aim-basics-routine/"
   type: article
+  tier: vendor
 
 - id: REF-20
   author: Aimlabs
   title: What smoothness actually is and why it makes everything else better
   url: "https://aimlabs.com/articles/aimlabs/what-smoothness-actually-is-and-why-it-makes-everything-else-better/"
   type: article
+  tier: vendor
 
 - id: REF-21
   author: Aimlabs
   title: "Wrist aiming vs arm aiming: why not both?"
   url: "https://aimlabs.com/articles/aimlabs/wrist-aiming-vs-arm-aiming-why-not-both/"
   type: article
+  tier: vendor
 
 - id: REF-22
   author: American Academy of Ophthalmology
   title: What is eye strain?
   url: "https://www.aao.org/eye-health/diseases/what-is-eye-strain"
   type: article
+  tier: research
 
 - id: REF-23
   author: Blur Busters
   title: Benefits of frame rate above refresh rate
   url: "https://blurbusters.com/faq/benefits-of-frame-rate-above-refresh-rate/"
   type: article
+  tier: testing
 
 - id: REF-24
   author: Evxl
   title: Aimbeast benchmarks
   url: "https://evxl.app/groups/aimbeast"
   type: website
+  tier: vendor
 
 - id: REF-25
   author: Evxl
   title: Benchmark Tracker
   url: "https://evxl.app"
   type: website
+  tier: vendor
 
 - id: REF-26
   author: Human Kinetics
   title: Distribution of practice in motor learning and development
   url: "https://us.humankinetics.com/blogs/excerpt/distribution-of-practice-in-motor-learning-and-development"
   type: article
+  tier: research
 
 - id: REF-27
   author: Human Kinetics
   title: "Understanding Fitts's law"
   url: "https://us.humankinetics.com/blogs/excerpt/understanding-fitts-law"
   type: article
+  tier: research
 
 - id: REF-28
   author: Human Kinetics
   title: Understanding motor learning stages improves skill instruction
   url: "https://us.humankinetics.com/blogs/excerpt/understanding-motor-learning-stages-improves-skill-instruction"
   type: article
+  tier: research
 
 - id: REF-29
   author: Uehara et al.
   title: a study on improving plateaued motor skill with somatic stimulation
   url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3186792/"
   type: study
+  tier: research
   publication: PLoS One
 
 - id: REF-30
@@ -188,102 +217,119 @@
   title: pyvno.xyz
   url: "https://pyvno.xyz"
   type: website
+  tier: vendor
 
 - id: REF-31
   author: "KovaaK's"
   title: sensitivity converter
   url: "https://kovaaks.com/kovaaks/sens-converter"
   type: website
+  tier: vendor
 
 - id: REF-32
   author: "KovaaK's"
   title: Sensitivity Matcher
   url: "https://www.kovaak.com/sensitivity-matcher/"
   type: website
+  tier: vendor
 
 - id: REF-33
   author: "KovaaK's"
   title: Steam store page
   url: "https://store.steampowered.com/app/824270/KovaaKs/"
   type: website
+  tier: vendor
 
 - id: REF-34
   author: "KovaaK's"
   title: Tracking Trainer on Steam
   url: "https://store.steampowered.com/app/1438210/KovaaKs_Tracking_Trainer/"
   type: website
+  tier: vendor
 
 - id: REF-35
   author: KovOBS
   title: README
   url: "https://github.com/Bassel-Bakr/KovOBS"
   type: repository
+  tier: vendor
 
 - id: REF-36
   author: "Ericsson & Harwell"
   title: "a 2019 review examining Ericsson's original definition of deliberate practice"
   url: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2019.02396/full"
   type: study
+  tier: research
 
 - id: REF-37
   author: Mayo Clinic
   title: Office ergonomics
   url: "https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/office-ergonomics/art-20046169"
   type: article
+  tier: research
 
 - id: REF-38
   author: Microsoft
   title: Change mouse settings
   url: "https://support.microsoft.com/en-us/windows/change-mouse-settings-e81356a4-0e74-fe38-7d01-9d79fbf8712b"
   type: documentation
+  tier: vendor
 
 - id: REF-39
   author: Mouse DPI Analyzer
   title: Best mouse settings for gaming
   url: "https://mousedpianalyzer.com/post/best-mouse-settings-for-gaming/"
   type: article
+  tier: vendor
 
 - id: REF-40
   author: NHS
   title: Repetitive strain injury (RSI)
   url: "https://www.nhs.uk/conditions/repetitive-strain-injury-rsi/"
   type: article
+  tier: research
 
 - id: REF-41
   author: OSHA
   title: "Computer workstations eTool: work process"
   url: "https://www.osha.gov/etools/computer-workstations/work-process"
   type: article
+  tier: research
 
 - id: REF-42
   author: ProSettings.net
   title: What is DPI and eDPI?
   url: "https://prosettings.net/blog/what-is-dpi-edpi/"
   type: article
+  tier: reference
 
 - id: REF-43
   author: Revosect
   title: benchmarks
   url: "https://revosect.com/benchmarks"
   type: website
+  tier: practitioner
 
 - id: REF-44
   author: Revosect
   title: Benchmarks guide
   url: "https://docs.google.com/document/d/1n-9BESnTSUxY8osjFbCIDd0tT7ufkFGSxpffe5ftoEQ/edit"
   type: document
+  tier: practitioner
 
 - id: REF-45
   author: Revosect
   title: resources
   url: "https://revosect.com/resources"
   type: website
+  tier: practitioner
 
 - id: REF-46
   author: Sports Health
   title: a clinical review of overtraining syndrome
   url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3435910/"
   type: study
+  tier: research
   publication: PMC
 
 - id: REF-47
@@ -291,48 +337,56 @@
   title: QcK Performance product page
   url: "https://steelseries.com/qck-performance"
   type: website
+  tier: vendor
 
 - id: REF-48
   author: Voltaic
   title: about the leaderboards
   url: "https://app.voltaic.gg/leaderboards/about"
   type: website
+  tier: practitioner
 
 - id: REF-49
   author: Voltaic
   title: Announcing the Voltaic Season 3 aiming benchmarks beta for Aimlabs
   url: "https://blog.voltaic.gg/announcing-the-voltaic-season-3-aiming-benchmarks-beta-for-aimlabs/"
   type: article
+  tier: practitioner
 
 - id: REF-50
   author: Voltaic
   title: "Announcing the Voltaic Season 5 aiming benchmarks beta for KovaaK's"
   url: "https://blog.voltaic.gg/announcing-the-voltaic-season-5-aiming-benchmarks-beta-for-kovaaks/"
   type: article
+  tier: practitioner
 
 - id: REF-51
   author: Voltaic
   title: Constructing an improvement based mentality
   url: "https://blog.voltaic.gg/constructing-an-improvement-based-mentality/"
   type: article
+  tier: practitioner
 
 - id: REF-52
   author: Voltaic
   title: Getting started with Voltaic
   url: "https://blog.voltaic.gg/getting-started-with-voltaic/"
   type: article
+  tier: practitioner
 
 - id: REF-53
   author: Voltaic
   title: Muscle memory
   url: "https://blog.voltaic.gg/muscle-memory/"
   type: article
+  tier: practitioner
 
 - id: REF-54
   author: VT Matty
   title: Underaiming is not edge tracking
   url: "https://x.com/Matty_OW/status/1873563341408674076"
   type: post
+  tier: practitioner
 
 # REF-55 is retired: it was wasdlife.com's grip styles article, replaced by REF-64 to REF-66. Do not
 # reuse the number.
@@ -342,36 +396,42 @@
   title: Field of view in video games
   url: "https://en.wikipedia.org/wiki/Field_of_view_in_video_games"
   type: encyclopedia
+  tier: reference
 
 - id: REF-57
   author: XDA Developers
   title: gaming mouse buying guide
   url: "https://www.xda-developers.com/gaming-mouse-buying-guide/"
   type: article
+  tier: reference
 
 - id: REF-58
   author: x76
   title: x76 home page
   url: "https://x76.gg/"
   type: website
+  tier: practitioner
 
 - id: REF-59
   author: x76
   title: The x76 wiki
   url: "https://x76.gg/wiki/"
   type: website
+  tier: practitioner
 
 - id: REF-60
   author: x76
   title: Welcome to the x76 wiki
   url: "https://x76.gg/wiki/getting-started/welcome/"
   type: article
+  tier: practitioner
 
 - id: REF-61
   author: Bob
   title: Strafe Aim Guide
   url: "https://x76.gg/wiki/strafe-aim-guide/"
   type: article
+  tier: practitioner
   publication: x76
 
 - id: REF-62
@@ -379,6 +439,7 @@
   title: Raw Accel README
   url: "https://github.com/RawAccelOfficial/rawaccel"
   type: repository
+  tier: vendor
   publication: GitHub
 
 - id: REF-63
@@ -386,6 +447,7 @@
   title: Raw Accel guide
   url: "https://github.com/RawAccelOfficial/rawaccel/blob/master/doc/Guide.md"
   type: documentation
+  tier: vendor
   publication: GitHub
 
 - id: REF-64
@@ -393,12 +455,14 @@
   title: "Mouse grip styles: fingertip vs palm vs claw"
   url: "https://www.corsair.com/us/en/explorer/gamer/mice/mouse-grips-explained-fingertip-vs-palm-vs-claw/"
   type: article
+  tier: vendor
 
 - id: REF-65
   author: Sanchis-Sanchis et al.
   title: Influence of Mouse Grip Type on Flicking and Tracking Tasks Performance
   url: "https://www.mdpi.com/2076-3417/14/16/7112"
   type: study
+  tier: research
   publication: Applied Sciences
   notes: 22 participants, each using their own grip. The tracking target moved at a constant speed.
 
@@ -407,12 +471,14 @@
   title: "The best mouse grip of all time? (Highest accuracy & control for aiming)"
   url: "https://1-hp.org/blog/hpforgamers/the-best-mouse-grip-of-all-time-highest-accuracy-control-for-aiming/"
   type: article
+  tier: practitioner
 
 - id: REF-67
   author: MattyOW
   title: Speed Matching in Precise Tracking
   url: "https://www.youtube.com/watch?v=-7n6q33We28"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-68
@@ -420,6 +486,7 @@
   title: How to Get Astra in Control Tracking
   url: "https://www.youtube.com/watch?v=FNK1LFBBZP8"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-69
@@ -427,6 +494,7 @@
   title: 1 Tip for Every Aim Training Category
   url: "https://www.youtube.com/watch?v=-Fypcu1lZ-0"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-70
@@ -434,6 +502,7 @@
   title: Diagonal Tracking Technique of Hizku - Unraveling the Secrets of Aim Ep. 5
   url: "https://www.youtube.com/watch?v=P-zKJ7-Crm8"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-71
@@ -441,6 +510,7 @@
   title: Cartoon, King of Micros - Unraveling the Secrets of Aim Ep. 7
   url: "https://www.youtube.com/watch?v=ft3pD4HITW0"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-72
@@ -448,6 +518,7 @@
   title: KovaaK's Precise Tracking - Mouse Grip and Tension
   url: "https://www.youtube.com/watch?v=BFDkOvX7vIw"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-73
@@ -455,6 +526,7 @@
   title: Introduction to Mouse Grips
   url: "https://www.youtube.com/watch?v=y0oLV-7k0Bg"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-74
@@ -462,6 +534,7 @@
   title: Flick Control Fundamentals
   url: "https://www.youtube.com/watch?v=_YX_jf1vnLo"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-75
@@ -469,6 +542,7 @@
   title: the KEY approach for AIM CONSISTENCY
   url: "https://www.youtube.com/watch?v=x9q6d0vBFag"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-76
@@ -476,6 +550,7 @@
   title: calm aim is a joke - this is why
   url: "https://www.youtube.com/watch?v=mRoPfhZ1Tm4"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-77
@@ -483,6 +558,7 @@
   title: Zeonlo's Static Guide 2026
   url: "https://www.youtube.com/watch?v=4cdQpKCCOGM"
   type: video
+  tier: practitioner
   publication: YouTube
 
 - id: REF-78
@@ -490,6 +566,7 @@
   title: 3 tips to stop death gripping mouse
   url: "https://1-hp.org/blog/healthy-movement/3-tips-to-stop-death-griping-mouse/"
   type: article
+  tier: practitioner
   notes: By Dr. Elliot Smithson, PT, DPT.
 
 - id: REF-79
@@ -497,6 +574,7 @@
   title: Intro to Scenario Creation
   url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/Intro"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-80
@@ -504,6 +582,7 @@
   title: Edit Scenario Window
   url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/EditScenario"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-81
@@ -511,6 +590,7 @@
   title: Character Profiles
   url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/CharacterProfiles"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-82
@@ -518,6 +598,7 @@
   title: Bot Profiles
   url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/BotProfiles"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-83
@@ -525,6 +606,7 @@
   title: Dodge Profiles
   url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/DodgeProfiles"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-84
@@ -532,6 +614,7 @@
   title: Session Manager
   url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/SessionManager"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-85
@@ -539,6 +622,7 @@
   title: How to create your own scenarios and uploading to the Steam Workshop
   url: "https://steamcommunity.com/sharedfiles/filedetails/?id=1349644104"
   type: document
+  tier: vendor
   publication: Steam Community
   notes: Written by the game's developer.
 
@@ -547,6 +631,7 @@
   title: Weapon Profiles
   url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/WeaponProfiles"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-87
@@ -554,6 +639,7 @@
   title: Ability Profiles
   url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/AbilityProfiles"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-88
@@ -561,6 +647,7 @@
   title: "KMC: the basics"
   url: "https://wiki.kovaaks.com/en/home/KovaaK'sMapCreator/home"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-89
@@ -568,6 +655,7 @@
   title: "KMC: the interface"
   url: "https://wiki.kovaaks.com/en/home/KovaaK'sMapCreator/the-interface"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-90
@@ -575,6 +663,7 @@
   title: "KMC: creating maps"
   url: "https://wiki.kovaaks.com/en/home/KovaaK'sMapCreator/map-editing"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-91
@@ -582,6 +671,7 @@
   title: "KMC: frequently asked questions"
   url: "https://wiki.kovaaks.com/en/home/KovaaK'sMapCreator/faq"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki
 
 - id: REF-94
@@ -589,22 +679,26 @@
   title: Jade Palace announcement
   url: "https://x.com/Matty_OW/status/1901508775044854146"
   type: post
+  tier: practitioner
 
 - id: REF-95
   author: VT Matty
   title: Jade Palace applications unfrozen
   url: "https://x.com/Matty_OW/status/1961519224884523098"
   type: post
+  tier: practitioner
 
 - id: REF-93
   author: Voltaic
   title: Amped coaching
   url: "https://voltaic.gg/coaching"
   type: website
+  tier: practitioner
 
 - id: REF-92
   author: KovaaK's
   title: Aim Profiles
   url: "https://wiki.kovaaks.com/en/home/KovaaK's/ScenarioCreation/AimProfiles"
   type: documentation
+  tier: vendor
   publication: KovaaK's Wiki

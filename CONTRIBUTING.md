@@ -142,6 +142,35 @@ Write it for someone deciding whether to open the page:
    normally. Name the month, so a reader can see how old the reading is, and read it again when a
    release changes the software.
 
+## Source tiers
+
+A citation says where a claim came from. A tier says how much weight that source carries, and which
+words the claim may use. Every entry in `references.yml` takes a `tier:`.
+
+| Tier | What it is | A claim may say | Never |
+| --- | --- | --- | --- |
+| `research` | Peer-reviewed work, clinical guidance, academic publishers | "research finds", "a 2024 study of 22 male players found" | — |
+| `testing` | Independent measurement with a published method | "Blur Busters' testing found" | "research finds" |
+| `practitioner` | Named coaches and communities writing from their own practice | "Voltaic recommends", "one coach describes" | "research shows", "the finding" |
+| `vendor` | A company describing its own product | "Aimlabs ships", "the Boxes tab holds", "it costs $5.79" | whether a method works, or anything about a competitor |
+| `reference` | Aggregators, journalism, encyclopedias | "commonly defined as" | a flat assertion |
+
+Three rules follow from the table.
+
+**A single study is not "research".** Name the sample: "a 2024 study of 22 male players found". This
+wiki once cited a twelve-person study as though it were a field.
+
+**A vendor is authoritative about its own product and nothing else.** Aimlabs' homepage settles what
+Aimlabs costs and which tabs its editor has. It settles nothing about whether a training method
+works, and nothing about KovaaK's.
+
+**Name the tester for `testing`.** The method belongs to that source, so the sentence says whose it
+is.
+
+Tier follows the claim as much as the source. 1HP is a physiotherapy practice: research weight on
+tendon inflammation, practitioner weight on aim advice. Where a source crosses tiers, weigh the
+claim rather than the name.
+
 ## Readability
 
 Most people reading this wiki skim, and many read with ADHD. A page has to work when it is read in

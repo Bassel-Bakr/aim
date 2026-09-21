@@ -44,7 +44,8 @@ python scripts/check_pages.py
 zensical build --clean
 ```
 
-`scripts/check_pages.py` enforces four content rules: every `tags:` value is on the allowed list,
+`scripts/check_pages.py` enforces five content rules: every `tags:` value is on the allowed list,
+every reference carries a `tier:` from the list in [CONTRIBUTING.md](CONTRIBUTING.md#source-tiers),
 each concept page and each resource page carries a `related:` list in front matter where every
 entry has a real reason, every citation names an ID in `references.yml` and runs together with
 any other citation on the same claim, and every page carries a `description:` of 50 to 160
@@ -168,8 +169,10 @@ agents most often miss:
    source's ID from `references.yml` as a footnote marker, `[^REF-15]`, and never define it on the
    page: `extensions/aim_references.py` adds the definition. Where a sentence rests on several
    sources, run the markers together with nothing between them, `[^REF-77][^REF-74]`. Add a missing
-   source to the registry with the next unused ID. Never renumber one. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full
-   rule and its two exceptions. Outside those exceptions, do not name the source in the sentence
+   source to the registry with the next unused ID, and give it a `tier:`. Never renumber one. See
+   [CONTRIBUTING.md](CONTRIBUTING.md#source-tiers) for the tiers, which decide how strongly a
+   claim may be worded, and [CONTRIBUTING.md](CONTRIBUTING.md) for the full rule and its two
+   exceptions. Outside those exceptions, do not name the source in the sentence
    ("Aimlabs puts…", "a coach recommends…"): state the claim and let the footnote say who.
    Never copy guides, tables, or images from other sites. Content here is CC BY-SA 4.0 and the
    sources are not. Third-party assets a figure is built from are the one exception. See

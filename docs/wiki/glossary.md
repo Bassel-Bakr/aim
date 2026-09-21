@@ -69,8 +69,8 @@ degrees.[^REF-56]
 
 ### FPS
 
-FPS (frames per second) is how many frames your game renders each second. With V-Sync off, a frame
-rate above your monitor's refresh rate still lowers input lag.[^REF-23]
+FPS (frames per second) is how many frames your game renders each second. Blur Busters' testing
+found that with V-Sync off, a frame rate above refresh still lowers input lag.[^REF-23]
 See [Setup and Gear](getting-started/setup.md).
 
 ### Hz
