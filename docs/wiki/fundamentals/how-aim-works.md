@@ -9,8 +9,8 @@ related:
     why: how to structure practice around these mechanics.
   - page: wiki/categories/index.md
     why: the three categories these mechanics add up to.
-  - page: wiki/techniques/underaiming.md
-    why: restraint over the corrections covered here.
+  - page: wiki/glossary.md
+    why: underaiming, a restraint over the corrections covered here.
   - page: wiki/categories/clicking.md
     why: acquisition, jumping to a new target, as a category of its own.
   - page: wiki/categories/tracking.md

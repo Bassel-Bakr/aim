@@ -11,8 +11,8 @@ related:
     why: the acquisition half of a switch, in isolation.
   - page: wiki/training/benchmarks.md
     why: how community benchmarks score these subcategories.
-  - page: wiki/techniques/underaiming.md
-    why: withholding motion a shot does not need, which applies to switches too.
+  - page: wiki/glossary.md
+    why: underaiming, the habit of withholding motion a shot does not need.
 ---
 
 !!! warning "Draft"

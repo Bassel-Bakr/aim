@@ -156,8 +156,8 @@ passes, so every page under `docs/wiki/` follows four rules:
    `## Resources`, giving a reader who lost the thread somewhere to go. The Related section is added
    between the two.
 
-Concept pages are those in `getting-started`, `fundamentals`, `categories`, `techniques`,
-`training`, and `scenarios`, other than `index.md`. [How Aim Works](docs/wiki/fundamentals/how-aim-works.md) shows
+Concept pages are those in `getting-started`, `fundamentals`, `categories`, `training`, and
+`making-scenarios`, other than `index.md`. [How Aim Works](docs/wiki/fundamentals/how-aim-works.md) shows
 all four rules on a real page.
 
 Write in US English, as the sources do: `practice` as a verb, `organize`, `behavior`. Footnote

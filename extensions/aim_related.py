@@ -36,7 +36,7 @@ from markdown.preprocessors import Preprocessor
 
 FRONT_MATTER = re.compile(r"\A---\r?\n(.*?)\r?\n---\r?\n", re.S)
 TITLE_HEADING = re.compile(r"^# (.+)$", re.M)
-CONCEPT_DIRS = {"getting-started", "fundamentals", "categories", "techniques", "training",
+CONCEPT_DIRS = {"getting-started", "fundamentals", "categories", "training",
                 "making-scenarios"}
 # What a suggested entry carries until someone writes its reason; the checker rejects it.
 PLACEHOLDER = "TODO"

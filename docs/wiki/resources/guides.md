@@ -7,8 +7,8 @@ related:
     why: who publishes these.
   - page: wiki/categories/index.md
     why: the same ground in this wiki's words.
-  - page: wiki/techniques/underaiming.md
-    why: a technique covered in this wiki's words.
+  - page: wiki/glossary.md
+    why: the terms the guides below assume, in this wiki's words.
   - page: wiki/training/index.md
     why: practice, routines and benchmarks in this wiki's words.
 ---
@@ -69,7 +69,7 @@ Score sheets and routines handed over without instructions stay on the [resource
   tension, fluidity, pathing, playstyles.
 - [This simple aim tech makes flicking 10x easier](https://www.youtube.com/watch?v=PEkz4YncixM) —
   ARandomDeadDude, 2025 — finding and drilling your undershoot distance. Its "underflicking" is
-  landing short, not the underaiming below.
+  landing short, not underaiming.
 - [Weakness targeted static flowchart](https://x.com/m0_nark/status/1905578974505251059){ .aim-link--image } — M0NARK,
   2025 — symptom in, scenarios out.
   <!-- REVIEW: a reply in that thread credits violat3 with making the original, but x.com/violat3

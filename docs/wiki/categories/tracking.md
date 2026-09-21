@@ -7,8 +7,8 @@ tags:
 related:
   - page: wiki/fundamentals/how-aim-works.md
     why: smoothness and reactive-versus-predictive tracking explained in more depth.
-  - page: wiki/techniques/underaiming.md
-    why: withholding motion a shot does not need, and the technique behind what aim trainers call edge tracking.
+  - page: wiki/glossary.md
+    why: underaiming, which aim trainers apply here as edge tracking.
   - page: wiki/training/benchmarks.md
     why: how community benchmarks score these subcategories.
   - page: wiki/categories/clicking.md

@@ -15,8 +15,8 @@ related:
     why: precise, reactive and control tracking, where tension balance shows most.
   - page: wiki/categories/clicking.md
     why: flicks and micro-corrections, which each want a different amount of tension.
-  - page: wiki/techniques/underaiming.md
-    why: withholding motion, which depends on withholding tension.
+  - page: wiki/glossary.md
+    why: underaiming, which depends on the tension control covered here.
   - page: wiki/training/health.md
     why: rest and recovery for the muscles a tight grip overworks.
 ---

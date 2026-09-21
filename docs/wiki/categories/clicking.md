@@ -13,8 +13,8 @@ related:
     why: how community benchmarks score these subcategories.
   - page: wiki/categories/switching.md
     why: chaining acquisitions across several targets.
-  - page: wiki/techniques/underaiming.md
-    why: withholding motion a shot does not need, which applies to flicks too.
+  - page: wiki/glossary.md
+    why: underaiming, the habit of withholding motion a shot does not need.
 ---
 
 !!! warning "Draft"

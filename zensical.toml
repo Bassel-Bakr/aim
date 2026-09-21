@@ -33,9 +33,6 @@ nav = [
       "wiki/categories/tracking.md",
       "wiki/categories/switching.md",
     ] },
-    { "Techniques" = [
-      "wiki/techniques/underaiming.md",
-    ] },
     { "Training" = [
       "wiki/training/index.md",
       "wiki/training/routines.md",
@@ -158,6 +155,7 @@ tags = {}
 "wiki/skills/tracking.md" = "wiki/categories/tracking.md"
 "wiki/skills/switching.md" = "wiki/categories/switching.md"
 "wiki/fundamentals/tension.md" = "wiki/fundamentals/tension-management.md"
+"wiki/techniques/underaiming.md" = "wiki/glossary.md"
 
 [project.markdown_extensions]
 abbr = {}

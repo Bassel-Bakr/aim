@@ -151,6 +151,14 @@ Precise tracking follows smooth, largely predictable movement. Reactive tracking
 that changes direction and speed less predictably. Control tracking is a hybrid of the two. See
 [Tracking](categories/tracking.md).
 
+### Underaiming
+
+Underaiming is deliberately withholding extra motion on a target, so that reading the target or
+taking the shot becomes easier.[^REF-54]
+
+It is not the same as edge tracking, which is underaiming applied in a tracking scenario in an aim
+trainer.[^REF-54] It is also not an underflick, which is a fact about one flick rather than a habit.
+
 ### Underflick
 
 Underflicking (also called undershooting) is landing a flick just short of the target.
