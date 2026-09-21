@@ -723,3 +723,22 @@
   notes: 6 players, 6 minutes a day for 1 week, no control group. Participants trained immediately
     before playing, so warm-up and training effects cannot be separated. The full text is paywalled,
     so these fields come from the publisher abstract.
+
+- id: REF-98
+  author: RTINGS
+  title: how mouse sensor latency is measured, and how much it matters
+  url: "https://www.rtings.com/mouse/tests/control/sensor-latency"
+  type: article
+  tier: testing
+  notes: Method published. A clamping box, an automated actuator and a Beagle 480 USB analyser, ten
+    runs at 3200 CPI and 200 mm/s. RTINGS buys the units it tests rather than taking review samples,
+    and earns affiliate revenue on purchase links.
+
+- id: REF-99
+  author: RTINGS
+  title: how monitor input lag is measured, and where it sits in total latency
+  url: "https://www.rtings.com/monitor/tests/inputs/input-lag"
+  type: article
+  tier: testing
+  notes: Results are comparable only across test bench 1.2 and newer. RTINGS buys the units it tests
+    rather than taking review samples, and earns affiliate revenue on purchase links.

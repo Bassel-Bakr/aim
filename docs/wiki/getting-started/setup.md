@@ -27,6 +27,9 @@ expensive hardware.
 that most players can't feel the difference. So the sensor spec sheet matters far less than
 fit.[^REF-57]
 
+RTINGS' testing reaches the same conclusion: "most people won't notice any difference in movement
+delay between mice".[^REF-98]
+
 Shape matters most. A mouse that doesn't match your hand size and grip style is uncomfortable to
 use, however good its sensor.[^REF-57]
 
@@ -75,6 +78,9 @@ rate, with V-Sync off, still measurably reduces input lag.[^REF-23]
 
 So both help you see and react to targets sooner: a higher refresh-rate monitor, and a frame rate
 that comfortably exceeds it.
+
+A monitor's own input lag is a small part of the total. RTINGS' testing finds that peripherals "add
+more latency than the monitor".[^REF-99]
 
 ## Essential settings
 
