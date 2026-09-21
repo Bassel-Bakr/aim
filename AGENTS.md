@@ -193,7 +193,8 @@ agents most often miss:
    exceptions. Outside those exceptions, do not name the source in the sentence
    ("Aimlabs puts…", "a coach recommends…"): state the claim and let the footnote say who.
    Never copy guides, tables, or images from other sites. Content here is CC BY-SA 4.0 and the
-   sources are not. Third-party assets a figure is built from are the one exception. See
+   sources are not. Two things are excepted: a third-party asset a figure is built from, and a
+   community image reproduced with its source credited. See
    [Third-party assets](#third-party-assets).
 6. Do not assert a claim you cannot verify from a public source. Leave it out, or mark it with
    `<!-- REVIEW: what needs checking -->`. One exception covers software with no public
@@ -241,6 +242,30 @@ in four places at once, and dropping any of them breaks the licence:
 
 CC BY also requires saying that the asset was changed. The credit line says so where the render
 poses, recolours or cuts up the original, which it always does here.
+
+A community image is the second case, and it works differently. Something the aim-training
+community made and passed around, a chart or a diagram, may be reproduced on a page that discusses
+it, with its source credited. The four-place credit above does not fit: three of those places
+belong to a render that a `build.py` generates, and a reproduced image has no generator. Only the
+visible caption credit applies.
+
+That credit carries more than the licensed case, because there is no licence to point at. Name who
+posted it, link the post, give the date, say who they credit as the original author, and say that
+no licence is stated. Add that the image is not under this site's own licence, or a reader
+reasonably assumes it is ShareAlike like everything around it:
+
+```markdown
+<span class="aim-figure-credit">Weakness targeted static flowchart, posted by
+<a href="https://x.com/m0_nark/status/1905578974505251059">M0NARK</a> in March 2025, who presents
+it as his translation of a Chinese original. Original author unconfirmed. No licence stated.
+Reproduced with its source credited, and not under this site's CC BY-SA 4.0 licence.</span>
+```
+
+Reproduce the image unchanged. The licensed case permits modification because its licence grants
+it, and this one does not. Convert the format and fit it to the column, nothing else.
+
+This case is narrow on purpose. It covers an image the page is about, not an image the page finds
+useful. If the page would read the same with the image removed, remove it.
 
 ## Articles are not wiki pages
 

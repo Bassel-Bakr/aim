@@ -60,7 +60,9 @@ Write it for someone deciding whether to open the page:
 ## Writing rules
 
 1. Write in your own words and link to the original source. Do not copy guides, tables, or images
-   from other sites.
+   from other sites, with two exceptions: an asset whose licence permits reuse, and a community
+   image the site reproduces with its source credited. Both are covered in
+   [AGENTS.md](AGENTS.md#third-party-assets).
 
    Keeping a source's sentence and swapping a few words is still copying, and it is the easy
    mistake to make, because the result reads as though you wrote it. Work out what the source
