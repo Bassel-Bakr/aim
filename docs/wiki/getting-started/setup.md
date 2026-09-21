@@ -91,6 +91,18 @@ predictable.[^REF-39]
 Turn it on in any first-person or third-person shooter that supports it. It is no substitute for a
 clean sensor or stable frame times, but it is worth checking.[^REF-39]
 
+**Polling rate: 1000 Hz.** Polling rate is how often your mouse reports its position to the
+computer, measured in reports per second.
+
+At 125 Hz the mouse reports every 8 milliseconds. Blur Busters' testing puts that at "0 to 8 ms of
+mouse lag added to every frame", depending on when the frame starts. At 1000 Hz that interval is 1
+millisecond.[^REF-100]
+
+It matters more as frame rate rises. At 120 fps the gap between frames is 8.3 ms, close to a 125 Hz
+mouse's reporting interval.[^REF-100]
+
+Set 1000 Hz in your mouse software if it is not already there.
+
 **Mouse acceleration: off to start.** Acceleration changes how far the cursor or camera moves based
 on how fast you physically move the mouse. Off is a sensible default while you learn, so one hand
 movement always means one turn.

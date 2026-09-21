@@ -742,3 +742,13 @@
   tier: testing
   notes: Results are comparable only across test bench 1.2 and newer. RTINGS buys the units it tests
     rather than taking review samples, and earns affiliate revenue on purchase links.
+
+- id: REF-100
+  author: Blur Busters
+  title: the Blur Busters Mouse Guide
+  url: "https://blurbusters.com/faq/mouse-guide/"
+  type: article
+  tier: testing
+  notes: Published 2014, last updated 2022. The interval arithmetic holds, but its statements about
+    what mice ship with are dated and predate 4000 Hz and 8000 Hz mice. Cited here only for the
+    mechanism.
