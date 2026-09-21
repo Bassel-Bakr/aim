@@ -317,7 +317,7 @@ def check(path: Path, drafts: bool, headings: dict[str, str | None],
     for label in REFERENCE_DEFINITION.findall(text):
         errors.append(f"{rel}: defines [^{label}] on the page; references are defined only in references.yml")
     if in_articles:
-        # A byline replaces the draft banner: articles are signed, not pending review.
+        # A byline replaces the sourcing note: articles are signed, not pending review.
         if not is_index:
             if BYLINE not in text:
                 errors.append(f'{rel}: missing byline, expected \'{BYLINE}<name>"\'')
@@ -330,7 +330,7 @@ def check(path: Path, drafts: bool, headings: dict[str, str | None],
         # by its author, and how it reads is the author's call in a way a wiki page's never is.
         advice += readability(rel, text, False)
     elif drafts and rel not in EXEMPT_FROM_BANNER and BANNER not in text:
-        errors.append(f"{rel}: missing draft banner")
+        errors.append(f"{rel}: missing the <!-- aim:sources --> marker")
     if in_wiki:
         if rel == "wiki/myths.md":
             entries = HUB_ENTRY.findall(text)

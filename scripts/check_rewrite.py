@@ -1,7 +1,7 @@
 """Check that rewriting a page changed its wording and nothing it depends on.
 
 A rewrite restructures prose. It must not drop a link, a citation, or a heading another page links
-to, and it must not touch front matter or the draft banner. Reading a diff by eye misses a link that
+to, and it must not touch front matter or the sourcing note. Reading a diff by eye misses a link that
 quietly fell out of a split sentence; this compares what the page points at, before and after.
 
 Usage:

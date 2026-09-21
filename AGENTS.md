@@ -55,8 +55,10 @@ with `{ .aim-myth-title }` over an untitled myth block holding its verdict, that
 elsewhere repeats that verdict word for word, and enforces the readability rules in
 [CONTRIBUTING.md](CONTRIBUTING.md#readability). It reports the same readability rules for articles
 under a separate heading, as advice rather than failures: the limits are worth meeting there too, but
-an article is signed, so how it reads is its author's call. Pass `--drafts` to also require the draft
-banner on every page. Name pages after the flags to check only those.
+an article is signed, so how it reads is its author's call. Pass `--drafts` to also require the
+`<!-- aim:sources -->` marker, which is why it is not part of the default run: it reports the wiki's
+navigation pages, which cite nothing and so carry no marker. The flag keeps its name from when that
+marker was a draft banner. Name pages after the flags to check only those.
 `zensical build` catches broken internal links and missing nav targets. The build no longer runs
 with `--strict`, so link problems appear as warnings rather than failures. Read the build output,
 do not rely on the exit code alone.
