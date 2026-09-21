@@ -107,7 +107,7 @@ Set 1000 Hz in your mouse software if it is not already there.
 on how fast you physically move the mouse. Off is a sensible default while you learn, so one hand
 movement always means one turn.
 
-Some players choose acceleration on purpose later, and [Raw Accel](../resources/tools/rawaccel.md)
+Some players choose acceleration on purpose later, and [Raw Accel](../resources/tools.md)
 is the tool for that. Check both your game's settings and your mouse software for an acceleration
 toggle.
 

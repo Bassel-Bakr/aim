@@ -11,8 +11,8 @@ related:
     why: choosing a trainer and what to expect from one.
   - page: wiki/training/benchmarks.md
     why: how the community benchmarks written for Aimbeast are scored.
-  - page: wiki/resources/tools/evxl.md
-    why: the tracker that collects Aimbeast benchmark sheets.
+  - page: wiki/resources/tools.md
+    why: the tracker that reads its scores.
   - page: wiki/getting-started/sensitivity.md
     why: choosing a sensitivity, which Aimbeast can match to another game.
   - page: wiki/resources/trainers/kovaaks.md
@@ -42,7 +42,7 @@ It also suits players who like configuring their own training. Scenarios are com
 - **Arena**: ranked one-on-one duels against other players on dedicated servers in Europe, North America, and Asia, plus custom games for up to 32 players. Duels are built around tracking, reactivity, precision, and movement rather than static drills.[^REF-2]
 - **Bots**: the selling point of the single-player side is bot movement that behaves like a player, not a fixed pattern. It is configurable.[^REF-2]
 - **[Sensitivity](../../getting-started/sensitivity.md) and input**: sensitivity can be matched to another game directly, and controllers are supported with selectable input curves.[^REF-2]
-- **[Benchmarks](../../training/benchmarks.md)**: the [Evxl Benchmark Tracker](../tools/evxl.md) collects the community benchmarks written for Aimbeast. It lists an Aimbeast V2 sheet alongside sheets such as VRTCL and a MattyOW Overwatch benchmark.[^REF-24]
+- **[Benchmarks](../../training/benchmarks.md)**: the [Evxl Benchmark Tracker](../tools.md) collects the community benchmarks written for Aimbeast. It lists an Aimbeast V2 sheet alongside sheets such as VRTCL and a MattyOW Overwatch benchmark.[^REF-24]
 
 ## Key content
 
@@ -56,4 +56,4 @@ Aimbeast is the third trainer worth knowing about, and the arena is the reason. 
 
 The trade-off is ecosystem. The benchmark seasons this wiki covers, [Voltaic](../communities/voltaic.md)'s and Revosect's, are published for [KovaaK's](kovaaks.md) and [Aimlabs](aimlabs.md).
 
-So an Aimbeast player reads their progress off a different and more scattered set of sheets. They're gathered on [Evxl](../tools/evxl.md) rather than issued as one season.[^REF-24] Picking it means picking its own ladders, rather than the ones most routines and guides are written against.
+So an Aimbeast player reads their progress off a different and more scattered set of sheets. They're gathered on [Evxl](../tools.md) rather than issued as one season.[^REF-24] Picking it means picking its own ladders, rather than the ones most routines and guides are written against.

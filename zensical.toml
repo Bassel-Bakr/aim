@@ -83,12 +83,7 @@ nav = [
         "wiki/resources/trainers/aimlabs.md",
         "wiki/resources/trainers/aimbeast.md",
       ] },
-      { "Tools" = [
-        "wiki/resources/tools/evxl.md",
-        "wiki/resources/tools/kova.md",
-        "wiki/resources/tools/kovobs.md",
-        "wiki/resources/tools/rawaccel.md",
-      ] },
+      "wiki/resources/tools.md",
       "wiki/resources/guides.md",
     ] },
     { "Myths" = "wiki/myths.md" },
@@ -156,6 +151,10 @@ tags = {}
 "wiki/skills/switching.md" = "wiki/categories/switching.md"
 "wiki/fundamentals/tension.md" = "wiki/fundamentals/tension-management.md"
 "wiki/techniques/underaiming.md" = "wiki/glossary.md"
+"wiki/resources/tools/evxl.md" = "wiki/resources/tools.md"
+"wiki/resources/tools/kova.md" = "wiki/resources/tools.md"
+"wiki/resources/tools/kovobs.md" = "wiki/resources/tools.md"
+"wiki/resources/tools/rawaccel.md" = "wiki/resources/tools.md"
 
 [project.markdown_extensions]
 abbr = {}

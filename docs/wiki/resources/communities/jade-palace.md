@@ -31,7 +31,7 @@ Matty_OW announced the server and posts its updates.[^REF-94][^REF-95]
 
 ## Key content
 
-- Jade Palace benchmarks are tracked on the [Evxl Benchmark Tracker](../tools/evxl.md).[^REF-25]
+- Jade Palace benchmarks are tracked on the [Evxl Benchmark Tracker](../tools.md).[^REF-25]
 
 ## Our take
 

@@ -19,8 +19,8 @@ related:
     why: the trainer its Season 3 benchmark runs on.
   - page: wiki/resources/communities/revosect.md
     why: a community running comparable benchmark seasons and routines.
-  - page: wiki/resources/tools/evxl.md
-    why: scores Voltaic benchmark runs automatically.
+  - page: wiki/resources/tools.md
+    why: the tracker that collects its benchmark sheets.
   - page: wiki/resources/communities/x76.md
     why: a player-run arena-shooter community whose glossary draws on Voltaic's entries.
 ---

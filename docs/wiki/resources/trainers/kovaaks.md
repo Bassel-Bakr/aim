@@ -15,12 +15,8 @@ related:
     why: the community whose Season 5 benchmark runs on KovaaK's.
   - page: wiki/training/benchmarks.md
     why: how the benchmark seasons built on KovaaK's are scored.
-  - page: wiki/resources/tools/evxl.md
-    why: tracks KovaaK's benchmark scores against community sheets.
-  - page: wiki/resources/tools/kovobs.md
-    why: saves an OBS clip when a KovaaK's run sets a personal best.
-  - page: wiki/resources/tools/kova.md
-    why: shows your KovaaK's personal bests on a public profile.
+  - page: wiki/resources/tools.md
+    why: the tools that read its scores and stats.
   - page: wiki/resources/trainers/aimlabs.md
     why: a free trainer with curated, game-specific training programs.
   - page: wiki/resources/trainers/aimbeast.md

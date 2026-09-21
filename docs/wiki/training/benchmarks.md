@@ -84,7 +84,7 @@ Rank names and season numbering are independent between the two, so a rank on on
 to a rank on the other.
 
 Smaller communities run their own benchmarks as well. The
-[Evxl Benchmark Tracker](../resources/tools/evxl.md) scores you against many of them at once.
+[Evxl Benchmark Tracker](../resources/tools.md) scores you against many of them at once.
 
 ## How often to rerun a benchmark
 
@@ -116,5 +116,5 @@ you're training for.
 
 ## Resources
 
-- [Evxl Benchmark Tracker](../resources/tools/evxl.md): scores your runs against community
+- [Evxl Benchmark Tracker](../resources/tools.md): scores your runs against community
   benchmarks automatically.
