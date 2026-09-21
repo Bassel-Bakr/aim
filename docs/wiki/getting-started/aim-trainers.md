@@ -34,15 +34,14 @@ That lets you work on a specific weakness instead of whatever a match happens to
 
 The trade-off: a scenario is not a real engagement. Trainers isolate mechanics. A match also
 demands game sense, positioning, and adjusting to abilities and recoil, which a scenario does not
-reproduce. See [Transfer to Games](../fundamentals/transfer-to-games.md) for what does and doesn't
-carry over.
+reproduce.
+
+How much carries over has barely been tested.[^REF-96][^REF-97] See
+[Transfer to Games](../fundamentals/transfer-to-games.md) for what does and doesn't carry over.
 
 **Dedicated trainer versus in-game practice.** Your game's deathmatch, practice range, and custom
 modes have one edge a trainer can't fully match. They use your real crosshair, recoil, movement,
 and hitboxes.
-
-<!-- REVIEW: no public source found that tests what carries from an aim trainer into a game. The
-transfer claims on this page are this wiki's own reading, not a sourced finding. -->
 
 The trade-off is that you can't isolate a single category the way a scenario does. Your reps are
 mixed in with everything else happening in that mode.

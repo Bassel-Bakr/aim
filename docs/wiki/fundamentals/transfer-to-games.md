@@ -40,8 +40,15 @@ control is improving over time.
 crosshair you actually use in a match. Trainer practice isolates mechanics rather than transferring
 one-to-one.
 
-<!-- REVIEW: no public source found that tests what carries from an aim trainer into a game. The
-transfer claims on this page are this wiki's own reading, not a sourced finding. -->
+How much carries over has barely been tested. One peer-reviewed study put six Valorant players
+through six minutes of Aim Lab a day for a week. It measured a rise in average damage per
+round.[^REF-97]
+
+Six players is a small sample, and they trained immediately before playing. That design cannot
+separate a warm-up effect from a training effect.
+
+The KovaaK's reliability study states the limit plainly: "caution is required if extrapolating to
+in-game environments".[^REF-96]
 
 Crosshair placement means keeping your aim where a target is about to appear. Positioning is where
 you stand and how you move through a map. Both depend on that game's angles, sightlines, and

@@ -702,3 +702,24 @@
   type: documentation
   tier: vendor
   publication: KovaaK's Wiki
+
+- id: REF-96
+  author: Rogers et al.
+  title: a pilot study testing whether KovaaK's measures shooting proficiency consistently
+  url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10925653/"
+  type: study
+  tier: research
+  publication: Frontiers in Sports and Active Living
+  notes: 10 players, no intervention. It tests whether the trainer measures consistently, not
+    whether training transfers. Its authors warn against extrapolating to in-game environments.
+
+- id: REF-97
+  author: "Roldan & Prasetyo"
+  title: a study measuring Valorant damage per round after a week of daily Aim Lab practice
+  url: "https://ieeexplore.ieee.org/document/9436822/"
+  type: study
+  tier: research
+  publication: IEEE ICIEA 2021
+  notes: 6 players, 6 minutes a day for 1 week, no control group. Participants trained immediately
+    before playing, so warm-up and training effects cannot be separated. The full text is paywalled,
+    so these fields come from the publisher abstract.
