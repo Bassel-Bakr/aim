@@ -14,8 +14,8 @@ improve. It assumes no aim-training experience. You don't need an aim trainer, a
 or any idea what a benchmark is to start here.
 
 !!! key "Keep the trainer to a slice of your practice"
-    A solid daily playlist runs 30 to 40 minutes. Past that, time in your own game does
-    more for you than more trainer time.[^REF-8]
+    The common view in the aim-training community is a daily playlist of 30 to 40 minutes. Past
+    that, time in your own game does more for you. Train longer if your schedule allows.[^REF-8]
 
 A first pass through the wiki looks like this:
 

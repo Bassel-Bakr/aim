@@ -32,11 +32,11 @@ Revosect is an aim-training and esports-improvement community that runs its own 
 
 Players who want a tiered benchmark to measure raw aim, similar in spirit to [Voltaic](voltaic.md), plus curated practice routines for specific games.
 
-Revosect's benchmarks have three difficulty tiers: Entry, Intermediate, and Advanced.[^REF-43] Newer and experienced players both have a track to climb. The top Advanced ranks require a recorded VOD to verify scores.
+Revosect's benchmarks have three difficulty tiers: Entry, Intermediate, and Advanced.[^REF-43] Newer and experienced players both have a track to climb. Every Advanced rank requires a recorded VOD for the two highest scores in each subcategory.[^REF-43]
 
 ## What it covers
 
-- **Benchmarks**: the current flagship benchmark on Revosect's site is Season 5, built for [KovaaK's](../trainers/kovaaks.md). It covers six subcategories: [Clicking](../../categories/clicking.md) (static, dynamic), [Tracking](../../categories/tracking.md) (precise, reactive), and [Switching](../../categories/switching.md) (speed, evasive).[^REF-43] Revosect has also published benchmark seasons and progression sheets for [Aimlabs](../trainers/aimlabs.md), currently at Season 2.[^REF-45]
+- **Benchmarks**: the current flagship benchmark on Revosect's site is Season 5, built for [KovaaK's](../trainers/kovaaks.md). It covers six subcategories: [Clicking](../../categories/clicking.md) (static, dynamic), [Tracking](../../categories/tracking.md) (precise, reactive), and [Switching](../../categories/switching.md) (speed, evasive).[^REF-43] For [Aimlabs](../trainers/aimlabs.md) its progression sheet is on Season 2, while its playlists reach Season 4.[^REF-45]
 - **[Routines](../../training/routines.md)**: foundational Aimlabs routines plus weakness- and smoothness-specific routines. There are also separate game-specific practice routines and playlists, for titles including Valorant, Apex Legends, Overwatch 2, Call of Duty/Warzone, Battlefield, Counter-Strike 2, and Fortnite.[^REF-45]
 - **Guides**: general aiming terminology and a beginner-oriented guide to Aimlabs benchmarks, also on the resources page.
 

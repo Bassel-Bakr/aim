@@ -21,14 +21,14 @@ A scenario you built is a measuring instrument. Every random element in it is no
 and noise you added yourself is the kind you can remove.
 
 - **Randomness hides what you did.** A score that moves on its own teaches nothing.
-- **Weapons are the usual source.** Spread and recoil both have random forms.[^REF-86]
+- **Weapons are the usual source.** Spread and recoil have patterned forms and looser ones.[^REF-86]
 - **The score model is a second instrument.** What it counts is what you will practice.
 - **Strip first, then judge.** Remove the noise before concluding anything about your aim.
 
 ## Noise you added by accident
 
-**A random cone is noise, not difficulty.** Spread is the cone a shot may land in. Per bullet
-spread is a fixed pattern instead.[^REF-86]
+**A random cone is noise, not difficulty.** Per bullet spread uses a pre-determined pattern, where
+plain spread does not.[^REF-86]
 
 The difference decides whether a miss was yours. With a cone, two identical inputs give two
 different outcomes, so a bad run may be the weapon rather than the aim.
@@ -78,11 +78,11 @@ drill is teaching something nobody chose.
 </figure>
 
 That is the speed-against-accuracy trade-off with a price attached. Push the pace and accuracy
-falls. The score model decides whether that trade pays.[^REF-17]
+tends to drop.[^REF-17] The score model decides whether that trade pays.
 
 ## Common mistakes
 
-- Reading a score from a scenario with random spread as a measure of aim.[^REF-86]
+- Reading a score from a scenario with random spread as a measure of aim.
 - Removing randomness and also removing the demand, leaving a drill that is merely easy.
 - Keeping the copied scenario's scoring without checking what it pays for.
 - Changing the noise and the difficulty in the same edit, so neither result is readable.

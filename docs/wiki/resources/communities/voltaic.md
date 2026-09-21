@@ -34,20 +34,20 @@ related:
 
 Voltaic is an aim-training community and coaching group built around structured benchmarks for [KovaaK's](../trainers/kovaaks.md) and [Aimlabs](../trainers/aimlabs.md). It publishes benchmark seasons, training routines, and guides through its [blog](https://blog.voltaic.gg) and companion [app](https://app.voltaic.gg), and runs an active [Discord](https://discord.gg/voltaic) server for training discussion.
 
-Voltaic also offers paid coaching through a program called Amped. It's aimed at competitive players and content creators working on mechanics such as flicking, tracking, and target switching, per the [Voltaic homepage](https://voltaic.gg).
+Voltaic also offers coaching through a program called Amped, for players working on mechanics such as flicking, tracking, and target switching.[^REF-58] It is sold per session or upfront.[^REF-93]
 
 ## Who it suits
 
 Players at any level who want a structured way to measure raw mouse-control skill. The benchmarks are split into Novice, Intermediate, and Advanced difficulty, so newer players and experienced players both have a track to climb.[^REF-50]
 
-Amped coaching targets competitive and content-creator players specifically, rather than beginners.
+Amped is described as a service for professional players and creators.[^REF-93]
 
 ## What it covers
 
 - **Benchmarks** for the three core categories, [Clicking](../../categories/clicking.md), [Tracking](../../categories/tracking.md), and [Switching](../../categories/switching.md), currently Season 5 on KovaaK's and Season 3 on Aimlabs. Each splits into static/dynamic, precise/reactive, and speed/evasive subcategories across three difficulty bands. A hybrid bridges each pair: linear, control, and stability, respectively.[^REF-50][^REF-49]
-- **Ranks** are grouped within each difficulty band. You climb them with an overall "Energy" score that combines your subcategory scores using a harmonic mean. That weights your weakest subcategory more heavily than your strongest.[^REF-48]
+- **Ranks** are grouped within each difficulty band. An overall "Energy" score combines your subcategory energies using a harmonic mean. You get no energy until you have a score in every subcategory.[^REF-48]
 - **[Routines](../../training/routines.md)**: fundamental routines for general mouse control, game-specific routines, and weakness-specific routines built from Voltaic's recommended scenario lists.[^REF-52]
-- **Guides** on health, lifestyle, and improvement mindset, also linked from the Getting Started guide.
+- **Guides** on health, peripherals and other topics, linked from the Getting Started guide.[^REF-52]
 
 ## Key content
 
@@ -57,6 +57,6 @@ Amped coaching targets competitive and content-creator players specifically, rat
 
 ## Our take
 
-Voltaic is one of the most established benchmark providers covering both KovaaK's and Aimlabs. That makes it a reasonable default for checking your raw aim against a wide player base. Its coaching arm (Amped) is aimed at competitive and creator-level players rather than beginners.
+Voltaic is one of the most established benchmark providers covering both KovaaK's and Aimlabs. That makes it a reasonable default for checking your raw aim against a wide player base. Its coaching arm, Amped, is aimed at professional players and creators.
 
 Some of Voltaic's material, such as exact rank thresholds, sits in a companion app and spreadsheets rather than on the public blog. Treat this page as an overview, and follow the links above for current detail.
