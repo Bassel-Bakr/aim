@@ -6,9 +6,6 @@ tags:
   - beginner
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
-
 This wiki is for anyone who wants to train aim deliberately. It covers:
 
 - the mechanics behind mouse aim
@@ -46,8 +43,9 @@ need them.
 
 ## About this wiki
 
-Every page here carries the "Draft" banner above because it is pending review. Content is written
-from public sources, and has not yet had a human check pass over it.
+Most pages here carry a "Draft" banner: they are written from public sources, and have not yet had
+a human check pass over them. A page loses the banner once someone has checked every claim on it
+against its source.
 
 [Articles](../articles/index.md) are a separate part of this site, not part of the wiki. They are signed, first-person pages written from experience, so they carry their author's name
 instead of a citation trail. They are not open to contributions.

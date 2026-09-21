@@ -6,9 +6,6 @@ tags:
   - beginner
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
-
 Every category on this wiki, from [Tracking](../categories/tracking.md) to
 [Switching](../categories/switching.md), is built on the same mechanics and the same practice habits.
 

@@ -4,9 +4,6 @@ description: >-
   Every source this wiki cites, listed once with a stable ID that pages reference.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
-
 Every source the wiki cites, in one list. Each has a stable ID, and wiki pages cite it by that ID,
 so the same source always reads the same way wherever it appears.
 
