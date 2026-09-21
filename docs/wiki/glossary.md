@@ -69,16 +69,16 @@ degrees.[^REF-56]
 
 ### FPS
 
-FPS (frames per second) is how many frames your game renders each second. A frame rate that
-comfortably exceeds your monitor's refresh rate measurably reduces input lag even with V-Sync off.
+FPS (frames per second) is how many frames your game renders each second. With V-Sync off, a frame
+rate above your monitor's refresh rate still lowers input lag.[^REF-23]
 See [Setup and Gear](getting-started/setup.md).
 
 ### Hz
 
 Hz (hertz) is a monitor's refresh rate: how many times per second it redraws the screen.
 
-A higher refresh rate shortens the time between frames the display can show. A 240Hz display, for
-example, refreshes noticeably faster per frame than a 144Hz one. See
+A higher refresh rate shortens the time between frames the display can show. A 240Hz display
+refreshes more often than a 144Hz one, so less time passes between frames. See
 [Setup and Gear](getting-started/setup.md).
 
 ### Micro-adjustment

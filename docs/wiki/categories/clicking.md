@@ -47,7 +47,7 @@ task comes down to precision and timing.
 Good execution is a flick that settles directly on the target, rather than overshooting and
 correcting back onto it afterward.
 
-The most common mistake is treating every flick as a rough first pass to be fine-tuned. That trains
+A common mistake is treating every flick as a rough first pass to be fine-tuned. That trains
 imprecise flicks propped up by correction, instead of an accurate first flick.
 
 Practice at a target size and distance where you land most flicks clean. Then gradually shrink the
@@ -65,7 +65,7 @@ needs.
 Aimlabs describes proper flicking technique in general as "the initial flicking motion with
 controlled microcorrections to adjust for the subtle motions of the targets."[^REF-19]
 
-The common mistake is flicking to where the target was at the start of the motion, and only
+A common mistake is flicking to where the target was at the start of the motion, and only
 reacting to its movement afterward. That turns one clean flick into a chase.
 
 Train it on scenarios that isolate target motion, at a pace you can still land cleanly, before
@@ -81,7 +81,7 @@ The target moves, but along a single readable line rather than erratically. Good
 approaches its line of travel smoothly and times the click to where it will be, not reactively once
 it's close.
 
-The common mistake is treating predictable movement as effectively stationary. A target moving
+A common mistake is treating predictable movement as effectively stationary. A target moving
 along a readable path still punishes a flick aimed at its current position instead of its
 near-future one.
 

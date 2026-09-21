@@ -21,9 +21,9 @@ related:
 Switching is moving your crosshair from a target you've just cleared to the next one. You close that
 gap quickly, without losing the accuracy you need to land the next click.
 
-- **Speed:** the transition is the hard part. Targets move too little to matter.
+- **Speed:** the transition is the hard part. Targets move, but not much.
 - **Evasive:** targets keep moving after you arrive. Finish with a beat of tracking.
-- **Stability:** targets hop in place. Your crosshair has to hold through the hop.
+- **Stability:** targets hop or bounce. Your crosshair has to hold through the movement.
 - **Accuracy before speed.** Widen spacing only once you land most switches.
 
 [Aimlabs](../resources/trainers/aimlabs.md) calls it "the heart of dynamic decision-making in
@@ -40,8 +40,8 @@ below speed, evasive, and stability.[^REF-50]
 ## Speed switching
 
 Speed switching puts the weight on the transition itself: how fast you can cross the gap and still
-land the click. The targets aren't necessarily frozen, but they move little enough that holding one
-is never the hard part.
+land the click. The targets aren't necessarily frozen, but the transition matters more than holding
+one.
 
 Good execution is a flick straight to the next target, then a quick micro-adjustment to settle on
 it. A slow drift across the gap is the opposite.
@@ -73,9 +73,9 @@ movement.
 Stability switching sits between the two. Voltaic added it in Season 5 as a hybrid category
 "bridging traditional subcategory gaps."[^REF-50]
 
-The targets barely move at all, hopping or jittering slightly in place. It looks like switching
-between stationary targets, but the crosshair has to hold through that small movement instead of
-arriving and stopping.
+The targets stay contained: one scenario has them hopping in place, the other bouncing around a
+pentagonal arena. The crosshair has to hold through that movement instead of arriving and
+stopping.
 
 Good execution is a stable flick onto each target that holds through the hop, instead of one that
 immediately drifts off.

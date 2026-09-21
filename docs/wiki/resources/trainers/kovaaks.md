@@ -43,18 +43,18 @@ Players comfortable choosing and configuring their own scenarios and playlists, 
 ## What it covers
 
 - **Scenarios and playlists** covering [Clicking](../../categories/clicking.md), [Tracking](../../categories/tracking.md), and [Switching](../../categories/switching.md) drills, created by the developer and the community and shared through the in-game [Steam Workshop](https://steamcommunity.com/app/824270/workshop/).
-- **Benchmarks**: built-in game-specific benchmarks for VALORANT, Apex Legends, Fortnite, and Overwatch. It is also the base game that third-party [benchmark](../../training/benchmarks.md) seasons such as [Voltaic](../communities/voltaic.md) Season 5 and Revosect Season 5 run on.[^REF-33][^REF-43]
+- **Benchmarks**: built-in game-specific benchmarks for VALORANT, Apex Legends, Fortnite, and Overwatch. It is also the base game that third-party [benchmark](../../training/benchmarks.md) seasons run on, including Revosect Season 5[^REF-43] and Voltaic's Season 5 beta.[^REF-50]
 - **[Sensitivity](../../getting-started/sensitivity.md) matching**: the official site hosts a web-based [sensitivity converter](https://kovaaks.com/kovaaks/sens-converter) for a set list of games.[^REF-31] The developer separately publishes an open-source [Sensitivity Matcher](https://github.com/KovaaK/SensitivityMatcher) script. It measures in-game turn rate, to match sensitivity for games not on that list.[^REF-32]
-- **Stats and editor**: Steam leaderboards and per-scenario stat tracking, plus a map and scenario editor for building custom content.[^REF-33]
+- **Stats and editor**: Steam leaderboards and stat tracking, plus a map and scenario editor for building custom content.[^REF-33]
 
 ## Key content
 
 - [KovaaK's on Steam](https://store.steampowered.com/app/824270/KovaaKs/): store page covering training modes, built-in benchmarks, and community content.
-- [KovaaK's Tracking Trainer](https://store.steampowered.com/app/1438210/KovaaKs_Tracking_Trainer/): paid DLC designed by KovaaK himself, adding eleven tracking-focused modules with dynamic difficulty.
+- [KovaaK's Tracking Trainer](https://store.steampowered.com/app/1438210/KovaaKs_Tracking_Trainer/): paid DLC designed by KovaaK himself, adding eleven tracking-focused core skills with dynamic difficulty.[^REF-34]
 - [Sensitivity Matcher](https://github.com/KovaaK/SensitivityMatcher): open-source script published by the developer for matching mouse sensitivity across games not covered by the built-in converter.
 
 ## Our take
 
-KovaaK's has the larger scenario library of the two main trainers on this wiki. It's also the base game most benchmark communities, including [Voltaic](../communities/voltaic.md) and Revosect, build their seasons on.
+KovaaK's carries a large scenario library. Benchmark communities including [Voltaic](../communities/voltaic.md) and Revosect build seasons on it.
 
 It's a one-time Steam purchase rather than free-to-play. Its Sandbox-first design rewards players who are willing to find and configure scenarios and playlists themselves.[^REF-33]

@@ -23,16 +23,16 @@ Motion changes which skill the shot belongs to.
 
 - **Readable and unreadable train different things.** Pick one on purpose.[^REF-15]
 - **A learnable path becomes recall.** That is useful, and it is not reading.[^REF-15]
-- **Mixed behavior costs comparability.** Weighted evenly, a run's difficulty is luck.[^REF-82]
-- **Travel time is motion too.** A projectile has to be led. Hitscan does not.[^REF-86]
+- **Mixed behavior costs comparability.** Weighted evenly, a run's difficulty is luck.
+- **Travel time is motion too.** A projectile has to be led. Hitscan does not.
 
 ## Readable against unreadable
 
 **A fixed path can be ridden.** Run the same route enough times and you stop reacting to it. You
 recall it, and your crosshair leads the target because you know where it goes.
 
-**A reacting target cannot be anticipated.** It answers your movement, so the only way through is
-to read it as it happens.[^REF-15]
+**A reacting target is not predictable enough to track by anticipation alone.** It answers your
+movement, so you have to read it as it happens.[^REF-15]
 
 <figure class="aim-figure">
 <!-- aim:figure reactive -->
@@ -85,7 +85,7 @@ Neither is wrong, but only one of them gives you a score you can read across ses
 
 ## Travel time is part of the motion
 
-**A projectile weapon turns every shot into a lead.**[^REF-86] Where the target will be matters more
+**A projectile weapon turns every shot into a lead.** Where the target will be matters more
 than where it is, and that is a different skill from putting a crosshair on a thing.
 
 <figure class="aim-figure">
@@ -100,9 +100,9 @@ Training hitscan for a projectile game leaves out the one that decides fights.
 ## Common mistakes
 
 - Building a path you meant to be unpredictable, then learning it within a week.
-- Stacking dodge profiles at similar weights and wondering why scores jump around.[^REF-82]
+- Stacking dodge profiles at similar weights and wondering why scores jump around.
 - Setting an elaborate route and leaving Waypoint Logic on Ignore, so nothing follows it.[^REF-91]
-- Training projectile leads for a game where every gun is hitscan.[^REF-86]
+- Training projectile leads for a game where every gun is hitscan.
 
 ## In practice
 

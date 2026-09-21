@@ -28,7 +28,7 @@ related:
 
 ## What it is
 
-Aimbeast is a paid aim trainer for Windows, developed and published by Focusd IO and sold on [Steam](https://store.steampowered.com/app/1100990/Aimbeast/) since May 2020. Alongside the usual scenario practice it ships a ranked multiplayer mode, which neither [KovaaK's](kovaaks.md) nor [Aimlabs](aimlabs.md) offers.[^REF-2]
+Aimbeast is a paid aim trainer for Windows, developed and published by Focusd IO and sold on [Steam](https://store.steampowered.com/app/1100990/Aimbeast/) since May 2020. Alongside the usual scenario practice it ships a ranked multiplayer mode on dedicated servers.[^REF-2]
 
 ## Who it suits
 
@@ -43,7 +43,7 @@ It also suits players who like configuring their own training. Scenarios are com
 - **Arena**: ranked one-on-one duels against other players on dedicated servers in Europe, North America, and Asia, plus custom games for up to 32 players. Duels are built around tracking, reactivity, precision, and movement rather than static drills.[^REF-2]
 - **Bots**: the selling point of the single-player side is bot movement that behaves like a player, not a fixed pattern. It is configurable.[^REF-2]
 - **[Sensitivity](../../getting-started/sensitivity.md) and input**: sensitivity can be matched to another game directly, and controllers are supported with selectable input curves.[^REF-2]
-- **[Benchmarks](../../training/benchmarks.md)**: the [Evxl Benchmark Tracker](../tools/evxl.md) collects the community benchmarks written for Aimbeast. It lists an official Aimbeast V2 sheet alongside community sheets such as VRTCL and a Matty_OW Overwatch benchmark.[^REF-24]
+- **[Benchmarks](../../training/benchmarks.md)**: the [Evxl Benchmark Tracker](../tools/evxl.md) collects the community benchmarks written for Aimbeast. It lists an Aimbeast V2 sheet alongside sheets such as VRTCL and a MattyOW Overwatch benchmark.[^REF-24]
 
 ## Key content
 
@@ -53,7 +53,7 @@ It also suits players who like configuring their own training. Scenarios are com
 
 ## Our take
 
-Aimbeast is the third trainer worth knowing about, and the arena is the reason. Practicing against a human opponent who is also trying to win is a different exercise from any scenario. It's the one thing the other two trainers don't have.
+Aimbeast is the third trainer worth knowing about, and the arena is the reason. Practicing against a human opponent who is also trying to win is a different exercise from any scenario. Of the three, only Aimbeast ranks that play.
 
 The trade-off is ecosystem. The benchmark seasons this wiki covers, [Voltaic](../communities/voltaic.md)'s and Revosect's, are published for [KovaaK's](kovaaks.md) and [Aimlabs](aimlabs.md).
 
