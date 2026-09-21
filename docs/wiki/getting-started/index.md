@@ -13,8 +13,8 @@ improve. It assumes no aim-training experience. You don't need an aim trainer, a
 or any idea what a benchmark is to start here.
 
 !!! key "Keep the trainer to a slice of your practice"
-    The common view in the aim-training community is a daily playlist of 30 to 40 minutes. Past
-    that, time in your own game does more for you. Train longer if your schedule allows.[^REF-8]
+    Aimlabs describes the community's common view as a daily playlist of 30 to 40 minutes. Past
+    that, it says, time in your own game does more for you.[^REF-8]
 
 A first pass through the wiki looks like this:
 
@@ -28,8 +28,8 @@ A first pass through the wiki looks like this:
 3. **Learn the fundamentals.** Understand what "aim" is actually made of and how deliberate
    practice works before you start drilling. See [Fundamentals](../fundamentals/index.md).
 4. **Find your weaknesses.** Run a benchmark to see which core category, clicking, tracking, or
-   switching, is holding you back. Then review fights you lose in your own games, and train the ones
-   your mechanics lost.[^REF-10] See [Benchmarks](../training/benchmarks.md).
+   switching, is holding you back. Aimlabs suggests reviewing fights you lose, and asking whether
+   your mechanics or your decisions lost them.[^REF-10] See [Benchmarks](../training/benchmarks.md).
 5. **Follow a routine.** Turn your benchmark result into a repeatable practice session instead of
    randomly picking scenarios. See [Routines](../training/routines.md).
 6. **Track progress and handle plateaus.** Improvement is not linear. Know how to measure it and

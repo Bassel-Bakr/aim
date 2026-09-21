@@ -71,9 +71,8 @@ practiced in the actual game.[^REF-50]
 
 Use trainer time for mechanics, and game time for everything a trainer can't reproduce.
 
-Keep the trainer part bounded. The common consensus is a daily playlist of 30 to 40 minutes. Past
-it, time in your own game does more for you, though you can train longer if your schedule
-allows.[^REF-8]
+Keep the trainer part bounded. Aimlabs describes the common consensus as a daily playlist of 30 to
+40 minutes. Past it, it says, time in your own game does more.[^REF-8]
 
 [Voltaic](../resources/communities/voltaic.md) structures its own [routines](../training/routines.md)
 around this split. General Fundamental Routines cover overall mouse control. Separate game-specific
