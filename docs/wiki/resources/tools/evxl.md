@@ -60,6 +60,6 @@ ID, or profile URL and the site reads your scores from there.[^REF-25]
 The practical value is breadth. Checking your standing across several community benchmarks otherwise
 means visiting each community's own sheet separately.
 
-Scores are read from your trainer profile rather than entered by hand. So what it shows depends on
-that profile being public and current. A community's own site remains the authority on that
-community's current season.
+The benchmark view reads scores from your trainer profile rather than from anything entered by
+hand. So what it shows depends on that profile being public and current. A community's own site
+remains the authority on that community's current season.

@@ -35,8 +35,8 @@ Players who want a single link that answers "what mouse, what pad, what
 [sensitivity](../../getting-started/sensitivity.md)" without retyping it, and groups that want a
 shared roster.
 
-It is a presentation and reference layer rather than a training tool: nothing here scores your aim
-or tells you what to practice.
+This page covers the profile side of the site. Kova also ships browser tools, among them an aim
+trainer and a rank-up planner, which this page does not cover.
 
 ## What it covers
 

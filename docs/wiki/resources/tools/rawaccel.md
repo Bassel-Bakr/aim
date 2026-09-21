@@ -19,9 +19,9 @@ related:
 
 ## What it is
 
-A free, open-source Windows 10 and 11 driver that applies mouse acceleration and sensitivity curves
-you define, before any game sees the input.[^REF-62] The driver is signed, and settings take a
-one-second delay to apply, which the developers say is there to limit abuse.[^REF-62]
+A free, open-source Windows 10 and 11 x86-64 driver that applies mouse acceleration and sensitivity
+curves you define, before any game sees the input.[^REF-62] The driver is signed, and settings take
+a one-second delay to apply, which the developers say is there to limit abuse.[^REF-62]
 
 ## Who it suits
 
@@ -35,7 +35,7 @@ covers people who want one curve that behaves the same in every game.
 - **Caps and offsets**: where acceleration starts, and the most it can add.[^REF-63]
 - **Horizontal and vertical**: one curve for all movement, or separate ones per direction.[^REF-63]
 - **Per-device settings**: DPI normalization and turning it off for individual mice.[^REF-63]
-- **Live graph**: shows the curve change as you edit it.[^REF-63]
+- **Live graph**: can overlay your recent mouse movements onto the curve.[^REF-63]
 
 ## Key content
 

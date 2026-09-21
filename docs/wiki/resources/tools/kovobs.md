@@ -30,15 +30,15 @@ without you reaching for a hotkey mid-scenario.[^REF-35]
 ## Who it suits
 
 Players who already record or stream their training and want their best runs kept automatically.
-It is not a training or [benchmark](../../training/benchmarks.md) tool: it captures video, and
-nothing about your scores or ranks.
+It is not a training or [benchmark](../../training/benchmarks.md) tool: it tells OBS when to save
+a clip, and reports nothing about your scores or ranks.
 
 ## What it covers
 
 - **Personal-best detection**: reads the stats files KovaaK's writes after each run and triggers
   only when a run beats your previous best for that scenario.[^REF-35]
-- **Replay saving and screenshots**: saves the OBS replay buffer, optionally takes a screenshot,
-  and trims the resulting clip.[^REF-35]
+- **Replay saving and screenshots**: saves the OBS replay buffer, and can optionally take a
+  screenshot and trim the resulting clip.[^REF-35]
 - **Aimbeast support**, marked experimental rather than finished.[^REF-35]
 - **Setup without config files**: a graphical interface for choosing the stats folder and entering
   the OBS WebSocket password.[^REF-35]
