@@ -27,8 +27,7 @@ Little about the server's internal activity is public.
 
 Applications were unfrozen in August 2025, alongside a new channel for submitting questions and suggestions about what people want to see from elite aim-training players.[^REF-95]
 
-<!-- REVIEW: no public source names who runs or moderates Jade Palace, and no official application
-link or form is posted anywhere besides these X posts. -->
+Matty_OW announced the server and posts its updates.[^REF-94][^REF-95]
 
 ## Key content
 
