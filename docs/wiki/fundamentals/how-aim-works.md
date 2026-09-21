@@ -37,7 +37,7 @@ adjustments. The wrist handles moderate movements, and the upper arm and shoulde
 sweeping turns.[^REF-21]
 
 Which joint leads shifts with sensitivity and target speed. Wrist-led aim suits precision holds
-where corrections are small. Arm-led aim is needed for the larger motions a faster game
+where corrections are small. Arm-led aim carries the larger motions a faster game
 demands.[^REF-21]
 
 Most players already blend both without thinking about it. Treating fingers, wrist, and arm as
@@ -67,8 +67,8 @@ The mechanic underneath is speed matching. Your crosshair moves at the rate the 
 right now, instead of lagging behind and snapping forward to catch up. Direction changes follow the
 same rule: decelerate and re-accelerate, no hard stop.
 
-Most "smoothness problems" are really tension problems. Gripping the mouse too tightly blocks fluid
-motion no matter how much you practice.[^REF-20] [Tension Management](tension-management.md) covers how to feel and control it.
+Players who have never considered tension often mistake a tension problem for a smoothness one. Too
+much tension makes the motion skip ahead, and too little makes it lag and stall.[^REF-20] [Tension Management](tension-management.md) covers how to feel and control it.
 
 **Reaction versus prediction.** Reactive tracking follows where a target actually is, responding to
 each change in direction as it happens. Predictive tracking aims ahead of it.

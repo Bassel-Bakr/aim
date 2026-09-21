@@ -28,8 +28,8 @@ expensive hardware.
 that most players can't feel the difference. So the sensor spec sheet matters far less than
 fit.[^REF-57]
 
-Shape matters most. A mouse that doesn't match your hand size and grip style causes fatigue and
-inconsistent aim, however good its sensor.[^REF-57]
+Shape matters most. A mouse that doesn't match your hand size and grip style is uncomfortable to
+use, however good its sensor.[^REF-57]
 
 Weight is a smaller, personal factor after shape. Some players prefer very light mice for lower
 inertia. Others find them harder to control.[^REF-57]
@@ -53,7 +53,7 @@ repeatable position for as long as you play.[^REF-66]
 - **Fingertip grip** touches the mouse with your fingertips only and moves it with fingers and
   wrist. It allows fast micro-adjustments, with less stability.[^REF-64]
 
-In a 2024 study of 22 players using their own grips, grip made no significant difference to
+In a 2024 study of 22 male players using their own grips, grip made no significant difference to
 flicking or tracking performance.[^REF-65] Its tracking target moved at a constant speed, so that
 result is narrower than it sounds.
 

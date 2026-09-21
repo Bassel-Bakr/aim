@@ -38,11 +38,11 @@ using the right amount, in the right place, at the right moment.
 moving, which turns them into a firmer structure around the mouse. That structure gives you
 control.[^REF-78]
 
-Held for long stretches, the same contraction irritates the muscles doing it. The extreme version
+Held for long stretches, the same contraction can irritate the muscles doing it. The extreme version
 is called [death gripping](../glossary.md#death-grip).[^REF-78]
 
 **A balance, not an enemy.** Aim advice often sounds like tension should be zero. It should not:
-using none is as harmful as using too much, and some tension always keeps you stable on a
+using none can be as harmful as using too much, and some tension always keeps you stable on a
 target.[^REF-67]
 
 The goal is a secure hold that needs little tension and leaves some finger control free.[^REF-73]
@@ -103,7 +103,7 @@ out of for a direction change.[^REF-67]
 **Downward press.** Your index finger or the base of your palm pushing into the pad. It adds control,
 with extra force at direction changes such as the top of a PGT arc.[^REF-72]
 
-Pressing hard into the pad often comes with holding the click. It does not speed up
+Pressing hard into the pad can come with holding the click. It does not speed up
 micro-corrections and can restrict their fluidity.[^REF-75]
 
 **Your grip changes the recipe.** A claw grip holds with a firm, not hard, pinch between thumb, ring
@@ -191,7 +191,7 @@ to stay composed with your heart rate up.[^REF-78] Hold the mouse like a baby ra
 
 ## Common mistakes
 
-- Chasing zero tension. A grip with none lags and stalls as badly as a tight one jitters.[^REF-67]
+- Chasing zero tension. A grip with none can lag and stall as badly as a tight one jitters.[^REF-67]
 - Keeping flick tension after landing, which leaves the micro stiff and drifts toward lockout.[^REF-74]
 - Using the forearm for narrow vertical micros in control tracking, where the fingertips do the job.[^REF-69]
 - Making micro-corrections fast and explosive, which costs precision unless the control habits are already there.[^REF-75]

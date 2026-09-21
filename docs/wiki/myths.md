@@ -39,9 +39,9 @@ movement.[^REF-28]
 Research on spacing practice makes the same point from another angle. Retention comes from shorter
 sessions spread out over time, not from piling up enough reps to fill a store.[^REF-26]
 
-The disturbance half doesn't hold either. Voltaic's muscle-memory piece finds no long-run drop in aim
-among players who change sensitivity often, the same evidence the next entry covers in
-full.[^REF-53]
+The disturbance half doesn't hold either. Voltaic's muscle-memory piece reports no long-run drop in
+aim among players who change sensitivity often, from community accounts rather than a study. The
+next entry covers it in full.[^REF-53]
 
 **What to do instead.** Judge practice by whether your read of a target and your corrections are
 getting better. That's what carries across settings.
@@ -57,8 +57,9 @@ a stored motion.
 **Why people believe it.** Your current sensitivity is what your hand knows. Change it and you start
 from nothing, so the safe move is to never touch it again.
 
-**What sources say.** That's the finding of Voltaic's muscle-memory piece.[^REF-53] The same piece
-lists a deliberate sensitivity change among the ways players work past a stall. The logic is that an
+**What sources say.** That's what Voltaic's muscle-memory piece concludes, from community
+accounts.[^REF-53] The same piece lists a deliberate sensitivity change among the ways players work
+past a stall. The logic is that an
 unfamiliar setting puts you back where there's obvious room to improve.[^REF-53]
 
 **What to do instead.** Change it for a reason, then leave it alone long enough to judge it.
@@ -107,7 +108,7 @@ precise adjustments, and the wrist handles moderate movements. The upper arm and
 large sweeping turns.[^REF-21]
 
 Which one leads shifts with sensitivity and target speed. Wrist-led aim suits precision holds where
-corrections are small. Arm-led aim is needed for the larger motions a faster game
+corrections are small. Arm-led aim carries the larger motions a faster game
 demands.[^REF-21]
 
 Most players already blend both without thinking about it.[^REF-21]
