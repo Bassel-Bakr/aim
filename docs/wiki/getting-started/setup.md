@@ -69,7 +69,7 @@ any single piece of gear.
 
 **Monitor refresh rate and FPS.** A higher refresh rate reduces the time between frames the display
 can show. For example, a 240Hz display refreshes roughly 2.8ms faster per frame than a 144Hz
-display.[^REF-23]
+display.
 
 Blur Busters' testing also found that running your in-game frame rate above your monitor's refresh
 rate, with V-Sync off, still measurably reduces input lag.[^REF-23]

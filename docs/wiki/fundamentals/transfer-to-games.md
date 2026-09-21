@@ -38,8 +38,11 @@ directly on top of this same split. That's a reasonable way to measure whether y
 control is improving over time.
 
 **What they don't train.** A scenario doesn't reproduce the recoil pattern, movement, hitboxes, or
-crosshair you actually use in a match. So trainer practice isolates mechanics rather than
-transferring one-to-one, as covered in [Aim Trainers](../getting-started/aim-trainers.md).
+crosshair you actually use in a match. Trainer practice isolates mechanics rather than transferring
+one-to-one.
+
+<!-- REVIEW: no public source found that tests what carries from an aim trainer into a game. The
+transfer claims on this page are this wiki's own reading, not a sourced finding. -->
 
 Crosshair placement means keeping your aim where a target is about to appear. Positioning is where
 you stand and how you move through a map. Both depend on that game's angles, sightlines, and
