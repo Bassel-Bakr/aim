@@ -148,7 +148,8 @@ The same literature describes early learning as large, inconsistent jumps, follo
 stage of smaller refinements. So gains shrinking is the normal shape of progress.[^REF-28]
 
 Fatigue is one cause you can act on. Training hard without enough recovery can tip into
-overreaching, then overtraining, where performance declines rather than stalls.[^REF-46]
+overreaching. Extreme overreaching plus another stressor can lead to overtraining syndrome, which
+is extremely rare.[^REF-46]
 
 **What to do instead.** Judge the trend across several [benchmark](training/benchmarks.md) runs
 spaced weeks apart, rather than any one result. If a flat score comes with feeling generally run
@@ -168,8 +169,8 @@ so the way to get better faster is to train longer.
 real rest tend to beat one long session. That holds for retaining a skill, and for how fatigue
 affects performance while training.[^REF-26]
 
-Sustained training without enough recovery can tip into overreaching, then overtraining syndrome,
-where performance actually declines.[^REF-46]
+Sustained training without enough recovery can tip into overreaching. Extreme overreaching plus
+another stressor can lead to overtraining syndrome, which is extremely rare.[^REF-46]
 
 Ericsson's definition of deliberate practice is also narrower than time spent. It requires a
 qualified teacher, a goal you can hold in mind, immediate feedback on each attempt, and repeated

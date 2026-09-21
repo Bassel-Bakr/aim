@@ -60,9 +60,9 @@ be noise.
 
 ## Causes of plateaus
 
-**Fatigue.** Training hard without enough recovery between sessions can tip into overreaching. If
-that continues, it can tip further into overtraining syndrome, where performance actually declines
-rather than just stalling.[^REF-46]
+**Fatigue.** Training hard without enough recovery between sessions can tip into overreaching.
+Extreme overreaching combined with another stressor can lead to overtraining syndrome, which takes
+over two months to recover from and is extremely rare.[^REF-46]
 
 A plateau that shows up alongside feeling generally run down, not just a flat score, is worth
 treating as a fatigue problem first.
