@@ -177,11 +177,11 @@
   type: article
 
 - id: REF-29
-  author: Journal of Neuroscience
-  title: a study on plateaued motor skill
+  author: Uehara et al.
+  title: a study on improving plateaued motor skill with somatic stimulation
   url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3186792/"
   type: study
-  publication: PMC
+  publication: PLoS One
 
 - id: REF-30
   author: kova
