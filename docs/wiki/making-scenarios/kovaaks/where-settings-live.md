@@ -12,8 +12,8 @@ related:
     why: which of these settings are worth changing and how far.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from vendor documentation. Not yet checked claim by claim.
 
 This page is a lookup table, not a manual. KovaaK's documents its own editor field by field, and
 stays current in a way a third-party page cannot.[^REF-79]

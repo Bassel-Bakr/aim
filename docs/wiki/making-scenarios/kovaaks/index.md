@@ -7,8 +7,8 @@ tags:
   - routines
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from vendor documentation. Not yet checked claim by claim.
 
 KovaaK's names its own fields and keeps that reference current.[^REF-79] These pages carry a figure
 for every option in all seven editors instead.

@@ -117,12 +117,22 @@ Write it for someone deciding whether to open the page:
    point. State the claim or the advice directly and let the marker carry the source. Where sources
    disagree, set the approaches side by side, each with its own citation, rather than naming who
    holds which.
-3. Pages written from research but not yet fact-checked keep this banner at the top:
+3. Every page says at the top what kind of sources it rests on, and whether anyone has checked it:
 
    ```markdown
-   !!! warning "Draft"
-       Written from public sources, pending review.
+   !!! note "How this page is sourced"
+       Sourced from research and clinical guidance, and vendor documentation. Not yet checked
+       claim by claim.
    ```
+
+   The first sentence lists the [tiers](#source-tiers) the page cites, strongest first. The second
+   stays until someone has checked every claim against its source, then it goes. A page that cites
+   nothing because it is navigation carries no note at all.
+
+   The two facts are separate on purpose. A tier says how much weight a claim deserves if it is
+   quoted correctly. The second sentence says whether the quoting was checked. The worst
+   misquotation found in this wiki was on a page citing a peer-reviewed paper, which it argued
+   against while citing it as support.
 
 4. If you cannot verify a claim from a public source, leave it out, or mark it with
    `<!-- REVIEW: what needs checking -->`. HTML comments are hidden on the page but still visible
@@ -268,7 +278,7 @@ article earns trust by carrying its author's name, and is not open to contributi
 separate trees means neither set of rules needs an exception clause for the other.
 
 Nothing in this document applies to articles. They are written by the site's maintainer from
-`templates/article.md`, carry a `!!! info "Written by <name>"` byline instead of the draft banner,
+`templates/article.md`, carry a `!!! info "Written by <name>"` byline instead of the sourcing note,
 take no tags, and do not require footnotes. `scripts/check_pages.py` enforces those rules for
 anything under `docs/articles/`.
 

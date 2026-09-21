@@ -25,8 +25,8 @@ related:
     why: a player-run arena-shooter community whose glossary draws on Voltaic's entries.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from named coaches and communities. Not yet checked claim by claim.
 
 **Links:** [Website](https://voltaic.gg) · [Discord](https://discord.gg/voltaic) · [YouTube](https://www.youtube.com/@VoltaicAim)
 

@@ -11,8 +11,9 @@ related:
     why: rest and consistency as part of effective practice, not separate from it.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from research and clinical guidance, and vendor documentation. Not yet checked claim
+    by claim.
 
 !!! note "Not medical advice"
     This page shares general information only. If you have pain, numbness, or tingling, stop

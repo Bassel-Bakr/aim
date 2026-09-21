@@ -17,8 +17,9 @@ related:
     why: underaiming, the habit of withholding motion a shot does not need.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from named coaches and communities, and vendor documentation. Not yet checked claim
+    by claim.
 
 Clicking is acquiring a target and landing a single shot or short burst on it. You close the gap
 between your crosshair and the target, then time the click so it actually connects.

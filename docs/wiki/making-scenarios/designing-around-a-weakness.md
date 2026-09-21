@@ -14,8 +14,9 @@ related:
     why: building the scenario once you know what it should demand.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from research and clinical guidance, named coaches and communities, and vendor
+    documentation. Not yet checked claim by claim.
 
 A scenario is a question you ask your aim. A vague question gets a vague answer, so the design work
 happens before the editor opens.

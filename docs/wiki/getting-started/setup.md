@@ -11,8 +11,9 @@ related:
     why: posture and recovery over long sessions.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from research and clinical guidance, independent measurement, named coaches and
+    communities, vendor documentation, and general reference. Not yet checked claim by claim.
 
 Good aim training starts with gear and settings that get out of your way. None of it requires
 expensive hardware.

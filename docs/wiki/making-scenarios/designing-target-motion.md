@@ -15,8 +15,8 @@ related:
     why: the category motion design affects most.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from vendor documentation. Not yet checked claim by claim.
 
 Motion is the single biggest design decision in a scenario. Target size changes how hard a shot is.
 Motion changes which skill the shot belongs to.

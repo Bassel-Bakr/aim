@@ -16,12 +16,9 @@ related:
 
 # Weapon Profile
 
-!!! warning "Draft"
-    Written from public sources, pending review.
-
-!!! note "Read from the editor"
-    Field names, tooltip text and defaults here were read from the KovaaK's scenario editor in
-    September 2026. The official wiki documents tabs rather than fields.
+!!! note "How this page is sourced"
+    Sourced from vendor documentation, plus field names and tooltips read from the scenario
+    editor in September 2026. Not yet checked claim by claim.
 
 The weapon decides what a click costs. It is also where most of a score's noise comes from. For a
 drill about aim, the job here is mostly taking things out.

@@ -182,8 +182,9 @@ agents most often miss:
    reference: read the field names and tooltips from the software, carry a note at the top of
    the page saying so and when, and give those claims no footnote. See
    [CONTRIBUTING.md](CONTRIBUTING.md#writing-rules). The KovaaK's editor pages work this way.
-7. A page written from research but not yet fact-checked keeps the draft banner at the top, exactly
-   as shown in [CONTRIBUTING.md](CONTRIBUTING.md).
+7. Every page opens with a note saying which source [tiers](CONTRIBUTING.md#source-tiers) it rests
+   on and whether anyone has checked it, exactly as shown in
+   [CONTRIBUTING.md](CONTRIBUTING.md#writing-rules).
 8. New abbreviations go in both `docs/wiki/glossary.md` and `includes/abbreviations.md`.
 9. Every wiki page follows the readability rules in
    [CONTRIBUTING.md](CONTRIBUTING.md#readability): 45-word paragraphs, 25-word sentences, and on
@@ -226,7 +227,7 @@ poses, recolours or cuts up the original, which it always does here.
 
 `docs/articles/` is a separate part of the site at `/articles`, and none of the rules above apply to
 it. Articles are signed opinion written from the maintainer's own experience: they use
-`templates/article.md`, carry a `!!! info "Written by <name>"` byline instead of the draft banner,
+`templates/article.md`, carry a `!!! info "Written by <name>"` byline instead of the sourcing note,
 take no tags, and do not require footnotes. `scripts/check_pages.py` enforces that.
 
 Never write or edit an article on your own initiative. A byline names a real person as

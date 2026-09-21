@@ -17,8 +17,8 @@ related:
     why: the trainer whose personal bests a profile shows.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from vendor documentation. Not yet checked claim by claim.
 
 **Links:** [Website](https://pyvno.xyz)
 

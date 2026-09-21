@@ -14,8 +14,9 @@ related:
     why: deciding what the scenario should be hard at before making it hard.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from research and clinical guidance, and vendor documentation. Not yet checked claim
+    by claim.
 
 Difficulty is not one slider. A scenario has several, they do different things, and turning them all
 up produces a drill that teaches nothing.

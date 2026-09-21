@@ -14,8 +14,9 @@ related:
     why: the build this testing loop follows.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from named coaches and communities, and vendor documentation. Not yet checked claim
+    by claim.
 
 A new scenario has no leaderboard, no benchmark and no history. Your score on it means nothing until
 you give it something to mean something against.

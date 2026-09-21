@@ -2,7 +2,7 @@
 
 Usage:
     python scripts/check_pages.py                          # tags, sections, and readability
-    python scripts/check_pages.py --drafts                 # also require the draft banner
+    python scripts/check_pages.py --drafts                 # also require the sourcing note
     python scripts/check_pages.py docs/wiki/glossary.md    # check named pages only
 """
 import re
@@ -23,7 +23,7 @@ ALLOWED_TAGS = {
     "benchmarks", "routines", "sensitivity", "beginner",
     "myth",
 }
-BANNER = '!!! warning "Draft"'
+BANNER = '!!! note "How this page is sourced"'
 # Every page describes itself in one line. overrides/main.html puts that line in the page's meta
 # description, its share card and its structured data, so a page without one is listed under the
 # site's own description instead of its subject. Search engines cut the line off around 160

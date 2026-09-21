@@ -9,8 +9,9 @@ related:
     why: covers the same trainer-versus-in-game trade-off from the other side.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from named coaches and communities, and vendor documentation. Not yet checked claim
+    by claim.
 
 An aim trainer is very good at one thing: huge numbers of repetitions on the raw mechanics of moving
 a crosshair. A real match asks for a lot more. This page separates what trainer practice improves

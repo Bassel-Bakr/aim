@@ -15,8 +15,9 @@ related:
     why: underaiming, the habit of withholding motion a shot does not need.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from named coaches and communities, and vendor documentation. Not yet checked claim
+    by claim.
 
 Switching is moving your crosshair from a target you've just cleared to the next one. You close that
 gap quickly, without losing the accuracy you need to land the next click.

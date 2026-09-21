@@ -6,8 +6,9 @@ tags:
   - myth
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from research and clinical guidance, named coaches and communities, vendor
+    documentation, and general reference. Not yet checked claim by claim.
 
 Some of the most repeated advice in aim training is a claim that the sources it appeals to don't
 actually make.

@@ -49,7 +49,7 @@
    * heading rather than as something to click. */
   --aim-heading: #7a291b;
   /* The wash behind a myth block. Light enough to read body text on, strong enough that the block
-   * is visibly not the draft banner. */
+   * is visibly not the sourcing note. */
   /* Myth and NOTE blocks keep fixed colours whatever colour a reader picks: red means wrong and
    * yellow means remember on every page, so aim-theme.js never writes these. */
   --aim-myth: #85291a;
@@ -425,8 +425,8 @@ body {
   text-transform: uppercase;
 }
 
-/* The draft banner sits at the top of every unreviewed page, so it has to say "unreviewed"
- * without taking the page over. A bar and a label do that; a filled block does not. */
+/* The sourcing note sits at the top of nearly every page, so it has to be readable without
+ * taking the page over. A bar and a label do that; a filled block does not. */
 .md-typeset .admonition[class],
 .md-typeset details[class] {
   border-width: 0 0 0 3px;
@@ -933,7 +933,7 @@ body {
  * to carry the citation for it.
  *
  * Both are allowed to raise their voice where other admonitions are not. The chrome section above
- * keeps admonitions quiet, because the draft banner sits on every page and must not take it over.
+ * keeps admonitions quiet, because the sourcing note sits on nearly every page and must not take it over.
  * Each sets its own border-style because the chrome block sets a width without one.
  *
  * The title bar is a flex row of two parts: the tag, then the title. The tag is the title's ::after

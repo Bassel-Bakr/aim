@@ -19,8 +19,9 @@ related:
     why: a paid trainer that adds ranked duels against other players.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from named coaches and communities, and vendor documentation. Not yet checked claim
+    by claim.
 
 **Links:** [Website](https://aimlabs.com) · [Discord](https://discord.com/invite/aimlab) · [YouTube](https://www.youtube.com/aimlab)
 

@@ -9,8 +9,8 @@ related:
     why: one line on how it connects to this page.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from <tiers, strongest first>. Not yet checked claim by claim.
 
 One short sentence on what this page covers.
 

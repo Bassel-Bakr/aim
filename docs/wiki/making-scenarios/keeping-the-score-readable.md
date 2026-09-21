@@ -14,8 +14,8 @@ related:
     why: what score movement looks like when nothing has actually changed.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from vendor documentation. Not yet checked claim by claim.
 
 A scenario you built is a measuring instrument. Every random element in it is noise on the reading,
 and noise you added yourself is the kind you can remove.

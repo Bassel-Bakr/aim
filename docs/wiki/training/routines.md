@@ -17,8 +17,9 @@ related:
     why: where a scenario you built earns its place in a session.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from named coaches and communities, and vendor documentation. Not yet checked claim
+    by claim.
 
 A routine is the specific set of scenarios you run in a session, in some order, for some length of
 time. This page covers how to assemble one.

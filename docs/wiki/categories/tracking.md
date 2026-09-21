@@ -17,8 +17,9 @@ related:
     why: moving between targets, which partly depends on tracking.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from named coaches and communities, and vendor documentation. Not yet checked claim
+    by claim.
 
 Tracking is keeping your crosshair on a target that's already moving, rather than acquiring it fresh
 or hopping to the next one.

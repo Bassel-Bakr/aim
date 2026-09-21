@@ -4,9 +4,6 @@ description: >-
   The communities, trainers and tools this wiki draws on, and what each is good for.
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
-
 These pages cover the aim-training communities, dedicated trainers, and supporting tools this wiki's
 benchmarks, routines, and scenario recommendations are drawn from.
 

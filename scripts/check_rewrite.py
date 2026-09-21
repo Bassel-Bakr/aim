@@ -19,7 +19,7 @@ LINK = re.compile(r"\]\(([^)\s]+)\)")
 FOOTNOTE = re.compile(r"\[\^([^\]]+)\](?!:)")
 HEADING = re.compile(r"^(#{2,3} .+)$", re.M)
 FRONT_MATTER = re.compile(r"\A---\r?\n.*?\r?\n---\r?\n", re.S)
-BANNER = '!!! warning "Draft"'
+BANNER = '!!! note "How this page is sourced"'
 
 
 def invariants(text: str) -> dict[str, set[str]]:
@@ -29,7 +29,7 @@ def invariants(text: str) -> dict[str, set[str]]:
         "footnote reference": set(FOOTNOTE.findall(text)),
         "heading": set(HEADING.findall(text)),
         "front matter": {front.group(0)} if front else set(),
-        "draft banner": {BANNER} if BANNER in text else set(),
+        "sourcing note": {BANNER} if BANNER in text else set(),
     }
 
 

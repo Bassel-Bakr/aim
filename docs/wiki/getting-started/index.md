@@ -6,8 +6,8 @@ tags:
   - beginner
 ---
 
-!!! warning "Draft"
-    Written from public sources, pending review.
+!!! note "How this page is sourced"
+    Sourced from vendor documentation. Not yet checked claim by claim.
 
 This wiki is for anyone who wants to train aim deliberately, instead of only playing and hoping to
 improve. It assumes no aim-training experience. You don't need an aim trainer, a known sensitivity,
