@@ -83,7 +83,9 @@ Practice that works gets harder as you improve, rather than starting at the ceil
 drill pinned above your level has nowhere left to go.
 
 **Skill level changes what difficulty should do.** Early on, a learner needs conditions that let the
-movement come together at all. Later, the useful work is at the edge.[^REF-28]
+movement come together at all. Later, the useful work is at the edge.
+
+The earlier stages are worth revisiting, however accomplished you are.[^REF-28]
 
 <figure class="aim-figure">
 <!-- aim:figure stage -->

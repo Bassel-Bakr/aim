@@ -52,8 +52,9 @@ Run them at a difficulty where your technique holds up, not one you can barely s
 minutes of honest self-assessment. That turns a session into feedback you can act on, instead of
 just more repetitions.
 
-Voltaic frames this kind of after-the-fact analysis as belonging to a separate "Learning Zone." That's
-distinct from staying focused and uncritical while you're actually training.[^REF-51]
+Voltaic calls this self-critical review the "Learning Zone". It sets that against the "Performance
+Zone", the focused state you want when trying to perform. You can prioritize the Learning Zone
+whenever you are not performing, though some find switching between them inefficient.[^REF-51]
 
 **Session length.** There's no single correct length. General motor-learning research favors several
 shorter sessions with real rest over one marathon session.
