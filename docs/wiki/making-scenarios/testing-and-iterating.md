@@ -23,7 +23,7 @@ you give it something to mean something against.
 - **Test without saving.** Profile changes apply from the pause menu.[^REF-79]
 - **Session Manager is a sandbox.** Nothing you set there survives a save.[^REF-84]
 - **Anchor to a scenario you know.** A familiar drill in the same session is your reference.
-- **One run proves nothing.** Read the trend, not the attempt.[^REF-29]
+- **One run proves nothing.** Two or three reps give a fuller read.[^REF-8]
 
 ## The fast loop
 
@@ -61,8 +61,8 @@ tells you what kind of day you are having, which a new scenario cannot.
 Without that anchor, a bad first session on a new scenario is unreadable. It could be the design, or
 it could be you.
 
-**A single run does not settle anything.** Scores move enough day to day that a trend across several
-runs is the only honest reading.[^REF-29]
+**A single run does not settle anything.** Two or three reps give a fuller read than one.[^REF-8]
+Scores also move from day to day.[^REF-9]
 
 <figure class="aim-figure">
 <!-- aim:figure noise -->
@@ -102,7 +102,7 @@ bored. A scenario played into the ground measures the scenario.
 
 - Saving after every small change, which fills your list with near-identical scenarios.
 - Tuning in the Session Manager, then saving and losing the change.[^REF-84]
-- Judging a new scenario on its first session, with nothing to compare against.[^REF-29]
+- Judging a new scenario on its first session, with nothing to compare against.
 - Editing a scenario you also train on, so its score history means nothing.
 
 ## In practice

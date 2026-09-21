@@ -113,8 +113,7 @@ and its value beats a version number.
 - Raising size, speed and spread together, then wondering which one broke the drill.
 - Building at your ceiling, where every run is noise.
 - Treating a slow variant as a wasted session.[^REF-17]
-- Judging a change on one run. A single day's result moves too much to prove
-  anything.[^REF-29]
+- Judging a change on one run. Two or three reps give a fuller read.[^REF-8]
 
 ## In practice
 

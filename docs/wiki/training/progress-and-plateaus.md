@@ -42,8 +42,8 @@ The pattern isn't specific to aim training.[^REF-28]
 Eventually most learners hit a stretch some researchers call a "learning plateau." Performance holds
 roughly steady for a while, however consistently you show up and train.
 
-Motor-learning research treats this as an ordinary, expected stage, not evidence that something in
-your training has broken.[^REF-29]
+A plateau is frequently experienced in late-stage motor learning, rather than evidence that
+something in your training has broken.[^REF-29]
 
 Knowing a stall is expected doesn't fix it on its own. But it does mean a flat week or two isn't
 evidence you've hit a hard ceiling.

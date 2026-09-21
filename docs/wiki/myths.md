@@ -141,8 +141,8 @@ responding rather than anticipating, because anticipation stops paying there.
 **Why people believe it.** Your score stopped moving, so you have found your limit. Talent set it,
 and more training will not move it.
 
-**What sources say.** Motor-learning research treats a stretch of flat performance as an ordinary,
-expected stage of learning, not evidence that something has broken.[^REF-29]
+**What sources say.** A flat stretch is frequently experienced in late-stage motor learning, rather
+than evidence that something has broken.[^REF-29]
 
 The same literature describes early learning as large, inconsistent jumps, followed by a slower
 stage of smaller refinements. So gains shrinking is the normal shape of progress.[^REF-28]
