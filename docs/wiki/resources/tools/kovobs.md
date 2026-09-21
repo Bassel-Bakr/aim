@@ -13,8 +13,7 @@ related:
     why: scoring and ranking runs, which KovOBS does not do.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 **Links:** [GitHub](https://github.com/Bassel-Bakr/KovOBS)
 

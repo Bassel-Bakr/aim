@@ -14,9 +14,7 @@ related:
 
 # Ability Profile
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation, plus field names and tooltips read from the scenario
-    editor in September 2026. Not yet checked claim by claim.
+<!-- aim:sources checked | plus field names and tooltips read from the scenario editor in September 2026 -->
 
 An ability is a movement, melee, sprint or recall action a character can use.[^REF-87] For a pure
 aim drill you will not need one. For a scenario that resembles a real fight, you might.

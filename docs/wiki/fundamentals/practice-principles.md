@@ -21,9 +21,7 @@ related:
     why: giving a well-defined practice goal the form of a scenario.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from research and clinical guidance, named coaches and communities, and vendor
-    documentation. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 How much you improve depends less on how many hours you spend than on what you do with them. Five
 habits, drawn from motor-learning research and from how the community's benchmark and coaching

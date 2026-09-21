@@ -174,4 +174,5 @@ pymdownx.snippets.auto_append = ["includes/abbreviations.md"]
 aim_figures = { folder = "docs/figures" }
 aim_references = { registry = "references.yml" }
 aim_related = {}
+aim_sources = { registry = "references.yml" }
 aim_stats = { registry = "references.yml" }

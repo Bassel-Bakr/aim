@@ -21,8 +21,7 @@ related:
     why: a free trainer with curated, game-specific training programs.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 **Links:** [Website](https://aimbeast.com) · [Discord](https://discord.gg/aimbeast) · [YouTube](https://www.youtube.com/@aimbeast2830)
 

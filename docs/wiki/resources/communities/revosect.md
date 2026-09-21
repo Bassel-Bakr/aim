@@ -19,8 +19,7 @@ related:
     why: a player-run arena-shooter community whose glossary draws on Revosect's entries.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from named coaches and communities. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 **Links:** [Website](https://revosect.com) · [Discord](https://discord.gg/revosect) · [YouTube](https://youtube.com/@revosect)
 

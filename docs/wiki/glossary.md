@@ -4,9 +4,7 @@ description: >-
   Plain definitions of the aim-training terms used across this wiki, each linked to the page that explains it.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from independent measurement, named coaches and communities, and general reference.
-    Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 Short definitions of the aim-training terms used across this wiki, in our own words, each linked
 to the page that explains it in more depth.

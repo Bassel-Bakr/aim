@@ -117,22 +117,34 @@ Write it for someone deciding whether to open the page:
    point. State the claim or the advice directly and let the marker carry the source. Where sources
    disagree, set the approaches side by side, each with its own citation, rather than naming who
    holds which.
-3. Every page says at the top what kind of sources it rests on, and whether anyone has checked it:
+3. Every page carries a marker near the top, which the build turns into a note saying which source
+   [tiers](#source-tiers) it rests on and how far it has been checked:
 
    ```markdown
-   !!! note "How this page is sourced"
-       Sourced from research and clinical guidance, and vendor documentation. Not yet checked
-       claim by claim.
+   <!-- aim:sources -->
+   <!-- aim:sources checked -->
+   <!-- aim:sources checked | plus field names read from the editor in September 2026 -->
    ```
 
-   The first sentence lists the [tiers](#source-tiers) the page cites, strongest first. The second
-   stays until someone has checked every claim against its source, then it goes. A page that cites
-   nothing because it is navigation carries no note at all.
+   The tiers are read from the page's own citations, so the note cannot drift: add a source and the
+   note follows on the next build. You write only the state, and the optional clause after the pipe.
 
-   The two facts are separate on purpose. A tier says how much weight a claim deserves if it is
-   quoted correctly. The second sentence says whether the quoting was checked. The worst
-   misquotation found in this wiki was on a page citing a peer-reviewed paper, which it argued
-   against while citing it as support.
+   | Marker | Second sentence |
+   | --- | --- |
+   | `<!-- aim:sources -->` | Not yet checked claim by claim. |
+   | `<!-- aim:sources checked -->` | Checked against its sources. Not yet reviewed by a person. |
+   | `<!-- aim:sources reviewed -->` | none |
+
+   "Checked" means someone compared every claim against the source cited for it. "Reviewed" means a
+   person signed off. They are different words because a page can be checked and still wrong in a
+   way only a reader who knows the subject would catch.
+
+   Weight and checking are separate facts on purpose. A tier says what a claim is worth if it is
+   quoted correctly; the state says whether the quoting was checked. The worst misquotation found in
+   this wiki sat on a page citing a peer-reviewed paper, which it argued against while citing it as
+   support.
+
+   A page that cites nothing carries no marker, and gets no note.
 
 4. If you cannot verify a claim from a public source, leave it out, or mark it with
    `<!-- REVIEW: what needs checking -->`. HTML comments are hidden on the page but still visible

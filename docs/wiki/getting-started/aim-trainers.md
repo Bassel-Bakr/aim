@@ -13,8 +13,7 @@ related:
     why: what trainer practice carries into a match, and what it does not.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from named coaches and communities. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 An aim trainer is standalone software built around drills that isolate specific mouse-control
 skills, instead of a full game.

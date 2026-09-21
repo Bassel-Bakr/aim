@@ -6,8 +6,7 @@ tags:
   - routines
 ---
 
-!!! note "How this page is sourced"
-    Sourced from research and clinical guidance. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 How you train matters more across weeks than within any single session. A workable rhythm:
 

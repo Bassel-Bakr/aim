@@ -16,9 +16,7 @@ related:
     why: reading a new scenario's scores against the same noise.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from research and clinical guidance, and vendor documentation. Not yet checked claim
-    by claim.
+<!-- aim:sources checked -->
 
 Progress in aim training rarely moves in a straight line. Expect fast early gains that slow down,
 and the occasional stretch where your score barely moves at all.

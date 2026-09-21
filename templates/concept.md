@@ -9,8 +9,7 @@ related:
     why: one line on how it connects to this page.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from <tiers, strongest first>. Not yet checked claim by claim.
+<!-- aim:sources -->
 
 One short sentence on what this page covers.
 

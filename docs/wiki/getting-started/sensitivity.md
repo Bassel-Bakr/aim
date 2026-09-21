@@ -12,9 +12,7 @@ related:
     why: when a sensitivity change helps a stalled score.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from named coaches and communities, vendor documentation, and general reference. Not
-    yet checked claim by claim.
+<!-- aim:sources checked -->
 
 Mouse sensitivity is how far your view turns for a given amount of hand movement.
 

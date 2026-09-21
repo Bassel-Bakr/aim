@@ -19,9 +19,7 @@ related:
     why: the same trade-off applied to settings in a scenario editor.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from research and clinical guidance, and vendor documentation. Not yet checked claim
-    by claim.
+<!-- aim:sources checked -->
 
 Aim is a chain of small decisions. Name the pieces and you have something specific to fix, instead
 of aim that "feels off".

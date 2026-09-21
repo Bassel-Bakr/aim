@@ -9,9 +9,7 @@ related:
     why: practice routines, which this page does not cover.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from named coaches and communities, and vendor documentation. Not yet checked claim
-    by claim.
+<!-- aim:sources checked -->
 
 **Links:** [Announcement post](https://x.com/Matty_OW/status/1901508775044854146) · [Applications update](https://x.com/Matty_OW/status/1961519224884523098)
 

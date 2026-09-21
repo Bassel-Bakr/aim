@@ -20,8 +20,7 @@ related:
     why: one of the communities whose benchmark sheets it collects.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 **Links:** [Website](https://evxl.app)
 

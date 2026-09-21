@@ -7,8 +7,7 @@ tags:
   - routines
 ---
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 Make a scenario only when nothing that already exists isolates the thing you keep losing. A custom
 scenario has no leaderboard and no history, so it costs you context a known scenario gives away

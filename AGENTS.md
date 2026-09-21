@@ -95,6 +95,7 @@ the same hue: in the light scheme a fill pale enough to read as a bar cannot car
 | `references.yml` | Every source the wiki cites, once, under a stable `REF-<number>` ID. |
 | `extensions/aim_related.py` | Markdown extension that writes the Related section from a page's `related:` front matter, adding bare links back from pages of the same kind that list it. Its helpers are shared by the checker and `scripts/suggest_related.py`. |
 | `extensions/aim_stats.py` | Markdown extension that replaces `<!-- aim:stats -->` on the landing page with counts of wiki pages, cited sources and guides, each linking to the page it counts, so the hero's numbers follow the content. |
+| `extensions/aim_sources.py` | Markdown extension that replaces `<!-- aim:sources -->` with the note naming which source tiers a page cites, read from its own `[^REF-n]` markers and the `tier:` on each registry entry, so the note cannot drift from the citations. The marker's optional `checked` or `reviewed` state decides the second sentence. |
 | `extensions/aim_references.py` | Markdown extension that turns `[^REF-<number>]` citations into footnotes and builds the References page. Installed by `pyproject.toml` through `requirements.txt`. |
 | `templates/` | Page templates. Not published. |
 | `specs/` | Design documents. Not published. |
@@ -182,9 +183,10 @@ agents most often miss:
    reference: read the field names and tooltips from the software, carry a note at the top of
    the page saying so and when, and give those claims no footnote. See
    [CONTRIBUTING.md](CONTRIBUTING.md#writing-rules). The KovaaK's editor pages work this way.
-7. Every page opens with a note saying which source [tiers](CONTRIBUTING.md#source-tiers) it rests
-   on and whether anyone has checked it, exactly as shown in
-   [CONTRIBUTING.md](CONTRIBUTING.md#writing-rules).
+7. Every page carries `<!-- aim:sources -->` near the top. `extensions/aim_sources.py` turns it
+   into a note naming the source [tiers](CONTRIBUTING.md#source-tiers) the page cites, read
+   from its own citations. Add `checked` or `reviewed` to the marker as the page earns them.
+   See [CONTRIBUTING.md](CONTRIBUTING.md#writing-rules).
 8. New abbreviations go in both `docs/wiki/glossary.md` and `includes/abbreviations.md`.
 9. Every wiki page follows the readability rules in
    [CONTRIBUTING.md](CONTRIBUTING.md#readability): 45-word paragraphs, 25-word sentences, and on

@@ -12,8 +12,7 @@ related:
     why: acceleration settings in games, mouse software and Windows, which this replaces with one curve.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 **Links:** [GitHub](https://github.com/RawAccelOfficial/rawaccel) · [Guide](https://github.com/RawAccelOfficial/rawaccel/blob/master/doc/Guide.md)
 

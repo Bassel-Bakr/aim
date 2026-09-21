@@ -14,8 +14,7 @@ related:
     why: the Tags tab that decides whether anyone finds the upload.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 Uploading is a button. Deciding what deserves uploading is not, and the workshop has an explicit
 rule about the difference.

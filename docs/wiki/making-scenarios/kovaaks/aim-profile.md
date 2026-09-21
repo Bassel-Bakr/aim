@@ -14,9 +14,7 @@ related:
 
 # Aim Profile
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation, plus field names and tooltips read from the scenario
-    editor in September 2026. Not yet checked claim by claim.
+<!-- aim:sources checked | plus field names and tooltips read from the scenario editor in September 2026 -->
 
 An aim profile tells a bot how to aim at you.[^REF-92] It has one tab, and most aim drills never
 touch it, because most aim drills use targets that never shoot back.

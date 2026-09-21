@@ -16,9 +16,7 @@ related:
 
 # Bot Profile
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation, plus field names and tooltips read from the scenario
-    editor in September 2026. Not yet checked claim by claim.
+<!-- aim:sources checked | plus field names and tooltips read from the scenario editor in September 2026 -->
 
 A bot profile is wiring, not content. It names a character, decides whether that character shoots,
 and attaches the dodges that make it move.

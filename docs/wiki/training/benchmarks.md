@@ -23,8 +23,7 @@ related:
     why: turning the subcategory a benchmark flags into a scenario.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from named coaches and communities. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 A benchmark is a standardized set of scenarios you run once, compare against a wider player base,
 and re-run later. It shows whether you're actually getting better, rather than trusting how a

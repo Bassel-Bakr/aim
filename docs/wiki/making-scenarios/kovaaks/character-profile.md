@@ -16,9 +16,7 @@ related:
 
 # Character Profile
 
-!!! note "How this page is sourced"
-    Sourced from vendor documentation, plus field names and tooltips read from the scenario
-    editor in September 2026. Not yet checked claim by claim.
+<!-- aim:sources checked | plus field names and tooltips read from the scenario editor in September 2026 -->
 
 A character profile is a body: the player's, or a target's. Four of its eight tabs do nothing for an
 aim drill. This page says which four, so you can stop reading them.

@@ -19,7 +19,7 @@ LINK = re.compile(r"\]\(([^)\s]+)\)")
 FOOTNOTE = re.compile(r"\[\^([^\]]+)\](?!:)")
 HEADING = re.compile(r"^(#{2,3} .+)$", re.M)
 FRONT_MATTER = re.compile(r"\A---\r?\n.*?\r?\n---\r?\n", re.S)
-BANNER = '!!! note "How this page is sourced"'
+BANNER = '<!-- aim:sources'
 
 
 def invariants(text: str) -> dict[str, set[str]]:

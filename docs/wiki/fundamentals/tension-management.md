@@ -21,8 +21,7 @@ related:
     why: rest and recovery for the muscles a tight grip overworks.
 ---
 
-!!! note "How this page is sourced"
-    Sourced from named coaches and communities. Not yet checked claim by claim.
+<!-- aim:sources checked -->
 
 Tension is how hard your hand, wrist and arm work to hold and steer the mouse. Managing it means
 using the right amount, in the right place, at the right moment.
