@@ -9,6 +9,17 @@
  * page components. Each component is documented above its rules with the Markdown that produces
  * it: .aim-hero, .aim-cards, .aim-steps, .aim-category, .aim-myth, .aim-key,
  * .aim-theme-picker, .aim-links, .aim-figure.
+ *
+ * Two components have no markup in the built HTML at all, because JavaScript builds them after the
+ * page loads: .aim-theme-picker and its children come from aim-theme.js, and .aim-hotspot,
+ * .aim-hotspot-layer, .aim-hotspot-frame, .aim-hotspot-says and .aim-hotspot-kind come from
+ * aim-hotspots.js. Any tool that looks for unused CSS by reading the built pages will call all of
+ * them dead. They are not. Check the scripts before deleting a rule that nothing seems to use.
+ *
+ * .aim-links carries a set of per-type modifiers, --article, --video, --playlist, --doc, --sheet,
+ * --post and --image, for the case where a link's address says the wrong thing about it. Only
+ * --image is used today, because no address pattern means "image" while a YouTube address really
+ * does mean a video. The rest are the other half of a documented escape hatch, not leftovers.
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&display=swap");
