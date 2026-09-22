@@ -25,6 +25,8 @@ one person's reading of that material, not a correction to it.
 
 - [The Metronome Method](metronome-method.md): finding your own tempo, reading accuracy to know
   when to raise it, and using the beat as a reference rather than a trigger.
+- [Weakness Targeted Static Flowchart](weakness-targeted-static-flowchart.md): point at any node
+  of the chart to see it move, and the branch I do not follow.
 
 ## Writing one
 

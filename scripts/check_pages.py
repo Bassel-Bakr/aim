@@ -5,6 +5,7 @@ Usage:
     python scripts/check_pages.py --drafts                 # also require the sourcing marker
     python scripts/check_pages.py docs/wiki/glossary.md    # check named pages only
 """
+import json
 import re
 import sys
 from collections.abc import Iterator, Sequence
@@ -387,6 +388,10 @@ def duplicate_descriptions(paths: Sequence[Path]) -> list[str]:
     ]
 
 
+HOTSPOT_DATA = re.compile(
+    r'<script type="application/json" class="aim-hotspot-data">\s*(\{.*?\})\s*</script>', re.S)
+
+
 def figure_files(paths: Sequence[Path]) -> list[str]:
     """Every figure file is cited, and every citation has a file.
 
@@ -401,9 +406,20 @@ def figure_files(paths: Sequence[Path]) -> list[str]:
     # citation map built from that one page would call all the other figures orphans.
     cited: dict[str, list[str]] = {}
     for path in sorted(DOCS.rglob("*.md")):
-        for name in re.findall(r"<!--\s*aim:figure\s+([A-Za-z0-9_-]+)\s*-->",
-                               path.read_text(encoding="utf-8")):
-            cited.setdefault(name, []).append(path.relative_to(DOCS).as_posix())
+        text = path.read_text(encoding="utf-8")
+        rel = path.relative_to(DOCS).as_posix()
+        for name in re.findall(r"<!--\s*aim:figure\s+([A-Za-z0-9_-]+)\s*-->", text):
+            cited.setdefault(name, []).append(rel)
+        # A page can also name a figure for aim-hotspots.js, which fetches it when a reader points
+        # at it rather than having it spliced in at build time. That is still a citation: the file
+        # has one page that renders it, and renaming the figure still has to break something.
+        for block in HOTSPOT_DATA.findall(text):
+            try:
+                names = json.loads(block)
+            except ValueError:
+                continue
+            for name in names:
+                cited.setdefault(name, []).append(rel)
     on_disk = {svg.stem for svg in folder.glob("*.svg")}
     errors = [f"docs/figures/{name}.svg: no page cites this figure"
               for name in sorted(on_disk - set(cited))]

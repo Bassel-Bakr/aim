@@ -257,7 +257,9 @@ reasonably assumes it is ShareAlike like everything around it:
 ```markdown
 <span class="aim-figure-credit">Weakness targeted static flowchart, posted by
 <a href="https://x.com/m0_nark/status/1905578974505251059">M0NARK</a> in March 2025, who presents
-it as his translation of a Chinese original. Original author unconfirmed. No licence stated.
+it as his translation of a Chinese original. Credited by
+<a href="https://x.com/0jizu/status/1905702604434526654">jizu</a> to violat3, whose account no
+longer exists. No licence stated.
 Reproduced with its source credited, and not under this site's CC BY-SA 4.0 licence.</span>
 ```
 

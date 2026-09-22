@@ -6,6 +6,7 @@ page and buried the prose. Now it writes one file per figure and the page keeps 
 A figure no page asks for is an error rather than a stray file: the marker and the generator have
 to agree, or a renamed figure leaves an orphan on disk and a hole in the page.
 """
+import json
 import re
 from pathlib import Path
 
@@ -16,13 +17,30 @@ DOCS = ROOT / "docs"
 FIGURES = DOCS / "figures"
 
 
+HOTSPOT_DATA = re.compile(
+    r'<script type="application/json" class="aim-hotspot-data">\s*(\{.*?\})\s*</script>', re.S)
+
+
 def _markers() -> dict[str, Path]:
-    """Every figure the pages ask for, and which page asks."""
+    """Every figure the pages ask for, and which page asks.
+
+    A page asks in one of two ways. Most carry a marker line, which the aim_figures extension
+    replaces with the figure at build time. A page can also name figures in a hotspot block, where
+    aim-hotspots.js fetches one when a reader points at it. Both are a page asking for a figure, so
+    both count here, or a figure loaded at read time looks like one nobody wants.
+    """
     found: dict[str, Path] = {}
     for page in DOCS.rglob("*.md"):
-        for name in re.findall(r"<!--\s*aim:figure\s+([A-Za-z0-9_-]+)\s*-->",
-                               page.read_text(encoding="utf-8")):
+        text = page.read_text(encoding="utf-8")
+        for name in re.findall(r"<!--\s*aim:figure\s+([A-Za-z0-9_-]+)\s*-->", text):
             found[name] = page
+        for block in HOTSPOT_DATA.findall(text):
+            try:
+                names = json.loads(block)
+            except ValueError:
+                continue
+            for name in names:
+                found[name] = page
     return found
 
 

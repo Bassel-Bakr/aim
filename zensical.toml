@@ -8,7 +8,8 @@ edit_uri = "edit/main/docs/"
 copyright = "Content licensed under <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>"
 
 extra_css = ["assets/stylesheets/aim.css"]
-extra_javascript = ["assets/javascripts/aim-stats.js", "assets/javascripts/aim-tables.js"]
+extra_javascript = ["assets/javascripts/aim-stats.js", "assets/javascripts/aim-tables.js",
+                    "assets/javascripts/aim-hotspots.js"]
 
 nav = [
   { "Home" = "index.md" },
@@ -94,6 +95,7 @@ nav = [
   { "Articles" = [
     "articles/index.md",
     "articles/metronome-method.md",
+    "articles/weakness-targeted-static-flowchart.md",
   ] },
 ]
 

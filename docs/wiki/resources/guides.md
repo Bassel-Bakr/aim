@@ -71,8 +71,8 @@ Score sheets and routines handed over without instructions stay on the [resource
   ARandomDeadDude, 2025 — finding and drilling your undershoot distance. Its "underflicking" is
   landing short, not underaiming.
 - [Weakness targeted static flowchart](https://x.com/m0_nark/status/1905578974505251059){ .aim-link--image } — M0NARK,
-  2025 — symptom in, scenarios out. M0NARK presents it as his translation of a Chinese original
-  rather than his own work.
+  2025 — symptom in, scenarios out. M0NARK presents it as his translation of a Chinese original,
+  which another player credits to violat3.
 - [PERFECCIONA tus FLICKS con esta TÉCNICA!](https://www.youtube.com/watch?v=VMLw5lC3pQU) — CARTOON,
   2024, in Spanish — flick technique for tactical shooters, stage by stage from speed to confirming
   the shot. Comes with KovaaK's and Aimlabs routines to practice it.

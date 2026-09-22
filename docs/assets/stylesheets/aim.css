@@ -1503,3 +1503,97 @@ body {
 .aim-figure .fig-loose-stroke { stroke: var(--aim-loose); }
 .aim-figure .fig-balanced-fill { fill: var(--aim-balanced); }
 .aim-figure .fig-balanced-stroke { stroke: var(--aim-balanced); }
+
+/* An image whose nodes can be hovered, with the matching animation shown beside it.
+ *
+ * The image is a third party's work reproduced under credit, so nothing here touches it. The
+ * hotspots are a layer of transparent buttons over the top, positioned in percentages so they hold
+ * their nodes at any width. aim-hotspots.js builds the layer and fetches the animations.
+ *
+ * Everything degrades to the plain figure: without JavaScript no layer is built, and the rules
+ * below apply to nothing. */
+.aim-hotspot-map { position: relative; }
+.aim-hotspot-map > figure { margin-bottom: 0.4rem; }
+/* Wraps the image alone, so the layer over it is the image's box and not the figure's. A figure
+ * carries a caption, and measuring percentages against that would drop every lower node below the
+ * picture. aim-hotspots.js inserts this. */
+.aim-hotspot-frame { position: relative; display: block; line-height: 0; }
+.aim-hotspot-layer { position: absolute; inset: 0; line-height: normal; }
+
+.aim-hotspot {
+  position: absolute;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0.2rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Hover and keyboard focus are the same state on purpose: a reader tabbing through the chart sees
+ * exactly what a reader pointing at it sees. */
+.aim-hotspot:hover,
+.aim-hotspot:focus-visible {
+  border-color: var(--aim-accent);
+  background: color-mix(in srgb, var(--aim-accent) 18%, transparent);
+  outline: none;
+}
+
+/* A pinned node stays marked once the pointer leaves, which is the whole reason for pinning. */
+.aim-hotspot[data-pinned] {
+  border-color: var(--aim-accent);
+  border-width: 2px;
+  background: color-mix(in srgb, var(--aim-accent) 26%, transparent);
+}
+
+/* While one node is pinned, hovering another must not look like it changed the panel, because it
+ * has not. */
+.aim-hotspot-map[data-pinned] .aim-hotspot:hover:not([data-pinned]) { background: transparent; }
+
+/* The panel also carries .aim-figure, and has to: every figure colour rule is written
+ * .aim-figure .fig-target and friends, so an SVG injected outside one renders black.
+ *
+ * It sticks to the bottom of the viewport while the chart is in view. The chart is over two
+ * thousand pixels tall, so a panel that simply followed it would sit a screen and a half below the
+ * node being pointed at, and a reader would never see what they triggered. */
+.aim-hotspot-panel {
+  position: sticky;
+  bottom: 0.4rem;
+  z-index: 2;
+  box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.18);
+  min-height: 6rem;
+  padding: 0.6rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.3rem;
+  background: var(--md-code-bg-color);
+  font-size: 0.72rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.aim-hotspot-panel svg { display: block; width: 100%; height: auto; }
+
+/* Said once, to a reader who has not hovered anything yet. */
+.aim-hotspot-map:not([data-ready]) .aim-hotspot-panel { display: none; }
+
+/* What a hotspot panel says before it draws anything.
+ *
+ * The chart's own wording leads, because that is what the reader pointed at, and it is quoted
+ * rather than paraphrased. This site's reading of the node follows it, smaller, so the two are
+ * never mistaken for each other. */
+.aim-hotspot-says {
+  margin: 0 0 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--md-default-fg-color);
+}
+
+/* Which kind of node it is, above the chart's own sentence. Small, because it is a tag rather
+ * than a sentence, and the chart's words are what the reader came for. */
+.aim-hotspot-kind {
+  margin: 0 0 0.15rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light);
+}
