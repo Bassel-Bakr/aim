@@ -94,6 +94,20 @@ text. Run it after changing any colour token, and read the whole report rather t
 since a pair can drop below AAA in one scheme while the other is fine. It runs on every pull request
 too, so a colour that fails one scheme cannot land.
 
+The forty-eight node figures on the static clicking article are generated from one table, and all
+of them land in one page, so they get their own check:
+
+```bash
+python scripts/check_figures.py
+```
+
+It renders every figure rather than reading the files on disk, so a stale SVG cannot pass a check
+its generator would fail. It catches the two mistakes this setup makes easy: a keyframe name, CSS
+class or element id that two figures share, which an inline `<style>` makes page-global so one
+quietly wins, and a hotspot box that has drifted off its own node and opens someone else's. It also
+holds each figure to a size budget, refuses SMIL and literal colours, and renders twice to prove the
+output is stable. It runs on every pull request.
+
 A figure's colours are checked twice, because they do two jobs. A bar or a band is a graphic, held
 to 3:1, and its fill token carries that. A label is text, held to 7:1, and takes an `-ink` token of
 the same hue: in the light scheme a fill pale enough to read as a bar cannot carry 12px text.

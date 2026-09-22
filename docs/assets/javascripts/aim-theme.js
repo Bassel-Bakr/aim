@@ -15,42 +15,42 @@
    * ---------------------------------------------------------------------------------------- */
 
   function parseHex(hex) {
-    var match = /^#?([0-9a-f]{6})$/i.exec(String(hex).trim());
+    const match = /^#?([0-9a-f]{6})$/i.exec(String(hex).trim());
     if (!match) return null;
-    var n = parseInt(match[1], 16);
-    return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(function (v) { return v / 255; });
+    const n = parseInt(match[1], 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => v / 255);
   }
 
   function byteHex(v) {
-    var byte = Math.round(Math.min(1, Math.max(0, v)) * 255);
-    return (byte < 16 ? "0" : "") + byte.toString(16);
+    const byte = Math.round(Math.min(1, Math.max(0, v)) * 255);
+    return byte.toString(16).padStart(2, "0");
   }
 
   /* A six-digit hex string, or eight digits when an alpha is given. */
   function toHex(rgb, alpha) {
-    return "#" + rgb.map(byteHex).join("") + (alpha === undefined ? "" : byteHex(alpha));
+    return `#${rgb.map(byteHex).join("")}${alpha === undefined ? "" : byteHex(alpha)}`;
   }
 
   function toLinear(v) { return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }
   function fromLinear(v) { return v <= 0.0031308 ? v * 12.92 : 1.055 * Math.pow(v, 1 / 2.4) - 0.055; }
 
   function rgbToOklch(rgb) {
-    var r = toLinear(rgb[0]), g = toLinear(rgb[1]), b = toLinear(rgb[2]);
-    var l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
-    var m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
-    var s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
-    var L = 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s;
-    var A = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s;
-    var B = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s;
+    const [r, g, b] = rgb.map((v) => toLinear(v));
+    const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+    const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+    const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+    const L = 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s;
+    const A = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s;
+    const B = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s;
     return { l: L, c: Math.hypot(A, B), h: (Math.atan2(B, A) * 180 / Math.PI + 360) % 360 };
   }
 
   /* Linear sRGB for an OKLCH colour, unclamped, so the caller can tell whether it is in gamut. */
   function oklchToLinear(L, C, H) {
-    var rad = H * Math.PI / 180, A = C * Math.cos(rad), B = C * Math.sin(rad);
-    var l = Math.pow(L + 0.3963377774 * A + 0.2158037573 * B, 3);
-    var m = Math.pow(L - 0.1055613458 * A - 0.0638541728 * B, 3);
-    var s = Math.pow(L - 0.0894841775 * A - 1.291485548 * B, 3);
+    const rad = H * Math.PI / 180, A = C * Math.cos(rad), B = C * Math.sin(rad);
+    const l = Math.pow(L + 0.3963377774 * A + 0.2158037573 * B, 3);
+    const m = Math.pow(L - 0.1055613458 * A - 0.0638541728 * B, 3);
+    const s = Math.pow(L - 0.0894841775 * A - 1.291485548 * B, 3);
     return [
       4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
       -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
@@ -59,30 +59,31 @@
   }
 
   function inGamut(lin) {
-    return lin.every(function (v) { return v >= -1e-4 && v <= 1 + 1e-4; });
+    return lin.every((v) => v >= -1e-4 && v <= 1 + 1e-4);
   }
 
   /* An sRGB colour at this lightness and hue, with chroma reduced until it fits the gamut. */
   function fit(L, C, H) {
-    L = Math.min(1, Math.max(0, L));
-    var lin = oklchToLinear(L, C, H);
+    const lightness = Math.min(1, Math.max(0, L));
+    let lin = oklchToLinear(lightness, C, H);
     if (!inGamut(lin)) {
-      var lo = 0, hi = C;
-      for (var i = 0; i < 24; i++) {
-        var mid = (lo + hi) / 2;
-        if (inGamut(oklchToLinear(L, mid, H))) lo = mid; else hi = mid;
+      let lo = 0, hi = C;
+      for (let i = 0; i < 24; i++) {
+        const mid = (lo + hi) / 2;
+        if (inGamut(oklchToLinear(lightness, mid, H))) lo = mid; else hi = mid;
       }
-      lin = oklchToLinear(L, lo, H);
+      lin = oklchToLinear(lightness, lo, H);
     }
-    return lin.map(function (v) { return fromLinear(Math.min(1, Math.max(0, v))); });
+    return lin.map((v) => fromLinear(Math.min(1, Math.max(0, v))));
   }
 
   function luminance(rgb) {
-    return 0.2126 * toLinear(rgb[0]) + 0.7152 * toLinear(rgb[1]) + 0.0722 * toLinear(rgb[2]);
+    const [r, g, b] = rgb;
+    return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
   }
 
   function contrast(a, b) {
-    var x = luminance(a), y = luminance(b);
+    const x = luminance(a), y = luminance(b);
     return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
   }
 
@@ -90,15 +91,15 @@
    * Derivation
    * ---------------------------------------------------------------------------------------- */
 
-  var DEFAULT_SEED = "#9c3522";
+  const DEFAULT_SEED = "#9c3522";
   /* The accent aim.css sets for each scheme. Brick applies no override, so its swatch shows these
    * rather than a derived approximation of them. */
-  var DEFAULT_ACCENT = { light: "#9c3522", dark: "#e38268" };
-  var TEXT_CONTRAST = 4.5;
-  var WHITE = [1, 1, 1];
-  var NIGHT_FG = parseHex("#e8eaf0");
+  const DEFAULT_ACCENT = { light: "#9c3522", dark: "#e38268" };
+  const TEXT_CONTRAST = 4.5;
+  const WHITE = [1, 1, 1];
+  const NIGHT_FG = parseHex("#e8eaf0");
 
-  var PRESETS = [
+  const PRESETS = [
     { name: "Brick", seed: "#9c3522" },
     { name: "Teal", seed: "#1f7a78" },
     { name: "Forest", seed: "#3f7a3a" },
@@ -118,10 +119,10 @@
    * down to grey; null when even grey cannot pass. The walk always runs at the chroma it is given
    * first, so a grey seed, whose chroma is already near zero, is tried rather than skipped. */
   function guard(L, C, H, backgrounds, step) {
-    for (var chroma = C; ; chroma /= 2) {
-      for (var l = L; l >= 0 && l <= 1; l += step) {
-        var rgb = fit(l, chroma, H);
-        var passes = backgrounds.every(function (bg) { return contrast(rgb, bg) >= TEXT_CONTRAST; });
+    for (let chroma = C; ; chroma /= 2) {
+      for (let l = L; l >= 0 && l <= 1; l += step) {
+        const rgb = fit(l, chroma, H);
+        const passes = backgrounds.every((bg) => contrast(rgb, bg) >= TEXT_CONTRAST);
         if (passes) return rgb;
       }
       if (chroma < 0.004) return null;
@@ -130,30 +131,30 @@
 
   /* The ink with more contrast on a solid colour, or null if neither reaches 4.5:1. */
   function tagInk(tag, night) {
-    var best = contrast(night, tag) >= contrast(NIGHT_FG, tag) ? night : NIGHT_FG;
+    const best = contrast(night, tag) >= contrast(NIGHT_FG, tag) ? night : NIGHT_FG;
     return contrast(best, tag) >= TEXT_CONTRAST ? best : null;
   }
 
   /* Token values for both schemes, or null when the seed cannot produce a readable palette. */
   function derive(seed) {
-    var rgb = parseHex(seed);
+    const rgb = parseHex(seed);
     if (!rgb) return null;
-    var base = rgbToOklch(rgb), h = base.h, c = base.c;
+    const { h, c } = rgbToOklch(rgb);
     // Tints scale with the seed's own colourfulness, so a grey seed gives neutral chrome and pages.
-    var tint = Math.min(1, c / 0.05);
+    const tint = Math.min(1, c / 0.05);
 
-    var chrome = fit(0.915, 0.012 * tint, h);
-    var lAccent = guard(0.48, Math.min(c, 0.14), h, [WHITE, chrome], -0.01);
-    var lHeading = guard(0.38, Math.min(c, 0.12), h, [WHITE], -0.01);
+    const chrome = fit(0.915, 0.012 * tint, h);
+    const lAccent = guard(0.48, Math.min(c, 0.14), h, [WHITE, chrome], -0.01);
+    const lHeading = guard(0.38, Math.min(c, 0.12), h, [WHITE], -0.01);
 
-    var page = fit(0.15, 0.008 * tint, h);
-    var night = fit(0.16, 0.008 * tint, h);
-    var dAccent = guard(0.71, Math.min(c, 0.13), h, [page, night], 0.01);
-    var dHeading = guard(0.8, Math.min(c, 0.1), h, [page], 0.01);
+    const page = fit(0.15, 0.008 * tint, h);
+    const night = fit(0.16, 0.008 * tint, h);
+    const dAccent = guard(0.71, Math.min(c, 0.13), h, [page, night], 0.01);
+    const dHeading = guard(0.8, Math.min(c, 0.1), h, [page], 0.01);
 
     if (!lAccent || !lHeading || !dAccent || !dHeading) return null;
     // Ink for text set on the solid accent: the dark scheme's hero button.
-    var dOnAccent = tagInk(dAccent, night);
+    const dOnAccent = tagInk(dAccent, night);
     if (!dOnAccent) return null;
 
     return {
@@ -180,22 +181,20 @@
     };
   }
 
-  var SCHEMES = {
+  const SCHEMES = {
     light: '[data-md-color-scheme="default"][data-md-color-primary]',
     dark: '[data-md-color-scheme="slate"][data-md-color-primary]'
   };
 
   /* The derived tokens as a stylesheet: one block per scheme, on the selectors aim.css uses. */
   function toCss(tokens) {
-    return Object.keys(SCHEMES).map(function (scheme) {
-      var lines = Object.keys(tokens[scheme]).map(function (name) {
-        return "  " + name + ": " + tokens[scheme][name] + ";";
-      });
-      return SCHEMES[scheme] + " {\n" + lines.join("\n") + "\n}";
+    return Object.entries(SCHEMES).map(([scheme, selector]) => {
+      const lines = Object.entries(tokens[scheme]).map(([name, value]) => `  ${name}: ${value};`);
+      return `${selector} {\n${lines.join("\n")}\n}`;
     }).join("\n");
   }
 
-  var api = global.aimTheme = {
+  const api = global.aimTheme = {
     PRESETS: PRESETS,
     DEFAULT_SEED: DEFAULT_SEED,
     derive: derive,
@@ -203,8 +202,8 @@
     toCss: toCss,
     /* Exposed for tests: contrast between two six-digit hex colours, and an in-gamut hex colour
      * for an OKLCH lightness, chroma and hue. */
-    contrast: function (a, b) { return contrast(parseHex(a), parseHex(b)); },
-    oklchHex: function (L, C, H) { return toHex(fit(L, C, H)); }
+    contrast: (a, b) => contrast(parseHex(a), parseHex(b)),
+    oklchHex: (L, C, H) => toHex(fit(L, C, H))
   };
 
   if (typeof document === "undefined") return;
@@ -213,18 +212,18 @@
    * Wiring: storage, painting, and the picker
    * ---------------------------------------------------------------------------------------- */
 
-  var STORAGE_KEY = "aim.theme.seed";
-  var STYLE_ID = "aim-theme";
+  const STORAGE_KEY = "aim.theme.seed";
+  const STYLE_ID = "aim-theme";
 
   /* The saved seed, lower-cased, or null. Storage can throw in private windows or when a browser
    * blocks site data; that reads as nothing saved. A malformed value is removed. */
   function readSeed() {
     try {
-      var seed = localStorage.getItem(STORAGE_KEY);
+      const seed = localStorage.getItem(STORAGE_KEY);
       if (seed === null) return null;
       if (parseHex(seed)) return seed.trim().toLowerCase();
       localStorage.removeItem(STORAGE_KEY);
-    } catch (error) { /* storage unavailable */ }
+    } catch { /* storage unavailable */ }
     return null;
   }
 
@@ -232,29 +231,29 @@
     try {
       if (seed === null) localStorage.removeItem(STORAGE_KEY);
       else localStorage.setItem(STORAGE_KEY, seed);
-    } catch (error) { /* storage unavailable: the choice lasts until the page is left */ }
+    } catch { /* storage unavailable: the choice lasts until the page is left */ }
   }
 
   /* Write the tokens into one <style> at the end of <head>, or remove it for the default. */
   function paint(tokens) {
-    var style = document.getElementById(STYLE_ID);
+    let style = document.getElementById(STYLE_ID);
     if (!tokens) {
-      if (style) style.parentNode.removeChild(style);
+      if (style) style.remove();
       return;
     }
     if (!style) {
       style = document.createElement("style");
       style.id = STYLE_ID;
-      document.head.appendChild(style);
+      document.head.append(style);
     }
     style.textContent = toCss(tokens);
   }
 
-  var active = DEFAULT_SEED;
-  var listeners = [];
+  let active = DEFAULT_SEED;
+  const listeners = [];
 
   function notify() {
-    listeners.forEach(function (listener) { listener(active); });
+    listeners.forEach((listener) => listener(active));
   }
 
   /* Re-colour the site from a seed and remember it. Brick is the default, so it clears instead.
@@ -264,7 +263,7 @@
       reset();
       return true;
     }
-    var tokens = derive(seed);
+    const tokens = derive(seed);
     if (!tokens) return false;
     active = seed.trim().toLowerCase();
     paint(tokens);
@@ -284,9 +283,9 @@
   api.reset = reset;
 
   // Runs in <head>, before the body is parsed, so a saved colour is in place before first paint.
-  var saved = readSeed();
+  const saved = readSeed();
   if (saved && !isDefault(saved)) {
-    var tokens = derive(saved);
+    const tokens = derive(saved);
     if (tokens) {
       active = saved;
       paint(tokens);
@@ -295,17 +294,22 @@
     }
   }
 
-  function element(tag, attributes, children) {
-    var node = document.createElement(tag);
-    Object.keys(attributes || {}).forEach(function (name) { node.setAttribute(name, attributes[name]); });
-    (children || []).forEach(function (child) {
-      node.appendChild(typeof child === "string" ? document.createTextNode(child) : child);
-    });
+  /* An element with its attributes set and its children appended; a string child becomes text. */
+  function element(tag, attributes = {}, children = []) {
+    const node = document.createElement(tag);
+    for (const [name, value] of Object.entries(attributes)) node.setAttribute(name, value);
+    node.append(...children);
     return node;
   }
 
+  /* Which way an arrow key moves through the swatches. A Map rather than an object literal, so a
+   * key name that happens to match something on Object.prototype cannot read as a step. */
+  const ARROW_STEPS = new Map([
+    ["ArrowRight", 1], ["ArrowDown", 1], ["ArrowLeft", -1], ["ArrowUp", -1]
+  ]);
+
   function buildPicker(anchor) {
-    var button = element("button", {
+    const button = element("button", {
       type: "button",
       class: "md-header__button md-icon aim-theme-picker__button",
       "aria-label": "Change colour",
@@ -316,32 +320,32 @@
 
     // Each swatch shows the accent the site will actually use, per scheme, not the raw seed: the
     // derivation adjusts a seed until it is readable, so the seed itself can differ visibly.
-    var swatches = PRESETS.map(function (preset) {
-      var tokens = isDefault(preset.seed) ? null : derive(preset.seed);
-      var light = tokens ? tokens.light["--aim-accent"] : DEFAULT_ACCENT.light;
-      var dark = tokens ? tokens.dark["--aim-accent"] : DEFAULT_ACCENT.dark;
+    const swatches = PRESETS.map(({ name, seed }) => {
+      const tokens = isDefault(seed) ? null : derive(seed);
+      const light = tokens ? tokens.light["--aim-accent"] : DEFAULT_ACCENT.light;
+      const dark = tokens ? tokens.dark["--aim-accent"] : DEFAULT_ACCENT.dark;
       return element("button", {
         type: "button",
         role: "radio",
         class: "aim-theme-picker__swatch",
-        style: "--aim-swatch-light: " + light + "; --aim-swatch-dark: " + dark,
-        "aria-label": preset.name,
-        title: preset.name,
-        "data-seed": preset.seed
+        style: `--aim-swatch-light: ${light}; --aim-swatch-dark: ${dark}`,
+        "aria-label": name,
+        title: name,
+        "data-seed": seed
       });
     });
-    var group = element("div", {
+    const group = element("div", {
       role: "radiogroup",
       "aria-label": "Preset colours",
       class: "aim-theme-picker__swatches"
     }, swatches);
 
-    var custom = element("input", { type: "color", class: "aim-theme-picker__input" });
-    var customLabel = element("label", { class: "aim-theme-picker__custom" }, ["Custom", custom]);
-    var message = element("p", { class: "aim-theme-picker__message", role: "status", hidden: "" });
-    var resetButton = element("button", { type: "button", class: "aim-theme-picker__reset" }, ["Reset"]);
+    const custom = element("input", { type: "color", class: "aim-theme-picker__input" });
+    const customLabel = element("label", { class: "aim-theme-picker__custom" }, ["Custom", custom]);
+    const message = element("p", { class: "aim-theme-picker__message", role: "status", hidden: "" });
+    const resetButton = element("button", { type: "button", class: "aim-theme-picker__reset" }, ["Reset"]);
 
-    var panel = element("div", {
+    const panel = element("div", {
       id: "aim-theme-panel",
       class: "aim-theme-picker__panel",
       role: "dialog",
@@ -349,17 +353,17 @@
       hidden: ""
     }, [group, customLabel, message, resetButton]);
 
-    var wrapper = element("div", { class: "md-header__option aim-theme-picker" }, [button, panel]);
-    anchor.parentNode.insertBefore(wrapper, anchor.nextSibling);
+    const wrapper = element("div", { class: "md-header__option aim-theme-picker" }, [button, panel]);
+    anchor.after(wrapper);
 
     function sync(seed) {
-      var preset = null;
-      swatches.forEach(function (swatch) {
-        var checked = swatch.getAttribute("data-seed") === seed;
+      let preset = null;
+      for (const swatch of swatches) {
+        const checked = swatch.getAttribute("data-seed") === seed;
         if (checked) preset = swatch;
         swatch.setAttribute("aria-checked", String(checked));
         swatch.tabIndex = -1;
-      });
+      }
       (preset || swatches[0]).tabIndex = 0;
       customLabel.toggleAttribute("data-active", !preset);
       custom.value = seed;
@@ -368,7 +372,7 @@
     function open() {
       panel.hidden = false;
       button.setAttribute("aria-expanded", "true");
-      var checked = swatches.filter(function (swatch) { return swatch.tabIndex === 0; })[0];
+      const checked = swatches.find((swatch) => swatch.tabIndex === 0);
       checked.focus();
     }
 
@@ -387,36 +391,36 @@
       }
     }
 
-    button.addEventListener("click", function () {
+    button.addEventListener("click", () => {
       if (panel.hidden) open(); else close(false);
     });
 
-    swatches.forEach(function (swatch, index) {
-      swatch.addEventListener("click", function () { choose(swatch.getAttribute("data-seed")); });
-      swatch.addEventListener("keydown", function (event) {
-        var step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
+    swatches.forEach((swatch, index) => {
+      swatch.addEventListener("click", () => choose(swatch.getAttribute("data-seed")));
+      swatch.addEventListener("keydown", (event) => {
+        const step = ARROW_STEPS.get(event.key);
         if (!step) return;
         event.preventDefault();
-        var next = swatches[(index + step + swatches.length) % swatches.length];
+        const next = swatches[(index + step + swatches.length) % swatches.length];
         next.focus();
         choose(next.getAttribute("data-seed"));
       });
     });
 
-    custom.addEventListener("input", function () { choose(custom.value); });
-    resetButton.addEventListener("click", function () {
+    custom.addEventListener("input", () => choose(custom.value));
+    resetButton.addEventListener("click", () => {
       message.hidden = true;
       reset();
     });
 
-    panel.addEventListener("keydown", function (event) {
+    panel.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         event.preventDefault();
         close(true);
       }
     });
 
-    document.addEventListener("click", function (event) {
+    document.addEventListener("click", (event) => {
       if (!panel.hidden && !wrapper.contains(event.target)) close(false);
     });
 
@@ -424,9 +428,9 @@
     sync(active);
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", () => {
     // The light/dark toggle's form. If a theme upgrade renames it, there is simply no picker.
-    var anchor = document.querySelector('.md-header__option[data-md-component="palette"]');
+    const anchor = document.querySelector('.md-header__option[data-md-component="palette"]');
     if (anchor) buildPicker(anchor);
   });
 })(typeof globalThis !== "undefined" ? globalThis : this);

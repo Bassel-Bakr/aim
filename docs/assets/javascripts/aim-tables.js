@@ -12,20 +12,17 @@
   "use strict";
 
   function label(table) {
-    var heads = [].map.call(table.querySelectorAll("thead th"), function (th) {
-      return th.textContent.trim();
-    });
+    const heads = [...table.querySelectorAll("thead th")].map((th) => th.textContent.trim());
     if (!heads.length) return;
-    [].forEach.call(table.querySelectorAll("tbody tr"), function (row) {
-      [].forEach.call(row.children, function (cell, index) {
+    table.querySelectorAll("tbody tr").forEach((row) => {
+      [...row.children].forEach((cell, index) => {
         if (heads[index]) cell.setAttribute("data-label", heads[index]);
       });
     });
   }
 
-  function run() {
-    [].forEach.call(document.querySelectorAll(".md-typeset table:not([class])"), label);
-  }
+  const run = () =>
+    document.querySelectorAll(".md-typeset table:not([class])").forEach(label);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", run);
